@@ -1,7 +1,13 @@
 import { FC } from 'react'
 
+import Logo from './components/UI/Logo'
+
 const App: FC = () => {
-	return <h1>Hello Vite app - DriveStory</h1>
+	return (
+		<>
+			<Logo color="black" />
+		</>
+	)
 }
 
 export default App
