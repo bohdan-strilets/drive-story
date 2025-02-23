@@ -1,11 +1,11 @@
 import { FC } from 'react'
 
-import Logo from './components/UI/Logo'
+import Header from './components/layout/Header'
 
 const App: FC = () => {
 	return (
 		<>
-			<Logo color="black" />
+			<Header />
 		</>
 	)
 }
