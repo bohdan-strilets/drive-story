@@ -26,7 +26,7 @@ export const LogoContainer = styled.div`
 `
 
 export const DecorativeLine = styled.div`
-	width: 100vw;
+	width: 100%;
 	height: 20px;
 
 	background-color: ${getColor('black')};

@@ -1,5 +1,5 @@
 export type LogoProps = {
-	color: 'black' | 'yellow'
+	color: 'black' | 'yellow' | 'white'
 }
 
 export type TitleProps = Pick<LogoProps, 'color'>
