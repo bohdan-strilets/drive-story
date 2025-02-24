@@ -7,12 +7,18 @@ import { LogoProps } from '@/types/props/UI/LogoProps'
 import { fadeIn } from '@/animations/fadeIn'
 import { slideIn } from '@/animations/slideIn'
 
-import { StyledLink, Subtitle, Title, WheelIcon, Wrapper } from './Logo.styled'
+import {
+	Container,
+	StyledLink,
+	Subtitle,
+	Title,
+	WheelIcon,
+} from './Logo.styled'
 
-const Logo: FC<LogoProps> = ({ color = 'black' }) => {
+const Logo: FC<LogoProps> = ({ color = 'black', size = 'large' }) => {
 	return (
-		<StyledLink to={routes.HOME}>
-			<Wrapper>
+		<StyledLink to={routes.HOME} size={size}>
+			<Container>
 				<Title {...slideIn()} color={color}>
 					drive
 				</Title>
@@ -20,7 +26,7 @@ const Logo: FC<LogoProps> = ({ color = 'black' }) => {
 				<Title {...slideIn('right')} color={color}>
 					story
 				</Title>
-			</Wrapper>
+			</Container>
 			<Subtitle {...fadeIn()} color={color}>
 				Your car in detail
 			</Subtitle>

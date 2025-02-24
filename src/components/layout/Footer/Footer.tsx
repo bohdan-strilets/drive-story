@@ -30,7 +30,7 @@ const Footer: FC = () => {
 			<DecorativeLine />
 			<Wrapper>
 				<Container>
-					<Logo color="white" />
+					<Logo color="white" size="small" />
 					<NavList>
 						<NavItem>
 							<FaBrave color="var(--yellow-color)" size={20} />

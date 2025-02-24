@@ -4,6 +4,7 @@ import { GiCarWheel } from 'react-icons/gi'
 import { Link } from 'react-router-dom'
 
 import {
+	StyledLinkProps,
 	SubtitleProps,
 	TitleProps,
 	WheelIconProps,
@@ -13,8 +14,11 @@ import { getColor } from '@/styles/helpers/getColor'
 import { media } from '@/styles/media/media'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 
-export const StyledLink = styled(Link)`
+export const StyledLink = styled(Link)<StyledLinkProps>`
 	${flexCenterDirection('column', 'inline-flex')}
+
+	transform: ${({ size }) => (size === 'small' ? 'scale(0.5)' : 'scale(1)')};
+	transform-origin: top left;
 
 	&:hover #wheel-icon,
 	&:focus #wheel-icon {
@@ -22,7 +26,7 @@ export const StyledLink = styled(Link)`
 	}
 `
 
-export const Wrapper = styled.div`
+export const Container = styled.div`
 	${flexCenterDirection('row', 'inline-flex')}
 
 	margin-bottom: 10px;
