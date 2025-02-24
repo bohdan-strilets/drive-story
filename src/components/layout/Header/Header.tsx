@@ -49,7 +49,7 @@ const Header: FC = () => {
 				{renderAuthContent()}
 			</ActionsContainer>
 			<LogoContainer>
-				<Logo color="black" />
+				<Logo color="black" size="large" />
 			</LogoContainer>
 			<DecorativeLine />
 		</Wrapper>
