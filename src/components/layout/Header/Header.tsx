@@ -7,12 +7,9 @@ import UserBar from '@/components/UI/UserBar'
 
 import useResponsive from '@/hooks/useResponsive'
 
-import {
-	ActionsContainer,
-	DecorativeLine,
-	LogoContainer,
-	Wrapper,
-} from './Header.styled'
+import Container from '../Container'
+
+import { ActionsContainer, LogoContainer, Wrapper } from './Header.styled'
 
 const Header: FC = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -40,18 +37,19 @@ const Header: FC = () => {
 
 	return (
 		<Wrapper>
-			<ActionsContainer>
-				{isLoggedIn && (
-					<Button variant="black">
-						<MenuIcon />
-					</Button>
-				)}
-				{renderAuthContent()}
-			</ActionsContainer>
-			<LogoContainer>
-				<Logo color="black" size="large" />
-			</LogoContainer>
-			<DecorativeLine />
+			<Container>
+				<ActionsContainer>
+					{isLoggedIn && (
+						<Button variant="black">
+							<MenuIcon />
+						</Button>
+					)}
+					{renderAuthContent()}
+				</ActionsContainer>
+				<LogoContainer>
+					<Logo color="black" size="large" />
+				</LogoContainer>
+			</Container>
 		</Wrapper>
 	)
 }

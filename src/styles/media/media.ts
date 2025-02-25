@@ -1,36 +1,60 @@
 import { css } from '@emotion/react'
+import { CSSInterpolation, SerializedStyles } from '@emotion/serialize'
 
 import { breakpoints } from './breakpoints'
 
 export const media = {
-	minTablet: (styles: TemplateStringsArray | string) => css`
+	minTablet: (
+		styles: TemplateStringsArray | string,
+		...values: CSSInterpolation[]
+	): SerializedStyles => css`
 		@media screen and (min-width: ${breakpoints.tabletMin}) {
-			${styles}
+			${css(styles, ...values)}
 		}
 	`,
-	minLaptop: (styles: TemplateStringsArray | string) => css`
+
+	minLaptop: (
+		styles: TemplateStringsArray | string,
+		...values: CSSInterpolation[]
+	): SerializedStyles => css`
 		@media screen and (min-width: ${breakpoints.laptopMin}) {
-			${styles}
+			${css(styles, ...values)}
 		}
 	`,
-	minDesktop: (styles: TemplateStringsArray | string) => css`
+
+	minDesktop: (
+		styles: TemplateStringsArray | string,
+		...values: CSSInterpolation[]
+	): SerializedStyles => css`
 		@media screen and (min-width: ${breakpoints.desktopMin}) {
-			${styles}
+			${css(styles, ...values)}
 		}
 	`,
-	maxMobile: (styles: TemplateStringsArray | string) => css`
+
+	maxMobile: (
+		styles: TemplateStringsArray | string,
+		...values: CSSInterpolation[]
+	): SerializedStyles => css`
 		@media screen and (max-width: ${breakpoints.mobileMax}) {
-			${styles}
+			${css(styles, ...values)}
 		}
 	`,
-	maxTablet: (styles: TemplateStringsArray | string) => css`
+
+	maxTablet: (
+		styles: TemplateStringsArray | string,
+		...values: CSSInterpolation[]
+	): SerializedStyles => css`
 		@media screen and (max-width: ${breakpoints.tabletMax}) {
-			${styles}
+			${css(styles, ...values)}
 		}
 	`,
-	maxLaptop: (styles: TemplateStringsArray | string) => css`
+
+	maxLaptop: (
+		styles: TemplateStringsArray | string,
+		...values: CSSInterpolation[]
+	): SerializedStyles => css`
 		@media screen and (max-width: ${breakpoints.laptopMax}) {
-			${styles}
+			${css(styles, ...values)}
 		}
 	`,
 }

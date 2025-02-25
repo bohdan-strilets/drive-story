@@ -8,7 +8,7 @@ export const Wrapper = styled.footer`
 	color: ${getColor('white')};
 `
 
-export const Container = styled.div`
+export const MainContainer = styled.div`
 	${flexCenterDirection()}
 	justify-content: space-between;
 	align-items: start;

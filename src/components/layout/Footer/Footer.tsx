@@ -9,14 +9,16 @@ import { RiDonutChartFill } from 'react-icons/ri'
 import Button from '@/components/UI/Button'
 import Logo from '@/components/UI/Logo'
 
+import Container from '../Container'
+
 import {
-	Container,
 	Copyright,
 	CopyrightContainer,
 	DevLogoContainer,
 	DevLogoText,
 	FormInput,
 	FormWrapper,
+	MainContainer,
 	NavItem,
 	NavLink,
 	NavList,
@@ -30,9 +32,9 @@ const Footer: FC = () => {
 	const currentYear = new Date().getFullYear()
 
 	return (
-		<>
-			<Wrapper>
-				<Container>
+		<Wrapper>
+			<Container>
+				<MainContainer>
 					<Logo color="white" size="small" />
 					<NavList>
 						<NavItem>
@@ -67,7 +69,7 @@ const Footer: FC = () => {
 							send
 						</Button>
 					</FormWrapper>
-				</Container>
+				</MainContainer>
 				<CopyrightContainer>
 					<Copyright>© {currentYear} - Drive Story</Copyright>
 					<DevLogoContainer>
@@ -82,8 +84,8 @@ const Footer: FC = () => {
 						</TermsItem>
 					</TermsNav>
 				</CopyrightContainer>
-			</Wrapper>
-		</>
+			</Container>
+		</Wrapper>
 	)
 }
 
