@@ -3,13 +3,6 @@ import styled from '@emotion/styled'
 import { getColor } from '@/styles/helpers/getColor'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 
-export const DecorativeLine = styled.div`
-	width: 100%;
-	height: 5px;
-
-	background-color: ${getColor('yellow')};
-`
-
 export const Wrapper = styled.footer`
 	background-color: ${getColor('black')};
 	color: ${getColor('white')};
@@ -21,12 +14,15 @@ export const Container = styled.div`
 	align-items: start;
 
 	padding: 25px 25px;
+
+	border-top: 5px solid ${getColor('yellow')};
 `
 
 export const NavList = styled.ul``
 
 export const NavItem = styled.li`
 	${flexCenterDirection()}
+	justify-content: start;
 
 	margin-bottom: 15px;
 
@@ -44,6 +40,7 @@ export const FormWrapper = styled.form`
 `
 
 export const FormInput = styled.input`
+	width: 300px;
 	height: 40px;
 	margin-bottom: 15px;
 `
@@ -54,8 +51,8 @@ export const CopyrightContainer = styled.div`
 
 	padding: 25px 25px;
 
-	color: ${getColor('black')};
-	background-color: ${getColor('yellow')};
+	color: ${getColor('white')};
+	background-color: ${getColor('gray')};
 `
 
 export const Copyright = styled.p`
@@ -77,7 +74,9 @@ export const DevLogoContainer = styled.div`
 	color: ${getColor('yellow')};
 `
 
-export const DevLogoText = styled.p``
+export const DevLogoText = styled.p`
+	color: ${getColor('white')};
+`
 
 export const TermsNav = styled.ul`
 	${flexCenterDirection()}
@@ -86,7 +85,7 @@ export const TermsNav = styled.ul`
 export const TermsItem = styled.li`
 	${flexCenterDirection()}
 
-	margin-right: 25px;
+	margin-right: 10px;
 
 	:last-child {
 		margin-right: 0;
@@ -94,5 +93,5 @@ export const TermsItem = styled.li`
 `
 
 export const TermsLink = styled.p`
-	margin-left: 10px;
+	font-size: 14px;
 `

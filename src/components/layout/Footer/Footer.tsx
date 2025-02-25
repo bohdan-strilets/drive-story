@@ -1,5 +1,10 @@
 import { FC } from 'react'
-import { FaBrave, FaLink } from 'react-icons/fa6'
+import { BiSolidCarGarage } from 'react-icons/bi'
+import { BsFuelPumpFill } from 'react-icons/bs'
+import { FaImages } from 'react-icons/fa6'
+import { GiAutoRepair } from 'react-icons/gi'
+import { MdLocalCarWash } from 'react-icons/md'
+import { RiDonutChartFill } from 'react-icons/ri'
 
 import Button from '@/components/UI/Button'
 import Logo from '@/components/UI/Logo'
@@ -8,7 +13,6 @@ import {
 	Container,
 	Copyright,
 	CopyrightContainer,
-	DecorativeLine,
 	DevLogoContainer,
 	DevLogoText,
 	FormInput,
@@ -27,26 +31,33 @@ const Footer: FC = () => {
 
 	return (
 		<>
-			<DecorativeLine />
 			<Wrapper>
 				<Container>
 					<Logo color="white" size="small" />
 					<NavList>
 						<NavItem>
-							<FaBrave color="var(--yellow-color)" size={20} />
-							<NavLink>Navigation item 1</NavLink>
+							<BiSolidCarGarage color="var(--yellow-color)" size={20} />
+							<NavLink>Garage</NavLink>
 						</NavItem>
 						<NavItem>
-							<FaBrave color="var(--yellow-color)" size={20} />
-							<NavLink>Navigation item 2</NavLink>
+							<GiAutoRepair color="var(--yellow-color)" size={20} />
+							<NavLink>Service</NavLink>
 						</NavItem>
 						<NavItem>
-							<FaBrave color="var(--yellow-color)" size={20} />
-							<NavLink>Navigation item 3</NavLink>
+							<BsFuelPumpFill color="var(--yellow-color)" />
+							<NavLink>Fuel</NavLink>
 						</NavItem>
 						<NavItem>
-							<FaBrave color="var(--yellow-color)" size={20} />
-							<NavLink>Navigation item 4</NavLink>
+							<MdLocalCarWash color="var(--yellow-color)" size={20} />
+							<NavLink>Accessories</NavLink>
+						</NavItem>
+						<NavItem>
+							<FaImages color="var(--yellow-color)" size={18} />
+							<NavLink>Gallery</NavLink>
+						</NavItem>
+						<NavItem>
+							<RiDonutChartFill color="var(--yellow-color)" size={20} />
+							<NavLink>Statistics</NavLink>
 						</NavItem>
 					</NavList>
 					<FormWrapper>
@@ -64,11 +75,9 @@ const Footer: FC = () => {
 					</DevLogoContainer>
 					<TermsNav>
 						<TermsItem>
-							<FaLink color="var(--black-color)" size={20} />
 							<TermsLink>Privacy policy</TermsLink>
 						</TermsItem>
 						<TermsItem>
-							<FaLink color="var(--black-color)" size={20} />
 							<TermsLink>Terms of use</TermsLink>
 						</TermsItem>
 					</TermsNav>
