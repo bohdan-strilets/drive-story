@@ -4,21 +4,17 @@ import { GiCarWheel } from 'react-icons/gi'
 import { Link } from 'react-router-dom'
 
 import {
-	StyledLinkProps,
 	SubtitleProps,
 	TitleProps,
 	WheelIconProps,
 } from '@/types/props/UI/LogoProps'
 
 import { getColor } from '@/styles/helpers/getColor'
-import { media } from '@/styles/media/media'
+import { breakpoints } from '@/styles/media/breakpoints'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 
-export const StyledLink = styled(Link)<StyledLinkProps>`
+export const StyledLink = styled(Link)`
 	${flexCenterDirection('column', 'inline-flex')}
-
-	transform: ${({ size }) => (size === 'small' ? 'scale(0.5)' : 'scale(1)')};
-	transform-origin: top left;
 
 	&:hover #wheel-icon,
 	&:focus #wheel-icon {
@@ -33,7 +29,7 @@ export const Container = styled.div`
 `
 
 export const Title = styled(motion.p)<TitleProps>`
-	font-size: 28px;
+	font-size: ${({ size }) => (size === 'large' ? '28px' : '20px')};
 	font-weight: 900;
 
 	line-height: 1;
@@ -41,46 +37,46 @@ export const Title = styled(motion.p)<TitleProps>`
 
 	color: ${({ color }) => getColor(color)};
 
-	${media.minTablet`
-	  font-size: 32px;
-  `}
+	@media screen and (min-width: ${breakpoints.tabletMin}) {
+		font-size: ${({ size }) => (size === 'large' ? '32px' : '20px')};
+	}
 
-	${media.minLaptop`
-		font-size: 36px;
-	`}  
-	          
-	${media.minDesktop`
-		font-size: 40px;
-	`}
+	@media screen and (min-width: ${breakpoints.laptopMin}) {
+		font-size: ${({ size }) => (size === 'large' ? '36px' : '20px')};
+	}
+
+	@media screen and (min-width: ${breakpoints.desktopMin}) {
+		font-size: ${({ size }) => (size === 'large' ? '40px' : '26px')};
+	}
 `
 
 export const WheelIcon = styled(GiCarWheel)<WheelIconProps>`
-	width: 50px;
-	height: 50px;
+	width: ${({ size }) => (size === 'large' ? '50px' : '35px')};
+	height: ${({ size }) => (size === 'large' ? '50px' : '35px')};
 
 	margin: 0 5px;
 
 	fill: ${({ color }) => getColor(color)};
 	transition: transform var(--hover-effect);
 
-	${media.minTablet`
-		width: 60px;
-		height: 60px;
-  `}
+	@media screen and (min-width: ${breakpoints.tabletMin}) {
+		width: ${({ size }) => (size === 'large' ? '60px' : '40px')};
+		height: ${({ size }) => (size === 'large' ? '60px' : '40px')};
+	}
 
-	${media.minLaptop`
-		width: 65px;
-		height: 65px;
-	`}  
-	          
-	${media.minDesktop`
-		width: 80px;
-		height: 80px;
-	`}
+	@media screen and (min-width: ${breakpoints.laptopMin}) {
+		width: ${({ size }) => (size === 'large' ? '65px' : '45px')};
+		height: ${({ size }) => (size === 'large' ? '65px' : '45px')};
+	}
+
+	@media screen and (min-width: ${breakpoints.desktopMin}) {
+		width: ${({ size }) => (size === 'large' ? '80px' : '50px')};
+		height: ${({ size }) => (size === 'large' ? '80px' : '45px')};
+	}
 `
 
 export const Subtitle = styled(motion.p)<SubtitleProps>`
-	font-size: 14px;
+	font-size: ${({ size }) => (size === 'large' ? '14px' : '7px')};
 	font-weight: 700;
 
 	letter-spacing: 5px;
@@ -89,11 +85,11 @@ export const Subtitle = styled(motion.p)<SubtitleProps>`
 
 	color: ${({ color }) => getColor(color)};
 
-	${media.minTablet`
-		font-size: 16px;
-  `}
+	@media screen and (min-width: ${breakpoints.tabletMin}) {
+		font-size: ${({ size }) => (size === 'large' ? '16px' : '8px')};
+	}
 
-	${media.minDesktop`
-		font-size: 18px;
-	`}
+	@media screen and (min-width: ${breakpoints.desktopMin}) {
+		font-size: ${({ size }) => (size === 'large' ? '18px' : '10px')};
+	}
 `

@@ -1,9 +1,7 @@
 import { FC } from 'react'
 import { ImExit } from 'react-icons/im'
 
-import useResponsive from '@/hooks/useResponsive'
-
-import { routes } from '@/utils/navigation/routes'
+import { routes } from '@/components/Menu/helpers/routes'
 
 import { UserBarProps } from '@/types/props/UI/UserBarProps'
 
@@ -13,8 +11,6 @@ import ImageBox from '../ImageBox'
 import { Email, InfoContainer, Name, StyledLink } from './UserBar.styled'
 
 const UserBar: FC<UserBarProps> = ({ name, email, avatarUrl }) => {
-	const { maxMobile } = useResponsive()
-
 	return (
 		<StyledLink to={routes.PROFILE}>
 			<InfoContainer>

@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { routes } from '@/utils/navigation/routes'
+import { routes } from '@/components/Menu/helpers/routes'
 
 import { LogoProps } from '@/types/props/UI/LogoProps'
 
@@ -17,17 +17,17 @@ import {
 
 const Logo: FC<LogoProps> = ({ color = 'black', size = 'large' }) => {
 	return (
-		<StyledLink to={routes.HOME} size={size}>
+		<StyledLink to={routes.HOME}>
 			<Container>
-				<Title {...slideIn()} color={color}>
+				<Title {...slideIn()} color={color} size={size}>
 					drive
 				</Title>
-				<WheelIcon id="wheel-icon" color={color} />
-				<Title {...slideIn('right')} color={color}>
+				<WheelIcon id="wheel-icon" color={color} size={size} />
+				<Title {...slideIn('right')} color={color} size={size}>
 					story
 				</Title>
 			</Container>
-			<Subtitle {...fadeIn()} color={color}>
+			<Subtitle {...fadeIn()} color={color} size={size}>
 				Your car in detail
 			</Subtitle>
 		</StyledLink>

@@ -1,90 +1,57 @@
 import { FC } from 'react'
-import { BiSolidCarGarage } from 'react-icons/bi'
-import { BsFuelPumpFill } from 'react-icons/bs'
-import { FaImages } from 'react-icons/fa6'
-import { GiAutoRepair } from 'react-icons/gi'
-import { MdLocalCarWash } from 'react-icons/md'
-import { RiDonutChartFill } from 'react-icons/ri'
 
+import Navigation from '@/components/Menu/Navigation'
+import PolicyNavigation from '@/components/Menu/PolicyNavigation'
 import Button from '@/components/UI/Button'
+import Copyright from '@/components/UI/Copyright'
+import DevLogo from '@/components/UI/DevLogo'
 import Logo from '@/components/UI/Logo'
+
+import useResponsive from '@/hooks/useResponsive'
 
 import Container from '../Container'
 
 import {
-	Copyright,
-	CopyrightContainer,
-	DevLogoContainer,
-	DevLogoText,
+	FlexContainer,
+	FooterBottom,
+	FooterContent,
 	FormInput,
+	FormTitle,
 	FormWrapper,
-	MainContainer,
-	NavItem,
-	NavLink,
-	NavList,
-	TermsItem,
-	TermsLink,
-	TermsNav,
 	Wrapper,
 } from './Footer.styled'
 
 const Footer: FC = () => {
-	const currentYear = new Date().getFullYear()
+	const { maxMobile } = useResponsive()
 
 	return (
 		<Wrapper>
-			<Container>
-				<MainContainer>
-					<Logo color="white" size="small" />
-					<NavList>
-						<NavItem>
-							<BiSolidCarGarage color="var(--yellow-color)" size={20} />
-							<NavLink>Garage</NavLink>
-						</NavItem>
-						<NavItem>
-							<GiAutoRepair color="var(--yellow-color)" size={20} />
-							<NavLink>Service</NavLink>
-						</NavItem>
-						<NavItem>
-							<BsFuelPumpFill color="var(--yellow-color)" />
-							<NavLink>Fuel</NavLink>
-						</NavItem>
-						<NavItem>
-							<MdLocalCarWash color="var(--yellow-color)" size={20} />
-							<NavLink>Accessories</NavLink>
-						</NavItem>
-						<NavItem>
-							<FaImages color="var(--yellow-color)" size={18} />
-							<NavLink>Gallery</NavLink>
-						</NavItem>
-						<NavItem>
-							<RiDonutChartFill color="var(--yellow-color)" size={20} />
-							<NavLink>Statistics</NavLink>
-						</NavItem>
-					</NavList>
-					<FormWrapper>
-						<FormInput type="text" name="name" />
-						<FormInput type="text" name="email" />
-						<Button variant="yellow" width="100%">
-							send
-						</Button>
-					</FormWrapper>
-				</MainContainer>
-				<CopyrightContainer>
-					<Copyright>© {currentYear} - Drive Story</Copyright>
-					<DevLogoContainer>
-						<DevLogoText>BS</DevLogoText>
-					</DevLogoContainer>
-					<TermsNav>
-						<TermsItem>
-							<TermsLink>Privacy policy</TermsLink>
-						</TermsItem>
-						<TermsItem>
-							<TermsLink>Terms of use</TermsLink>
-						</TermsItem>
-					</TermsNav>
-				</CopyrightContainer>
-			</Container>
+			<FooterContent>
+				<Container>
+					<FlexContainer>
+						<Logo color="white" size="small" />
+						<Navigation margin={maxMobile ? '40px 0 40px 0' : ''} />
+
+						<FormWrapper>
+							<FormTitle>Newsletter</FormTitle>
+							<FormInput type="text" name="name" placeholder="Name" />
+							<FormInput type="text" name="email" placeholder="Email" />
+							<Button variant="yellow" width="100%">
+								send
+							</Button>
+						</FormWrapper>
+					</FlexContainer>
+				</Container>
+			</FooterContent>
+			<FooterBottom>
+				<Container>
+					<FlexContainer style={{ alignItems: 'center' }}>
+						<Copyright />
+						<DevLogo />
+						<PolicyNavigation />
+					</FlexContainer>
+				</Container>
+			</FooterBottom>
 		</Wrapper>
 	)
 }

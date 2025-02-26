@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 
 import { getColor } from '@/styles/helpers/getColor'
+import { breakpoints } from '@/styles/media/breakpoints'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 
 export const Wrapper = styled.footer`
@@ -8,90 +9,59 @@ export const Wrapper = styled.footer`
 	color: ${getColor('white')};
 `
 
-export const MainContainer = styled.div`
-	${flexCenterDirection()}
-	justify-content: space-between;
-	align-items: start;
-
-	padding: 25px 25px;
-
+export const FooterContent = styled.div`
+	padding: 15px;
 	border-top: 5px solid ${getColor('yellow')};
-`
 
-export const NavList = styled.ul``
-
-export const NavItem = styled.li`
-	${flexCenterDirection()}
-	justify-content: start;
-
-	margin-bottom: 15px;
-
-	:last-child {
-		margin-bottom: 0;
+	@media screen and (min-width: ${breakpoints.laptopMin}) {
+		padding: 25px;
 	}
 `
 
-export const NavLink = styled.p`
-	margin-left: 15px;
+export const FlexContainer = styled.div`
+	@media screen and (min-width: ${breakpoints.tabletMin}) {
+		${flexCenterDirection()}
+		justify-content: space-between;
+		align-items: start;
+
+		& > * {
+			max-width: 33%;
+		}
+	}
 `
 
 export const FormWrapper = styled.form`
 	${flexCenterDirection('column')}
 `
 
-export const FormInput = styled.input`
-	width: 300px;
-	height: 40px;
+export const FormTitle = styled.p`
+	width: 100%;
 	margin-bottom: 15px;
-`
 
-export const CopyrightContainer = styled.div`
-	${flexCenterDirection()}
-	justify-content: space-between;
-
-	padding: 25px 25px;
-
-	color: ${getColor('white')};
-	background-color: ${getColor('gray')};
-`
-
-export const Copyright = styled.p`
-	font-weight: 600;
-	text-align: center;
-`
-export const DevLogoContainer = styled.div`
-	${flexCenterDirection()}
-
-	width: 40px;
-	height: 40px;
-
+	text-transform: uppercase;
 	font-weight: 700;
 	font-size: 18px;
 
-	text-shadow: var(--text-shadow);
-	border-radius: 5px;
-	background-color: ${getColor('black')};
 	color: ${getColor('yellow')};
 `
 
-export const DevLogoText = styled.p`
+export const FormInput = styled.input`
+	width: 100%;
+	height: 30px;
+	margin-bottom: 15px;
+	padding: 10px;
+
+	border-radius: 3px;
+`
+
+export const FooterBottom = styled.div`
+	padding: 15px;
+
 	color: ${getColor('white')};
-`
+	background-color: ${getColor('gray')};
+	box-shadow: 0px 10px 10px -3px rgba(0, 0, 0, 0.5) inset;
 
-export const TermsNav = styled.ul`
-	${flexCenterDirection()}
-`
-
-export const TermsItem = styled.li`
-	${flexCenterDirection()}
-
-	margin-right: 10px;
-
-	:last-child {
-		margin-right: 0;
+	@media screen and (min-width: ${breakpoints.laptopMin}) {
+		padding: 25px;
 	}
-`
-
-export const TermsLink = styled.p`
-	font-size: 14px;
 `

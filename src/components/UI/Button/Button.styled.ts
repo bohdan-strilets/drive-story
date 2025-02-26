@@ -4,7 +4,7 @@ import { ButtonStyledProps } from '@/types/props/UI/ButtonProps'
 
 import { getButtonColor } from '@/styles/helpers/getButtonColor'
 import { getColor } from '@/styles/helpers/getColor'
-import { media } from '@/styles/media/media'
+import { breakpoints } from '@/styles/media/breakpoints'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 
 export const StyledButton = styled.button<ButtonStyledProps>`
@@ -39,13 +39,13 @@ export const StyledButton = styled.button<ButtonStyledProps>`
 		transform: scale(0.99);
 	}
 
-	${media.minTablet`
+	@media screen and (min-width: ${breakpoints.tabletMin}) {
 		height: 35px;
 		font-size: 14px;
-	`}
+	}
 
-	${media.minLaptop`
+	@media screen and (min-width: ${breakpoints.laptopMin}) {
 		height: 40px;
 		font-size: 15px;
-	`}
+	}
 `

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 import { getColor } from '@/styles/helpers/getColor'
-import { media } from '@/styles/media/media'
+import { breakpoints } from '@/styles/media/breakpoints'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 
 export const Wrapper = styled.header`
@@ -9,9 +9,9 @@ export const Wrapper = styled.header`
 
 	border-bottom: 20px solid ${getColor('black')};
 
-	${media.minTablet`
+	@media screen and (min-width: ${breakpoints.tabletMin}) {
 		border-bottom: 30px solid ${getColor('black')};
-	`}
+	}
 `
 
 export const ActionsContainer = styled.div`

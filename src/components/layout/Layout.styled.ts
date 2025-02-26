@@ -1,11 +1,11 @@
 import styled from '@emotion/styled'
 
-import { media } from '@/styles/media/media'
+import { breakpoints } from '@/styles/media/breakpoints'
 
 export const Main = styled.main`
 	padding: 10px;
 
-	${media.minTablet`
+	@media screen and (min-width: ${breakpoints.tabletMin}) {
 		padding: 15px;
-	`}
+	}
 `
