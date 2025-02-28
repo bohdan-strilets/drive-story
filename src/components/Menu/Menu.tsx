@@ -24,7 +24,14 @@ const Menu: FC<MenuProps> = ({ onClose, onBackdropClick }) => {
 	return createPortal(
 		<Backdtop onClick={onBackdropClick} {...fadeIn(0.5)}>
 			<Wrapper {...slideIn('left', 0.5)}>
-				<CloseBtn onClose={onClose} />
+				<CloseBtn
+					onClose={onClose}
+					position={
+						minTablet
+							? { top: '25px', right: '35px' }
+							: { top: '10px', right: '5px' }
+					}
+				/>
 				<Logo color="white" size="small" />
 				<Navigation
 					margin={minTablet ? '45px 0 0 0' : '25px 0 0 0'}

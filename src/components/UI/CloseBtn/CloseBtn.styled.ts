@@ -1,11 +1,15 @@
 import styled from '@emotion/styled'
 
+import { ButtonProps } from '@/types/props/UI/CloseBtnProps'
+
 import { getColor } from '@/styles/helpers/getColor'
 
-export const Button = styled.button`
+export const Button = styled.button<ButtonProps>`
 	position: absolute;
-	top: 25px;
-	right: 35px;
+	top: ${({ position }) => position.top && position.top};
+	bottom: ${({ position }) => position.bottom && position.bottom};
+	right: ${({ position }) => position.right && position.right};
+	left: ${({ position }) => position.left && position.left};
 
 	font-size: 24px;
 

@@ -5,9 +5,9 @@ import { CloseBtnProps } from '@/types/props/UI/CloseBtnProps'
 
 import { Button } from './CloseBtn.styled'
 
-const CloseBtn: FC<CloseBtnProps> = ({ onClose }) => {
+const CloseBtn: FC<CloseBtnProps> = ({ onClose, position }) => {
 	return (
-		<Button type="button" onClick={onClose}>
+		<Button type="button" onClick={onClose} position={position}>
 			<RxCross2 />
 		</Button>
 	)
