@@ -24,7 +24,7 @@ export const Wrapper = styled(motion.div)`
 	padding: 30px 15px 15px 15px;
 
 	background-color: ${getColor('black')};
-	color: ${getColor('#423b3b')};
+	color: ${getColor('white')};
 	box-shadow: var(--box-shadow);
 
 	overflow-y: auto;
