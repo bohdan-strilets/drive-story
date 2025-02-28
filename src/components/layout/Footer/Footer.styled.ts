@@ -30,30 +30,6 @@ export const MainContent = styled.div`
 	}
 `
 
-export const FormWrapper = styled.form`
-	${flexCenterDirection('column')}
-`
-
-export const FormTitle = styled.p`
-	width: 100%;
-	margin-bottom: 15px;
-
-	text-transform: uppercase;
-	font-weight: 700;
-	font-size: 18px;
-
-	color: ${getColor('yellow')};
-`
-
-export const FormInput = styled.input`
-	width: 100%;
-	height: 30px;
-	margin-bottom: 15px;
-	padding: 10px;
-
-	border-radius: 3px;
-`
-
 export const FooterBottom = styled.div`
 	padding: 15px;
 

@@ -11,10 +11,6 @@ import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 export const List = styled.ul<ListProps>`
 	width: 100%;
 	margin: ${({ margin }) => margin};
-
-	@media screen and (min-width: ${breakpoints.tabletMin}) {
-		width: 100%;
-	}
 `
 
 export const Item = styled(motion.li)<ItemProps>`

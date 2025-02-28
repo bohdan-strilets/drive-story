@@ -7,6 +7,7 @@ import { StyledButton } from './Button.styled'
 const Button: FC<ButtonProps> = ({
 	children,
 	variant = 'black',
+	type = 'button',
 	width,
 	height,
 	margin,
@@ -15,8 +16,8 @@ const Button: FC<ButtonProps> = ({
 }) => {
 	return (
 		<StyledButton
-			type="button"
 			variant={variant}
+			type={type}
 			width={width}
 			height={height}
 			margin={margin}
