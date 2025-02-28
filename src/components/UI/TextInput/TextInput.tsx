@@ -36,8 +36,9 @@ const TextInput = <T extends FieldValues>({
 				height={height}
 				padding={padding}
 				defaultValue={defaultValue}
+				aria-invalid={!!error}
 			/>
-			{error && <ErrorMsg>{error.message}</ErrorMsg>}
+			{error && <ErrorMsg role="alert">{error.message}</ErrorMsg>}
 		</Wrapper>
 	)
 }
