@@ -1,5 +1,7 @@
 import { FC } from 'react'
 
+import { routes } from '@/config/routes'
+
 import { LogoProps } from '@/types/props/UI/LogoProps'
 
 import { fadeIn } from '@/animations/fadeIn'
@@ -12,21 +14,20 @@ import {
 	Title,
 	WheelIcon,
 } from './Logo.styled'
-import { routes } from '@/config/routes'
 
-const Logo: FC<LogoProps> = ({ color = 'black', size = 'large' }) => {
+const Logo: FC<LogoProps> = ({ color = 'black', variant = 'large' }) => {
 	return (
 		<StyledLink to={routes.HOME}>
 			<Container>
-				<Title {...slideIn()} color={color} size={size}>
+				<Title {...slideIn()} color={color} variant={variant}>
 					drive
 				</Title>
-				<WheelIcon id="wheel-icon" color={color} size={size} />
-				<Title {...slideIn('right')} color={color} size={size}>
+				<WheelIcon id="wheel-icon" color={color} variant={variant} />
+				<Title {...slideIn('right')} color={color} variant={variant}>
 					story
 				</Title>
 			</Container>
-			<Subtitle {...fadeIn()} color={color} size={size}>
+			<Subtitle {...fadeIn()} color={color} variant={variant}>
 				Your car in detail
 			</Subtitle>
 		</StyledLink>
