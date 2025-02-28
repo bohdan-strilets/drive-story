@@ -19,7 +19,7 @@ import Navigation from './Navigation'
 const menuPortal = document.getElementById('menu') as HTMLDivElement
 
 const Menu: FC<MenuProps> = ({ onClose, onBackdropClick }) => {
-	const { minTablet } = useResponsive()
+	const { minTablet, maxMobile } = useResponsive()
 
 	return createPortal(
 		<Backdtop onClick={onBackdropClick} {...fadeIn(0.5)}>
@@ -36,7 +36,7 @@ const Menu: FC<MenuProps> = ({ onClose, onBackdropClick }) => {
 						avatarUrl="https://res.cloudinary.com/ddd1vgg5b/image/upload/v1738671410/drive-story/default/wkj0lwfumli3e6ga95tk.jpg"
 						name="Bohdan Strilets"
 						logoutBtnColor="yellow"
-						width="100%"
+						width={maxMobile ? '100%' : ''}
 					/>
 					<CopyrightContainer>
 						<Copyright margin="30px 0 0 0" textAlign="center" />
