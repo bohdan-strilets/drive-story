@@ -10,8 +10,8 @@ import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 export const StyledButton = styled.button<ButtonStyledProps>`
 	${flexCenterDirection()}
 
-	padding: 0 25px;
-	height: 30px;
+	padding: ${({ padding }) => (padding ? padding : '0 25px')};
+	height: ${({ height }) => (height ? height : '30px')};
 	width: ${({ width }) => width};
 	margin: ${({ margin }) => margin};
 
@@ -40,12 +40,12 @@ export const StyledButton = styled.button<ButtonStyledProps>`
 	}
 
 	@media screen and (min-width: ${breakpoints.tabletMin}) {
-		height: 35px;
+		height: ${({ height }) => (height ? height : '35px')};
 		font-size: 14px;
 	}
 
 	@media screen and (min-width: ${breakpoints.laptopMin}) {
-		height: 40px;
+		height: ${({ height }) => (height ? height : '40px')};
 		font-size: 15px;
 	}
 `

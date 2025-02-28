@@ -8,7 +8,9 @@ const Button: FC<ButtonProps> = ({
 	children,
 	variant = 'black',
 	width,
+	height,
 	margin,
+	padding,
 	...otherProps
 }) => {
 	return (
@@ -16,7 +18,9 @@ const Button: FC<ButtonProps> = ({
 			type="button"
 			variant={variant}
 			width={width}
+			height={height}
 			margin={margin}
+			padding={padding}
 			{...otherProps}
 		>
 			{children}

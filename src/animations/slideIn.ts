@@ -13,5 +13,6 @@ export const slideIn = (
 ) => ({
 	initial: { x: direction === 'left' ? '-100%' : '100%', opacity: 0 },
 	animate: { x: 0, opacity: 1 },
+	exit: { x: direction === 'left' ? '-100%' : '100%', opacity: 0 },
 	transition: { duration, ease: 'easeInOut' },
 })

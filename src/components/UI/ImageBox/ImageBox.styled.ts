@@ -17,6 +17,4 @@ export const Image = styled.div<ImageProps>`
 	box-shadow: ${({ isShadow }) => isShadow && 'var(--box-shadow)'};
 	border-radius: ${({ isBorder }) => isBorder && '5px'};
 	border: ${({ isBorder }) => isBorder && `5px solid ${getColor('black')}`};
-
-	margin-right: 10px;
 `

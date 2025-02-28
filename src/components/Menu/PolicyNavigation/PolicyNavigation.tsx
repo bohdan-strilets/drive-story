@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { routes } from '../helpers/routes'
+import { routes } from '../../../config/routes'
 
 import { Item, List, StyledLink } from './PolicyNavigation.styled'
 

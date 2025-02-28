@@ -1,7 +1,5 @@
 import { FC } from 'react'
 
-import { routes } from '@/components/Menu/helpers/routes'
-
 import { LogoProps } from '@/types/props/UI/LogoProps'
 
 import { fadeIn } from '@/animations/fadeIn'
@@ -14,6 +12,7 @@ import {
 	Title,
 	WheelIcon,
 } from './Logo.styled'
+import { routes } from '@/config/routes'
 
 const Logo: FC<LogoProps> = ({ color = 'black', size = 'large' }) => {
 	return (
