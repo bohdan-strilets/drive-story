@@ -12,12 +12,13 @@ import useResponsive from '@/hooks/useResponsive'
 import Container from '../Container'
 
 import {
-	FlexContainer,
+	CopyrightWrapper,
 	FooterBottom,
 	FooterContent,
 	FormInput,
 	FormTitle,
 	FormWrapper,
+	MainContent,
 	Wrapper,
 } from './Footer.styled'
 
@@ -28,7 +29,7 @@ const Footer: FC = () => {
 		<Wrapper>
 			<FooterContent>
 				<Container>
-					<FlexContainer>
+					<MainContent>
 						<Logo color="white" size="small" />
 						<Navigation margin={maxMobile ? '40px 0 40px 0' : ''} />
 
@@ -40,16 +41,20 @@ const Footer: FC = () => {
 								send
 							</Button>
 						</FormWrapper>
-					</FlexContainer>
+					</MainContent>
 				</Container>
 			</FooterContent>
 			<FooterBottom>
 				<Container>
-					<FlexContainer style={{ alignItems: 'center' }}>
-						<Copyright />
-						<DevLogo />
-						<PolicyNavigation />
-					</FlexContainer>
+					<CopyrightWrapper>
+						<div>
+							<Copyright textAlign="left" />
+							<PolicyNavigation />
+						</div>
+						<div>
+							<DevLogo />
+						</div>
+					</CopyrightWrapper>
 				</Container>
 			</FooterBottom>
 		</Wrapper>

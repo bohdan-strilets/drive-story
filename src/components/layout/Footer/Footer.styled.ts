@@ -10,7 +10,7 @@ export const Wrapper = styled.footer`
 `
 
 export const FooterContent = styled.div`
-	padding: 15px;
+	padding: 25px 15px;
 	border-top: 5px solid ${getColor('yellow')};
 
 	@media screen and (min-width: ${breakpoints.laptopMin}) {
@@ -18,7 +18,7 @@ export const FooterContent = styled.div`
 	}
 `
 
-export const FlexContainer = styled.div`
+export const MainContent = styled.div`
 	@media screen and (min-width: ${breakpoints.tabletMin}) {
 		${flexCenterDirection()}
 		justify-content: space-between;
@@ -64,4 +64,9 @@ export const FooterBottom = styled.div`
 	@media screen and (min-width: ${breakpoints.laptopMin}) {
 		padding: 25px;
 	}
+`
+
+export const CopyrightWrapper = styled.div`
+	${flexCenterDirection()}
+	justify-content: space-between;
 `
