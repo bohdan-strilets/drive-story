@@ -1,5 +1,6 @@
 import { AnimatePresence } from 'motion/react'
 import { FC, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import Menu from '@/components/Menu'
 import Button from '@/components/UI/Button'
@@ -10,16 +11,19 @@ import UserBar from '@/components/UI/UserBar'
 import useMenu from '@/hooks/useMenu'
 import useResponsive from '@/hooks/useResponsive'
 
+import { routes } from '@/config/routes'
+
 import Container from '../Container'
 
 import { ActionsContainer, LogoContainer, Wrapper } from './Header.styled'
 
 const Header: FC = () => {
-	const [isLoggedIn, setIsLoggedIn] = useState(false)
+	const [isLoggedIn] = useState(false)
 	const { minTablet } = useResponsive()
 	const { onOpen, onClose, onBackdropClick, isOpen } = useMenu()
 
-	const handleToggleAuth = () => setIsLoggedIn((state) => !state)
+	const navigate = useNavigate()
+	const onAuthClick = () => navigate(routes.AUTH)
 
 	const renderAuthContent = () => {
 		if (isLoggedIn) {
@@ -34,7 +38,7 @@ const Header: FC = () => {
 		}
 
 		return (
-			<Button variant="black" onClick={handleToggleAuth}>
+			<Button variant="black" onClick={onAuthClick}>
 				auth
 			</Button>
 		)
