@@ -3,11 +3,13 @@ import { Route, Routes } from 'react-router-dom'
 
 import { routes } from './config/routes'
 import HomePage from './pages/HomePage'
+import NotFoundPage from './pages/NotFoundPage'
 
 const App: FC = () => {
 	return (
 		<Routes>
 			<Route path={routes.HOME} element={<HomePage />} />
+			<Route path="*" element={<NotFoundPage />} />
 		</Routes>
 	)
 }
