@@ -5,16 +5,19 @@ import Button from '@/components/UI/Button'
 import TextInput from '@/components/UI/TextInput'
 import Title from '@/components/UI/Title'
 
-import { SubscribeFields, validation } from '@/validation/SubscribeSchema'
+import {
+	SubscribeFields,
+	SubscribeValidation,
+} from '@/validation/SubscribeSchema'
 
-import { Wrapper } from './SubscribeForm.styled'
+import { Wrapper } from './Subscribe.styled'
 
-const SubscribeForm: FC = () => {
+const Subscribe: FC = () => {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<SubscribeFields>(validation)
+	} = useForm<SubscribeFields>(SubscribeValidation)
 
 	const onSubmit: SubmitHandler<SubscribeFields> = async (data) => {
 		try {
@@ -57,4 +60,4 @@ const SubscribeForm: FC = () => {
 	)
 }
 
-export default SubscribeForm
+export default Subscribe

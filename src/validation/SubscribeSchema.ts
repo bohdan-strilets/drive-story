@@ -17,6 +17,6 @@ export const SubscribeSchema = yup.object().shape({
 
 export type SubscribeFields = yup.InferType<typeof SubscribeSchema>
 
-export const validation = {
+export const SubscribeValidation = {
 	resolver: yupResolver<SubscribeFields>(SubscribeSchema),
 }
