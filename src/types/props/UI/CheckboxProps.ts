@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { Control, FieldErrors, FieldValues, Path } from 'react-hook-form'
+import { Control, FieldValues, Path } from 'react-hook-form'
 
 import { CheckboxRules } from '@/types/types/CheckboxRules'
 
@@ -8,7 +8,6 @@ export type CheckboxProps<T extends FieldValues> = {
 	control: Control<T>
 	name: Path<T>
 	rules?: CheckboxRules<T>
-	errors?: FieldErrors<T>
 	margin?: string
 }
 

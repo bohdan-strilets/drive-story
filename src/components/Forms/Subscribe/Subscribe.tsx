@@ -13,11 +13,8 @@ import {
 import { Wrapper } from './Subscribe.styled'
 
 const Subscribe: FC = () => {
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = useForm<SubscribeFields>(SubscribeValidation)
+	const { handleSubmit, control } =
+		useForm<SubscribeFields>(SubscribeValidation)
 
 	const onSubmit: SubmitHandler<SubscribeFields> = async (data) => {
 		try {
@@ -34,24 +31,24 @@ const Subscribe: FC = () => {
 				Newsletter
 			</Title>
 			<TextInput<SubscribeFields>
-				register={register}
+				control={control}
 				name="name"
 				type="text"
 				width="100%"
 				margin="0 0 15px 0"
 				placeholder="Name"
-				errors={errors}
 				rules={{ required: true }}
+				defaultValue=""
 			/>
 			<TextInput<SubscribeFields>
-				register={register}
+				control={control}
 				name="email"
 				type="email"
 				width="100%"
 				margin="0 0 15px 0"
 				placeholder="Email"
-				errors={errors}
 				rules={{ required: true }}
+				defaultValue=""
 			/>
 			<Button variant="yellow" width="100%" type="submit">
 				subscribe

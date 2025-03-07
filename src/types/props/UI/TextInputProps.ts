@@ -1,25 +1,19 @@
-import {
-	FieldErrors,
-	FieldValues,
-	Path,
-	UseFormRegister,
-} from 'react-hook-form'
+import { Control, FieldValues, Path, PathValue } from 'react-hook-form'
 
 import { TextInputRules } from '@/types/types/TextInputRules'
 
 export type TextInputProps<T extends FieldValues> = {
-	register: UseFormRegister<T>
+	control: Control<T>
 	name: Path<T>
 	type: 'text' | 'password' | 'email'
-	rules?: TextInputRules
 	label?: string
+	rules?: TextInputRules
+	defaultValue?: PathValue<T, Path<T>>
 	placeholder?: string
-	errors?: FieldErrors<T>
 	width?: string
 	height?: string
 	margin?: string
 	padding?: string
-	defaultValue?: string
 }
 
 export type WrapperProps = Pick<TextInputProps<FieldValues>, 'margin' | 'width'>

@@ -17,13 +17,9 @@ import {
 import { Group } from './Registration.styled'
 
 const Registration: FC = () => {
-	const {
-		control,
-		register,
-		handleSubmit,
-
-		formState: { errors },
-	} = useForm<RegistrationFields>(RegistrationValidation)
+	const { control, handleSubmit } = useForm<RegistrationFields>(
+		RegistrationValidation
+	)
 
 	const onSubmit: SubmitHandler<RegistrationFields> = async (data) => {
 		try {
@@ -41,63 +37,62 @@ const Registration: FC = () => {
 			</Title>
 			<Group>
 				<TextInput<RegistrationFields>
-					register={register}
+					control={control}
 					label="First name"
 					name="firstName"
 					type="text"
 					width="49%"
 					margin="0 0 15px 0"
 					placeholder="Madison"
-					errors={errors}
 					rules={{ required: true }}
+					defaultValue=""
 				/>
 				<TextInput<RegistrationFields>
-					register={register}
+					control={control}
 					label="Last name"
 					name="lastName"
 					type="text"
 					width="49%"
 					margin="0 0 15px 0"
 					placeholder="Carter"
-					errors={errors}
 					rules={{ required: true }}
+					defaultValue=""
 				/>
 			</Group>
 			<TextInput<RegistrationFields>
-				register={register}
+				control={control}
 				label="Email"
 				name="email"
 				type="email"
 				width="100%"
 				margin="0 0 15px 0"
 				placeholder="madison.carter@gmail.com"
-				errors={errors}
 				rules={{ required: true }}
+				defaultValue=""
 			/>
 			<Group>
 				<TextInput<RegistrationFields>
-					register={register}
+					control={control}
 					label="Password"
 					name="password"
 					type="password"
 					width="49%"
-					errors={errors}
 					rules={{ required: true }}
+					defaultValue=""
 				/>
 				<TextInput<RegistrationFields>
-					register={register}
+					control={control}
 					label="Password again"
 					name="passwordAgain"
 					type="password"
 					width="49%"
-					errors={errors}
 					rules={{ required: true }}
+					defaultValue=""
 				/>
 			</Group>
 			<Checkbox<RegistrationFields>
 				control={control}
 				name="isAccessRight"
-				errors={errors}
 				rules={{ isChecked: false, required: true }}
 			>
 				I have read the{' '}
