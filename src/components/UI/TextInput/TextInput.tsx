@@ -2,13 +2,21 @@ import { FieldValues, useController } from 'react-hook-form'
 
 import { TextInputProps } from '@/types/props/UI/TextInputProps'
 
-import { ErrorMsg, Input, Label, Required, Wrapper } from './TextInput.styled'
+import {
+	ErrorMsg,
+	Input,
+	InputContainer,
+	Label,
+	Required,
+	Wrapper,
+} from './TextInput.styled'
 
 const TextInput = <T extends FieldValues>({
 	control,
 	name,
 	type,
 	label,
+	children,
 	rules,
 	defaultValue,
 	placeholder,
@@ -37,15 +45,18 @@ const TextInput = <T extends FieldValues>({
 					{required && <Required>*</Required>}
 				</Label>
 			)}
-			<Input
-				id={name}
-				{...field}
-				placeholder={placeholder}
-				type={type}
-				height={height}
-				padding={padding}
-				aria-invalid={!!error}
-			/>
+			<InputContainer>
+				<Input
+					id={name}
+					{...field}
+					placeholder={placeholder}
+					type={type}
+					height={height}
+					padding={padding}
+					aria-invalid={!!error}
+				/>
+				{children && children}
+			</InputContainer>
 			{error && <ErrorMsg role="alert">{error.message}</ErrorMsg>}
 		</Wrapper>
 	)

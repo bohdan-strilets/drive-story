@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 import Button from '@/components/UI/Button'
 import Checkbox from '@/components/UI/Checkbox'
+import PasswordInput from '@/components/UI/PasswordInput/PasswordInput'
 import StyledLink from '@/components/UI/StyledLink'
 import TextInput from '@/components/UI/TextInput'
 import Title from '@/components/UI/Title'
@@ -71,20 +72,18 @@ const Registration: FC = () => {
 				defaultValue=""
 			/>
 			<Group>
-				<TextInput<RegistrationFields>
+				<PasswordInput<RegistrationFields>
 					control={control}
 					label="Password"
 					name="password"
-					type="password"
 					width="49%"
 					rules={{ required: true }}
 					defaultValue=""
 				/>
-				<TextInput<RegistrationFields>
+				<PasswordInput<RegistrationFields>
 					control={control}
 					label="Password again"
 					name="passwordAgain"
-					type="password"
 					width="49%"
 					rules={{ required: true }}
 					defaultValue=""
