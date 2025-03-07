@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 
 import { getColor } from '@/styles/helpers/getColor'
+import { breakpoints } from '@/styles/media/breakpoints'
 
 export const Button = styled.button`
 	position: absolute;
@@ -8,7 +9,7 @@ export const Button = styled.button`
 	right: 10px;
 	transform: translateY(-50%);
 
-	font-size: 20px;
+	font-size: 16px;
 
 	background-color: transparent;
 	color: ${getColor('gray')};
@@ -19,5 +20,13 @@ export const Button = styled.button`
 	:hover,
 	:focus {
 		color: ${getColor('yellow')};
+	}
+
+	@media screen and (min-width: ${breakpoints.tabletMin}) {
+		font-size: 18px;
+	}
+
+	@media screen and (min-width: ${breakpoints.laptopMin}) {
+		font-size: 20px;
 	}
 `
