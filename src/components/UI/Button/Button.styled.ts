@@ -22,7 +22,7 @@ export const StyledButton = styled.button<ButtonStyledProps>`
 	border-radius: 5px;
 	background-color: ${({ variant }) => getColor(variant)};
 	color: ${({ variant }) => getButtonColor(variant, 'default')};
-	box-shadow: var(--box-shadow);
+	box-shadow: ${({ isShadow }) => isShadow && 'var(--box-shadow)'};
 	text-shadow: var(--text-shadow);
 
 	cursor: pointer;
@@ -46,6 +46,6 @@ export const StyledButton = styled.button<ButtonStyledProps>`
 
 	@media screen and (min-width: ${breakpoints.laptopMin}) {
 		height: ${({ height }) => (height ? height : '40px')};
-		font-size: 15px;
+		font-size: 16px;
 	}
 `

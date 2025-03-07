@@ -12,6 +12,7 @@ const Button: FC<ButtonProps> = ({
 	height,
 	margin,
 	padding,
+	isShadow = false,
 	...otherProps
 }) => {
 	return (
@@ -22,6 +23,7 @@ const Button: FC<ButtonProps> = ({
 			height={height}
 			margin={margin}
 			padding={padding}
+			isShadow={isShadow}
 			{...otherProps}
 		>
 			{children}

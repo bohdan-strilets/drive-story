@@ -1,7 +1,9 @@
 import { FC } from 'react'
 
+import Auth from '@/components/Auth'
+
 const AuthPage: FC = () => {
-	return null
+	return <Auth />
 }
 
 export default AuthPage

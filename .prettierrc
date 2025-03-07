@@ -17,6 +17,7 @@
 		"^@/store/(.*)$",
 		"^@/utils/(.*)$",
 		"^@/types/(.*)$",
+		"^@/regex/(.*)$",
 		"^@/validation/(.*)$",
 		"^@/animations/(.*)$",
 		"^@/styles/(.*)$",

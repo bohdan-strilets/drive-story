@@ -38,7 +38,7 @@ const Header: FC = () => {
 		}
 
 		return (
-			<Button variant="black" onClick={onAuthClick}>
+			<Button variant="black" onClick={onAuthClick} isShadow={true}>
 				auth
 			</Button>
 		)

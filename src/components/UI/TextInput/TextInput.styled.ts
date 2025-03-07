@@ -38,7 +38,6 @@ export const Input = styled.input<InputProps>`
 	color: ${getColor('black')};
 	border-radius: 3px;
 	border-bottom: 2px solid transparent;
-	box-shadow: var(--box-shadow);
 
 	transition: border-bottom-color var(--hover-effect);
 

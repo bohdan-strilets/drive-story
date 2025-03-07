@@ -8,9 +8,10 @@ export type ButtonProps = {
 	height?: string
 	margin?: string
 	padding?: string
+	isShadow?: boolean
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
 export type ButtonStyledProps = Pick<
 	ButtonProps,
-	'width' | 'height' | 'margin' | 'padding' | 'variant'
+	'width' | 'height' | 'margin' | 'padding' | 'variant' | 'isShadow'
 >
