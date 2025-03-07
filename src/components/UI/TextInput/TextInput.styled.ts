@@ -6,6 +6,8 @@ import { getColor } from '@/styles/helpers/getColor'
 import { breakpoints } from '@/styles/media/breakpoints'
 
 export const Wrapper = styled.label<WrapperProps>`
+	display: block;
+
 	width: ${({ width }) => width};
 	margin: ${({ margin }) => margin};
 `

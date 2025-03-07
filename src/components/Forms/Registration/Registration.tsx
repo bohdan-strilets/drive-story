@@ -8,6 +8,8 @@ import StyledLink from '@/components/UI/StyledLink'
 import TextInput from '@/components/UI/TextInput'
 import Title from '@/components/UI/Title'
 
+import useResponsive from '@/hooks/useResponsive'
+
 import { routes } from '@/config/routes'
 
 import {
@@ -18,6 +20,7 @@ import {
 import { Group } from './Registration.styled'
 
 const Registration: FC = () => {
+	const { maxMobile } = useResponsive()
 	const { control, handleSubmit } = useForm<RegistrationFields>(
 		RegistrationValidation
 	)
@@ -33,7 +36,7 @@ const Registration: FC = () => {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<Title type="h2" fontSize={36} textAlign="left" variant="gray">
+			<Title type="h2" fontSize={30} textAlign="left" variant="gray">
 				Registration
 			</Title>
 			<Group>
@@ -42,7 +45,7 @@ const Registration: FC = () => {
 					label="First name"
 					name="firstName"
 					type="text"
-					width="49%"
+					width={maxMobile ? '100%' : '49%'}
 					margin="0 0 15px 0"
 					placeholder="Madison"
 					rules={{ required: true }}
@@ -53,7 +56,7 @@ const Registration: FC = () => {
 					label="Last name"
 					name="lastName"
 					type="text"
-					width="49%"
+					width={maxMobile ? '100%' : '49%'}
 					margin="0 0 15px 0"
 					placeholder="Carter"
 					rules={{ required: true }}
@@ -76,7 +79,8 @@ const Registration: FC = () => {
 					control={control}
 					label="Password"
 					name="password"
-					width="49%"
+					width={maxMobile ? '100%' : '49%'}
+					margin="0 0 15px 0"
 					rules={{ required: true }}
 					defaultValue=""
 				/>
@@ -84,7 +88,8 @@ const Registration: FC = () => {
 					control={control}
 					label="Password again"
 					name="passwordAgain"
-					width="49%"
+					width={maxMobile ? '100%' : '49%'}
+					margin="0 0 15px 0"
 					rules={{ required: true }}
 					defaultValue=""
 				/>
@@ -92,22 +97,17 @@ const Registration: FC = () => {
 			<Checkbox<RegistrationFields>
 				control={control}
 				name="isAccessRight"
+				margin="0 0 15px 0"
 				rules={{ isChecked: false, required: true }}
 			>
-				I have read the{' '}
-				<StyledLink
-					path={routes.PRIVACY_POLICY}
-					label="Privacy policy"
-					margin="0 8px"
-				/>
-				and agree to the{' '}
-				<StyledLink
-					path={routes.TERMS_USE}
-					label="Terms of use"
-					margin="0 8px"
-				/>
+				<p>
+					I have read the{' '}
+					<StyledLink path={routes.PRIVACY_POLICY} label="Privacy policy" /> and{' '}
+					agree to the{' '}
+					<StyledLink path={routes.TERMS_USE} label="Terms of use" />
+				</p>
 			</Checkbox>
-			<Button variant="yellow" width="100%" type="submit" margin=" 15px 0 0 0">
+			<Button variant="yellow" width="100%" type="submit">
 				subscribe
 			</Button>
 		</form>

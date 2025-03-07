@@ -36,7 +36,7 @@ export const Container = styled.div`
 	cursor: pointer;
 `
 
-export const CustomCheckbox = styled(motion.p)<CustomCheckboxProps>`
+export const CustomCheckbox = styled(motion.div)<CustomCheckboxProps>`
 	${flexCenterDirection()}
 
 	min-width: 20px;
