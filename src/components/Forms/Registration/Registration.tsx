@@ -1,3 +1,4 @@
+import { motion } from 'motion/react'
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
@@ -17,6 +18,8 @@ import {
 	RegistrationValidation,
 } from '@/validation/RegistrationSchema'
 
+import { slideDownFadeIn } from '@/animations/slideDownFadeIn'
+
 import { Group } from './Registration.styled'
 
 const Registration: FC = () => {
@@ -35,7 +38,7 @@ const Registration: FC = () => {
 	}
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
+		<motion.form onSubmit={handleSubmit(onSubmit)} {...slideDownFadeIn()}>
 			<Title type="h2" fontSize={30} textAlign="left" variant="gray">
 				Registration
 			</Title>
@@ -110,7 +113,7 @@ const Registration: FC = () => {
 			<Button variant="yellow" width="100%" type="submit">
 				subscribe
 			</Button>
-		</form>
+		</motion.form>
 	)
 }
 

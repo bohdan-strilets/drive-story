@@ -10,6 +10,8 @@ import {
 	SubscribeValidation,
 } from '@/validation/SubscribeSchema'
 
+import { slideDownFadeIn } from '@/animations/slideDownFadeIn'
+
 import { Wrapper } from './Subscribe.styled'
 
 const Subscribe: FC = () => {
@@ -26,7 +28,7 @@ const Subscribe: FC = () => {
 	}
 
 	return (
-		<Wrapper onSubmit={handleSubmit(onSubmit)}>
+		<Wrapper onSubmit={handleSubmit(onSubmit)} {...slideDownFadeIn()}>
 			<Title type="h2" fontSize={18} textAlign="left" variant={'yellow'}>
 				Newsletter
 			</Title>
