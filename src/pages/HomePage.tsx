@@ -1,6 +1,14 @@
+import { AnimatePresence } from 'motion/react'
 import { FC } from 'react'
 
+import Modal from '@/components/Modal'
+import Button from '@/components/UI/Button'
+
+import useModal from '@/hooks/useModal'
+
 const HomePage: FC = () => {
+	const { checkQueryParam, modalNames, onOpen } = useModal()
+
 	return (
 		<>
 			<p>
@@ -15,30 +23,24 @@ const HomePage: FC = () => {
 				fuga eligendi ipsum autem consequuntur labore. Recusandae exercitationem
 				deserunt nam nemo!
 			</p>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia ullam
-				illo molestias praesentium consequuntur! Quae, nostrum. Magnam, illum
-				velit pariatur dolorum incidunt amet consequuntur aperiam, rem enim
-				provident est deserunt excepturi perspiciatis quae quos exercitationem
-				saepe sapiente optio culpa iusto necessitatibus maiores. Totam
-				reprehenderit sapiente eos maxime magni rem eaque est soluta asperiores
-				architecto, animi dolor, vel veritatis quod fugit perferendis. Soluta
-				voluptatum itaque molestias placeat, nihil et! Quos voluptatum sint
-				animi quam, ducimus sunt consequuntur nulla voluptatem nostrum
-				consequatur eum ratione blanditiis culpa fuga, ut corporis rerum neque
-				eveniet fugiat! Quos ad, provident explicabo aperiam a ea, quis nam
-				nostrum sint eaque quasi ut ipsa placeat voluptatum aliquid optio
-				consequuntur architecto natus minus quia? Provident possimus sit
-				exercitationem enim suscipit dolores eaque. Quo possimus, laborum neque
-				pariatur quam error totam perferendis facilis tempora ab atque quidem
-				explicabo sit, tempore cupiditate natus dolores ipsum similique ex?
-				Inventore, necessitatibus! Beatae modi praesentium fugiat cumque a ipsum
-				doloribus aut laboriosam optio quia voluptate consequuntur debitis,
-				delectus laudantium eos provident vel quasi rerum itaque fugit libero
-				explicabo! Iusto minima totam eos deleniti, quas dolor? Illum doloribus
-				pariatur voluptatum excepturi. Vero, porro quia quasi qui, iste fugiat
-				doloremque praesentium nesciunt iusto recusandae quisquam accusamus!
-			</p>
+			<Button variant="black" onClick={() => onOpen(modalNames.EXAMPLE)}>
+				Open example modal
+			</Button>
+			<AnimatePresence>
+				{checkQueryParam(modalNames.EXAMPLE) && (
+					<Modal title="Example modal">
+						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt
+						sit in obcaecati debitis libero dicta natus numquam. Tenetur
+						molestias ipsum vitae alias voluptas, harum eum reiciendis culpa
+						odit, repellendus earum. Lorem ipsum dolor sit amet consectetur
+						adipisicing elit. Animi tenetur, dignissimos deserunt nulla eaque
+						accusamus commodi cum sequi deleniti. Recusandae nemo beatae,
+						temporibus voluptate molestias nisi? Atque iure harum beatae
+						quaerat, doloribus at voluptatibus, officiis voluptas corrupti
+						dignissimos repellat architecto omnis, optio fuga
+					</Modal>
+				)}
+			</AnimatePresence>
 		</>
 	)
 }
