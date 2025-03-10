@@ -7,7 +7,6 @@ import Checkbox from '@/components/UI/Checkbox'
 import PasswordInput from '@/components/UI/PasswordInput/PasswordInput'
 import StyledLink from '@/components/UI/StyledLink'
 import TextInput from '@/components/UI/TextInput'
-import Title from '@/components/UI/Title'
 
 import useResponsive from '@/hooks/useResponsive'
 
@@ -18,7 +17,7 @@ import {
 	RegistrationValidation,
 } from '@/validation/RegistrationSchema'
 
-import { slideDownFadeIn } from '@/animations/slideDownFadeIn'
+import { fadeSlide } from '@/animations/fadeSlide'
 
 import { Group } from './Registration.styled'
 
@@ -38,10 +37,7 @@ const Registration: FC = () => {
 	}
 
 	return (
-		<motion.form onSubmit={handleSubmit(onSubmit)} {...slideDownFadeIn()}>
-			<Title type="h2" fontSize={30} textAlign="left" variant="gray">
-				Registration
-			</Title>
+		<motion.form onSubmit={handleSubmit(onSubmit)} {...fadeSlide()}>
 			<Group>
 				<TextInput<RegistrationFields>
 					control={control}
@@ -111,7 +107,7 @@ const Registration: FC = () => {
 				</p>
 			</Checkbox>
 			<Button variant="yellow" width="100%" type="submit">
-				subscribe
+				registration
 			</Button>
 		</motion.form>
 	)

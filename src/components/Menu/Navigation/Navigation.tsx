@@ -4,7 +4,7 @@ import { navigationItems } from '@/config/navigationItems'
 
 import { NavigationProps } from '@/types/props/Menu/NavigationProps'
 
-import { slideDownFadeIn } from '@/animations/slideDownFadeIn'
+import { fadeSlide } from '@/animations/fadeSlide'
 
 import { Item, Label, List, StyledLink } from './Navigation.styled'
 
@@ -15,7 +15,7 @@ const Navigation: FC<NavigationProps> = ({ margin, itemHeight }) => {
 				return (
 					<Item
 						key={id}
-						{...slideDownFadeIn(index * 0.1, 0.5)}
+						{...fadeSlide(0, -20, index * 0.1, 0.5)}
 						itemHeight={itemHeight}
 					>
 						<StyledLink to={route}>
