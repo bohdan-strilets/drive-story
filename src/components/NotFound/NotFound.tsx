@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { routes } from '@/config/routes'
 
-import { springAnimation } from '@/animations/springAnimation'
+import { spring } from '@/animations/spring'
 
 import Button from '../UI/Button'
 
@@ -21,7 +21,7 @@ const NotFound: FC = () => {
 	return (
 		<Wrapper>
 			<Container>
-				<StatusCode {...springAnimation()}>404</StatusCode>
+				<StatusCode {...spring()}>404</StatusCode>
 				<Subtitle>Page not found...</Subtitle>
 			</Container>
 			<Container>
