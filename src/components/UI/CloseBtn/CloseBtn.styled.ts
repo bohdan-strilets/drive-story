@@ -17,7 +17,7 @@ export const Button = styled.button<ButtonProps>`
 	height: 40px;
 
 	background-color: transparent;
-	color: ${getColor('yellow')};
+	color: ${({ variant }) => `${getColor(variant)}`};
 
 	cursor: pointer;
 	transition: color var(--hover-effect);

@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { createPortal } from 'react-dom'
 
 import useModal from '@/hooks/useModal'
+import useResponsive from '@/hooks/useResponsive'
 
 import { ModalProps } from '@/types/props/Modal/ModalProps'
 
@@ -16,13 +17,18 @@ const modalPortal = document.getElementById('modal') as HTMLDivElement
 
 const Modal: FC<ModalProps> = ({ children, title }) => {
 	const { onClose, onBackdropClick } = useModal()
+	const { maxMobile } = useResponsive()
 
 	return createPortal(
 		<Backdrop onClick={onBackdropClick} {...fadeIn(0.3)}>
 			<Wrapper {...floating()}>
 				<Header>
 					<Title>{title}</Title>
-					<CloseBtn onClose={onClose} position={{ top: '50%', right: '3%' }} />
+					<CloseBtn
+						onClose={onClose}
+						variant="black"
+						position={{ top: maxMobile ? '20%' : '35%', right: '3%' }}
+					/>
 				</Header>
 				<Content>{children}</Content>
 			</Wrapper>

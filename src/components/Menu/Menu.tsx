@@ -26,6 +26,7 @@ const Menu: FC<MenuProps> = ({ onClose, onBackdropClick }) => {
 			<Wrapper {...slideIn('left', 0.5)}>
 				<CloseBtn
 					onClose={onClose}
+					variant="yellow"
 					position={
 						minTablet
 							? { top: '25px', right: '35px' }
