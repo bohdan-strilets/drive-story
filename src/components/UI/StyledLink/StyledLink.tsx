@@ -2,13 +2,13 @@ import { FC } from 'react'
 
 import { StyledLinkProps } from '@/types/props/UI/StyledLinkProps'
 
-import { Wrapper } from './StyledLink.styled'
+import { CustomLink } from './StyledLink.styled'
 
 const StyledLink: FC<StyledLinkProps> = ({ path, label, margin }) => {
 	return (
-		<Wrapper to={path} margin={margin}>
+		<CustomLink to={path} margin={margin}>
 			{label}
-		</Wrapper>
+		</CustomLink>
 	)
 }
 

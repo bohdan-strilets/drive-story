@@ -3,9 +3,11 @@ import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import Button from '@/components/UI/Button'
+import ButtonAsLink from '@/components/UI/ButtonAsLink'
 import PasswordInput from '@/components/UI/PasswordInput/PasswordInput'
-import StyledLink from '@/components/UI/StyledLink'
 import TextInput from '@/components/UI/TextInput'
+
+import useModal from '@/hooks/useModal'
 
 import { LoginFields, LoginValidation } from '@/validation/LoginSchema'
 
@@ -13,6 +15,7 @@ import { fadeSlide } from '@/animations/fadeSlide'
 
 const Login: FC = () => {
 	const { control, handleSubmit } = useForm<LoginFields>(LoginValidation)
+	const { modalNames, onOpen } = useModal()
 
 	const onSubmit: SubmitHandler<LoginFields> = async (data) => {
 		try {
@@ -45,7 +48,13 @@ const Login: FC = () => {
 				rules={{ required: true }}
 				defaultValue=""
 			/>
-			<StyledLink path="/" label="Forgot your password?" margin="0 0 15px 0" />
+			<ButtonAsLink
+				onClick={() => onOpen(modalNames.FORGOT_PASSWORD)}
+				color="yellow"
+				hoverColor="black"
+				label="Forgot your password?"
+				margin="0 0 15px 0"
+			/>
 			<Button variant="yellow" width="100%" type="submit">
 				login
 			</Button>

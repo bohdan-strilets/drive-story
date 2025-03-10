@@ -4,4 +4,4 @@ export type StyledLinkProps = {
 	margin?: string
 }
 
-export type WrapperProps = Pick<StyledLinkProps, 'margin'>
+export type CustomLinkProps = Pick<StyledLinkProps, 'margin'>

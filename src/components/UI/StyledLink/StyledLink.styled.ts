@@ -1,11 +1,11 @@
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
 
-import { WrapperProps } from '@/types/props/UI/StyledLinkProps'
+import { CustomLinkProps } from '@/types/props/UI/StyledLinkProps'
 
 import { getColor } from '@/styles/helpers/getColor'
 
-export const Wrapper = styled(Link)<WrapperProps>`
+export const CustomLink = styled(Link)<CustomLinkProps>`
 	display: inline-block;
 
 	margin: ${({ margin }) => margin};
