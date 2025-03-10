@@ -4,7 +4,7 @@ import { motion } from 'motion/react'
 import { getColor } from '@/styles/helpers/getColor'
 import { breakpoints } from '@/styles/media/breakpoints'
 
-export const Backdop = styled(motion.div)`
+export const Backdrop = styled(motion.div)`
 	position: fixed;
 	top: 0;
 	left: 0;

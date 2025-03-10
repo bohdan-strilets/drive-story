@@ -10,7 +10,7 @@ import { floating } from '@/animations/floating'
 
 import CloseBtn from '../UI/CloseBtn'
 
-import { Backdop, Content, Header, Title, Wrapper } from './Modal.styled'
+import { Backdrop, Content, Header, Title, Wrapper } from './Modal.styled'
 
 const modalPortal = document.getElementById('modal') as HTMLDivElement
 
@@ -18,7 +18,7 @@ const Modal: FC<ModalProps> = ({ children, title }) => {
 	const { onClose, onBackdropClick } = useModal()
 
 	return createPortal(
-		<Backdop onClick={onBackdropClick} {...fadeIn(0.3)}>
+		<Backdrop onClick={onBackdropClick} {...fadeIn(0.3)}>
 			<Wrapper {...floating()}>
 				<Header>
 					<Title>{title}</Title>
@@ -26,7 +26,7 @@ const Modal: FC<ModalProps> = ({ children, title }) => {
 				</Header>
 				<Content>{children}</Content>
 			</Wrapper>
-		</Backdop>,
+		</Backdrop>,
 		modalPortal
 	)
 }
