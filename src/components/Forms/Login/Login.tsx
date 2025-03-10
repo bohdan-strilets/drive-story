@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 import Button from '@/components/UI/Button'
 import PasswordInput from '@/components/UI/PasswordInput/PasswordInput'
+import StyledLink from '@/components/UI/StyledLink'
 import TextInput from '@/components/UI/TextInput'
 
 import { LoginFields, LoginValidation } from '@/validation/LoginSchema'
@@ -44,6 +45,7 @@ const Login: FC = () => {
 				rules={{ required: true }}
 				defaultValue=""
 			/>
+			<StyledLink path="/" label="Forgot your password?" margin="0 0 15px 0" />
 			<Button variant="yellow" width="100%" type="submit">
 				login
 			</Button>
