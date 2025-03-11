@@ -8,7 +8,7 @@ const Title: FC<TitleProps> = ({
 	children,
 	type: Tag = 'h1',
 	fontSize,
-	variant = 'yellow',
+	color = 'yellow',
 	textAlign = 'left',
 	margin,
 }) => {
@@ -17,7 +17,7 @@ const Title: FC<TitleProps> = ({
 			as={Tag}
 			fontSize={fontSize}
 			textAlign={textAlign}
-			variant={variant}
+			color={color}
 			margin={margin}
 		>
 			{children}

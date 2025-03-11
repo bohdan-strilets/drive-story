@@ -1,17 +1,29 @@
 import { FC } from 'react'
 
+import StyledLink from '@/components/UI/StyledLink'
+
 import { routes } from '../../../config/routes'
 
-import { Item, List, StyledLink } from './PolicyNavigation.styled'
+import { Item, List } from './PolicyNavigation.styled'
 
 const PolicyNavigation: FC = () => {
 	return (
 		<List>
 			<Item>
-				<StyledLink to={routes.PRIVACY_POLICY}>Privacy policy</StyledLink>
+				<StyledLink
+					path={routes.PRIVACY_POLICY}
+					label="Privacy policy"
+					color="white"
+					hoverColor="black"
+				/>
 			</Item>
 			<Item>
-				<StyledLink to={routes.TERMS_USE}>Terms of use</StyledLink>
+				<StyledLink
+					path={routes.TERMS_USE}
+					label="Terms of use"
+					color="white"
+					hoverColor="black"
+				/>
 			</Item>
 		</List>
 	)

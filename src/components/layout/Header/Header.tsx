@@ -32,13 +32,23 @@ const Header: FC = () => {
 					email="bohdan.strilets@gmail.com"
 					avatarUrl="https://res.cloudinary.com/ddd1vgg5b/image/upload/v1738671410/drive-story/default/wkj0lwfumli3e6ga95tk.jpg"
 					name="Bohdan Strilets"
-					logoutBtnColor="black"
+					background="black"
+					color="white"
+					hoverBackground="gray"
+					hoverColor="white"
 				/>
 			) : null
 		}
 
 		return (
-			<Button variant="black" onClick={onAuthClick} isShadow={true}>
+			<Button
+				background="black"
+				color="white"
+				hoverBackground="gray"
+				hoverColor="white"
+				onClick={onAuthClick}
+				isShadow={true}
+			>
 				auth
 			</Button>
 		)
@@ -50,14 +60,20 @@ const Header: FC = () => {
 				<Container>
 					<ActionsContainer>
 						{isLoggedIn && (
-							<Button variant="black" onClick={onOpen}>
+							<Button
+								background="black"
+								color="white"
+								hoverBackground="gray"
+								hoverColor="white"
+								onClick={onOpen}
+							>
 								<MenuIcon />
 							</Button>
 						)}
 						{renderAuthContent()}
 					</ActionsContainer>
 					<LogoContainer>
-						<Logo color="black" variant="large" />
+						<Logo color="black" size="large" />
 					</LogoContainer>
 				</Container>
 			</Wrapper>

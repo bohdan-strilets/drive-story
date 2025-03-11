@@ -1,10 +1,12 @@
+import { ThemeColor } from '@/types/types/ThemeColor'
+
 export type LogoProps = {
-	color: 'black' | 'yellow' | 'white'
-	variant: 'small' | 'large'
+	color: ThemeColor
+	size: 'small' | 'large'
 }
 
-export type TitleProps = Pick<LogoProps, 'color' | 'variant'>
+export type TitleProps = Pick<LogoProps, 'color' | 'size'>
 
-export type WheelIconProps = Pick<LogoProps, 'color' | 'variant'>
+export type WheelIconProps = Pick<LogoProps, 'color' | 'size'>
 
-export type SubtitleProps = Pick<LogoProps, 'color' | 'variant'>
+export type SubtitleProps = Pick<LogoProps, 'color' | 'size'>

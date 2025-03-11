@@ -8,12 +8,16 @@ import { getColor } from '@/styles/helpers/getColor'
 export const CustomLink = styled(Link)<CustomLinkProps>`
 	display: inline-block;
 
+	text-decoration: underline;
+
 	margin: ${({ margin }) => margin};
-	color: ${getColor('yellow')};
+
+	color: ${({ color }) => getColor(color)};
+
 	transition: color var(--hover-effect);
 
 	:hover,
 	:focus {
-		color: ${getColor('gray')};
+		color: ${({ hoverColor }) => getColor(hoverColor)};
 	}
 `

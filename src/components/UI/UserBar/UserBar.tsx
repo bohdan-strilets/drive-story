@@ -22,8 +22,11 @@ const UserBar: FC<UserBarProps> = ({
 	name,
 	email,
 	avatarUrl,
-	logoutBtnColor,
 	width,
+	color,
+	background,
+	hoverColor,
+	hoverBackground,
 }) => {
 	const { minTablet } = useResponsive()
 
@@ -43,7 +46,10 @@ const UserBar: FC<UserBarProps> = ({
 				/>
 			</StyledLink>
 			<Button
-				variant={logoutBtnColor}
+				color={color}
+				background={background}
+				hoverColor={hoverColor}
+				hoverBackground={hoverBackground}
 				width={minTablet ? '' : '100%'}
 				height={minTablet ? '80px' : '40px'}
 				padding="0 10px"

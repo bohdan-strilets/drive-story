@@ -2,7 +2,6 @@ import styled from '@emotion/styled'
 
 import { ButtonStyledProps } from '@/types/props/UI/ButtonProps'
 
-import { getButtonColor } from '@/styles/helpers/getButtonColor'
 import { getColor } from '@/styles/helpers/getColor'
 import { breakpoints } from '@/styles/media/breakpoints'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
@@ -20,19 +19,20 @@ export const StyledButton = styled.button<ButtonStyledProps>`
 	text-transform: uppercase;
 
 	border-radius: 5px;
-	background-color: ${({ variant }) => getColor(variant)};
-	color: ${({ variant }) => getButtonColor(variant, 'default')};
+	background-color: ${({ background }) => getColor(background)};
+	color: ${({ color }) => getColor(color)};
 	box-shadow: ${({ isShadow }) => isShadow && 'var(--box-shadow)'};
 	text-shadow: var(--text-shadow);
 
 	cursor: pointer;
-	transition: background-color var(--hover-effect);
+	transition:
+		background-color var(--hover-effect),
+		color var(--hover-effect);
 
 	:hover,
 	:focus {
-		background-color: ${({ variant }) =>
-			variant === 'gray' ? getColor('yellow') : getColor('gray')};
-		color: ${({ variant }) => getButtonColor(variant, 'hover')};
+		background-color: ${({ hoverBackground }) => getColor(hoverBackground)};
+		color: ${({ hoverColor }) => getColor(hoverColor)};
 	}
 
 	:active {

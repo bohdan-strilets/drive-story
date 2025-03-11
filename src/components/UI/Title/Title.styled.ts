@@ -13,5 +13,5 @@ export const StyledTitle = styled.h1<StyledTitleProps>`
 	width: 100%;
 	margin: ${({ margin }) => margin};
 
-	color: ${({ variant }) => `${getColor(variant)}`};
+	color: ${({ color }) => `${getColor(color)}`};
 `

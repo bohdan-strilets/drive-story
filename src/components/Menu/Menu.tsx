@@ -8,7 +8,7 @@ import { MenuProps } from '@/types/props/Menu/MenuProps'
 import { fadeIn } from '@/animations/fadeIn'
 import { slideIn } from '@/animations/slideIn'
 
-import CloseBtn from '../UI/CloseBtn'
+import CloseBtn from '../UI/CloseButton'
 import Copyright from '../UI/Copyright'
 import Logo from '../UI/Logo'
 import UserBar from '../UI/UserBar'
@@ -26,14 +26,15 @@ const Menu: FC<MenuProps> = ({ onClose, onBackdropClick }) => {
 			<Wrapper {...slideIn('left', 0.5)}>
 				<CloseBtn
 					onClose={onClose}
-					variant="yellow"
+					color="yellow"
+					hoverColor="gray"
 					position={
 						minTablet
 							? { top: '25px', right: '35px' }
 							: { top: '10px', right: '5px' }
 					}
 				/>
-				<Logo color="white" variant="small" />
+				<Logo color="white" size="small" />
 				<Navigation
 					margin={minTablet ? '45px 0 0 0' : '25px 0 0 0'}
 					itemHeight="60px"
@@ -43,8 +44,11 @@ const Menu: FC<MenuProps> = ({ onClose, onBackdropClick }) => {
 						email="bohdan.strilets@gmail.com"
 						avatarUrl="https://res.cloudinary.com/ddd1vgg5b/image/upload/v1738671410/drive-story/default/wkj0lwfumli3e6ga95tk.jpg"
 						name="Bohdan Strilets"
-						logoutBtnColor="yellow"
 						width={maxMobile ? '100%' : ''}
+						background="yellow"
+						color="black"
+						hoverBackground="gray"
+						hoverColor="white"
 					/>
 					<CopyrightContainer>
 						<Copyright margin="30px 0 0 0" textAlign="center" />

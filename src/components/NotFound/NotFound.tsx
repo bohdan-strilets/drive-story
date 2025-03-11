@@ -30,7 +30,10 @@ const NotFound: FC = () => {
 					have changed or become outdated.
 				</InfoText>
 				<Button
-					variant={'black'}
+					background="yellow"
+					color="black"
+					hoverBackground="gray"
+					hoverColor="white"
 					width="100%"
 					onClick={() => navigate(routes.HOME)}
 				>

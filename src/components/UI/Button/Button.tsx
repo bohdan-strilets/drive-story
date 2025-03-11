@@ -6,7 +6,10 @@ import { StyledButton } from './Button.styled'
 
 const Button: FC<ButtonProps> = ({
 	children,
-	variant = 'black',
+	color = 'black',
+	background = 'yellow',
+	hoverColor = 'white',
+	hoverBackground = 'black',
 	type = 'button',
 	width,
 	height,
@@ -17,7 +20,10 @@ const Button: FC<ButtonProps> = ({
 }) => {
 	return (
 		<StyledButton
-			variant={variant}
+			color={color}
+			background={background}
+			hoverColor={hoverColor}
+			hoverBackground={hoverBackground}
 			type={type}
 			width={width}
 			height={height}

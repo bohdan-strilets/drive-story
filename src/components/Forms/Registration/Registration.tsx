@@ -101,12 +101,29 @@ const Registration: FC = () => {
 			>
 				<p>
 					I have read the{' '}
-					<StyledLink path={routes.PRIVACY_POLICY} label="Privacy policy" /> and{' '}
-					agree to the{' '}
-					<StyledLink path={routes.TERMS_USE} label="Terms of use" />
+					<StyledLink
+						path={routes.PRIVACY_POLICY}
+						label="Privacy policy"
+						color="yellow"
+						hoverColor="black"
+					/>{' '}
+					and agree to the{' '}
+					<StyledLink
+						path={routes.TERMS_USE}
+						label="Terms of use"
+						color="yellow"
+						hoverColor="black"
+					/>
 				</p>
 			</Checkbox>
-			<Button variant="yellow" width="100%" type="submit">
+			<Button
+				background="yellow"
+				color="black"
+				hoverBackground="gray"
+				hoverColor="white"
+				width="100%"
+				type="submit"
+			>
 				registration
 			</Button>
 		</motion.form>

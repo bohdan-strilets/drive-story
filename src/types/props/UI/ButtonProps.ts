@@ -1,8 +1,13 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react'
 
+import { ThemeColor } from '@/types/types/ThemeColor'
+
 export type ButtonProps = {
 	children: ReactNode | string
-	variant: 'black' | 'yellow' | 'gray'
+	color: ThemeColor
+	background: ThemeColor
+	hoverColor: ThemeColor
+	hoverBackground: ThemeColor
 	type?: 'submit' | 'reset' | 'button'
 	width?: string
 	height?: string
@@ -13,5 +18,13 @@ export type ButtonProps = {
 
 export type ButtonStyledProps = Pick<
 	ButtonProps,
-	'width' | 'height' | 'margin' | 'padding' | 'variant' | 'isShadow'
+	| 'width'
+	| 'height'
+	| 'margin'
+	| 'padding'
+	| 'color'
+	| 'background'
+	| 'hoverColor'
+	| 'hoverBackground'
+	| 'isShadow'
 >

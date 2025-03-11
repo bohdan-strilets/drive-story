@@ -7,7 +7,7 @@ import { breakpoints } from '@/styles/media/breakpoints'
 export const Text = styled.p<TextProps>`
 	font-weight: 500;
 	font-size: 14px;
-	text-align: ${({ textAlign }) => (textAlign ? textAlign : 'left')};
+	text-align: ${({ textAlign }) => textAlign};
 
 	margin: ${({ margin }) => margin};
 

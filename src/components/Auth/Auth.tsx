@@ -21,7 +21,7 @@ const Auth: FC = () => {
 		<Wrapper auth={auth} layout {...fadeSlide(-100, 0)}>
 			<FormContainer>
 				<Title
-					variant="black"
+					color="black"
 					fontSize={28}
 					textAlign="center"
 					margin="0 0 30px 0"
@@ -31,7 +31,7 @@ const Auth: FC = () => {
 				{auth === 'registration' ? <Registration /> : <Login />}
 			</FormContainer>
 			<InfoContainer auth={auth}>
-				<Title variant="yellow" fontSize={28} textAlign="center">
+				<Title color="yellow" fontSize={28} textAlign="center">
 					{auth === 'registration' ? 'Hello friend' : 'Welcome back'}
 				</Title>
 				<Text>
@@ -41,7 +41,10 @@ const Auth: FC = () => {
 				</Text>
 				<Button
 					type="button"
-					variant={'yellow'}
+					background="yellow"
+					color="black"
+					hoverBackground="gray"
+					hoverColor="white"
 					width="280px"
 					onClick={auth === 'registration' ? goToLogin : goToRegistration}
 				>

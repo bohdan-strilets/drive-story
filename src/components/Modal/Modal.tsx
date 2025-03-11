@@ -9,7 +9,7 @@ import { ModalProps } from '@/types/props/Modal/ModalProps'
 import { fadeIn } from '@/animations/fadeIn'
 import { floating } from '@/animations/floating'
 
-import CloseBtn from '../UI/CloseBtn'
+import CloseBtn from '../UI/CloseButton'
 
 import { Backdrop, Content, Header, Title, Wrapper } from './Modal.styled'
 
@@ -26,7 +26,8 @@ const Modal: FC<ModalProps> = ({ children, title }) => {
 					<Title>{title}</Title>
 					<CloseBtn
 						onClose={onClose}
-						variant="black"
+						color="black"
+						hoverColor="gray"
 						position={{ top: maxMobile ? '20%' : '35%', right: '3%' }}
 					/>
 				</Header>

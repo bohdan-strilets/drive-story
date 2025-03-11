@@ -55,7 +55,14 @@ const Login: FC = () => {
 				label="Forgot your password?"
 				margin="0 0 15px 0"
 			/>
-			<Button variant="yellow" width="100%" type="submit">
+			<Button
+				background="yellow"
+				color="black"
+				hoverBackground="gray"
+				hoverColor="white"
+				width="100%"
+				type="submit"
+			>
 				login
 			</Button>
 		</motion.form>

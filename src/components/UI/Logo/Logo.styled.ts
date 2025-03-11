@@ -29,7 +29,7 @@ export const Container = styled.div`
 `
 
 export const Title = styled(motion.p)<TitleProps>`
-	font-size: ${({ variant }) => (variant === 'large' ? '28px' : '20px')};
+	font-size: ${({ size }) => (size === 'large' ? '28px' : '20px')};
 	font-weight: 900;
 
 	line-height: 1;
@@ -38,21 +38,21 @@ export const Title = styled(motion.p)<TitleProps>`
 	color: ${({ color }) => getColor(color)};
 
 	@media screen and (min-width: ${breakpoints.tabletMin}) {
-		font-size: ${({ variant }) => (variant === 'large' ? '32px' : '20px')};
+		font-size: ${({ size }) => (size === 'large' ? '32px' : '20px')};
 	}
 
 	@media screen and (min-width: ${breakpoints.laptopMin}) {
-		font-size: ${({ variant }) => (variant === 'large' ? '36px' : '20px')};
+		font-size: ${({ size }) => (size === 'large' ? '36px' : '20px')};
 	}
 
 	@media screen and (min-width: ${breakpoints.desktopMin}) {
-		font-size: ${({ variant }) => (variant === 'large' ? '40px' : '26px')};
+		font-size: ${({ size }) => (size === 'large' ? '40px' : '26px')};
 	}
 `
 
 export const WheelIcon = styled(GiCarWheel)<WheelIconProps>`
-	width: ${({ variant }) => (variant === 'large' ? '50px' : '35px')};
-	height: ${({ variant }) => (variant === 'large' ? '50px' : '35px')};
+	width: ${({ size }) => (size === 'large' ? '50px' : '35px')};
+	height: ${({ size }) => (size === 'large' ? '50px' : '35px')};
 
 	margin: 0 5px;
 
@@ -60,23 +60,23 @@ export const WheelIcon = styled(GiCarWheel)<WheelIconProps>`
 	transition: transform var(--hover-effect);
 
 	@media screen and (min-width: ${breakpoints.tabletMin}) {
-		width: ${({ variant }) => (variant === 'large' ? '60px' : '40px')};
-		height: ${({ variant }) => (variant === 'large' ? '60px' : '40px')};
+		width: ${({ size }) => (size === 'large' ? '60px' : '40px')};
+		height: ${({ size }) => (size === 'large' ? '60px' : '40px')};
 	}
 
 	@media screen and (min-width: ${breakpoints.laptopMin}) {
-		width: ${({ variant }) => (variant === 'large' ? '65px' : '45px')};
-		height: ${({ variant }) => (variant === 'large' ? '65px' : '45px')};
+		width: ${({ size }) => (size === 'large' ? '65px' : '45px')};
+		height: ${({ size }) => (size === 'large' ? '65px' : '45px')};
 	}
 
 	@media screen and (min-width: ${breakpoints.desktopMin}) {
-		width: ${({ variant }) => (variant === 'large' ? '80px' : '50px')};
-		height: ${({ variant }) => (variant === 'large' ? '80px' : '45px')};
+		width: ${({ size }) => (size === 'large' ? '80px' : '50px')};
+		height: ${({ size }) => (size === 'large' ? '80px' : '45px')};
 	}
 `
 
 export const Subtitle = styled(motion.p)<SubtitleProps>`
-	font-size: ${({ variant }) => (variant === 'large' ? '14px' : '7px')};
+	font-size: ${({ size }) => (size === 'large' ? '14px' : '7px')};
 	font-weight: 700;
 
 	letter-spacing: 5px;
@@ -86,10 +86,10 @@ export const Subtitle = styled(motion.p)<SubtitleProps>`
 	color: ${({ color }) => getColor(color)};
 
 	@media screen and (min-width: ${breakpoints.tabletMin}) {
-		font-size: ${({ variant }) => (variant === 'large' ? '16px' : '8px')};
+		font-size: ${({ size }) => (size === 'large' ? '16px' : '8px')};
 	}
 
 	@media screen and (min-width: ${breakpoints.desktopMin}) {
-		font-size: ${({ variant }) => (variant === 'large' ? '18px' : '10px')};
+		font-size: ${({ size }) => (size === 'large' ? '18px' : '10px')};
 	}
 `

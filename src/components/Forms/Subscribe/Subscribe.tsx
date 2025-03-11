@@ -29,7 +29,7 @@ const Subscribe: FC = () => {
 
 	return (
 		<Wrapper onSubmit={handleSubmit(onSubmit)} {...fadeSlide()}>
-			<Title type="h2" fontSize={18} textAlign="left" variant={'yellow'}>
+			<Title type="h2" fontSize={18} textAlign="left" color={'yellow'}>
 				Newsletter
 			</Title>
 			<TextInput<SubscribeFields>
@@ -52,7 +52,14 @@ const Subscribe: FC = () => {
 				rules={{ required: true }}
 				defaultValue=""
 			/>
-			<Button variant="yellow" width="100%" type="submit">
+			<Button
+				background="yellow"
+				color="black"
+				hoverBackground="gray"
+				hoverColor="white"
+				width="100%"
+				type="submit"
+			>
 				subscribe
 			</Button>
 		</Wrapper>
