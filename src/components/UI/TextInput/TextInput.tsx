@@ -1,3 +1,4 @@
+import { useId } from 'react'
 import { FieldValues, useController } from 'react-hook-form'
 
 import { TextInputProps } from '@/types/props/UI/TextInputProps'
@@ -47,7 +48,7 @@ const TextInput = <T extends FieldValues>({
 			)}
 			<InputContainer>
 				<Input
-					id={name}
+					id={useId()}
 					{...field}
 					placeholder={placeholder}
 					type={type}
