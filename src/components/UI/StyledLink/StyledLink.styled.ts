@@ -5,7 +5,9 @@ import { CustomLinkProps } from '@/types/props/UI/StyledLinkProps'
 
 import { getColor } from '@/styles/helpers/getColor'
 
-export const CustomLink = styled(Link)<CustomLinkProps>`
+export const CustomLink = styled(Link, {
+	shouldForwardProp: (prop) => prop !== 'hoverColor',
+})<CustomLinkProps>`
 	display: inline-block;
 
 	text-decoration: underline;
@@ -18,6 +20,7 @@ export const CustomLink = styled(Link)<CustomLinkProps>`
 
 	:hover,
 	:focus {
-		color: ${({ hoverColor }) => getColor(hoverColor)};
+		color: ${({ hoverColor }) =>
+			hoverColor ? getColor(hoverColor) : 'inherit'};
 	}
 `
