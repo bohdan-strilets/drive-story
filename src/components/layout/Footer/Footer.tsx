@@ -27,7 +27,7 @@ const Footer: FC = () => {
 			<FooterContent>
 				<Container>
 					<MainContent>
-						<Logo color="white" size="small" />
+						<Logo color="white" scale="small" />
 						<Navigation margin={maxMobile ? '40px 0 40px 0' : ''} />
 						<Subscribe />
 					</MainContent>

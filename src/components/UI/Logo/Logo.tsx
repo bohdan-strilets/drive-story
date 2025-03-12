@@ -15,19 +15,19 @@ import {
 	WheelIcon,
 } from './Logo.styled'
 
-const Logo: FC<LogoProps> = ({ color = 'black', size = 'large' }) => {
+const Logo: FC<LogoProps> = ({ color = 'black', scale = 'large' }) => {
 	return (
 		<StyledLink to={routes.HOME}>
 			<Container>
-				<Title {...slideIn()} color={color} size={size}>
+				<Title {...slideIn()} color={color} scale={scale}>
 					drive
 				</Title>
-				<WheelIcon id="wheel-icon" color={color} size={size} />
-				<Title {...slideIn('right')} color={color} size={size}>
+				<WheelIcon id="wheel-icon" color={color} scale={scale} />
+				<Title {...slideIn('right')} color={color} scale={scale}>
 					story
 				</Title>
 			</Container>
-			<Subtitle {...fadeIn()} color={color} size={size}>
+			<Subtitle {...fadeIn()} color={color} scale={scale}>
 				Your car in detail
 			</Subtitle>
 		</StyledLink>
