@@ -1,15 +1,15 @@
 import { FC } from 'react'
 import { createPortal } from 'react-dom'
 
-import useModal from '@/hooks/useModal'
-import useResponsive from '@/hooks/useResponsive'
+import useModal from '@/hooks/ui/useModal'
+import useResponsive from '@/hooks/ui/useResponsive'
 
 import { ModalProps } from '@/types/props/Modal/ModalProps'
 
 import { fadeIn } from '@/animations/fadeIn'
 import { floating } from '@/animations/floating'
 
-import CloseBtn from '../UI/CloseButton'
+import CloseButton from '../UI/CloseButton'
 
 import { Backdrop, Content, Header, Title, Wrapper } from './Modal.styled'
 
@@ -24,7 +24,7 @@ const Modal: FC<ModalProps> = ({ children, title }) => {
 			<Wrapper {...floating()}>
 				<Header>
 					<Title>{title}</Title>
-					<CloseBtn
+					<CloseButton
 						onClose={onClose}
 						color="black"
 						hoverColor="gray"

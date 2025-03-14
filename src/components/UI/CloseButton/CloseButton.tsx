@@ -5,7 +5,7 @@ import { CloseButtonProps } from '@/types/props/UI/CloseButtonProps'
 
 import { Button } from './CloseButton.styled'
 
-const CloseBtn: FC<CloseButtonProps> = ({
+const CloseButton: FC<CloseButtonProps> = ({
 	onClose,
 	position,
 	color = 'yellow',
@@ -24,4 +24,4 @@ const CloseBtn: FC<CloseButtonProps> = ({
 	)
 }
 
-export default CloseBtn
+export default CloseButton

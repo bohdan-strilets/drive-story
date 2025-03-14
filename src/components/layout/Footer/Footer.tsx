@@ -7,7 +7,7 @@ import Copyright from '@/components/UI/Copyright'
 import DevLogo from '@/components/UI/DevLogo'
 import Logo from '@/components/UI/Logo'
 
-import useResponsive from '@/hooks/useResponsive'
+import useResponsive from '@/hooks/ui/useResponsive'
 
 import Container from '../Container'
 

@@ -7,7 +7,7 @@ import ButtonAsLink from '@/components/UI/ButtonAsLink'
 import PasswordInput from '@/components/UI/PasswordInput/PasswordInput'
 import TextInput from '@/components/UI/TextInput'
 
-import useModal from '@/hooks/useModal'
+import useModal from '@/hooks/ui/useModal'
 
 import { LoginFields, LoginValidation } from '@/validation/LoginSchema'
 

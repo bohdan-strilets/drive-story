@@ -8,7 +8,7 @@ import PasswordInput from '@/components/UI/PasswordInput/PasswordInput'
 import StyledLink from '@/components/UI/StyledLink'
 import TextInput from '@/components/UI/TextInput'
 
-import useResponsive from '@/hooks/useResponsive'
+import useResponsive from '@/hooks/ui/useResponsive'
 
 import { routes } from '@/config/routes'
 

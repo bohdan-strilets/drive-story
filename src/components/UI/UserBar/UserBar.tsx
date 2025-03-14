@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { ImExit } from 'react-icons/im'
 
-import useResponsive from '@/hooks/useResponsive'
+import useResponsive from '@/hooks/ui/useResponsive'
 
 import { routes } from '@/config/routes'
 

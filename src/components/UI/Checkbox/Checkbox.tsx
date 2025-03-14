@@ -1,8 +1,8 @@
 import { FieldError, FieldValues } from 'react-hook-form'
 import { HiCheck } from 'react-icons/hi'
 
-import useCheckbox from '@/hooks/useCheckbox'
-import useKeyboard from '@/hooks/useKeyboard'
+import useCheckbox from '@/hooks/ui/useCheckbox'
+import useKeyboard from '@/hooks/ui/useKeyboard'
 
 import { CheckboxProps } from '@/types/props/UI/CheckboxProps'
 
@@ -32,12 +32,10 @@ const Checkbox = <T extends FieldValues>({
 		animationControls,
 	} = useCheckbox<T>({ name, control, rules })
 
-	const { onEnterDown, onSpaceDown } = useKeyboard()
-
-	const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-		onEnterDown(e, toggleCheckbox)
-		onSpaceDown(e, toggleCheckbox)
-	}
+	useKeyboard({
+		Space: toggleCheckbox,
+		Enter: toggleCheckbox,
+	})
 
 	return (
 		<Wrapper
@@ -46,7 +44,6 @@ const Checkbox = <T extends FieldValues>({
 			role="checkbox"
 			aria-checked={isChecked}
 			tabIndex={0}
-			onKeyDown={onKeyDown}
 		>
 			<Container>
 				<HiddenInput

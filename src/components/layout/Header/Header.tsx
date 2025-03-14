@@ -8,8 +8,8 @@ import Logo from '@/components/UI/Logo'
 import MenuIcon from '@/components/UI/MenuIcon'
 import UserBar from '@/components/UI/UserBar'
 
-import useMenu from '@/hooks/useMenu'
-import useResponsive from '@/hooks/useResponsive'
+import useMenu from '@/hooks/ui/useMenu'
+import useResponsive from '@/hooks/ui/useResponsive'
 
 import { routes } from '@/config/routes'
 

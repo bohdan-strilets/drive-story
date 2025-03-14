@@ -1,11 +1,11 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import useKeyboard from './useKeyboard'
 
 const useModal = () => {
 	const [searchParams, setSearchParams] = useSearchParams()
-	const { onEscapeDown } = useKeyboard()
+
 	const POPUP_NAME = 'modal'
 
 	const modalNames = {
@@ -36,11 +36,9 @@ const useModal = () => {
 		if (e.target === e.currentTarget) onClose()
 	}
 
-	useEffect(() => {
-		document.addEventListener('keydown', (e) => onEscapeDown(e, onClose))
-		return () =>
-			document.removeEventListener('keydown', (e) => onEscapeDown(e, onClose))
-	}, [onClose, onEscapeDown])
+	useKeyboard({
+		Escape: onClose,
+	})
 
 	return {
 		modalNames,

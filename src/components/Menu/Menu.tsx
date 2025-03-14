@@ -1,14 +1,14 @@
 import { FC } from 'react'
 import { createPortal } from 'react-dom'
 
-import useResponsive from '@/hooks/useResponsive'
+import useResponsive from '@/hooks/ui/useResponsive'
 
 import { MenuProps } from '@/types/props/Menu/MenuProps'
 
 import { fadeIn } from '@/animations/fadeIn'
 import { slideIn } from '@/animations/slideIn'
 
-import CloseBtn from '../UI/CloseButton'
+import CloseButton from '../UI/CloseButton'
 import Copyright from '../UI/Copyright'
 import Logo from '../UI/Logo'
 import UserBar from '../UI/UserBar'
@@ -24,7 +24,7 @@ const Menu: FC<MenuProps> = ({ onClose, onBackdropClick }) => {
 	return createPortal(
 		<Backdtop onClick={onBackdropClick} {...fadeIn(0.5)}>
 			<Wrapper {...slideIn('left', 0.5)}>
-				<CloseBtn
+				<CloseButton
 					onClose={onClose}
 					color="yellow"
 					hoverColor="gray"
