@@ -1,6 +1,8 @@
 import { motion } from 'motion/react'
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 import Button from '@/components/UI/Button'
 import Checkbox from '@/components/UI/Checkbox'
@@ -8,6 +10,7 @@ import PasswordInput from '@/components/UI/PasswordInput/PasswordInput'
 import StyledLink from '@/components/UI/StyledLink'
 import TextInput from '@/components/UI/TextInput'
 
+import { useRegistration } from '@/hooks/auth/useRegistration'
 import useResponsive from '@/hooks/ui/useResponsive'
 
 import { routes } from '@/config/routes'
@@ -23,16 +26,39 @@ import { Group } from './Registration.styled'
 
 const Registration: FC = () => {
 	const { maxMobile } = useResponsive()
+	const { mutateAsync: register, isPending } = useRegistration()
+	const navigate = useNavigate()
+
 	const { control, handleSubmit } = useForm<RegistrationFields>(
 		RegistrationValidation
 	)
 
 	const onSubmit: SubmitHandler<RegistrationFields> = async (data) => {
 		try {
-			console.log(data)
-			console.log('Registration form successfully sending')
+			const dto = {
+				firstName: data.firstName,
+				lastName: data.lastName,
+				email: data.email,
+				password: data.password,
+			}
+
+			const response = await register(dto)
+
+			if (response.success) {
+				toast.success('Registration was successful')
+			} else {
+				toast.error(response.message || 'Error during registration')
+			}
+
+			navigate(routes.HOME)
 		} catch (error) {
-			console.log(error)
+			let errorMessage = 'Something went wrong. Please try again.'
+
+			if (error instanceof Error) {
+				errorMessage = error.message
+			}
+
+			toast.error(errorMessage)
 		}
 	}
 
@@ -123,8 +149,9 @@ const Registration: FC = () => {
 				hoverColor="white"
 				width="100%"
 				type="submit"
+				disabled={isPending}
 			>
-				registration
+				{isPending ? '...' : 'registration'}
 			</Button>
 		</motion.form>
 	)
