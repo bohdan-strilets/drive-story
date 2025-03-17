@@ -11,6 +11,7 @@ import StyledLink from '@/components/UI/StyledLink'
 import TextInput from '@/components/UI/TextInput'
 
 import { useRegistration } from '@/hooks/auth/useRegistration'
+import useModal from '@/hooks/ui/useModal'
 import useResponsive from '@/hooks/ui/useResponsive'
 
 import { routes } from '@/config/routes'
@@ -27,6 +28,7 @@ import { Group } from './Registration.styled'
 const Registration: FC = () => {
 	const { maxMobile } = useResponsive()
 	const { mutateAsync: register, isPending } = useRegistration()
+	const { modalNames } = useModal()
 	const navigate = useNavigate()
 
 	const { control, handleSubmit } = useForm<RegistrationFields>(
@@ -44,13 +46,13 @@ const Registration: FC = () => {
 
 			const response = await register(dto)
 
-			if (response.success) {
-				toast.success('Registration was successful')
-			} else {
+			if (!response.success) {
 				toast.error(response.message || 'Error during registration')
+				return
 			}
 
-			navigate(routes.HOME)
+			toast.success('Registration was successful')
+			navigate(routes.HOME, { state: { openModal: modalNames.WELCOME } })
 		} catch (error) {
 			let errorMessage = 'Something went wrong. Please try again.'
 

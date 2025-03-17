@@ -1,5 +1,6 @@
 import { AnimatePresence } from 'motion/react'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
 import WelcomeMessage from '@/components/Auth/WelcomeMessage'
 import Modal from '@/components/Modal'
@@ -8,6 +9,13 @@ import useModal from '@/hooks/ui/useModal'
 
 const HomePage: FC = () => {
 	const { checkQueryParam, modalNames, onOpen } = useModal()
+	const { state } = useLocation()
+
+	useEffect(() => {
+		if (state?.openModal === modalNames.WELCOME) {
+			onOpen(modalNames.WELCOME)
+		}
+	}, [state, modalNames.WELCOME, onOpen])
 
 	return (
 		<>
@@ -23,9 +31,7 @@ const HomePage: FC = () => {
 				fuga eligendi ipsum autem consequuntur labore. Recusandae exercitationem
 				deserunt nam nemo!
 			</p>
-			<button type="button" onClick={() => onOpen(modalNames.WELCOME)}>
-				open welcome msg
-			</button>
+
 			<AnimatePresence>
 				{checkQueryParam(modalNames.WELCOME) && (
 					<Modal title="Welcome">
