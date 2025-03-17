@@ -10,6 +10,7 @@ const useModal = () => {
 
 	const modalNames = {
 		FORGOT_PASSWORD: 'forgot-password',
+		WELCOME: 'welcome',
 	}
 
 	const onOpen = useCallback(

@@ -1,6 +1,14 @@
+import { AnimatePresence } from 'motion/react'
 import { FC } from 'react'
 
+import WelcomeMessage from '@/components/Auth/WelcomeMessage'
+import Modal from '@/components/Modal'
+
+import useModal from '@/hooks/ui/useModal'
+
 const HomePage: FC = () => {
+	const { checkQueryParam, modalNames, onOpen } = useModal()
+
 	return (
 		<>
 			<p>
@@ -15,6 +23,16 @@ const HomePage: FC = () => {
 				fuga eligendi ipsum autem consequuntur labore. Recusandae exercitationem
 				deserunt nam nemo!
 			</p>
+			<button type="button" onClick={() => onOpen(modalNames.WELCOME)}>
+				open welcome msg
+			</button>
+			<AnimatePresence>
+				{checkQueryParam(modalNames.WELCOME) && (
+					<Modal title="Welcome">
+						<WelcomeMessage />
+					</Modal>
+				)}
+			</AnimatePresence>
 		</>
 	)
 }
