@@ -3,5 +3,4 @@ export type AuthState = {
 	isLoggedIn: boolean
 	setIsLoggedIn: (isLoggedIn: boolean) => void
 	setToken: (token: string | null) => void
-	logout: () => void
 }
