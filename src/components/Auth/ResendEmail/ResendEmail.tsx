@@ -1,7 +1,9 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 import Button from '@/components/UI/Button'
+import ButtonGoBack from '@/components/UI/ButtonGoBack'
 import Paragraph from '@/components/UI/Paragraph'
 import TextInput from '@/components/UI/TextInput'
 
@@ -11,6 +13,7 @@ import {
 } from '@/validation/ResendEmailSchema'
 
 const ResendEmail: FC = () => {
+	const navigate = useNavigate()
 	const { control, handleSubmit } = useForm<ResendEmailFields>(
 		ResendEmailValidation
 	)
@@ -26,6 +29,11 @@ const ResendEmail: FC = () => {
 
 	return (
 		<>
+			<ButtonGoBack
+				label="welcome message"
+				onClick={() => navigate(-1)}
+				margin="0 0 15px 0"
+			/>
 			<Paragraph color="black" margin="0 0 10px 0">
 				It looks like you haven’t activated your account yet. No worries—just
 				enter your email address below, and we’ll send you a new activation
