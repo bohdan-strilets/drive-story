@@ -2,6 +2,7 @@ import { AnimatePresence } from 'motion/react'
 import { FC, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
+import ResendEmail from '@/components/Auth/ResendEmail'
 import WelcomeMessage from '@/components/Auth/WelcomeMessage'
 import Modal from '@/components/Modal'
 
@@ -36,6 +37,11 @@ const HomePage: FC = () => {
 				{checkQueryParam(modalNames.WELCOME) && (
 					<Modal title="Welcome">
 						<WelcomeMessage />
+					</Modal>
+				)}
+				{checkQueryParam(modalNames.RESEND_EMAIL) && (
+					<Modal title="Resend activation email">
+						<ResendEmail />
 					</Modal>
 				)}
 			</AnimatePresence>

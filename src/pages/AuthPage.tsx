@@ -13,6 +13,7 @@ const AuthPage: FC = () => {
 	return (
 		<>
 			<Auth />
+
 			<AnimatePresence>
 				{checkQueryParam(modalNames.FORGOT_PASSWORD) && (
 					<Modal title="Forgot your password?">

@@ -10,7 +10,3 @@ export const Wrapper = styled.div`
 		width: 70%;
 	}
 `
-
-export const Text = styled.p`
-	margin: 15px 0;
-`

@@ -11,6 +11,7 @@ const useModal = () => {
 	const modalNames = {
 		FORGOT_PASSWORD: 'forgot-password',
 		WELCOME: 'welcome',
+		RESEND_EMAIL: 'resend-email',
 	}
 
 	const onOpen = useCallback(

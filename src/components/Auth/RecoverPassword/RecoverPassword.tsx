@@ -3,6 +3,7 @@ import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import Button from '@/components/UI/Button'
+import Paragraph from '@/components/UI/Paragraph'
 import PasswordInput from '@/components/UI/PasswordInput/PasswordInput'
 import Title from '@/components/UI/Title'
 
@@ -13,7 +14,7 @@ import {
 
 import { fadeSlide } from '@/animations/fadeSlide'
 
-import { Text, Wrapper } from './RecoverPassword.styled'
+import { Wrapper } from './RecoverPassword.styled'
 
 const RecoverPassword: FC = () => {
 	const { control, handleSubmit } = useForm<ReccoverPasswordFields>(
@@ -34,12 +35,12 @@ const RecoverPassword: FC = () => {
 			<Title fontSize={28} textAlign={'center'} color={'black'}>
 				Create a New Password
 			</Title>
-			<Text>
+			<Paragraph color="black" margin="15px 0">
 				Enter a new password for your account and store it in a safe place. The
 				password must be at least 6 characters long. Use a combination of
 				letters, numbers, and special characters for better security. Once
 				saved, use this password to log in to your account.
-			</Text>
+			</Paragraph>
 			<motion.form onSubmit={handleSubmit(onSubmit)} {...fadeSlide()}>
 				<PasswordInput<ReccoverPasswordFields>
 					control={control}
