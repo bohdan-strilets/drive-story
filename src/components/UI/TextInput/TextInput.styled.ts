@@ -56,6 +56,11 @@ export const Input = styled.input<InputProps>`
 		border-bottom-color: ${getColor('green')};
 	}
 
+	::-ms-reveal,
+	::-ms-clear {
+		display: none;
+	}
+
 	@media screen and (min-width: ${breakpoints.tabletMin}) {
 		height: ${({ height }) => (height ? height : '35px')};
 		font-size: 16px;
