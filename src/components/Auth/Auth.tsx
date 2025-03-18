@@ -4,12 +4,12 @@ import { AuthType } from '@/types/types/AuthType'
 
 import { fadeSlide } from '@/animations/fadeSlide'
 
-import Login from '../Forms/Login'
-import Registration from '../Forms/Registration'
 import Button from '../UI/Button'
 import Title from '../UI/Title'
 
 import { FormContainer, InfoContainer, Text, Wrapper } from './Auth.styled'
+import Login from './Login'
+import Registration from './Registration'
 
 const Auth: FC = () => {
 	const [auth, setAuth] = useState<AuthType>('login')

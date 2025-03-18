@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import Subscribe from '@/components/Forms/Subscribe'
+import Subscribe from '@/components/Layout/Footer/Subscribe'
 import Navigation from '@/components/Menu/Navigation'
 import PolicyNavigation from '@/components/Menu/PolicyNavigation'
 import Copyright from '@/components/UI/Copyright'

@@ -2,7 +2,7 @@ import { AnimatePresence } from 'motion/react'
 import { FC } from 'react'
 
 import Auth from '@/components/Auth'
-import ForgotPassword from '@/components/Forms/ForgotPassword'
+import ForgotPassword from '@/components/Auth/ForgotPassword'
 import Modal from '@/components/Modal'
 
 import useModal from '@/hooks/ui/useModal'
