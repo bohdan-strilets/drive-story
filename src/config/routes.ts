@@ -1,6 +1,7 @@
 export const routes = {
 	HOME: '/',
 	AUTH: '/auth',
+	ACTIVATION_SUCCESS: 'activation-success',
 	PROFILE: '/profile',
 	PRIVACY_POLICY: '/privacy-policy',
 	TERMS_USE: '/terms-use',
