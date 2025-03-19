@@ -1,13 +1,14 @@
 import { Gender } from '../enums/Gender'
 
+import { Image } from './Image'
 import { Location } from './Location'
 
 export type User = {
 	_id: string
 	email: string
 	gender: Gender
-	avatars: string | null
-	posters: string | null
+	avatars: string | null | Image
+	posters: string | null | Image
 	createdAt: Date
 	updatedAt: Date
 	firstName?: string | null
