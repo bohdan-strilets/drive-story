@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query'
 import { registration } from '@/api/authApi'
 
 import { queryClient } from '@/config/queryClient'
+import { AuthKey } from '@/config/queryKeys'
 
 import { useAuthStore } from '@/store/useAuthStore'
 import { useUserStore } from '@/store/useUserStore'
@@ -27,7 +28,7 @@ export const useRegistration = () => {
 				setUser(response.data?.user || null)
 				setToken(response.data?.tokens.accessToken || null)
 				setIsLoggedIn(true)
-				queryClient.invalidateQueries({ queryKey: ['auth'] })
+				queryClient.invalidateQueries({ queryKey: [AuthKey] })
 			}
 		},
 	})
