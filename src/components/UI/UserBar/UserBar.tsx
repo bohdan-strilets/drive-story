@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { ImExit } from 'react-icons/im'
 
+import { useLogout } from '@/hooks/auth/useLogout'
 import useResponsive from '@/hooks/ui/useResponsive'
 
 import { routes } from '@/config/routes'
@@ -29,6 +30,7 @@ const UserBar: FC<UserBarProps> = ({
 	hoverBackground,
 }) => {
 	const { minTablet } = useResponsive()
+	const { mutateAsync: logout, isPending } = useLogout()
 
 	return (
 		<Wrapper width={width}>
@@ -53,8 +55,10 @@ const UserBar: FC<UserBarProps> = ({
 				width={minTablet ? '' : '100%'}
 				height={minTablet ? '80px' : '40px'}
 				padding="0 10px"
+				onClick={() => logout()}
+				disabled={isPending}
 			>
-				<ImExit />
+				{isPending ? '...' : <ImExit />}
 			</Button>
 		</Wrapper>
 	)

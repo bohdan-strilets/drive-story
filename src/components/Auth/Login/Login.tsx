@@ -1,28 +1,44 @@
 import { motion } from 'motion/react'
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 import Button from '@/components/UI/Button'
 import ButtonAsLink from '@/components/UI/ButtonAsLink'
 import PasswordInput from '@/components/UI/PasswordInput/PasswordInput'
 import TextInput from '@/components/UI/TextInput'
 
+import { useLogin } from '@/hooks/auth/useLogin'
 import useModal from '@/hooks/ui/useModal'
+
+import { routes } from '@/config/routes'
+
+import { handleError } from '@/utils/handleError'
 
 import { LoginFields, LoginValidation } from '@/validation/LoginSchema'
 
 import { fadeSlide } from '@/animations/fadeSlide'
 
 const Login: FC = () => {
-	const { control, handleSubmit } = useForm<LoginFields>(LoginValidation)
 	const { modalNames, onOpen } = useModal()
+	const { mutateAsync: login, isPending } = useLogin()
+	const navigate = useNavigate()
+
+	const { control, handleSubmit } = useForm<LoginFields>(LoginValidation)
 
 	const onSubmit: SubmitHandler<LoginFields> = async (data) => {
 		try {
-			console.log(data)
-			console.log('Login form successfully sending')
+			const response = await login(data)
+
+			if (!response.success) {
+				toast.error(response.message || 'Error during login')
+				return
+			}
+
+			navigate(routes.HOME)
 		} catch (error) {
-			console.log(error)
+			handleError(error)
 		}
 	}
 
@@ -62,8 +78,9 @@ const Login: FC = () => {
 				hoverColor="white"
 				width="100%"
 				type="submit"
+				disabled={isPending}
 			>
-				login
+				{isPending ? '...' : 'login'}
 			</Button>
 		</motion.form>
 	)

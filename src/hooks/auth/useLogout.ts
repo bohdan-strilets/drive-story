@@ -10,7 +10,7 @@ import { useUserStore } from '@/store/useUserStore'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { AuthResponse } from '@/types/types/AuthResponse'
 
-export const useLogin = () => {
+export const useLogout = () => {
 	const setUser = useUserStore((state) => state.setUser)
 	const setIsLoggedIn = useAuthStore((state) => state.setIsLoggedIn)
 	const setToken = useAuthStore((state) => state.setToken)

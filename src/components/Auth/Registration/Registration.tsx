@@ -16,6 +16,8 @@ import useResponsive from '@/hooks/ui/useResponsive'
 
 import { routes } from '@/config/routes'
 
+import { handleError } from '@/utils/handleError'
+
 import {
 	RegistrationFields,
 	RegistrationValidation,
@@ -54,13 +56,7 @@ const Registration: FC = () => {
 			toast.success('Registration was successful')
 			navigate(routes.HOME, { state: { openModal: modalNames.WELCOME } })
 		} catch (error) {
-			let errorMessage = 'Something went wrong. Please try again.'
-
-			if (error instanceof Error) {
-				errorMessage = error.message
-			}
-
-			toast.error(errorMessage)
+			handleError(error)
 		}
 	}
 

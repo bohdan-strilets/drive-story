@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'motion/react'
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Menu from '@/components/Menu'
@@ -13,14 +13,16 @@ import useResponsive from '@/hooks/ui/useResponsive'
 
 import { routes } from '@/config/routes'
 
+import { useAuthStore } from '@/store/useAuthStore'
+
 import Container from '../Container'
 
 import { ActionsContainer, LogoContainer, Wrapper } from './Header.styled'
 
 const Header: FC = () => {
-	const [isLoggedIn] = useState(false)
 	const { minTablet } = useResponsive()
 	const { onOpen, onClose, onBackdropClick, isOpen } = useMenu()
+	const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
 
 	const navigate = useNavigate()
 	const onAuthClick = () => navigate(routes.AUTH)

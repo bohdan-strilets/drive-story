@@ -6,18 +6,18 @@ import { BrowserRouter } from 'react-router-dom'
 
 import App from './App.tsx'
 import Layout from './components/Layout'
-import { queryClient } from './config/queryClient.ts'
+import { queryClient } from './config/queryClient'
 import './styles/index.css'
 
 createRoot(document.getElementById('root')!).render(
-	<StrictMode>
-		<BrowserRouter>
-			<Layout>
-				<QueryClientProvider client={queryClient}>
+	<QueryClientProvider client={queryClient}>
+		<StrictMode>
+			<BrowserRouter>
+				<Layout>
 					<Toaster />
 					<App />
-				</QueryClientProvider>
-			</Layout>
-		</BrowserRouter>
-	</StrictMode>
+				</Layout>
+			</BrowserRouter>
+		</StrictMode>
+	</QueryClientProvider>
 )
