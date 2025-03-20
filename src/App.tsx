@@ -1,14 +1,23 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 import { routes } from './config/routes'
+import { useGetCurrentUser } from './hooks/user/useGetCurrentUser'
 import ActivationSuccessPage from './pages/ActivationSuccessPage'
 import AuthPage from './pages/AuthPage'
 import HomePage from './pages/HomePage'
 import NotFoundPage from './pages/NotFoundPage'
 import RecoverPasswordPage from './pages/RecoverPasswordPage'
+import { useAuthStore } from './store/useAuthStore'
 
 const App: FC = () => {
+	const token = useAuthStore((state) => state.token)
+	const { mutateAsync: getCurrentUser, isPending } = useGetCurrentUser()
+
+	useEffect(() => {
+		if (token) getCurrentUser()
+	}, [getCurrentUser, token])
+
 	return (
 		<Routes>
 			<Route path={routes.HOME} element={<HomePage />} />
