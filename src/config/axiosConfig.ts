@@ -51,11 +51,11 @@ apiClient.interceptors.response.use(
 					: {}
 
 				const updatedAuthStateToLS = {
+					...parsedAuthStateFromLS,
 					state: {
 						isLoggedIn: true,
 						token: data?.tokens.accessToken,
 					},
-					...parsedAuthStateFromLS,
 				}
 
 				localStorage.setItem(
