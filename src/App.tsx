@@ -12,26 +12,28 @@ import { useAuthStore } from './store/useAuthStore'
 
 const App: FC = () => {
 	const token = useAuthStore((state) => state.token)
-	const { mutateAsync: getCurrentUser, isPending } = useGetCurrentUser()
+	const { mutateAsync: getCurrentUser } = useGetCurrentUser()
 
 	useEffect(() => {
 		if (token) getCurrentUser()
 	}, [getCurrentUser, token])
 
 	return (
-		<Routes>
-			<Route path={routes.HOME} element={<HomePage />} />
-			<Route path={routes.AUTH} element={<AuthPage />} />
-			<Route
-				path={routes.RECCOVER_PASSWORD}
-				element={<RecoverPasswordPage />}
-			/>
-			<Route
-				path={routes.ACTIVATION_SUCCESS}
-				element={<ActivationSuccessPage />}
-			/>
-			<Route path="*" element={<NotFoundPage />} />
-		</Routes>
+		<>
+			<Routes>
+				<Route path={routes.HOME} element={<HomePage />} />
+				<Route path={routes.AUTH} element={<AuthPage />} />
+				<Route
+					path={routes.RECCOVER_PASSWORD}
+					element={<RecoverPasswordPage />}
+				/>
+				<Route
+					path={routes.ACTIVATION_SUCCESS}
+					element={<ActivationSuccessPage />}
+				/>
+				<Route path="*" element={<NotFoundPage />} />
+			</Routes>
+		</>
 	)
 }
 
