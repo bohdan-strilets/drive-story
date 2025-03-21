@@ -24,7 +24,7 @@ const App: FC = () => {
 				<Route path={routes.HOME} element={<HomePage />} />
 				<Route path={routes.AUTH} element={<AuthPage />} />
 				<Route
-					path={routes.RECCOVER_PASSWORD}
+					path={routes.RECOVER_PASSWORD}
 					element={<RecoverPasswordPage />}
 				/>
 				<Route

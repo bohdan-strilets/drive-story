@@ -5,7 +5,7 @@ export const routes = {
 	PROFILE: '/profile',
 	PRIVACY_POLICY: '/privacy-policy',
 	TERMS_USE: '/terms-use',
-	RECCOVER_PASSWORD: '/recover-password',
+	RECOVER_PASSWORD: '/recover-password',
 	GARAGE: '/garage',
 	SERVICE: '/service',
 	FUEL: '/fuel',
