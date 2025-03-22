@@ -1,11 +1,18 @@
 import { motion } from 'motion/react'
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
+import { useParams } from 'react-router-dom'
 
 import Button from '@/components/UI/Button'
+import Loader from '@/components/UI/Loader'
 import Paragraph from '@/components/UI/Paragraph'
 import PasswordInput from '@/components/UI/PasswordInput/PasswordInput'
 import Title from '@/components/UI/Title'
+
+import { useResetPassword } from '@/hooks/user/useResetPassword'
+
+import { handleError } from '@/utils/handleError'
 
 import {
 	ReccoverPasswordFields,
@@ -17,16 +24,29 @@ import { fadeSlide } from '@/animations/fadeSlide'
 import { Wrapper } from './RecoverPassword.styled'
 
 const RecoverPassword: FC = () => {
+	const { mutateAsync: resetPassword, isPending } = useResetPassword()
+	const { resetToken } = useParams()
+
 	const { control, handleSubmit } = useForm<ReccoverPasswordFields>(
 		ReccoverPasswordValidation
 	)
 
 	const onSubmit: SubmitHandler<ReccoverPasswordFields> = async (data) => {
 		try {
-			console.log(data)
-			console.log('Reccover password form successfully sending')
+			const dto = { password: data.password }
+			const response = await resetPassword({
+				dto,
+				resetToken: resetToken ?? '',
+			})
+
+			if (!response.success) {
+				toast.error(response.message || 'Error during registration')
+				return
+			}
+
+			toast.success('The password has been changed successfully')
 		} catch (error) {
-			console.log(error)
+			handleError(error)
 		}
 	}
 
@@ -60,6 +80,7 @@ const RecoverPassword: FC = () => {
 					rules={{ required: true }}
 					defaultValue=""
 				/>
+				{isPending && <Loader color="gray" margin="15px 0" />}
 				<Button
 					background="yellow"
 					color="black"
@@ -67,8 +88,9 @@ const RecoverPassword: FC = () => {
 					hoverColor="white"
 					width="100%"
 					type="submit"
+					disabled={isPending}
 				>
-					send
+					{isPending ? '...' : 'send'}
 				</Button>
 			</motion.form>
 		</Wrapper>

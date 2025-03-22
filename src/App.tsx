@@ -8,6 +8,7 @@ import AuthPage from './pages/AuthPage'
 import HomePage from './pages/HomePage'
 import NotFoundPage from './pages/NotFoundPage'
 import RecoverPasswordPage from './pages/RecoverPasswordPage'
+import ResetPasswordPage from './pages/ResetPasswordPage'
 import { useAuthStore } from './store/useAuthStore'
 
 const App: FC = () => {
@@ -31,6 +32,7 @@ const App: FC = () => {
 					path={routes.ACTIVATION_SUCCESS}
 					element={<ActivationSuccessPage />}
 				/>
+				<Route path={routes.RESET_PASSWORD} element={<ResetPasswordPage />} />
 				<Route path="*" element={<NotFoundPage />} />
 			</Routes>
 		</>

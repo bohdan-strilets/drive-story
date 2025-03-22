@@ -18,4 +18,5 @@ export type User = {
 	phoneNumber?: string | null
 	isActivated?: boolean
 	location?: Location | null
+	resetToken?: string | null
 }

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 import Button from '@/components/UI/Button'
 import ButtonAsLink from '@/components/UI/ButtonAsLink'
+import Loader from '@/components/UI/Loader'
 import PasswordInput from '@/components/UI/PasswordInput/PasswordInput'
 import TextInput from '@/components/UI/TextInput'
 
@@ -71,6 +72,7 @@ const Login: FC = () => {
 				label="Forgot your password?"
 				margin="0 0 15px 0"
 			/>
+			{isPending && <Loader color="gray" margin="15px 0" />}
 			<Button
 				background="yellow"
 				color="black"

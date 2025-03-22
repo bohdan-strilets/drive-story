@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 import Button from '@/components/UI/Button'
 import Checkbox from '@/components/UI/Checkbox'
+import Loader from '@/components/UI/Loader'
 import PasswordInput from '@/components/UI/PasswordInput/PasswordInput'
 import StyledLink from '@/components/UI/StyledLink'
 import TextInput from '@/components/UI/TextInput'
@@ -140,6 +141,7 @@ const Registration: FC = () => {
 					/>
 				</p>
 			</Checkbox>
+			{isPending && <Loader color="gray" margin="15px 0" />}
 			<Button
 				background="yellow"
 				color="black"
