@@ -1,11 +1,17 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 
 import Button from '@/components/UI/Button'
 import ButtonGoBack from '@/components/UI/ButtonGoBack'
+import Loader from '@/components/UI/Loader'
 import Paragraph from '@/components/UI/Paragraph'
 import TextInput from '@/components/UI/TextInput'
+
+import { useResendActivationEmail } from '@/hooks/user/useResendActivationEmail'
+
+import { handleError } from '@/utils/handleError'
 
 import {
 	ResendEmailFields,
@@ -14,16 +20,25 @@ import {
 
 const ResendEmail: FC = () => {
 	const navigate = useNavigate()
+	const { mutateAsync: resendActivationEmail, isPending } =
+		useResendActivationEmail()
+
 	const { control, handleSubmit } = useForm<ResendEmailFields>(
 		ResendEmailValidation
 	)
 
 	const onSubmit: SubmitHandler<ResendEmailFields> = async (data) => {
 		try {
-			console.log(data)
-			console.log('Email sand successfully.')
+			const response = await resendActivationEmail(data)
+
+			if (!response.success) {
+				toast.error(response.message || 'Error during registration')
+				return
+			}
+
+			toast.success('The letter has been sent successfully')
 		} catch (error) {
-			console.log(error)
+			handleError(error)
 		}
 	}
 
@@ -59,6 +74,7 @@ const ResendEmail: FC = () => {
 					rules={{ required: true }}
 					defaultValue=""
 				/>
+				{isPending && <Loader color="gray" margin="15px 0" />}
 				<Button
 					background="yellow"
 					color="black"
@@ -66,8 +82,9 @@ const ResendEmail: FC = () => {
 					hoverColor="white"
 					width="100%"
 					type="submit"
+					disabled={isPending}
 				>
-					send
+					{isPending ? '...' : 'send'}
 				</Button>
 			</form>
 		</>
