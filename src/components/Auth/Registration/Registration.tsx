@@ -50,7 +50,9 @@ const Registration: FC = () => {
 			const response = await register(dto)
 
 			if (!response.success) {
-				toast.error(response.message || 'Error during registration')
+				toast.error(
+					response.message || 'Something went wrong, please try again'
+				)
 				return
 			}
 

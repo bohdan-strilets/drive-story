@@ -24,7 +24,9 @@ const GoogleAuth: FC = () => {
 				const response = await googleAuth(dto)
 
 				if (!response.success) {
-					toast.error(response.message || 'Error using google authorization')
+					toast.error(
+						response.message || 'Something went wrong, please try again'
+					)
 					return
 				}
 

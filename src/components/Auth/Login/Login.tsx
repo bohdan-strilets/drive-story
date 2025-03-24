@@ -33,7 +33,9 @@ const Login: FC = () => {
 			const response = await login(data)
 
 			if (!response.success) {
-				toast.error(response.message || 'Error during login')
+				toast.error(
+					response.message || 'Something went wrong, please try again'
+				)
 				return
 			}
 
