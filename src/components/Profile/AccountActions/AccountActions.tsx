@@ -21,7 +21,7 @@ const AccountActions: FC = () => {
 				</Button>
 			</Item>
 			<Item {...fadeSlide(0, -20, 0.2, 0.5)}>
-				<Button type="button">
+				<Button type="button" onClick={() => onOpen(modalNames.EDIT_PASSWORD)}>
 					<RiLockPasswordFill />
 					<Label>Edit password</Label>
 				</Button>

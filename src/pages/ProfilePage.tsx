@@ -5,6 +5,7 @@ import ResendEmail from '@/components/Auth/ResendEmail'
 import Modal from '@/components/Modal'
 import Profile from '@/components/Profile'
 import EditEmail from '@/components/Profile/EditEmail'
+import EditPassword from '@/components/Profile/EditPassword'
 
 import useModal from '@/hooks/ui/useModal'
 
@@ -19,6 +20,12 @@ const ProfilePage: FC = () => {
 				{checkQueryParam(modalNames.EDIT_EMAIL) && (
 					<Modal title="Edit email address">
 						<EditEmail />
+					</Modal>
+				)}
+
+				{checkQueryParam(modalNames.EDIT_PASSWORD) && (
+					<Modal title="Edit password">
+						<EditPassword />
 					</Modal>
 				)}
 
