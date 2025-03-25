@@ -16,15 +16,15 @@ import { UserBarProps } from '@/types/props/UI/UserBarProps'
 import Button from '../Button'
 import ImageBox from '../ImageBox'
 
-import { Email, InfoContainer, StyledLink, Wrapper } from './UserBar.styled'
+import {
+	Email,
+	InfoContainer,
+	Name,
+	StyledLink,
+	Wrapper,
+} from './UserBar.styled'
 
-const UserBar: FC<UserBarProps> = ({
-	width,
-	color,
-	background,
-	hoverColor,
-	hoverBackground,
-}) => {
+const UserBar: FC<UserBarProps> = ({ width }) => {
 	const { minTablet } = useResponsive()
 	const { mutateAsync: logout, isPending } = useLogout()
 	const user = useUserStore((state) => state.user)
@@ -33,12 +33,18 @@ const UserBar: FC<UserBarProps> = ({
 		image: user?.avatars,
 		defaultImage: defaultImages.avatar,
 	})
+	const userPosterRef = useGetImage({
+		image: user?.posters,
+		defaultImage: defaultImages.poster,
+	})
 
 	return (
-		<Wrapper width={width}>
+		<Wrapper width={width} posterUrl={userPosterRef.current}>
 			<StyledLink to={routes.PROFILE}>
 				<InfoContainer>
-					{user?.firstName} {user?.lastName}
+					<Name>
+						{user?.firstName} {user?.lastName}
+					</Name>
 					<Email>{user?.email}</Email>
 				</InfoContainer>
 				<ImageBox
@@ -50,10 +56,10 @@ const UserBar: FC<UserBarProps> = ({
 				/>
 			</StyledLink>
 			<Button
-				color={color}
-				background={background}
-				hoverColor={hoverColor}
-				hoverBackground={hoverBackground}
+				color="black"
+				background="yellow"
+				hoverColor="white"
+				hoverBackground="gray"
 				width={minTablet ? '' : '100%'}
 				height={minTablet ? '80px' : '40px'}
 				padding="0 10px"

@@ -29,17 +29,7 @@ const Header: FC = () => {
 
 	const renderAuthContent = () => {
 		if (isLoggedIn) {
-			return minTablet ? (
-				<UserBar
-					email="bohdan.strilets@gmail.com"
-					avatarUrl="https://res.cloudinary.com/ddd1vgg5b/image/upload/v1738671410/drive-story/default/wkj0lwfumli3e6ga95tk.jpg"
-					name="Bohdan Strilets"
-					background="black"
-					color="white"
-					hoverBackground="gray"
-					hoverColor="white"
-				/>
-			) : null
+			return minTablet ? <UserBar /> : null
 		}
 
 		return (
