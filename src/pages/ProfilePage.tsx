@@ -1,9 +1,28 @@
+import { AnimatePresence } from 'motion/react'
 import { FC } from 'react'
 
+import Modal from '@/components/Modal'
 import Profile from '@/components/Profile'
+import EditEmail from '@/components/Profile/EditEmail'
+
+import useModal from '@/hooks/ui/useModal'
 
 const ProfilePage: FC = () => {
-	return <Profile />
+	const { checkQueryParam, modalNames } = useModal()
+
+	return (
+		<>
+			<Profile />
+
+			<AnimatePresence>
+				{checkQueryParam(modalNames.EDIT_EMAIL) && (
+					<Modal title="Edit email address">
+						<EditEmail />
+					</Modal>
+				)}
+			</AnimatePresence>
+		</>
+	)
 }
 
 export default ProfilePage

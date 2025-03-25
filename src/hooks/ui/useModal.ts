@@ -12,6 +12,7 @@ const useModal = () => {
 		FORGOT_PASSWORD: 'forgot-password',
 		WELCOME: 'welcome',
 		RESEND_EMAIL: 'resend-email',
+		EDIT_EMAIL: 'edit-email',
 	}
 
 	const onOpen = useCallback(

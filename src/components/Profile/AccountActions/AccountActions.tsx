@@ -3,15 +3,19 @@ import { ImExit } from 'react-icons/im'
 import { MdDelete, MdEmail } from 'react-icons/md'
 import { RiLockPasswordFill, RiProfileFill } from 'react-icons/ri'
 
+import useModal from '@/hooks/ui/useModal'
+
 import { fadeSlide } from '@/animations/fadeSlide'
 
 import { Button, Item, Label } from './AccountActions.styled'
 
 const AccountActions: FC = () => {
+	const { modalNames, onOpen } = useModal()
+
 	return (
 		<ul>
 			<Item {...fadeSlide(0, -20, 0.1, 0.5)}>
-				<Button type="button">
+				<Button type="button" onClick={() => onOpen(modalNames.EDIT_EMAIL)}>
 					<MdEmail />
 					<Label>Edit email</Label>
 				</Button>
