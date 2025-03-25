@@ -1,7 +1,8 @@
-import { FC, useEffect, useRef } from 'react'
+import { FC } from 'react'
 import { ImExit } from 'react-icons/im'
 
 import { useLogout } from '@/hooks/auth/useLogout'
+import { useGetImage } from '@/hooks/ui/useGetImage'
 import useResponsive from '@/hooks/ui/useResponsive'
 
 import { routes } from '@/config/routes'
@@ -10,7 +11,6 @@ import { useUserStore } from '@/store/useUserStore'
 
 import { defaultImages } from '@/utils/defaultImages'
 
-import { isImage } from '@/types/guards/isImage'
 import { UserBarProps } from '@/types/props/UI/UserBarProps'
 
 import Button from '../Button'
@@ -29,13 +29,10 @@ const UserBar: FC<UserBarProps> = ({
 	const { mutateAsync: logout, isPending } = useLogout()
 	const user = useUserStore((state) => state.user)
 
-	const userAvatarRef = useRef<string>(defaultImages.avatar)
-
-	useEffect(() => {
-		if (user && isImage(user.avatars)) {
-			userAvatarRef.current = user.avatars.selected
-		}
-	}, [user])
+	const userAvatarRef = useGetImage({
+		image: user?.avatars,
+		defaultImage: defaultImages.avatar,
+	})
 
 	return (
 		<Wrapper width={width}>
