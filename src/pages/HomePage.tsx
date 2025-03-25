@@ -41,7 +41,7 @@ const HomePage: FC = () => {
 				)}
 				{checkQueryParam(modalNames.RESEND_EMAIL) && (
 					<Modal title="Resend activation email">
-						<ResendEmail />
+						<ResendEmail showButtonGoBack={true} />
 					</Modal>
 				)}
 			</AnimatePresence>

@@ -1,6 +1,9 @@
 import { FC } from 'react'
 
+import ButtonAsLink from '@/components/UI/ButtonAsLink'
 import StatusBadge from '@/components/UI/StatusBadge'
+
+import useModal from '@/hooks/ui/useModal'
 
 import { parsedDateToString } from '@/utils/parsedDateToString'
 
@@ -8,7 +11,7 @@ import { UserInformationProps } from '@/types/props/Profile/UserInformationProps
 
 import { fadeSlide } from '@/animations/fadeSlide'
 
-import { Item, List, Property, Value } from './UserInformation.styled'
+import { Group, Item, List, Property, Value } from './UserInformation.styled'
 
 const UserInformation: FC<UserInformationProps> = ({
 	email,
@@ -20,6 +23,8 @@ const UserInformation: FC<UserInformationProps> = ({
 	city,
 	postalCode,
 }) => {
+	const { modalNames, onOpen } = useModal()
+
 	return (
 		<List>
 			<Item {...fadeSlide(0, -20, 0.1, 0.5)}>
@@ -28,7 +33,18 @@ const UserInformation: FC<UserInformationProps> = ({
 			</Item>
 			<Item {...fadeSlide(0, -20, 0.2, 0.5)}>
 				<Property>Email activated:</Property>
-				<StatusBadge status={isActivated} />
+				<Group>
+					{!isActivated && (
+						<ButtonAsLink
+							onClick={() => onOpen(modalNames.RESEND_EMAIL)}
+							label="Send activation email"
+							color="yellow"
+							hoverColor="gray"
+							margin="0 15px 0 0"
+						/>
+					)}
+					<StatusBadge status={isActivated} />
+				</Group>
 			</Item>
 			<Item {...fadeSlide(0, -20, 0.3, 0.5)}>
 				<Property>Password:</Property>

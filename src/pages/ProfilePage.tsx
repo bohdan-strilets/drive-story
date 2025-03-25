@@ -1,6 +1,7 @@
 import { AnimatePresence } from 'motion/react'
 import { FC } from 'react'
 
+import ResendEmail from '@/components/Auth/ResendEmail'
 import Modal from '@/components/Modal'
 import Profile from '@/components/Profile'
 import EditEmail from '@/components/Profile/EditEmail'
@@ -18,6 +19,12 @@ const ProfilePage: FC = () => {
 				{checkQueryParam(modalNames.EDIT_EMAIL) && (
 					<Modal title="Edit email address">
 						<EditEmail />
+					</Modal>
+				)}
+
+				{checkQueryParam(modalNames.RESEND_EMAIL) && (
+					<Modal title="Resend activation email">
+						<ResendEmail />
 					</Modal>
 				)}
 			</AnimatePresence>

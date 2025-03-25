@@ -45,3 +45,7 @@ export const Property = styled.p`
 export const Value = styled.p`
 	color: ${getColor('gray')};
 `
+
+export const Group = styled.div`
+	${flexCenterDirection()}
+`

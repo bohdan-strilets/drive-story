@@ -13,12 +13,14 @@ import { useResendActivationEmail } from '@/hooks/user/useResendActivationEmail'
 
 import { handleError } from '@/utils/handleError'
 
+import { ResendEmailProps } from '@/types/props/Auth/ResendEmailProps'
+
 import {
 	ResendEmailFields,
 	ResendEmailValidation,
 } from '@/validation/ResendEmailSchema'
 
-const ResendEmail: FC = () => {
+const ResendEmail: FC<ResendEmailProps> = ({ showButtonGoBack = false }) => {
 	const navigate = useNavigate()
 	const { mutateAsync: resendActivationEmail, isPending } =
 		useResendActivationEmail()
@@ -46,11 +48,13 @@ const ResendEmail: FC = () => {
 
 	return (
 		<>
-			<ButtonGoBack
-				label="welcome message"
-				onClick={() => navigate(-1)}
-				margin="0 0 15px 0"
-			/>
+			{showButtonGoBack && (
+				<ButtonGoBack
+					label="welcome message"
+					onClick={() => navigate(-1)}
+					margin="0 0 15px 0"
+				/>
+			)}
 			<Paragraph color="black" margin="0 0 10px 0">
 				It looks like you haven’t activated your account yet. No worries—just
 				enter your email address below, and we’ll send you a new activation
