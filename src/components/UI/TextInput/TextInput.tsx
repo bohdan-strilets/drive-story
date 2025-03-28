@@ -1,6 +1,8 @@
 import { useId } from 'react'
 import { FieldValues, useController } from 'react-hook-form'
 
+import { formatPhoneNumber } from '@/utils/formatPhoneNumber'
+
 import { TextInputProps } from '@/types/props/UI/TextInputProps'
 
 import InputErrorMessage from '../InputErrorMessage'
@@ -34,6 +36,14 @@ const TextInput = <T extends FieldValues>({
 
 	const required = rules?.required
 
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		let newValue = e.target.value
+		if (type === 'tel') {
+			newValue = formatPhoneNumber(newValue)
+		}
+		field.onChange(newValue)
+	}
+
 	return (
 		<Wrapper htmlFor={name} margin={margin} width={width}>
 			<InputLabel label={label} required={required} />
@@ -41,6 +51,8 @@ const TextInput = <T extends FieldValues>({
 				<Input
 					id={useId()}
 					{...field}
+					value={field.value || ''}
+					onChange={handleChange}
 					placeholder={placeholder}
 					type={type}
 					height={height}

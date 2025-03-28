@@ -13,7 +13,7 @@ export type Rules = {
 export type TextInputProps<T extends FieldValues> = {
 	control: Control<T>
 	name: Path<T>
-	type: 'text' | 'password' | 'email'
+	type: 'text' | 'password' | 'email' | 'tel'
 	label?: string
 	children?: ReactNode
 	rules?: Rules

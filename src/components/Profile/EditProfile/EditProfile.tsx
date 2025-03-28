@@ -12,6 +12,7 @@ import { useEditProfile } from '@/hooks/user/useEditProfile'
 
 import { useUserStore } from '@/store/useUserStore'
 
+import { formatPhoneNumber } from '@/utils/formatPhoneNumber'
 import {
 	formatValue,
 	generateDropdownOptions,
@@ -113,11 +114,11 @@ const EditProfile: FC = () => {
 				control={control}
 				label="PhoneNumber"
 				name="phoneNumber"
-				type="text"
+				type="tel"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder="123-456-789"
-				defaultValue={user?.phoneNumber || ''}
+				placeholder="123 456 789"
+				defaultValue={formatPhoneNumber(user?.phoneNumber || '')}
 			/>
 			<DropdownList<EditProfileFields>
 				control={control}
