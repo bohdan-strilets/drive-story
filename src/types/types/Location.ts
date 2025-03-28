@@ -1,5 +1,5 @@
 export type Location = {
-	country: string | null
-	city: string | null
-	postalCode: string | null
+	country?: string | null
+	city?: string | null
+	postalCode?: string | null
 }

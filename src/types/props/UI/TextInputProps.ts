@@ -1,7 +1,14 @@
 import { ReactNode } from 'react'
 import { Control, FieldValues, Path, PathValue } from 'react-hook-form'
 
-import { TextInputRules } from '@/types/types/TextInputRules'
+export type Rules = {
+	required?: boolean
+	min?: number
+	max?: number
+	minLength?: number
+	maxLength?: number
+	disabled?: boolean
+}
 
 export type TextInputProps<T extends FieldValues> = {
 	control: Control<T>
@@ -9,7 +16,7 @@ export type TextInputProps<T extends FieldValues> = {
 	type: 'text' | 'password' | 'email'
 	label?: string
 	children?: ReactNode
-	rules?: TextInputRules
+	rules?: Rules
 	defaultValue?: PathValue<T, Path<T>>
 	placeholder?: string
 	width?: string

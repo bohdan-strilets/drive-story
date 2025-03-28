@@ -3,14 +3,10 @@ import { FieldValues, useController } from 'react-hook-form'
 
 import { TextInputProps } from '@/types/props/UI/TextInputProps'
 
-import {
-	ErrorMsg,
-	Input,
-	InputContainer,
-	Label,
-	Required,
-	Wrapper,
-} from './TextInput.styled'
+import InputErrorMessage from '../InputErrorMessage'
+import InputLabel from '../InputLabel'
+
+import { Input, InputContainer, Wrapper } from './TextInput.styled'
 
 const TextInput = <T extends FieldValues>({
 	control,
@@ -40,12 +36,7 @@ const TextInput = <T extends FieldValues>({
 
 	return (
 		<Wrapper htmlFor={name} margin={margin} width={width}>
-			{label && (
-				<Label>
-					{label}
-					{required && <Required>*</Required>}
-				</Label>
-			)}
+			<InputLabel label={label} required={required} />
 			<InputContainer>
 				<Input
 					id={useId()}
@@ -58,7 +49,7 @@ const TextInput = <T extends FieldValues>({
 				/>
 				{children && children}
 			</InputContainer>
-			{error && <ErrorMsg role="alert">{error.message}</ErrorMsg>}
+			<InputErrorMessage error={error} />
 		</Wrapper>
 	)
 }

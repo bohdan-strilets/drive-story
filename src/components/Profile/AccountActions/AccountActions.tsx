@@ -27,7 +27,7 @@ const AccountActions: FC = () => {
 				</Button>
 			</Item>
 			<Item {...fadeSlide(0, -20, 0.3, 0.5)}>
-				<Button type="button">
+				<Button type="button" onClick={() => onOpen(modalNames.EDIT_PROFILE)}>
 					<RiProfileFill />
 					<Label>Edit profile</Label>
 				</Button>
