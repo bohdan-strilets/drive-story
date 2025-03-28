@@ -150,7 +150,6 @@ const EditProfile: FC = () => {
 				placeholder="Warshaw"
 				defaultValue={user?.location?.city || ''}
 			/>
-
 			{isPending && <Loader color="gray" margin="15px 0" />}
 			<Button
 				background="yellow"

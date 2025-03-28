@@ -1,4 +1,3 @@
-import { useId } from 'react'
 import { FieldValues, useController } from 'react-hook-form'
 
 import { formatPhoneNumber } from '@/utils/formatPhoneNumber'
@@ -45,11 +44,10 @@ const TextInput = <T extends FieldValues>({
 	}
 
 	return (
-		<Wrapper htmlFor={name} margin={margin} width={width}>
+		<Wrapper margin={margin} width={width}>
 			<InputLabel label={label} required={required} />
 			<InputContainer>
 				<Input
-					id={useId()}
 					{...field}
 					value={field.value || ''}
 					onChange={handleChange}
