@@ -7,6 +7,7 @@ import DatePicker from '@/components/UI/DatePicker'
 import DropdownList from '@/components/UI/DropdownList'
 import Loader from '@/components/UI/Loader'
 import TextInput from '@/components/UI/TextInput'
+import Title from '@/components/UI/Title'
 
 import { useEditProfile } from '@/hooks/user/useEditProfile'
 
@@ -36,6 +37,8 @@ const EditProfile: FC = () => {
 	)
 
 	const onSubmit: SubmitHandler<EditProfileFields> = async (data) => {
+		console.log(data)
+
 		try {
 			const dto: ProfileDto = {
 				firstName: data.firstName,
@@ -71,6 +74,15 @@ const EditProfile: FC = () => {
 
 	return user ? (
 		<form onSubmit={handleSubmit(onSubmit)}>
+			<Title
+				fontSize={20}
+				textAlign="left"
+				color={'black'}
+				type="h2"
+				margin="0 0 15px 0"
+			>
+				User information
+			</Title>
 			<TextInput<EditProfileFields>
 				control={control}
 				label="First name"
@@ -112,13 +124,15 @@ const EditProfile: FC = () => {
 			/>
 			<TextInput<EditProfileFields>
 				control={control}
-				label="PhoneNumber"
+				label="Phone number"
 				name="phoneNumber"
 				type="tel"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder="123 456 789"
+				placeholder="000 000 000"
 				defaultValue={formatPhoneNumber(user?.phoneNumber || '')}
+				mask="000 000 000"
+				unmask={true}
 			/>
 			<DropdownList<EditProfileFields>
 				control={control}
@@ -130,6 +144,15 @@ const EditProfile: FC = () => {
 				placeholder="Select your gender"
 				defaultValue={formatValue(user.gender)}
 			/>
+			<Title
+				fontSize={20}
+				textAlign="left"
+				color={'black'}
+				type="h2"
+				margin="0 0 15px 0"
+			>
+				Location information
+			</Title>
 			<TextInput<EditProfileFields>
 				control={control}
 				label="Country"
@@ -149,6 +172,18 @@ const EditProfile: FC = () => {
 				margin="0 0 15px 0"
 				placeholder="Warshaw"
 				defaultValue={user?.location?.city || ''}
+			/>
+			<TextInput<EditProfileFields>
+				control={control}
+				label="Postal code"
+				name="location.postalCode"
+				type="text"
+				width="100%"
+				margin="0 0 15px 0"
+				placeholder="00-000"
+				defaultValue={formatPhoneNumber(user?.location?.postalCode || '')}
+				mask="00-000"
+				unmask={false}
 			/>
 			{isPending && <Loader color="gray" margin="15px 0" />}
 			<Button

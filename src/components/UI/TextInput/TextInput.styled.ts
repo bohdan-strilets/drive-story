@@ -1,4 +1,6 @@
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { IMaskInput } from 'react-imask'
 
 import { InputProps, WrapperProps } from '@/types/props/UI/TextInputProps'
 
@@ -17,19 +19,14 @@ export const InputContainer = styled.div`
 	width: 100%;
 `
 
-export const Input = styled.input<InputProps>`
+export const baseInputStyles = css`
 	width: 100%;
-	height: ${({ height }) => (height ? height : '30px')};
-	padding: ${({ padding }) => (padding ? padding : '0 10px')};
 	margin: 5px 0;
-
 	font-size: 14px;
-
 	background-color: ${getColor('#e4e4e4')};
 	color: ${getColor('black')};
 	border-radius: 3px;
 	border-bottom: 2px solid transparent;
-
 	transition: border-bottom-color var(--hover-effect);
 
 	::placeholder {
@@ -40,14 +37,32 @@ export const Input = styled.input<InputProps>`
 		border-bottom-color: ${getColor('green')};
 	}
 
-	::-ms-reveal,
-	::-ms-clear {
-		display: none;
+	@media screen and (min-width: ${breakpoints.tabletMin}) {
+		font-size: 16px;
 	}
+`
+
+export const Input = styled.input<InputProps>`
+	${baseInputStyles}
+	height: ${({ height }) => (height ? height : '30px')};
+	padding: ${({ padding }) => (padding ? padding : '0 10px')};
 
 	@media screen and (min-width: ${breakpoints.tabletMin}) {
 		height: ${({ height }) => (height ? height : '35px')};
-		font-size: 16px;
+	}
+
+	@media screen and (min-width: ${breakpoints.laptopMin}) {
+		height: ${({ height }) => (height ? height : '40px')};
+	}
+`
+
+export const StyledIMaskInput = styled(IMaskInput)<InputProps>`
+	${baseInputStyles}
+	height: ${({ height }) => (height ? height : '30px')};
+	padding: ${({ padding }) => (padding ? padding : '0 10px')};
+
+	@media screen and (min-width: ${breakpoints.tabletMin}) {
+		height: ${({ height }) => (height ? height : '35px')};
 	}
 
 	@media screen and (min-width: ${breakpoints.laptopMin}) {

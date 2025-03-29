@@ -7,7 +7,12 @@ import { TextInputProps } from '@/types/props/UI/TextInputProps'
 import InputErrorMessage from '../InputErrorMessage'
 import InputLabel from '../InputLabel'
 
-import { Input, InputContainer, Wrapper } from './TextInput.styled'
+import {
+	Input,
+	InputContainer,
+	StyledIMaskInput,
+	Wrapper,
+} from './TextInput.styled'
 
 const TextInput = <T extends FieldValues>({
 	control,
@@ -22,6 +27,8 @@ const TextInput = <T extends FieldValues>({
 	height,
 	margin,
 	padding,
+	mask,
+	unmask,
 }: TextInputProps<T>) => {
 	const {
 		field,
@@ -47,16 +54,27 @@ const TextInput = <T extends FieldValues>({
 		<Wrapper margin={margin} width={width}>
 			<InputLabel label={label} required={required} />
 			<InputContainer>
-				<Input
-					{...field}
-					value={field.value || ''}
-					onChange={handleChange}
-					placeholder={placeholder}
-					type={type}
-					height={height}
-					padding={padding}
-					aria-invalid={!!error}
-				/>
+				{mask ? (
+					<StyledIMaskInput
+						mask={mask}
+						value={field.value || ''}
+						onAccept={(value: string) => field.onChange(value)}
+						unmask={unmask}
+						placeholder={placeholder}
+						aria-invalid={!!error}
+					/>
+				) : (
+					<Input
+						{...field}
+						value={field.value || ''}
+						onChange={handleChange}
+						placeholder={placeholder}
+						type={type}
+						height={height}
+						padding={padding}
+						aria-invalid={!!error}
+					/>
+				)}
 				{children && children}
 			</InputContainer>
 			<InputErrorMessage error={error} />
