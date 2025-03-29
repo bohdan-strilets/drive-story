@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useMemo } from 'react'
 
 import ButtonAsLink from '@/components/UI/ButtonAsLink'
 import StatusBadge from '@/components/UI/StatusBadge'
@@ -34,7 +34,8 @@ const UserInformation: FC<UserInformationProps> = ({
 	postalCode,
 }) => {
 	const { modalNames, onOpen } = useModal()
-	const userAge = useCalculateAge(birthDate || new Date())
+	const memoBirthDate = useMemo(() => birthDate || new Date(), [])
+	const userAge = useCalculateAge(memoBirthDate)
 
 	return (
 		<List>

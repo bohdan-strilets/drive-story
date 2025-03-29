@@ -33,7 +33,7 @@ const AccountActions: FC = () => {
 				</Button>
 			</Item>
 			<Item {...fadeSlide(0, -20, 0.4, 0.5)}>
-				<Button type="button">
+				<Button type="button" onClick={() => onOpen(modalNames.DELETE_PROFILE)}>
 					<MdDelete />
 					<Label>Delete profile</Label>
 				</Button>

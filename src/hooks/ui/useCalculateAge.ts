@@ -4,7 +4,6 @@ import { AgeResult } from '@/types/types/AgeResult'
 
 export const useCalculateAge = (date: Date): AgeResult => {
 	const [age, setAge] = useState<AgeResult>({ ageInYears: 0, detailedAge: '' })
-	const formatedDate = new Date(date)
 
 	const getYearWord = (years: number): string => {
 		return years === 1 ? 'year' : 'years'
@@ -13,13 +12,14 @@ export const useCalculateAge = (date: Date): AgeResult => {
 	useEffect(() => {
 		const calculateAge = (date: Date): AgeResult => {
 			const now = new Date()
+			const formatedDate = new Date(date)
 
-			let years = now.getFullYear() - date.getFullYear()
-			const monthDiff = now.getMonth() - date.getMonth()
+			let years = now.getFullYear() - formatedDate.getFullYear()
+			const monthDiff = now.getMonth() - formatedDate.getMonth()
 
 			if (
 				monthDiff < 0 ||
-				(monthDiff === 0 && now.getDate() < date.getDate())
+				(monthDiff === 0 && now.getDate() < formatedDate.getDate())
 			) {
 				years--
 			}
@@ -27,8 +27,8 @@ export const useCalculateAge = (date: Date): AgeResult => {
 			let detailed = ''
 
 			if (years < 1) {
-				let months = now.getMonth() - date.getMonth()
-				let days = now.getDate() - date.getDate()
+				let months = now.getMonth() - formatedDate.getMonth()
+				let days = now.getDate() - formatedDate.getDate()
 				if (days < 0) {
 					const prevMonthDate = new Date(now.getFullYear(), now.getMonth(), 0)
 					days += prevMonthDate.getDate()
@@ -54,7 +54,7 @@ export const useCalculateAge = (date: Date): AgeResult => {
 			}
 		}
 
-		setAge(calculateAge(formatedDate))
+		setAge(calculateAge(date))
 	}, [date])
 
 	return age

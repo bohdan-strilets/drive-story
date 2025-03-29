@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useMemo } from 'react'
 
 import { useCalculateAge } from '@/hooks/ui/useCalculateAge'
 
@@ -15,7 +15,8 @@ const ProfileMeta: FC<ProfileMetaProps> = ({
 	createdDate,
 	updatedDate,
 }) => {
-	const userOnPortal = useCalculateAge(createdDate || new Date())
+	const memoCreatedDate = useMemo(() => createdDate || new Date(), [])
+	const userOnPortal = useCalculateAge(memoCreatedDate)
 
 	return (
 		<List>
