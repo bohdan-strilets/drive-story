@@ -5,6 +5,8 @@ import StatusBadge from '@/components/UI/StatusBadge'
 
 import useModal from '@/hooks/ui/useModal'
 
+import { formatPhoneNumber } from '@/utils/formatPhoneNumber'
+import { formatLabel } from '@/utils/generateDropdownOptions'
 import { parsedDateToString } from '@/utils/parsedDateToString'
 
 import { UserInformationProps } from '@/types/props/Profile/UserInformationProps'
@@ -56,11 +58,11 @@ const UserInformation: FC<UserInformationProps> = ({
 			</Item>
 			<Item {...fadeSlide(0, -20, 0.5, 0.5)}>
 				<Property>Phone number:</Property>
-				<Value>{phoneNumber || '---'}</Value>
+				<Value>{formatPhoneNumber(phoneNumber || '---')}</Value>
 			</Item>
 			<Item {...fadeSlide(0, -20, 0.6, 0.5)}>
 				<Property>Gender:</Property>
-				<Value>{gender}</Value>
+				<Value>{formatLabel(gender || '')}</Value>
 			</Item>
 			<Item {...fadeSlide(0, -20, 0.7, 0.5)}>
 				<Property>Country:</Property>
