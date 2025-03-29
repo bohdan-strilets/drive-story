@@ -37,8 +37,6 @@ const EditProfile: FC = () => {
 	)
 
 	const onSubmit: SubmitHandler<EditProfileFields> = async (data) => {
-		console.log(data)
-
 		try {
 			const dto: ProfileDto = {
 				firstName: data.firstName,
