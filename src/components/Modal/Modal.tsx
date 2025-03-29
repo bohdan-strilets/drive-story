@@ -11,6 +11,7 @@ import { floating } from '@/animations/floating'
 
 import Button from '../UI/Button'
 import CloseButton from '../UI/CloseButton'
+import Loader from '../UI/Loader'
 
 import {
 	Backdrop,
@@ -29,6 +30,7 @@ const Modal: FC<ModalProps> = ({
 	children,
 	title,
 	isDialog = false,
+	isLoading = false,
 	positiveBtnLabel,
 	negativeBtnLabel,
 	positiveCallback,
@@ -52,6 +54,7 @@ const Modal: FC<ModalProps> = ({
 				<Content>{children}</Content>
 				{isDialog && (
 					<Footer>
+						{isLoading && <Loader color="gray" margin="0 0 15px 0" />}
 						<List>
 							<Item>
 								<Button
@@ -61,6 +64,7 @@ const Modal: FC<ModalProps> = ({
 									hoverColor={'white'}
 									hoverBackground={'gray'}
 									width="100%"
+									disabled={isLoading}
 								>
 									{negativeBtnLabel}
 								</Button>
@@ -73,6 +77,7 @@ const Modal: FC<ModalProps> = ({
 									hoverColor={'white'}
 									hoverBackground={'gray'}
 									width="100%"
+									disabled={isLoading}
 								>
 									{positiveBtnLabel}
 								</Button>

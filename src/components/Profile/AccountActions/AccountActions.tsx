@@ -39,7 +39,7 @@ const AccountActions: FC = () => {
 				</Button>
 			</Item>
 			<Item {...fadeSlide(0, -20, 0.5, 0.5)}>
-				<Button type="button">
+				<Button type="button" onClick={() => onOpen(modalNames.EXIT_PROFILE)}>
 					<ImExit />
 					<Label>Exit</Label>
 				</Button>

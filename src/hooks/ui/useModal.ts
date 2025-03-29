@@ -15,6 +15,7 @@ const useModal = () => {
 		EDIT_EMAIL: 'edit-email',
 		EDIT_PASSWORD: 'edit-password',
 		EDIT_PROFILE: 'edit-profile',
+		EXIT_PROFILE: 'exit-profile',
 	}
 
 	const onOpen = useCallback(
