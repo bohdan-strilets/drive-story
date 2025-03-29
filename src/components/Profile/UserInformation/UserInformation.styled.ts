@@ -49,3 +49,8 @@ export const Value = styled.p`
 export const Group = styled.div`
 	${flexCenterDirection()}
 `
+
+export const Age = styled.span`
+	font-weight: 700;
+	color: ${getColor('yellow')};
+`

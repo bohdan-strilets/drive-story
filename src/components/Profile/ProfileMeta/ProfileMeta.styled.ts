@@ -35,3 +35,7 @@ export const Property = styled.p`
 export const Value = styled.p`
 	color: ${getColor('gray')};
 `
+
+export const Age = styled.span`
+	font-weight: 700;
+`

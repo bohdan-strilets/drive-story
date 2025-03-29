@@ -3,6 +3,7 @@ import { FC } from 'react'
 import ButtonAsLink from '@/components/UI/ButtonAsLink'
 import StatusBadge from '@/components/UI/StatusBadge'
 
+import { useCalculateAge } from '@/hooks/ui/useCalculateAge'
 import useModal from '@/hooks/ui/useModal'
 
 import { formatPhoneNumber } from '@/utils/formatPhoneNumber'
@@ -13,7 +14,14 @@ import { UserInformationProps } from '@/types/props/Profile/UserInformationProps
 
 import { fadeSlide } from '@/animations/fadeSlide'
 
-import { Group, Item, List, Property, Value } from './UserInformation.styled'
+import {
+	Age,
+	Group,
+	Item,
+	List,
+	Property,
+	Value,
+} from './UserInformation.styled'
 
 const UserInformation: FC<UserInformationProps> = ({
 	email,
@@ -26,6 +34,7 @@ const UserInformation: FC<UserInformationProps> = ({
 	postalCode,
 }) => {
 	const { modalNames, onOpen } = useModal()
+	const userAge = useCalculateAge(birthDate || new Date())
 
 	return (
 		<List>
@@ -54,7 +63,10 @@ const UserInformation: FC<UserInformationProps> = ({
 			</Item>
 			<Item {...fadeSlide(0, -20, 0.4, 0.5)}>
 				<Property>Birthday:</Property>
-				<Value>{parsedDateToString(birthDate) || '---'}</Value>
+				<Value>
+					{parsedDateToString(birthDate) || '---'}
+					{birthDate && <Age> | {userAge.detailedAge}</Age>}
+				</Value>
 			</Item>
 			<Item {...fadeSlide(0, -20, 0.5, 0.5)}>
 				<Property>Phone number:</Property>

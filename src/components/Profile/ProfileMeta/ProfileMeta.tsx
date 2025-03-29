@@ -1,18 +1,22 @@
 import { FC } from 'react'
 
+import { useCalculateAge } from '@/hooks/ui/useCalculateAge'
+
 import { parsedDateToString } from '@/utils/parsedDateToString'
 
 import { ProfileMetaProps } from '@/types/props/Profile/ProfileMetaProps'
 
 import { fadeSlide } from '@/animations/fadeSlide'
 
-import { Item, List, Property, Value } from './ProfileMeta.styled'
+import { Age, Item, List, Property, Value } from './ProfileMeta.styled'
 
 const ProfileMeta: FC<ProfileMetaProps> = ({
 	userId,
 	createdDate,
 	updatedDate,
 }) => {
+	const userOnPortal = useCalculateAge(createdDate || new Date())
+
 	return (
 		<List>
 			<Item {...fadeSlide(0, -20, 0.1, 0.5)}>
@@ -21,7 +25,10 @@ const ProfileMeta: FC<ProfileMetaProps> = ({
 			</Item>
 			<Item {...fadeSlide(0, -20, 0.2, 0.5)}>
 				<Property>Date of registration:</Property>
-				<Value>{parsedDateToString(createdDate) || '---'}</Value>
+				<Value>
+					{parsedDateToString(createdDate) || '---'}
+					<Age> | {createdDate && userOnPortal.detailedAge}</Age>
+				</Value>
 			</Item>
 			<Item {...fadeSlide(0, -20, 0.3, 0.5)}>
 				<Property>Latest changes:</Property>
