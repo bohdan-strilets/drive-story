@@ -3,6 +3,7 @@ import { motion } from 'motion/react'
 
 import { getColor } from '@/styles/helpers/getColor'
 import { breakpoints } from '@/styles/media/breakpoints'
+import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 
 export const Backdrop = styled(motion.div)`
 	position: fixed;
@@ -76,5 +77,27 @@ export const Content = styled.div`
 
 	@media screen and (min-width: ${breakpoints.tabletMin}) {
 		padding: 50px 30px;
+	}
+`
+
+export const Footer = styled.div`
+	padding: 0 15px 15px 15px;
+
+	@media screen and (min-width: ${breakpoints.tabletMin}) {
+		padding: 0 30px 30px 30px;
+	}
+`
+
+export const List = styled.ul`
+	${flexCenterDirection()}
+	justify-content: end;
+`
+
+export const Item = styled.li`
+	width: 140px;
+	margin-right: 15px;
+
+	:last-child {
+		margin-right: 0;
 	}
 `
