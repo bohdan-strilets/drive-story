@@ -108,14 +108,14 @@ const EditProfile: FC = () => {
 				type="text"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder="Goffra"
+				placeholder="Tabasco"
 				defaultValue={user?.nickname || ''}
 			/>
 			<DatePicker<EditProfileFields>
 				control={control}
 				name="birthDate"
 				label="Birthday"
-				placeholder="Seletec birthday"
+				placeholder="Select birthday"
 				width="100%"
 				margin="0 0 15px 0"
 				defaultValue={user.birthDate || new Date()}
@@ -168,7 +168,7 @@ const EditProfile: FC = () => {
 				type="text"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder="Warshaw"
+				placeholder="Warsaw"
 				defaultValue={user?.location?.city || ''}
 			/>
 			<TextInput<EditProfileFields>
