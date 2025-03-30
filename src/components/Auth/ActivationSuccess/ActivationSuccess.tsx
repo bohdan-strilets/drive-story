@@ -35,6 +35,7 @@ const ActivationSuccess: FC = () => {
 				width="100%"
 				height="300px"
 				margin="30px 0"
+				size="contain"
 			/>
 			<List>
 				<Item>

@@ -5,9 +5,10 @@ export type ImageBoxProps = {
 	margin?: string
 	isBorder?: boolean
 	isShadow?: boolean
+	size?: 'cover' | 'contain'
 }
 
 export type ImageProps = Pick<
 	ImageBoxProps,
-	'imageUrl' | 'width' | 'height' | 'margin' | 'isBorder' | 'isShadow'
+	'imageUrl' | 'width' | 'height' | 'margin' | 'isBorder' | 'isShadow' | 'size'
 >

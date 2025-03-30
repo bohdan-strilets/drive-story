@@ -11,6 +11,7 @@ const ImageBox: FC<ImageBoxProps> = ({
 	margin,
 	isBorder = false,
 	isShadow = false,
+	size = 'cover',
 }) => {
 	return (
 		<Image
@@ -20,6 +21,7 @@ const ImageBox: FC<ImageBoxProps> = ({
 			margin={margin}
 			isBorder={isBorder}
 			isShadow={isShadow}
+			size={size}
 		/>
 	)
 }
