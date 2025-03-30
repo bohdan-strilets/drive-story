@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
 
 import Button from '@/components/UI/Button'
 import DatePicker from '@/components/UI/DatePicker'
@@ -9,6 +8,7 @@ import Loader from '@/components/UI/Loader'
 import TextInput from '@/components/UI/TextInput'
 import Title from '@/components/UI/Title'
 
+import useSubmit from '@/hooks/ui/useSubmit'
 import { useEditProfile } from '@/hooks/user/useEditProfile'
 
 import { useUserStore } from '@/store/useUserStore'
@@ -18,10 +18,10 @@ import {
 	formatValue,
 	generateDropdownOptions,
 } from '@/utils/generateDropdownOptions'
-import { handleError } from '@/utils/handleError'
 
 import { ProfileDto } from '@/types/dto/ProfileDto'
 import { Gender } from '@/types/enums/Gender'
+import { User } from '@/types/types/User'
 
 import {
 	EditProfileFields,
@@ -36,35 +36,26 @@ const EditProfile: FC = () => {
 		EditProfileValidation
 	)
 
+	const submitEditProfile = useSubmit<User | null, ProfileDto>({
+		callback: editProfile,
+		successMessage: 'Profile successfully changed',
+	})
+
 	const onSubmit: SubmitHandler<EditProfileFields> = async (data) => {
-		try {
-			const dto: ProfileDto = {
-				firstName: data.firstName,
-				lastName: data.lastName,
-				nickname: data.nickname,
-				birthDate: data.birthDate,
-				gender: data.gender,
-				phoneNumber: data.phoneNumber,
-				location: {
-					country: data.location?.country,
-					city: data.location?.city,
-					postalCode: data.location?.postalCode,
-				},
-			}
-
-			const response = await editProfile(dto)
-
-			if (!response.success) {
-				toast.error(
-					response.message || 'Something went wrong, please try again'
-				)
-				return
-			}
-
-			toast.success('Profile successfully changed')
-		} catch (error) {
-			handleError(error)
+		const dto: ProfileDto = {
+			firstName: data.firstName,
+			lastName: data.lastName,
+			nickname: data.nickname,
+			birthDate: data.birthDate,
+			gender: data.gender,
+			phoneNumber: data.phoneNumber,
+			location: {
+				country: data.location?.country,
+				city: data.location?.city,
+				postalCode: data.location?.postalCode,
+			},
 		}
+		submitEditProfile(dto)
 	}
 
 	const genders = Object.values(Gender)

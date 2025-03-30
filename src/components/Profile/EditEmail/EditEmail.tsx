@@ -1,15 +1,16 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
 
 import Button from '@/components/UI/Button'
 import Loader from '@/components/UI/Loader'
 import Paragraph from '@/components/UI/Paragraph'
 import TextInput from '@/components/UI/TextInput'
 
+import useSubmit from '@/hooks/ui/useSubmit'
 import { useEditEmail } from '@/hooks/user/useEditEmail'
 
-import { handleError } from '@/utils/handleError'
+import { EmailDto } from '@/types/dto/EmailDto'
+import { User } from '@/types/types/User'
 
 import {
 	EditEmailFields,
@@ -22,21 +23,13 @@ const EditEmail: FC = () => {
 	const { control, handleSubmit } =
 		useForm<EditEmailFields>(EditEmailValidation)
 
+	const submitEditEmail = useSubmit<User | null, EmailDto>({
+		callback: editEmail,
+		successMessage: 'The email has been successfully changed',
+	})
+
 	const onSubmit: SubmitHandler<EditEmailFields> = async (data) => {
-		try {
-			const response = await editEmail(data)
-
-			if (!response.success) {
-				toast.error(
-					response.message || 'Something went wrong, please try again'
-				)
-				return
-			}
-
-			toast.success('The email has been successfully changed')
-		} catch (error) {
-			handleError(error)
-		}
+		submitEditEmail(data)
 	}
 
 	return (

@@ -1,7 +1,6 @@
 import { motion } from 'motion/react'
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
 import { useParams } from 'react-router-dom'
 
 import Button from '@/components/UI/Button'
@@ -10,9 +9,11 @@ import Paragraph from '@/components/UI/Paragraph'
 import PasswordInput from '@/components/UI/PasswordInput/PasswordInput'
 import Title from '@/components/UI/Title'
 
+import useSubmit from '@/hooks/ui/useSubmit'
 import { useResetPassword } from '@/hooks/user/useResetPassword'
 
-import { handleError } from '@/utils/handleError'
+import { ResetPasswordDto } from '@/types/dto/ResetPasswordDto'
+import { User } from '@/types/types/User'
 
 import {
 	ReccoverPasswordFields,
@@ -31,25 +32,20 @@ const RecoverPassword: FC = () => {
 		ReccoverPasswordValidation
 	)
 
+	const submitResetPassword = useSubmit<
+		User | null,
+		{ dto: ResetPasswordDto; resetToken: string }
+	>({
+		callback: resetPassword,
+		successMessage: 'The password has been changed successfully',
+	})
+
 	const onSubmit: SubmitHandler<ReccoverPasswordFields> = async (data) => {
-		try {
-			const dto = { password: data.password }
-			const response = await resetPassword({
-				dto,
-				resetToken: resetToken ?? '',
-			})
-
-			if (!response.success) {
-				toast.error(
-					response.message || 'Something went wrong, please try again'
-				)
-				return
-			}
-
-			toast.success('The password has been changed successfully')
-		} catch (error) {
-			handleError(error)
-		}
+		const dto: ResetPasswordDto = { password: data.password }
+		submitResetPassword({
+			dto,
+			resetToken: resetToken ?? '',
+		})
 	}
 
 	return (

@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 
 import Button from '@/components/UI/Button'
@@ -9,11 +8,12 @@ import Loader from '@/components/UI/Loader'
 import Paragraph from '@/components/UI/Paragraph'
 import TextInput from '@/components/UI/TextInput'
 
+import useSubmit from '@/hooks/ui/useSubmit'
 import { useResendActivationEmail } from '@/hooks/user/useResendActivationEmail'
 
-import { handleError } from '@/utils/handleError'
-
+import { EmailDto } from '@/types/dto/EmailDto'
 import { ResendEmailProps } from '@/types/props/Auth/ResendEmailProps'
+import { User } from '@/types/types/User'
 
 import {
 	ResendEmailFields,
@@ -29,21 +29,13 @@ const ResendEmail: FC<ResendEmailProps> = ({ showButtonGoBack = false }) => {
 		ResendEmailValidation
 	)
 
+	const submitResendActivationEmail = useSubmit<User | null, EmailDto>({
+		callback: resendActivationEmail,
+		successMessage: 'The letter has been sent successfully',
+	})
+
 	const onSubmit: SubmitHandler<ResendEmailFields> = async (data) => {
-		try {
-			const response = await resendActivationEmail(data)
-
-			if (!response.success) {
-				toast.error(
-					response.message || 'Something went wrong, please try again'
-				)
-				return
-			}
-
-			toast.success('The letter has been sent successfully')
-		} catch (error) {
-			handleError(error)
-		}
+		submitResendActivationEmail(data)
 	}
 
 	return (

@@ -1,8 +1,6 @@
 import { motion } from 'motion/react'
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
-import { useNavigate } from 'react-router-dom'
 
 import Button from '@/components/UI/Button'
 import ButtonAsLink from '@/components/UI/ButtonAsLink'
@@ -12,10 +10,12 @@ import TextInput from '@/components/UI/TextInput'
 
 import { useLogin } from '@/hooks/auth/useLogin'
 import useModal from '@/hooks/ui/useModal'
+import useSubmit from '@/hooks/ui/useSubmit'
 
 import { routes } from '@/config/routes'
 
-import { handleError } from '@/utils/handleError'
+import { LoginDto } from '@/types/dto/LoginDto'
+import { AuthResponse } from '@/types/types/AuthResponse'
 
 import { LoginFields, LoginValidation } from '@/validation/LoginSchema'
 
@@ -24,25 +24,16 @@ import { fadeSlide } from '@/animations/fadeSlide'
 const Login: FC = () => {
 	const { modalNames, onOpen } = useModal()
 	const { mutateAsync: login, isPending } = useLogin()
-	const navigate = useNavigate()
 
 	const { control, handleSubmit } = useForm<LoginFields>(LoginValidation)
 
+	const submitLogin = useSubmit<AuthResponse | null, LoginDto>({
+		callback: login,
+		navigateTo: routes.HOME,
+	})
+
 	const onSubmit: SubmitHandler<LoginFields> = async (data) => {
-		try {
-			const response = await login(data)
-
-			if (!response.success) {
-				toast.error(
-					response.message || 'Something went wrong, please try again'
-				)
-				return
-			}
-
-			navigate(routes.HOME)
-		} catch (error) {
-			handleError(error)
-		}
+		submitLogin(data)
 	}
 
 	return (

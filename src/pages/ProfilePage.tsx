@@ -1,7 +1,5 @@
 import { AnimatePresence } from 'motion/react'
 import { FC } from 'react'
-import toast from 'react-hot-toast'
-import { useNavigate } from 'react-router-dom'
 
 import ResendEmail from '@/components/Auth/ResendEmail'
 import Modal from '@/components/Modal'
@@ -15,21 +13,22 @@ import Uploader from '@/components/Uploader'
 import { useLogout } from '@/hooks/auth/useLogout'
 import { useUploadImage } from '@/hooks/image/useUploadImage'
 import useModal from '@/hooks/ui/useModal'
+import useSubmit from '@/hooks/ui/useSubmit'
 import { useRemoveProfile } from '@/hooks/user/useRemoveProfile'
 
 import { routes } from '@/config/routes'
 
 import { useUserStore } from '@/store/useUserStore'
 
-import { handleError } from '@/utils/handleError'
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
 import { ApiResponse } from '@/types/types/ApiResponse'
+import { AuthResponse } from '@/types/types/AuthResponse'
 import { Image } from '@/types/types/Image'
+import { User } from '@/types/types/User'
 
 const ProfilePage: FC = () => {
-	const navigate = useNavigate()
 	const { checkQueryParam, modalNames, onClose } = useModal()
 
 	const { mutateAsync: logout, isPending: isLogoutPending } = useLogout()
@@ -40,41 +39,16 @@ const ProfilePage: FC = () => {
 
 	const user = useUserStore((state) => state.user)
 
-	const logoutAndNavigate = async () => {
-		try {
-			const response = await logout()
+	const logoutAndNavigate = useSubmit<AuthResponse | null>({
+		callback: logout,
+		navigateTo: routes.HOME,
+	})
 
-			if (!response.success) {
-				toast.error(
-					response.message || 'Something went wrong, please try again'
-				)
-				return
-			}
-
-			await navigate(routes.HOME)
-			toast.success('The password has been successfully changed')
-		} catch (error) {
-			handleError(error)
-		}
-	}
-
-	const deleteAndNavigate = async () => {
-		try {
-			const response = await removeProfile()
-
-			if (!response.success) {
-				toast.error(
-					response.message || 'Something went wrong, please try again'
-				)
-				return
-			}
-
-			await navigate(routes.HOME)
-			toast.success('The password has been successfully changed')
-		} catch (error) {
-			handleError(error)
-		}
-	}
+	const deleteAndNavigate = useSubmit<User | null>({
+		callback: removeProfile,
+		navigateTo: routes.HOME,
+		successMessage: 'The profile was successfully deleted',
+	})
 
 	const uploadAvatar = async (
 		file: FormData

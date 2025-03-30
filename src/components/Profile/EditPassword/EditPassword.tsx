@@ -1,16 +1,15 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
 
 import Button from '@/components/UI/Button'
 import Loader from '@/components/UI/Loader'
 import PasswordInput from '@/components/UI/PasswordInput/PasswordInput'
 
+import useSubmit from '@/hooks/ui/useSubmit'
 import { useEditPassword } from '@/hooks/user/useEditPassword'
 
-import { handleError } from '@/utils/handleError'
-
 import { EditPasswordDto } from '@/types/dto/EditPasswordDto'
+import { User } from '@/types/types/User'
 
 import {
 	EditPasswordFields,
@@ -24,26 +23,17 @@ const EditPassword: FC = () => {
 		EditPasswordValidation
 	)
 
+	const submitEditPassword = useSubmit<User | null, EditPasswordDto>({
+		callback: editPassword,
+		successMessage: 'The password has been successfully changed',
+	})
+
 	const onSubmit: SubmitHandler<EditPasswordFields> = async (data) => {
-		try {
-			const dto: EditPasswordDto = {
-				password: data.password,
-				newPassword: data.newPassword,
-			}
-
-			const response = await editPassword(dto)
-
-			if (!response.success) {
-				toast.error(
-					response.message || 'Something went wrong, please try again'
-				)
-				return
-			}
-
-			toast.success('The password has been successfully changed')
-		} catch (error) {
-			handleError(error)
+		const dto: EditPasswordDto = {
+			password: data.password,
+			newPassword: data.newPassword,
 		}
+		submitEditPassword(dto)
 	}
 
 	return (

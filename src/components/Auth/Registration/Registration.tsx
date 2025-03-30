@@ -1,8 +1,6 @@
 import { motion } from 'motion/react'
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
-import { useNavigate } from 'react-router-dom'
 
 import Button from '@/components/UI/Button'
 import Checkbox from '@/components/UI/Checkbox'
@@ -14,10 +12,12 @@ import TextInput from '@/components/UI/TextInput'
 import { useRegistration } from '@/hooks/auth/useRegistration'
 import useModal from '@/hooks/ui/useModal'
 import useResponsive from '@/hooks/ui/useResponsive'
+import useSubmit from '@/hooks/ui/useSubmit'
 
 import { routes } from '@/config/routes'
 
-import { handleError } from '@/utils/handleError'
+import { RegistrationDto } from '@/types/dto/RegistrationDto'
+import { AuthResponse } from '@/types/types/AuthResponse'
 
 import {
 	RegistrationFields,
@@ -30,37 +30,28 @@ import { Group } from './Registration.styled'
 
 const Registration: FC = () => {
 	const { maxMobile } = useResponsive()
-	const { mutateAsync: register, isPending } = useRegistration()
+	const { mutateAsync: registration, isPending } = useRegistration()
 	const { modalNames } = useModal()
-	const navigate = useNavigate()
 
 	const { control, handleSubmit } = useForm<RegistrationFields>(
 		RegistrationValidation
 	)
 
+	const submitRegistration = useSubmit<AuthResponse | null, RegistrationDto>({
+		callback: registration,
+		successMessage: 'Registration was successful',
+		navigateOptions: { state: { openModal: modalNames.WELCOME } },
+		navigateTo: routes.HOME,
+	})
+
 	const onSubmit: SubmitHandler<RegistrationFields> = async (data) => {
-		try {
-			const dto = {
-				firstName: data.firstName,
-				lastName: data.lastName,
-				email: data.email,
-				password: data.password,
-			}
-
-			const response = await register(dto)
-
-			if (!response.success) {
-				toast.error(
-					response.message || 'Something went wrong, please try again'
-				)
-				return
-			}
-
-			toast.success('Registration was successful')
-			navigate(routes.HOME, { state: { openModal: modalNames.WELCOME } })
-		} catch (error) {
-			handleError(error)
+		const dto: RegistrationDto = {
+			firstName: data.firstName,
+			lastName: data.lastName,
+			email: data.email,
+			password: data.password,
 		}
+		submitRegistration(dto)
 	}
 
 	return (
