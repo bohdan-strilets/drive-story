@@ -9,4 +9,5 @@ export type useSubmitParams<T = unknown, U = void> = {
 	navigateTo?: string
 	navigateOptions?: NavigateOptions
 	successMessage?: string
+	isCloseModal?: boolean
 }

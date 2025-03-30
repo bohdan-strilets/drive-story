@@ -26,6 +26,7 @@ const EditEmail: FC = () => {
 	const submitEditEmail = useSubmit<User | null, EmailDto>({
 		callback: editEmail,
 		successMessage: 'The email has been successfully changed',
+		isCloseModal: true,
 	})
 
 	const onSubmit: SubmitHandler<EditEmailFields> = async (data) => {

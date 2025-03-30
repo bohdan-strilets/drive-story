@@ -26,6 +26,7 @@ const EditPassword: FC = () => {
 	const submitEditPassword = useSubmit<User | null, EditPasswordDto>({
 		callback: editPassword,
 		successMessage: 'The password has been successfully changed',
+		isCloseModal: true,
 	})
 
 	const onSubmit: SubmitHandler<EditPasswordFields> = async (data) => {

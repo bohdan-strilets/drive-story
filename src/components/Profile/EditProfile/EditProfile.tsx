@@ -39,6 +39,7 @@ const EditProfile: FC = () => {
 	const submitEditProfile = useSubmit<User | null, ProfileDto>({
 		callback: editProfile,
 		successMessage: 'Profile successfully changed',
+		isCloseModal: true,
 	})
 
 	const onSubmit: SubmitHandler<EditProfileFields> = async (data) => {
