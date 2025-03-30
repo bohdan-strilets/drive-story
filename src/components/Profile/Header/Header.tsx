@@ -8,21 +8,23 @@ import { HeaderProps } from '@/types/props/Profile/HeaderProps'
 
 import { fadeIn } from '@/animations/fadeIn'
 
-import { FullName, Nickname, Wrapper } from './Header.styled'
+import { FullName, Nickname, Poster, Wrapper } from './Header.styled'
 
 const Header: FC<HeaderProps> = ({ posterUrl, fullName, nickname }) => {
 	const { onOpen, modalNames } = useModal()
 
 	return (
-		<OpenGalleryButton
-			onClick={() => onOpen(modalNames.USER_POSTERS)}
-			width="100%"
-		>
-			<Wrapper posterUrl={posterUrl} {...fadeIn()}>
-				<FullName>{fullName}</FullName>
-				<Nickname>{nickname || '---'}</Nickname>
-			</Wrapper>
-		</OpenGalleryButton>
+		<Wrapper>
+			<OpenGalleryButton
+				onClick={() => onOpen(modalNames.USER_POSTERS)}
+				width="100%"
+			>
+				<Poster posterUrl={posterUrl} {...fadeIn()}>
+					<FullName>{fullName}</FullName>
+					<Nickname>{nickname || '---'}</Nickname>
+				</Poster>
+			</OpenGalleryButton>
+		</Wrapper>
 	)
 }
 

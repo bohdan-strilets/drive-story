@@ -7,7 +7,11 @@ import { getColor } from '@/styles/helpers/getColor'
 import { breakpoints } from '@/styles/media/breakpoints'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 
-export const Wrapper = styled(motion.div)<WrapperProps>`
+export const Wrapper = styled.div`
+	margin-bottom: 40px;
+`
+
+export const Poster = styled(motion.div)<WrapperProps>`
 	${flexCenterDirection('column')}
 	justify-content: start;
 	align-items: start;
@@ -15,7 +19,6 @@ export const Wrapper = styled(motion.div)<WrapperProps>`
 	width: 100%;
 	height: 140px;
 	padding: 15px;
-	margin-bottom: 40px;
 
 	background-image: ${({ posterUrl }) =>
 		`var(--black-transparent-gradient), url(${posterUrl})`};

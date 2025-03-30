@@ -8,9 +8,10 @@ const OpenGalleryButton: FC<OpenGalleryButtonProps> = ({
 	onClick,
 	children,
 	width,
+	height = '100%',
 }) => {
 	return (
-		<Button onClick={onClick} width={width}>
+		<Button onClick={onClick} width={width} height={height}>
 			<Icon className="gallery-icon" />
 			{children}
 		</Button>

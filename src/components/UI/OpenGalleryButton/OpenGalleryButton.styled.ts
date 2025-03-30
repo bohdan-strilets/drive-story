@@ -10,6 +10,7 @@ export const Button = styled.button<ButtonProps>`
 	display: inline-block;
 
 	width: ${({ width }) => width};
+	height: ${({ height }) => height};
 
 	background-color: transparent;
 	border: none;
