@@ -11,7 +11,7 @@ export const Image = styled.div<ImageProps>`
 
 	background-image: ${({ imageUrl }) => `url(${imageUrl})`};
 	background-position: center;
-	background-size: contain;
+	background-size: cover;
 	background-repeat: no-repeat;
 
 	box-shadow: ${({ isShadow }) => isShadow && 'var(--box-shadow)'};
