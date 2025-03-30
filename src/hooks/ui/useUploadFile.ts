@@ -1,14 +1,12 @@
 import { useRef, useState } from 'react'
-import toast from 'react-hot-toast'
 
 import { useUploadFileParams } from '@/types/hooks/useUploadFileParams'
 import { FileInformation } from '@/types/types/FileInformation'
+import { Image } from '@/types/types/Image'
 
-const useUploadFile = ({
-	fileName,
-	callback,
-	handleCloseModal,
-}: useUploadFileParams) => {
+import useSubmit from './useSubmit'
+
+const useUploadFile = ({ fileName, callback }: useUploadFileParams) => {
 	const hiddenFileInput = useRef<HTMLInputElement>(null)
 	const [previewSource, setPreviewSource] = useState('')
 	const [fileInfo, setFileInfo] = useState<FileInformation | null>(null)
@@ -24,6 +22,12 @@ const useUploadFile = ({
 		reader.onloadend = () => setPreviewSource(reader.result as string)
 	}
 
+	const submitUploadImage = useSubmit<Image | null, FormData>({
+		callback,
+		successMessage: 'Image uploaded successfully',
+		isCloseModal: true,
+	})
+
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		const fileInput = hiddenFileInput.current?.files?.[0]
@@ -31,18 +35,7 @@ const useUploadFile = ({
 		if (fileInput) {
 			const formData = new FormData()
 			formData.append(fileName, fileInput)
-
-			const response = await callback(formData)
-
-			if (!response.success) {
-				toast.error(
-					response.message || 'Something went wrong, please try again'
-				)
-				return
-			}
-
-			handleCloseModal()
-			toast.success('Image uploaded successfully')
+			submitUploadImage(formData)
 		}
 	}
 

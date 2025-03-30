@@ -60,6 +60,16 @@ const ProfilePage: FC = () => {
 		})
 	}
 
+	const uploadPoster = async (
+		file: FormData
+	): Promise<ApiResponse<Image | null>> => {
+		return await uploadImage({
+			entityId: user?._id as string,
+			entityType: EntityType.POSTERS,
+			file,
+		})
+	}
+
 	return (
 		<>
 			<Profile />
@@ -146,6 +156,18 @@ const ProfilePage: FC = () => {
 							fileSize={uploadFileParams.size}
 							isLoading={isUploadImagePending}
 							callback={uploadAvatar}
+						/>
+					</Modal>
+				)}
+
+				{checkQueryParam(modalNames.UPLOAD_POSTER) && (
+					<Modal title="Upload poster">
+						<Uploader
+							fileName="image"
+							fileTypes={uploadFileParams.types}
+							fileSize={uploadFileParams.size}
+							isLoading={isUploadImagePending}
+							callback={uploadPoster}
 						/>
 					</Modal>
 				)}

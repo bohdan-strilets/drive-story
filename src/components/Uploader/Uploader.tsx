@@ -1,6 +1,5 @@
 import { FC } from 'react'
 
-import useModal from '@/hooks/ui/useModal'
 import useUploadFile from '@/hooks/ui/useUploadFile'
 
 import { UploaderProps } from '@/types/props/Uploader/UploaderProps'
@@ -19,7 +18,6 @@ const Uploader: FC<UploaderProps> = ({
 	isLoading = false,
 	callback,
 }) => {
-	const { onClose } = useModal()
 	const {
 		handleFileChange,
 		handleSubmit,
@@ -27,7 +25,7 @@ const Uploader: FC<UploaderProps> = ({
 		previewSource,
 		triggerFileInput,
 		fileInfo,
-	} = useUploadFile({ fileName, callback, handleCloseModal: onClose })
+	} = useUploadFile({ fileName, callback })
 
 	return (
 		<>
