@@ -9,19 +9,34 @@ import EditEmail from '@/components/Profile/EditEmail'
 import EditPassword from '@/components/Profile/EditPassword'
 import EditProfile from '@/components/Profile/EditProfile'
 import Paragraph from '@/components/UI/Paragraph'
+import Uploader from '@/components/Uploader'
 
 import { useLogout } from '@/hooks/auth/useLogout'
+import { useUploadImage } from '@/hooks/image/useUploadImage'
 import useModal from '@/hooks/ui/useModal'
 import { useRemoveProfile } from '@/hooks/user/useRemoveProfile'
 
 import { routes } from '@/config/routes'
 
+import { useUserStore } from '@/store/useUserStore'
+
+import { uploadFileParams } from '@/utils/uploadFileParams'
+
+import { EntityType } from '@/types/enums/EntityType'
+import { ApiResponse } from '@/types/types/ApiResponse'
+import { Image } from '@/types/types/Image'
+
 const ProfilePage: FC = () => {
-	const { checkQueryParam, modalNames, onClose } = useModal()
-	const { mutateAsync: logout, isPending: isLogoutPending } = useLogout()
-	const { mutateAsync: removeProfile, isPending: isRemovePending } =
-		useRemoveProfile()
 	const navigate = useNavigate()
+	const { checkQueryParam, modalNames, onClose } = useModal()
+
+	const { mutateAsync: logout, isPending: isLogoutPending } = useLogout()
+	const { mutateAsync: removeProfile, isPending: isRemoveProfilePending } =
+		useRemoveProfile()
+	const { mutateAsync: uploadImage, isPending: isUploadImagePending } =
+		useUploadImage()
+
+	const user = useUserStore((state) => state.user)
 
 	const logoutAndNavigate = () => {
 		logout()
@@ -31,6 +46,16 @@ const ProfilePage: FC = () => {
 	const deleteAndNavigate = () => {
 		removeProfile()
 		navigate(routes.HOME)
+	}
+
+	const uploadAvatar = async (
+		file: FormData
+	): Promise<ApiResponse<Image | null>> => {
+		return await uploadImage({
+			entityId: user?._id as string,
+			entityType: EntityType.AVATARS,
+			file,
+		})
 	}
 
 	return (
@@ -80,7 +105,7 @@ const ProfilePage: FC = () => {
 					<Modal
 						title="Do you want to delete your profile?"
 						isDialog={true}
-						isLoading={isRemovePending}
+						isLoading={isRemoveProfilePending}
 						negativeBtnLabel="no"
 						positiveBtnLabel="yes"
 						negativeCallback={onClose}
@@ -96,6 +121,30 @@ const ProfilePage: FC = () => {
 							All your personal information, uploaded files, and activity
 							history will be lost forever.
 						</Paragraph>
+					</Modal>
+				)}
+
+				{checkQueryParam(modalNames.USER_AVATARS) && (
+					<Modal title="Avatars">
+						<p>Avatars gallery</p>
+					</Modal>
+				)}
+
+				{checkQueryParam(modalNames.USER_POSTERS) && (
+					<Modal title="Posters">
+						<p>Posters gallery</p>
+					</Modal>
+				)}
+
+				{checkQueryParam(modalNames.UPLOAD_AVATAR) && (
+					<Modal title="Upload avatar">
+						<Uploader
+							fileName="image"
+							fileTypes={uploadFileParams.types}
+							fileSize={uploadFileParams.size}
+							isLoading={isUploadImagePending}
+							callback={uploadAvatar}
+						/>
 					</Modal>
 				)}
 			</AnimatePresence>

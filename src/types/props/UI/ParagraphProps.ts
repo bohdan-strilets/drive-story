@@ -1,8 +1,10 @@
+import { ReactNode } from 'react'
+
 import { TextAlign } from '@/types/types/TextAlign'
 import { ThemeColor } from '@/types/types/ThemeColor'
 
 export type ParagraphProps = {
-	children: string
+	children: string | ReactNode
 	color: ThemeColor
 	fontSize?: number
 	fontWeight?: number

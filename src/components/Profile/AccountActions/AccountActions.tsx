@@ -1,49 +1,22 @@
 import { FC } from 'react'
-import { ImExit } from 'react-icons/im'
-import { MdDelete, MdEmail } from 'react-icons/md'
-import { RiLockPasswordFill, RiProfileFill } from 'react-icons/ri'
 
-import useModal from '@/hooks/ui/useModal'
+import { AccountActionsProps } from '@/types/props/Profile/AccountActionsProps'
 
 import { fadeSlide } from '@/animations/fadeSlide'
 
 import { Button, Item, Label } from './AccountActions.styled'
 
-const AccountActions: FC = () => {
-	const { modalNames, onOpen } = useModal()
-
+const AccountActions: FC<AccountActionsProps> = ({ actions }) => {
 	return (
 		<ul>
-			<Item {...fadeSlide(0, -20, 0.1, 0.5)}>
-				<Button type="button" onClick={() => onOpen(modalNames.EDIT_EMAIL)}>
-					<MdEmail />
-					<Label>Edit email</Label>
-				</Button>
-			</Item>
-			<Item {...fadeSlide(0, -20, 0.2, 0.5)}>
-				<Button type="button" onClick={() => onOpen(modalNames.EDIT_PASSWORD)}>
-					<RiLockPasswordFill />
-					<Label>Edit password</Label>
-				</Button>
-			</Item>
-			<Item {...fadeSlide(0, -20, 0.3, 0.5)}>
-				<Button type="button" onClick={() => onOpen(modalNames.EDIT_PROFILE)}>
-					<RiProfileFill />
-					<Label>Edit profile</Label>
-				</Button>
-			</Item>
-			<Item {...fadeSlide(0, -20, 0.4, 0.5)}>
-				<Button type="button" onClick={() => onOpen(modalNames.DELETE_PROFILE)}>
-					<MdDelete />
-					<Label>Delete profile</Label>
-				</Button>
-			</Item>
-			<Item {...fadeSlide(0, -20, 0.5, 0.5)}>
-				<Button type="button" onClick={() => onOpen(modalNames.EXIT_PROFILE)}>
-					<ImExit />
-					<Label>Exit</Label>
-				</Button>
-			</Item>
+			{actions.map(({ id, label, callback, icon }, index) => (
+				<Item key={id} {...fadeSlide(0, -20, 0.1 * index, 0.5)}>
+					<Button type="button" onClick={callback}>
+						{icon}
+						<Label>{label}</Label>
+					</Button>
+				</Item>
+			))}
 		</ul>
 	)
 }

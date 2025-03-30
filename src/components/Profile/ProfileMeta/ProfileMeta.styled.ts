@@ -6,10 +6,10 @@ import { breakpoints } from '@/styles/media/breakpoints'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 
 export const List = styled.ul`
-	margin: 30px 0;
+	margin: 20px 0;
 
 	@media screen and (min-width: ${breakpoints.tabletMin}) {
-		margin: 40px 0;
+		margin: 30px 0;
 	}
 `
 

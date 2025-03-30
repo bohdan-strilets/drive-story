@@ -17,6 +17,10 @@ const useModal = () => {
 		EDIT_PROFILE: 'edit-profile',
 		EXIT_PROFILE: 'exit-profile',
 		DELETE_PROFILE: 'delete-profile',
+		USER_AVATARS: 'user-avatars',
+		USER_POSTERS: 'user-posters',
+		UPLOAD_AVATAR: 'upload-avatar',
+		UPLOAD_POSTER: 'upload-poster',
 	}
 
 	const onOpen = useCallback(

@@ -5,8 +5,13 @@ import { WrapperProps } from '@/types/props/Profile/HeaderProps'
 
 import { getColor } from '@/styles/helpers/getColor'
 import { breakpoints } from '@/styles/media/breakpoints'
+import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 
 export const Wrapper = styled(motion.div)<WrapperProps>`
+	${flexCenterDirection('column')}
+	justify-content: start;
+	align-items: start;
+
 	width: 100%;
 	height: 140px;
 	padding: 15px;

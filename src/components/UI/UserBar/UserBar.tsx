@@ -29,17 +29,17 @@ const UserBar: FC<UserBarProps> = ({ width }) => {
 	const { mutateAsync: logout, isPending } = useLogout()
 	const user = useUserStore((state) => state.user)
 
-	const userAvatarRef = useGetImage({
+	const userAvatar = useGetImage({
 		image: user?.avatars,
 		defaultImage: defaultImages.avatar,
 	})
-	const userPosterRef = useGetImage({
+	const userPoster = useGetImage({
 		image: user?.posters,
 		defaultImage: defaultImages.poster,
 	})
 
 	return (
-		<Wrapper width={width} posterUrl={userPosterRef.current}>
+		<Wrapper width={width} posterUrl={userPoster}>
 			<StyledLink to={routes.PROFILE}>
 				<InfoContainer>
 					<Name>
@@ -48,7 +48,7 @@ const UserBar: FC<UserBarProps> = ({ width }) => {
 					<Email>{user?.email}</Email>
 				</InfoContainer>
 				<ImageBox
-					imageUrl={userAvatarRef.current}
+					imageUrl={userAvatar}
 					width="80px"
 					height="80px"
 					isBorder={true}

@@ -1,16 +1,16 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 
 import { isImage } from '@/types/guards/isImage'
 import { useGetImageParams } from '@/types/hooks/useGetImageParams'
 
 export const useGetImage = ({ image, defaultImage }: useGetImageParams) => {
-	const imageRef = useRef<string>(defaultImage)
+	const [selectedImage, setSelectedImage] = useState(defaultImage)
 
 	useEffect(() => {
 		if (image && isImage(image)) {
-			imageRef.current = image.selected
+			setSelectedImage(image.selected)
 		}
 	}, [image])
 
-	return imageRef
+	return selectedImage
 }
