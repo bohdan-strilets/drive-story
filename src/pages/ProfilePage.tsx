@@ -1,5 +1,6 @@
 import { AnimatePresence } from 'motion/react'
 import { FC } from 'react'
+import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 
 import ResendEmail from '@/components/Auth/ResendEmail'
@@ -20,6 +21,7 @@ import { routes } from '@/config/routes'
 
 import { useUserStore } from '@/store/useUserStore'
 
+import { handleError } from '@/utils/handleError'
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
@@ -38,14 +40,40 @@ const ProfilePage: FC = () => {
 
 	const user = useUserStore((state) => state.user)
 
-	const logoutAndNavigate = () => {
-		logout()
-		navigate(routes.HOME)
+	const logoutAndNavigate = async () => {
+		try {
+			const response = await logout()
+
+			if (!response.success) {
+				toast.error(
+					response.message || 'Something went wrong, please try again'
+				)
+				return
+			}
+
+			await navigate(routes.HOME)
+			toast.success('The password has been successfully changed')
+		} catch (error) {
+			handleError(error)
+		}
 	}
 
-	const deleteAndNavigate = () => {
-		removeProfile()
-		navigate(routes.HOME)
+	const deleteAndNavigate = async () => {
+		try {
+			const response = await removeProfile()
+
+			if (!response.success) {
+				toast.error(
+					response.message || 'Something went wrong, please try again'
+				)
+				return
+			}
+
+			await navigate(routes.HOME)
+			toast.success('The password has been successfully changed')
+		} catch (error) {
+			handleError(error)
+		}
 	}
 
 	const uploadAvatar = async (
