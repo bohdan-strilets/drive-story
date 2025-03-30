@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query'
 import { upload } from '@/api/imageApi'
 
 import { queryClient } from '@/config/queryClient'
-import { ImageKey, UserKey } from '@/config/queryKeys'
+import { UserKey } from '@/config/queryKeys'
 
 import { useImageStore } from '@/store/useImageStore'
 
@@ -21,7 +21,7 @@ export const useUploadImage = () => {
 		onSuccess: (response) => {
 			if (response.success) {
 				setImage(response.data || null)
-				queryClient.invalidateQueries({ queryKey: [ImageKey, UserKey] })
+				queryClient.invalidateQueries({ queryKey: [UserKey] })
 			}
 		},
 	})

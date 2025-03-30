@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { nanoid } from 'nanoid'
 import { FC, useMemo } from 'react'
 import { BsImageFill } from 'react-icons/bs'

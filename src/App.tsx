@@ -1,6 +1,7 @@
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
+import Loader from './components/UI/Loader'
 import { routes } from './config/routes'
 import { useGetCurrentUser } from './hooks/user/useGetCurrentUser'
 import ActivationSuccessPage from './pages/ActivationSuccessPage'
@@ -10,15 +11,13 @@ import NotFoundPage from './pages/NotFoundPage'
 import ProfilePage from './pages/ProfilePage'
 import RecoverPasswordPage from './pages/RecoverPasswordPage'
 import ResetPasswordPage from './pages/ResetPasswordPage'
-import { useAuthStore } from './store/useAuthStore'
 
 const App: FC = () => {
-	const token = useAuthStore((state) => state.token)
-	const { mutateAsync: getCurrentUser } = useGetCurrentUser()
+	const { isLoading } = useGetCurrentUser()
 
-	useEffect(() => {
-		if (token) getCurrentUser()
-	}, [getCurrentUser, token])
+	if (isLoading) {
+		return <Loader color="gray" />
+	}
 
 	return (
 		<>
