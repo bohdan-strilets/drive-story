@@ -14,10 +14,11 @@ export const fadeSlide = (
 	y = -20,
 	delay = 0,
 	duration = 0.5,
-	ease = 'easeOut'
+	ease = 'easeOut',
+	isExit = true
 ) => ({
 	initial: { opacity: 0, x, y },
 	animate: { opacity: 1, x: 0, y: 0 },
-	exit: { opacity: 0, x, y },
+	exit: isExit ? { opacity: 0, x, y } : undefined,
 	transition: { delay, duration, ease },
 })

@@ -9,9 +9,9 @@ import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 export const StyledButton = styled.button<ButtonStyledProps>`
 	${flexCenterDirection()}
 
-	padding: ${({ padding }) => (padding ? padding : '0 25px')};
 	height: ${({ height }) => (height ? height : '30px')};
 	width: ${({ width }) => width};
+	padding: ${({ padding }) => padding};
 	margin: ${({ margin }) => margin};
 
 	font-size: 13px;
@@ -37,6 +37,11 @@ export const StyledButton = styled.button<ButtonStyledProps>`
 
 	:active {
 		transform: scale(0.99);
+	}
+
+	:disabled {
+		background-color: ${getColor('#cccccc')};
+		pointer-events: none;
 	}
 
 	@media screen and (min-width: ${breakpoints.tabletMin}) {

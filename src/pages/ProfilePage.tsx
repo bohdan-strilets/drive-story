@@ -2,6 +2,7 @@ import { AnimatePresence } from 'motion/react'
 import { FC } from 'react'
 
 import ResendEmail from '@/components/Auth/ResendEmail'
+import Gallery from '@/components/Gallery'
 import Modal from '@/components/Modal'
 import Profile from '@/components/Profile'
 import EditEmail from '@/components/Profile/EditEmail'
@@ -23,6 +24,7 @@ import { useUserStore } from '@/store/useUserStore'
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
+import { isImage } from '@/types/guards/isImage'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { AuthResponse } from '@/types/types/AuthResponse'
 import { Image } from '@/types/types/Image'
@@ -138,7 +140,9 @@ const ProfilePage: FC = () => {
 
 				{checkQueryParam(modalNames.USER_AVATARS) && (
 					<Modal title="Avatars">
-						<p>Avatars gallery</p>
+						{user && isImage(user.avatars) && (
+							<Gallery images={user?.avatars.resources} />
+						)}
 					</Modal>
 				)}
 
