@@ -58,6 +58,7 @@ const Header: FC = () => {
 								hoverBackground="gray"
 								hoverColor="white"
 								onClick={onOpen}
+								width="50px"
 							>
 								<MenuIcon />
 							</Button>
