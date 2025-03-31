@@ -148,7 +148,9 @@ const ProfilePage: FC = () => {
 
 				{checkQueryParam(modalNames.USER_POSTERS) && (
 					<Modal title="Posters">
-						<p>Posters gallery</p>
+						{user && isImage(user.posters) && (
+							<Gallery images={user?.posters.resources} />
+						)}
 					</Modal>
 				)}
 
