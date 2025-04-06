@@ -6,5 +6,5 @@ export type UploaderProps = {
 	fileTypes: string
 	fileSize: number
 	isLoading: boolean
-	callback: (file: FormData) => Promise<ApiResponse<Image | null>>
+	callback: (file: FormData) => Promise<ApiResponse<Image | null> | undefined>
 }

@@ -5,18 +5,6 @@ import { getColor } from '@/styles/helpers/getColor'
 import { breakpoints } from '@/styles/media/breakpoints'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 
-export const Backdrop = styled(motion.div)`
-	position: fixed;
-	top: 0;
-	left: 0;
-
-	width: 100vw;
-	height: 100vh;
-
-	background: var(--black-transparent-gradient);
-	backdrop-filter: var(--blur-effect);
-`
-
 export const Wrapper = styled(motion.div)`
 	position: absolute;
 	top: 50%;

@@ -1,4 +1,7 @@
+import { Image } from '../types/Image'
+
 export type ImageState = {
 	image: Image | null
-	setImage: (user: Image | null) => void
+
+	setImage: (image: Image | null) => void
 }

@@ -9,9 +9,15 @@ import { fadeSlide } from '@/animations/fadeSlide'
 
 import Pagination from '../UI/Pagination'
 
-import { Button, Item, List } from './Gallery.styled'
+import { ImageContainer, Item, List } from './Gallery.styled'
+import OverlayActions from './OverlayActions'
 
-const Gallery: FC<GalleryProps> = ({ images = [] }) => {
+const Gallery: FC<GalleryProps> = ({
+	images = [],
+	isOverlay = false,
+	overlayActions,
+	isActionLoading,
+}) => {
 	const [currentPageData, setCurrentPageData] = useState<string[]>([])
 
 	const itemsPerPage = 6
@@ -37,9 +43,16 @@ const Gallery: FC<GalleryProps> = ({ images = [] }) => {
 								key={index}
 								{...fadeSlide(0, -30, index * 0.1, 0.2, 'easeOut', false)}
 							>
-								<Button type="button">
+								<ImageContainer>
 									<ImageBox imageUrl={imageUrl} width="100%" height="100%" />
-								</Button>
+									{isOverlay && (
+										<OverlayActions
+											imageUrl={imageUrl}
+											overlayActions={overlayActions}
+											isActionLoading={isActionLoading}
+										/>
+									)}
+								</ImageContainer>
 							</Item>
 						))}
 					</List>

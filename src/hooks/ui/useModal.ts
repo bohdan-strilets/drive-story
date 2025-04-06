@@ -43,10 +43,6 @@ const useModal = () => {
 		return modal === modalName
 	}
 
-	const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-		if (e.target === e.currentTarget) onClose()
-	}
-
 	useKeyboard({
 		Escape: onClose,
 	})
@@ -56,7 +52,6 @@ const useModal = () => {
 		onOpen,
 		onClose,
 		checkQueryParam,
-		onBackdropClick,
 	}
 }
 

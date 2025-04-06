@@ -3,6 +3,7 @@ import { FC } from 'react'
 
 import ResendEmail from '@/components/Auth/ResendEmail'
 import Gallery from '@/components/Gallery'
+import ImageViewer from '@/components/Gallery/ImageViewer'
 import Modal from '@/components/Modal'
 import Profile from '@/components/Profile'
 import EditEmail from '@/components/Profile/EditEmail'
@@ -12,8 +13,8 @@ import Paragraph from '@/components/UI/Paragraph'
 import Uploader from '@/components/Uploader'
 
 import { useLogout } from '@/hooks/auth/useLogout'
-import { useUploadImage } from '@/hooks/image/useUploadImage'
 import useModal from '@/hooks/ui/useModal'
+import { useProfileGallery } from '@/hooks/ui/useProfileGallery'
 import useSubmit from '@/hooks/ui/useSubmit'
 import { useRemoveProfile } from '@/hooks/user/useRemoveProfile'
 
@@ -25,9 +26,7 @@ import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
 import { isImage } from '@/types/guards/isImage'
-import { ApiResponse } from '@/types/types/ApiResponse'
 import { AuthResponse } from '@/types/types/AuthResponse'
-import { Image } from '@/types/types/Image'
 import { User } from '@/types/types/User'
 
 const ProfilePage: FC = () => {
@@ -36,8 +35,6 @@ const ProfilePage: FC = () => {
 	const { mutateAsync: logout, isPending: isLogoutPending } = useLogout()
 	const { mutateAsync: removeProfile, isPending: isRemoveProfilePending } =
 		useRemoveProfile()
-	const { mutateAsync: uploadImage, isPending: isUploadImagePending } =
-		useUploadImage()
 
 	const user = useUserStore((state) => state.user)
 
@@ -52,25 +49,23 @@ const ProfilePage: FC = () => {
 		successMessage: 'The profile was successfully deleted',
 	})
 
-	const uploadAvatar = async (
-		file: FormData
-	): Promise<ApiResponse<Image | null>> => {
-		return await uploadImage({
-			entityId: user?._id as string,
-			entityType: EntityType.AVATARS,
-			file,
-		})
-	}
+	const {
+		actions: avatarActions,
+		isLoading: isAvatarActionLoading,
+		upload: uploadAvatar,
+		showImageViewer: showAvatarViewer,
+		currentImage: currentAvatar,
+		closeViewer: closeAvatarViewer,
+	} = useProfileGallery(EntityType.AVATARS)
 
-	const uploadPoster = async (
-		file: FormData
-	): Promise<ApiResponse<Image | null>> => {
-		return await uploadImage({
-			entityId: user?._id as string,
-			entityType: EntityType.POSTERS,
-			file,
-		})
-	}
+	const {
+		actions: posterActions,
+		isLoading: isPosterActionLoading,
+		upload: uploadPoster,
+		showImageViewer: showPosterViewer,
+		currentImage: currentPoster,
+		closeViewer: closePosterViewer,
+	} = useProfileGallery(EntityType.POSTERS)
 
 	return (
 		<>
@@ -78,31 +73,32 @@ const ProfilePage: FC = () => {
 
 			<AnimatePresence>
 				{checkQueryParam(modalNames.EDIT_EMAIL) && (
-					<Modal title="Edit email address">
+					<Modal key={modalNames.EDIT_EMAIL} title="Edit email address">
 						<EditEmail />
 					</Modal>
 				)}
 
 				{checkQueryParam(modalNames.EDIT_PASSWORD) && (
-					<Modal title="Edit password">
+					<Modal key={modalNames.EDIT_PASSWORD} title="Edit password">
 						<EditPassword />
 					</Modal>
 				)}
 
 				{checkQueryParam(modalNames.EDIT_PROFILE) && (
-					<Modal title="Edit profile">
+					<Modal key={modalNames.EDIT_PROFILE} title="Edit profile">
 						<EditProfile />
 					</Modal>
 				)}
 
 				{checkQueryParam(modalNames.RESEND_EMAIL) && (
-					<Modal title="Resend activation email">
+					<Modal key={modalNames.RESEND_EMAIL} title="Resend activation email">
 						<ResendEmail />
 					</Modal>
 				)}
 
 				{checkQueryParam(modalNames.EXIT_PROFILE) && (
 					<Modal
+						key={modalNames.EXIT_PROFILE}
 						title="Logout from profile?"
 						isDialog={true}
 						isLoading={isLogoutPending}
@@ -117,6 +113,7 @@ const ProfilePage: FC = () => {
 
 				{checkQueryParam(modalNames.DELETE_PROFILE) && (
 					<Modal
+						key={modalNames.DELETE_PROFILE}
 						title="Do you want to delete your profile?"
 						isDialog={true}
 						isLoading={isRemoveProfilePending}
@@ -139,43 +136,67 @@ const ProfilePage: FC = () => {
 				)}
 
 				{checkQueryParam(modalNames.USER_AVATARS) && (
-					<Modal title="Avatars">
+					<Modal key={modalNames.USER_AVATARS} title="Avatars">
 						{user && isImage(user.avatars) && (
-							<Gallery images={user?.avatars.resources} />
+							<Gallery
+								images={user?.avatars.resources}
+								isOverlay={true}
+								overlayActions={avatarActions}
+								isActionLoading={isAvatarActionLoading}
+							/>
 						)}
 					</Modal>
 				)}
 
 				{checkQueryParam(modalNames.USER_POSTERS) && (
-					<Modal title="Posters">
+					<Modal key={modalNames.USER_POSTERS} title="Posters">
 						{user && isImage(user.posters) && (
-							<Gallery images={user?.posters.resources} />
+							<Gallery
+								images={user?.posters.resources}
+								isOverlay={true}
+								overlayActions={posterActions}
+								isActionLoading={isPosterActionLoading}
+							/>
 						)}
 					</Modal>
 				)}
 
 				{checkQueryParam(modalNames.UPLOAD_AVATAR) && (
-					<Modal title="Upload avatar">
+					<Modal key={modalNames.UPLOAD_AVATAR} title="Upload avatar">
 						<Uploader
 							fileName="image"
 							fileTypes={uploadFileParams.types}
 							fileSize={uploadFileParams.size}
-							isLoading={isUploadImagePending}
+							isLoading={isAvatarActionLoading}
 							callback={uploadAvatar}
 						/>
 					</Modal>
 				)}
 
 				{checkQueryParam(modalNames.UPLOAD_POSTER) && (
-					<Modal title="Upload poster">
+					<Modal key={modalNames.UPLOAD_POSTER} title="Upload poster">
 						<Uploader
 							fileName="image"
 							fileTypes={uploadFileParams.types}
 							fileSize={uploadFileParams.size}
-							isLoading={isUploadImagePending}
+							isLoading={isPosterActionLoading}
 							callback={uploadPoster}
 						/>
 					</Modal>
+				)}
+
+				{showAvatarViewer && (
+					<ImageViewer
+						imageUrl={currentAvatar}
+						closeViewer={closeAvatarViewer}
+					/>
+				)}
+
+				{showPosterViewer && (
+					<ImageViewer
+						imageUrl={currentPoster}
+						closeViewer={closePosterViewer}
+					/>
 				)}
 			</AnimatePresence>
 		</>

@@ -6,15 +6,14 @@ import useResponsive from '@/hooks/ui/useResponsive'
 
 import { ModalProps } from '@/types/props/Modal/ModalProps'
 
-import { fadeIn } from '@/animations/fadeIn'
 import { floating } from '@/animations/floating'
 
+import Backdrop from '../UI/Backdrop'
 import Button from '../UI/Button'
 import CloseButton from '../UI/CloseButton'
 import Loader from '../UI/Loader'
 
 import {
-	Backdrop,
 	Content,
 	Footer,
 	Header,
@@ -36,11 +35,11 @@ const Modal: FC<ModalProps> = ({
 	positiveCallback,
 	negativeCallback,
 }) => {
-	const { onClose, onBackdropClick } = useModal()
+	const { onClose } = useModal()
 	const { maxMobile } = useResponsive()
 
 	return createPortal(
-		<Backdrop onClick={onBackdropClick} {...fadeIn(0.3)}>
+		<Backdrop onClose={onClose}>
 			<Wrapper {...floating()}>
 				<Header>
 					<Title>{title}</Title>
