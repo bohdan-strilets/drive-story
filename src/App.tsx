@@ -6,6 +6,7 @@ import { routes } from './config/routes'
 import { useGetCurrentUser } from './hooks/user/useGetCurrentUser'
 import ActivationSuccessPage from './pages/ActivationSuccessPage'
 import AuthPage from './pages/AuthPage'
+import GaragePage from './pages/GaragePage'
 import HomePage from './pages/HomePage'
 import NotFoundPage from './pages/NotFoundPage'
 import ProfilePage from './pages/ProfilePage'
@@ -34,6 +35,7 @@ const App: FC = () => {
 				/>
 				<Route path={routes.RESET_PASSWORD} element={<ResetPasswordPage />} />
 				<Route path={routes.PROFILE} element={<ProfilePage />} />
+				<Route path={routes.GARAGE} element={<GaragePage />} />
 				<Route path="*" element={<NotFoundPage />} />
 			</Routes>
 		</>
