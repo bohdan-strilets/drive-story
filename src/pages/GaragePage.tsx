@@ -1,7 +1,9 @@
 import { FC } from 'react'
 
+import Garage from '@/components/Garage'
+
 const GaragePage: FC = () => {
-	return null
+	return <Garage />
 }
 
 export default GaragePage
