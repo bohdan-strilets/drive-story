@@ -1,12 +1,12 @@
-import { BasicInfoDto } from './BasicInfoDto'
+import { CarBasicInfoDto } from './CarBasicInfoDto'
+import { CarOwnerShipDto } from './CarOwnerShipDto'
 import { CarRegistrationDto } from './CarRegistrationDto'
-import { OwnerShipDto } from './OwnerShipDto'
-import { SpecificationsDto } from './SpecificationsDto'
+import { CarSpecificationsDto } from './CarSpecificationsDto'
 
 export type CarDto = {
-	basicInfo: BasicInfoDto
-	specifications: SpecificationsDto
+	basicInfo: CarBasicInfoDto
+	specifications: CarSpecificationsDto
 	registration: CarRegistrationDto
-	ownership: OwnerShipDto
-	description: string | null
+	ownership: CarOwnerShipDto
+	description?: string | null
 }

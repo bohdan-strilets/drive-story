@@ -5,7 +5,7 @@ import { Transmission } from '../enums/Transmission'
 
 import { EngineDto } from './EngineDto'
 
-export type SpecificationsDto = {
+export type CarSpecificationsDto = {
 	mileage: number
 	fuelType: FuelType
 	transmission: Transmission

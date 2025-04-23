@@ -3,8 +3,8 @@ import { Control, FieldValues, Path, PathValue } from 'react-hook-form'
 import { DropdownOption } from '@/types/types/DropdownOption'
 
 export type Rules = {
-	required: boolean
-	disabled: boolean
+	required?: boolean
+	disabled?: boolean
 }
 
 export type DropdownListProps<T extends FieldValues> = {

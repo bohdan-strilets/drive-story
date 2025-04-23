@@ -1,4 +1,4 @@
-export type BasicInfoDto = {
+export type CarBasicInfoDto = {
 	make: string
 	model: string
 	year: number
