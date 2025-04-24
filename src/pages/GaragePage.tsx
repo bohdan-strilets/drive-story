@@ -1,18 +1,30 @@
 import { AnimatePresence } from 'motion/react'
 import { FC } from 'react'
+import { RiFunctionAddFill } from 'react-icons/ri'
 
-import Garage from '@/components/Garage'
 import AddCar from '@/components/Garage/AddCar'
+import Parking from '@/components/Garage/Parking'
 import Modal from '@/components/Modal'
+import BigButton from '@/components/UI/BigButton'
 
 import useModal from '@/hooks/ui/useModal'
 
 const GaragePage: FC = () => {
-	const { checkQueryParam, modalNames } = useModal()
+	const { checkQueryParam, modalNames, onOpen } = useModal()
 
 	return (
 		<>
-			<Garage />
+			<BigButton
+				onClick={() => onOpen(modalNames.ADD_CAR)}
+				icon={<RiFunctionAddFill />}
+				label="Add new car"
+				height="140px"
+				iconSize="80px"
+				labelSize="20px"
+				margin="0 0 30px 0"
+			/>
+
+			<Parking />
 
 			<AnimatePresence>
 				{checkQueryParam(modalNames.ADD_CAR) && (

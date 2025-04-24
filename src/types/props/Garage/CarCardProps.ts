@@ -2,10 +2,10 @@ export type CarCardProps = {
 	posterUrl: string
 	make: string
 	model: string
-	year: string
+	year: number
 	bodyType: string
-	mileage: string
-	engineVolume: string
+	mileage: number
+	engineVolume: number
 	fuelType: string
 	trnasmission: string
 }

@@ -1,11 +1,12 @@
 import styled from '@emotion/styled'
+import { FaArrowRight } from 'react-icons/fa6'
 
 import { getColor } from '@/styles/helpers/getColor'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 
 export const Wrapper = styled.article`
-	width: 33%;
-	margin-top: 25px;
+	width: 100%;
+	height: auto;
 
 	box-shadow: var(--box-shadow);
 	border-radius: 5px;
@@ -49,11 +50,20 @@ export const Item = styled.li`
 	}
 `
 
+export const IconWrapper = styled.div`
+	${flexCenterDirection()}
+`
+
 export const Label = styled.p`
+	margin-left: 10px;
 	font-weight: 700;
 `
 
 export const Value = styled.p`
 	font-weight: 500;
 	color: ${getColor('gray')};
+`
+
+export const ButtonIcon = styled(FaArrowRight)`
+	margin-left: 15px;
 `

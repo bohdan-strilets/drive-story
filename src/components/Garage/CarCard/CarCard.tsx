@@ -1,14 +1,24 @@
 import { FC } from 'react'
+import { IoCarSportSharp } from 'react-icons/io5'
+import { PiEngineFill, PiSpeedometerFill } from 'react-icons/pi'
+import { TbManualGearboxFilled } from 'react-icons/tb'
 
 import Button from '@/components/UI/Button'
 import ImageBox from '@/components/UI/ImageBox'
 
+import { convertEngineVolume } from '@/utils/convertEngineVolume'
 import { defaultImages } from '@/utils/defaultImages'
+import { formatMileage } from '@/utils/formatMileage'
+import { formatLabel } from '@/utils/generateDropdownOptions'
 
 import { CarCardProps } from '@/types/props/Garage/CarCardProps'
 
+import { getColor } from '@/styles/helpers/getColor'
+
 import {
+	ButtonIcon,
 	Header,
+	IconWrapper,
 	Information,
 	Item,
 	Label,
@@ -47,22 +57,34 @@ const CarCard: FC<CarCardProps> = ({
 				</Header>
 				<List>
 					<Item>
-						<Label>Body type</Label>
-						<Value>{bodyType}</Value>
+						<IconWrapper>
+							<IoCarSportSharp color={getColor('yellow')} />
+							<Label>Body type</Label>
+						</IconWrapper>
+						<Value>{formatLabel(bodyType)}</Value>
 					</Item>
 					<Item>
-						<Label>Milage</Label>
-						<Value>{mileage} KM</Value>
+						<IconWrapper>
+							<PiSpeedometerFill color={getColor('yellow')} />
+							<Label>Mileage</Label>
+						</IconWrapper>
+						<Value>{formatMileage(mileage)} KM</Value>
 					</Item>
 					<Item>
-						<Label>Engine</Label>
+						<IconWrapper>
+							<PiEngineFill color={getColor('yellow')} />
+							<Label>Engine</Label>
+						</IconWrapper>
 						<Value>
-							{engineVolume}L {fuelType}
+							{convertEngineVolume(engineVolume)}L {formatLabel(fuelType)}
 						</Value>
 					</Item>
 					<Item>
-						<Label>Transmission</Label>
-						<Value>{trnasmission}</Value>
+						<IconWrapper>
+							<TbManualGearboxFilled color={getColor('yellow')} />
+							<Label>Transmission</Label>
+						</IconWrapper>
+						<Value>{formatLabel(trnasmission)}</Value>
 					</Item>
 				</List>
 			</Information>
@@ -72,8 +94,10 @@ const CarCard: FC<CarCardProps> = ({
 				hoverColor="white"
 				hoverBackground="black"
 				width="100%"
+				height="50px"
 			>
 				View details
+				<ButtonIcon />
 			</Button>
 		</Wrapper>
 	)

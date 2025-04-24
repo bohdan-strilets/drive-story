@@ -1,33 +1,15 @@
 import styled from '@emotion/styled'
 import { motion } from 'motion/react'
 
-import { breakpoints } from '@/styles/media/breakpoints'
-import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
+import { cardGridContainer } from '@/styles/mixins/cardGridContainer'
+import { cardGridItem } from '@/styles/mixins/cardGridItem'
 
 export const List = styled(motion.ul)`
-	${flexCenterDirection()}
-	flex-wrap: wrap;
-	justify-content: start;
-
-	gap: 5px;
-	padding: 0;
+	${cardGridContainer('5px')}
 `
 
 export const Item = styled(motion.li)`
-	flex: 1 1 100%;
-	box-sizing: border-box;
-	max-width: 100%;
-	height: 200px;
-
-	@media screen and (min-width: ${breakpoints.tabletMin}) {
-		flex: 1 1 calc(50% - 5px);
-		max-width: calc(50% - 5px);
-	}
-
-	@media screen and (min-width: ${breakpoints.laptopMin}) {
-		flex: 1 1 calc(33% - 5px);
-		max-width: calc(33% - 5px);
-	}
+	${cardGridItem('5px')}
 `
 
 export const ImageContainer = styled.div`
