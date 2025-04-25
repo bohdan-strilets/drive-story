@@ -13,7 +13,6 @@ import { Item, List } from './Parking.styled'
 const Parking: FC = () => {
 	const paginationDto: PaginationDto = { limit: 5, page: 1 }
 	const { data: cars, isLoading } = useGetAllCar(paginationDto)
-	console.log(cars)
 
 	if (isLoading) {
 		return <Loader color="gray" />
@@ -22,8 +21,9 @@ const Parking: FC = () => {
 	return (
 		<List>
 			{cars?.map((car) => (
-				<Item>
+				<Item key={car._id}>
 					<CarCard
+						id={car._id}
 						posterUrl={''}
 						make={car.basicInfo.make}
 						model={car.basicInfo.model}

@@ -2,9 +2,12 @@ import { FC } from 'react'
 import { IoCarSportSharp } from 'react-icons/io5'
 import { PiEngineFill, PiSpeedometerFill } from 'react-icons/pi'
 import { TbManualGearboxFilled } from 'react-icons/tb'
+import { useNavigate } from 'react-router-dom'
 
 import Button from '@/components/UI/Button'
 import ImageBox from '@/components/UI/ImageBox'
+
+import { routes } from '@/config/routes'
 
 import { convertEngineVolume } from '@/utils/convertEngineVolume'
 import { defaultImages } from '@/utils/defaultImages'
@@ -30,6 +33,7 @@ import {
 } from './CarCard.styled'
 
 const CarCard: FC<CarCardProps> = ({
+	id,
 	posterUrl,
 	make,
 	model,
@@ -40,6 +44,8 @@ const CarCard: FC<CarCardProps> = ({
 	fuelType,
 	trnasmission,
 }) => {
+	const navigate = useNavigate()
+
 	return (
 		<Wrapper>
 			<ImageBox
@@ -89,6 +95,7 @@ const CarCard: FC<CarCardProps> = ({
 				</List>
 			</Information>
 			<Button
+				onClick={() => navigate(`${routes.CAR_INFORMATION}/${id}`)}
 				color="black"
 				background="yellow"
 				hoverColor="white"

@@ -1,4 +1,5 @@
 export type CarCardProps = {
+	id: string
 	posterUrl: string
 	make: string
 	model: string
