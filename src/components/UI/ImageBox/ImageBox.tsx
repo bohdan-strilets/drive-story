@@ -12,6 +12,9 @@ const ImageBox: FC<ImageBoxProps> = ({
 	isBorder = false,
 	isShadow = false,
 	size = 'cover',
+	children,
+	padding = '0px',
+	gradient = '',
 }) => {
 	return (
 		<Image
@@ -22,7 +25,11 @@ const ImageBox: FC<ImageBoxProps> = ({
 			isBorder={isBorder}
 			isShadow={isShadow}
 			size={size}
-		/>
+			padding={padding}
+			gradient={gradient}
+		>
+			{children}
+		</Image>
 	)
 }
 

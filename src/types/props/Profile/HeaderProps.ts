@@ -3,5 +3,3 @@ export type HeaderProps = {
 	fullName: string
 	nickname?: string | null
 }
-
-export type WrapperProps = Pick<HeaderProps, 'posterUrl'>

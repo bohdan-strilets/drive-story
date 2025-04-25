@@ -7,8 +7,12 @@ import Paragraph from '@/components/UI/Paragraph'
 import Title from '@/components/UI/Title'
 
 import { useGetByIdCar } from '@/hooks/car/useGetByIdCar'
+import { useGetImage } from '@/hooks/ui/useGetImage'
 
+import { defaultImages } from '@/utils/defaultImages'
 import { parsedDateToString } from '@/utils/parsedDateToString'
+
+import { Name, ShortName } from './CarInformation.styled'
 
 const CarInformation: FC = () => {
 	const { carId } = useParams()
@@ -19,6 +23,11 @@ const CarInformation: FC = () => {
 	const engine = car?.specifications.engine
 	const registration = car?.registration
 	const ownership = car?.ownership
+
+	const carPoster = useGetImage({
+		image: car?.photos,
+		defaultImage: defaultImages.poster,
+	})
 
 	if (isLoading) {
 		return <Loader color="gray" />
@@ -31,7 +40,19 @@ const CarInformation: FC = () => {
 	return (
 		car && (
 			<article>
-				<ImageBox imageUrl={''} width={''} height={''} />
+				<ImageBox
+					imageUrl={carPoster}
+					width="100%"
+					height="240px"
+					padding="30px"
+					isShadow={true}
+					gradient="var(--black-transparent-gradient)"
+				>
+					<Name>
+						{basicInfo?.make} {basicInfo?.model}
+					</Name>
+					<ShortName>{basicInfo?.shortName}</ShortName>
+				</ImageBox>
 				<Paragraph color={'gray'}>Hello world</Paragraph>
 				<div>
 					<div>
