@@ -1,5 +1,7 @@
 import { FC, useMemo } from 'react'
 
+import AccentText from '@/components/UI/AccentText'
+
 import { useCalculateAge } from '@/hooks/ui/useCalculateAge'
 
 import { useUserStore } from '@/store/useUserStore'
@@ -8,7 +10,7 @@ import { parsedDateToString } from '@/utils/parsedDateToString'
 
 import { fadeSlide } from '@/animations/fadeSlide'
 
-import { Age, Item, List, Property, Value } from './ProfileMeta.styled'
+import { Item, List, Property, Value } from './ProfileMeta.styled'
 
 const ProfileMeta: FC = () => {
 	const user = useUserStore((state) => state.user)
@@ -26,7 +28,10 @@ const ProfileMeta: FC = () => {
 				<Property>Date of registration:</Property>
 				<Value>
 					{parsedDateToString(user?.createdAt) || '---'}
-					<Age> | {user?.createdAt && userOnPortal.detailedAge}</Age>
+					<AccentText color="black">
+						{' '}
+						| {user?.createdAt && userOnPortal.detailedAge}
+					</AccentText>
 				</Value>
 			</Item>
 			<Item {...fadeSlide(0, -20, 0.3, 0.5)}>
