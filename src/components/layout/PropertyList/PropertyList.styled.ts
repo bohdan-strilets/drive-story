@@ -31,6 +31,6 @@ export const Property = styled.p`
 	font-weight: 700;
 `
 
-export const Value = styled.p`
+export const Value = styled.div`
 	color: ${getColor('gray')};
 `

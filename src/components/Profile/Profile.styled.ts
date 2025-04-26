@@ -11,6 +11,20 @@ export const Information = styled.div`
 	}
 `
 
+export const InformationWrapper = styled.div`
+	width: 100%;
+	margin-bottom: 30px;
+
+	@media screen and (min-width: ${breakpoints.laptopMin}) {
+		width: 65%;
+		margin-bottom: 0;
+	}
+
+	@media screen and (min-width: ${breakpoints.desktopMin}) {
+		width: 70%;
+	}
+`
+
 export const SideMenu = styled.div`
 	width: 100%;
 
