@@ -122,13 +122,13 @@ const ProfilePage: FC = () => {
 						negativeCallback={onClose}
 						positiveCallback={deleteAndNavigate}
 					>
-						<Paragraph color={'black'} margin="0 0 15px 0">
+						<Paragraph background="white" color={'black'} margin="0 0 15px 0">
 							Are you sure you want to permanently delete your profile and all
 							associated data? Please be aware that this action is irreversible,
 							and we will not be able to recover your account and information
 							after deletion.
 						</Paragraph>
-						<Paragraph color={'red'}>
+						<Paragraph background="white" color={'red'}>
 							All your personal information, uploaded files, and activity
 							history will be lost forever.
 						</Paragraph>

@@ -53,7 +53,7 @@ const RecoverPassword: FC = () => {
 			<Title fontSize={28} textAlign={'center'} color={'black'}>
 				Create a New Password
 			</Title>
-			<Paragraph color="black" margin="15px 0">
+			<Paragraph background="white" color="black" margin="15px 0">
 				Enter a new password for your account and store it in a safe place. The
 				password must be at least 6 characters long. Use a combination of
 				letters, numbers, and special characters for better security. Once

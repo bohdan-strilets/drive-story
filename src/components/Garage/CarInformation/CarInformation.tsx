@@ -13,12 +13,15 @@ import Title from '@/components/UI/Title'
 
 import { useCarInformation } from '@/hooks/ui/useCarInformation'
 
+import { parsedDateToString } from '@/utils/parsedDateToString'
+
 import {
 	Container,
 	InformationWrapper,
 	Name,
 	ShortName,
 	SideMenu,
+	Text,
 	WarnItem,
 	WarnList,
 } from './CarInformation.styled'
@@ -31,6 +34,8 @@ const CarInformation: FC = () => {
 		carPoster,
 		carName,
 		shortName,
+		updatedDate,
+		description,
 		basicInfoList,
 		specificationsList,
 		registrationList,
@@ -60,13 +65,15 @@ const CarInformation: FC = () => {
 					<Name>{carName}</Name>
 					<ShortName>{shortName}</ShortName>
 				</ImageBox>
-				<Paragraph color={'gray'} margin=" 15px 0">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-					neque quas molestiae, totam perferendis officiis? Ex facilis deleniti
-					autem possimus doloribus consequuntur quidem culpa, perspiciatis non?
-					Officia in soluta totam sit quisquam. Excepturi ipsam iusto odio
-					tempore dolorum totam error illum vel consequuntur, repellat
-					necessitatibus iure harum fugit nesciunt impedit?
+				<Text>ID: {carId}</Text>
+				<Text>Latest changes: {parsedDateToString(updatedDate)}</Text>
+				<Paragraph
+					background="white"
+					color="black"
+					margin=" 15px 0"
+					padding="10px 10px 10px 40px"
+				>
+					{description || 'A little story about your car...'}
 				</Paragraph>
 
 				<WarnList>

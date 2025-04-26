@@ -6,7 +6,7 @@ import { getColor } from '@/styles/helpers/getColor'
 
 export const Text = styled.span<TextProps>`
 	font-weight: ${({ fontWeight }) => fontWeight};
-	font-size: ${({ fontSize }) => fontSize};
+	font-size: ${({ fontSize }) => `${fontSize}px`};
 
 	margin: ${({ margin }) => margin};
 

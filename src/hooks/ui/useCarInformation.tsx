@@ -42,6 +42,8 @@ export const useCarInformation = (carId: string) => {
 
 	const carName = `${basicInfo?.make} ${basicInfo?.model}`
 	const shortName = basicInfo?.shortName
+	const updatedDate = car?.updatedAt
+	const description = car?.description
 
 	const basicInfoList: PropertyListItem[] = useMemo(
 		() => [
@@ -250,6 +252,8 @@ export const useCarInformation = (carId: string) => {
 		carPoster,
 		carName,
 		shortName,
+		updatedDate,
+		description,
 		basicInfoList,
 		specificationsList,
 		registrationList,

@@ -27,6 +27,12 @@ export const ShortName = styled.p`
 	}
 `
 
+export const Text = styled.p`
+	text-align: right;
+	font-size: 12px;
+	margin: 5px 0;
+`
+
 export const Container = styled.div`
 	${flexCenterDirection()}
 	justify-content: space-between;

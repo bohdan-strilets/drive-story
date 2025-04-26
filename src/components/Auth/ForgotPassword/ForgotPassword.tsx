@@ -36,7 +36,7 @@ const ForgotPassword: FC = () => {
 
 	return (
 		<>
-			<Paragraph color="black" margin="0 0 20px 0">
+			<Paragraph background="white" color="black" margin="0 0 20px 0">
 				Once you provide your email address, a password reset email will be sent
 				to your inbox. This email will contain a link that will allow you to
 				reset your password securely.

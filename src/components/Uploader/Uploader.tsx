@@ -31,7 +31,7 @@ const Uploader: FC<UploaderProps> = ({
 
 	return (
 		<>
-			<Paragraph color="black">
+			<Paragraph background="white" color="black">
 				The selected file must be in one of the following formats
 				<Accent>{fileTypes}.</Accent>The file must not exceed
 				<Accent>{fileSize} MB</Accent>

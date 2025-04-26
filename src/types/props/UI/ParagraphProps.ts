@@ -6,6 +6,7 @@ import { ThemeColor } from '@/types/types/ThemeColor'
 export type ParagraphProps = {
 	children: string | ReactNode
 	color: ThemeColor
+	background: ThemeColor
 	fontSize?: number
 	fontWeight?: number
 	margin?: string
@@ -17,6 +18,7 @@ export type ParagraphProps = {
 export type TextProps = Pick<
 	ParagraphProps,
 	| 'color'
+	| 'background'
 	| 'fontSize'
 	| 'fontWeight'
 	| 'margin'

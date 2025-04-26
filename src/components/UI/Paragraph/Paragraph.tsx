@@ -6,7 +6,8 @@ import { Text } from './Paragraph.styled'
 
 const Paragraph: FC<ParagraphProps> = ({
 	children,
-	color,
+	color = 'black',
+	background = 'white',
 	fontSize = 16,
 	fontWeight = 400,
 	margin = '',
@@ -17,6 +18,7 @@ const Paragraph: FC<ParagraphProps> = ({
 	return (
 		<Text
 			color={color}
+			background={background}
 			fontSize={fontSize}
 			fontWeight={fontWeight}
 			margin={margin}
