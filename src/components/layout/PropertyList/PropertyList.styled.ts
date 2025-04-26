@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { motion } from 'motion/react'
 
 import { getColor } from '@/styles/helpers/getColor'
 import { breakpoints } from '@/styles/media/breakpoints'
@@ -8,7 +9,7 @@ export const List = styled.ul`
 	width: 100%;
 `
 
-export const Item = styled.li`
+export const Item = styled(motion.li)`
 	${flexCenterDirection()}
 	justify-content: space-between;
 
