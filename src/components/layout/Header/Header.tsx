@@ -34,6 +34,7 @@ const Header: FC = () => {
 
 		return (
 			<Button
+				width="100px"
 				background="black"
 				color="white"
 				hoverBackground="gray"
