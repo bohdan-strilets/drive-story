@@ -44,79 +44,94 @@ export const useProfile = () => {
 	const memoBirthDate = useMemo(() => user?.birthDate || new Date(), [])
 	const userAge = useCalculateAge(memoBirthDate)
 
-	const userInfoList: PropertyListItem[] = [
-		{
-			id: nanoid(),
-			property: 'Email',
-			value: user?.email || '---',
-		},
-		{
-			id: nanoid(),
-			property: 'Email activated',
-			value: (
-				<div
-					style={{
-						display: 'flex',
-						alignItems: 'center',
-						justifyContent: 'center',
-					}}
-				>
-					{!user?.isActivated && (
-						<ButtonAsLink
-							onClick={() => onOpen(modalNames.RESEND_EMAIL)}
-							label="Send activation email"
-							color="yellow"
-							hoverColor="gray"
-							margin="0 15px 0 0"
-						/>
-					)}
-					<StatusBadge status={!!user?.isActivated} />
-				</div>
-			),
-		},
-		{
-			id: nanoid(),
-			property: 'Password',
-			value: '************',
-		},
-		{
-			id: nanoid(),
-			property: 'Birthday',
-			value: (
-				<>
-					{parsedDateToString(user?.birthDate) || '---'}
-					{user?.birthDate && (
-						<AccentText color="yellow"> | {userAge.detailedAge}</AccentText>
-					)}
-				</>
-			),
-		},
-		{
-			id: nanoid(),
-			property: 'Phone number',
-			value: formatPhoneNumber(user?.phoneNumber || '---'),
-		},
-		{
-			id: nanoid(),
-			property: 'Gender',
-			value: formatLabel(user?.gender || ''),
-		},
-		{
-			id: nanoid(),
-			property: 'Country',
-			value: user?.location?.country || '---',
-		},
-		{
-			id: nanoid(),
-			property: 'City',
-			value: user?.location?.city || '---',
-		},
-		{
-			id: nanoid(),
-			property: 'Postal code',
-			value: user?.location?.postalCode || '---',
-		},
-	]
+	const userInfoList: PropertyListItem[] = useMemo(
+		() => [
+			{
+				id: nanoid(),
+				property: 'Email',
+				value: user?.email || '---',
+			},
+			{
+				id: nanoid(),
+				property: 'Email activated',
+				value: (
+					<div
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							justifyContent: 'center',
+						}}
+					>
+						{!user?.isActivated && (
+							<ButtonAsLink
+								onClick={() => onOpen(modalNames.RESEND_EMAIL)}
+								label="Send activation email"
+								color="yellow"
+								hoverColor="gray"
+								margin="0 15px 0 0"
+							/>
+						)}
+						<StatusBadge status={!!user?.isActivated} />
+					</div>
+				),
+			},
+			{
+				id: nanoid(),
+				property: 'Password',
+				value: '************',
+			},
+			{
+				id: nanoid(),
+				property: 'Birthday',
+				value: (
+					<>
+						{parsedDateToString(user?.birthDate) || '---'}
+						{user?.birthDate && (
+							<AccentText color="yellow"> | {userAge.detailedAge}</AccentText>
+						)}
+					</>
+				),
+			},
+			{
+				id: nanoid(),
+				property: 'Phone number',
+				value: formatPhoneNumber(user?.phoneNumber || '---'),
+			},
+			{
+				id: nanoid(),
+				property: 'Gender',
+				value: formatLabel(user?.gender || ''),
+			},
+			{
+				id: nanoid(),
+				property: 'Country',
+				value: user?.location?.country || '---',
+			},
+			{
+				id: nanoid(),
+				property: 'City',
+				value: user?.location?.city || '---',
+			},
+			{
+				id: nanoid(),
+				property: 'Postal code',
+				value: user?.location?.postalCode || '---',
+			},
+		],
+		[
+			modalNames.RESEND_EMAIL,
+			onOpen,
+			user?.birthDate,
+			user?.email,
+			user?.gender,
+			user?.isActivated,
+			user?.location?.city,
+			user?.location?.country,
+			user?.location?.postalCode,
+			user?.phoneNumber,
+			userAge.detailedAge,
+		]
+	)
 
 	const settingActions: Action[] = useMemo(
 		() => [
