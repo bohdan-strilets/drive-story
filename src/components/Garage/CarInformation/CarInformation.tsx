@@ -1,33 +1,42 @@
 import { FC } from 'react'
+import { FaOilCan } from 'react-icons/fa'
+import { IoNewspaper } from 'react-icons/io5'
+import { MdMiscellaneousServices } from 'react-icons/md'
 import { useParams } from 'react-router-dom'
 
+import ActionMenu from '@/components/Layout/ActionMenu'
+import PropertyList from '@/components/Layout/PropertyList'
 import ImageBox from '@/components/UI/ImageBox'
 import Loader from '@/components/UI/Loader'
 import Paragraph from '@/components/UI/Paragraph'
 import Title from '@/components/UI/Title'
 
-import { useGetByIdCar } from '@/hooks/car/useGetByIdCar'
-import { useGetImage } from '@/hooks/ui/useGetImage'
+import { useCarInformation } from '@/hooks/ui/useCarInformation'
 
-import { defaultImages } from '@/utils/defaultImages'
-import { parsedDateToString } from '@/utils/parsedDateToString'
-
-import { Name, ShortName } from './CarInformation.styled'
+import {
+	Container,
+	InformationWrapper,
+	Name,
+	ShortName,
+	SideMenu,
+	WarnItem,
+	WarnList,
+} from './CarInformation.styled'
 
 const CarInformation: FC = () => {
 	const { carId } = useParams()
-	const { data: car, isLoading, isError } = useGetByIdCar(carId as string)
-
-	const basicInfo = car?.basicInfo
-	const specifications = car?.specifications
-	const engine = car?.specifications.engine
-	const registration = car?.registration
-	const ownership = car?.ownership
-
-	const carPoster = useGetImage({
-		image: car?.photos,
-		defaultImage: defaultImages.poster,
-	})
+	const {
+		isLoading,
+		isError,
+		carPoster,
+		carName,
+		shortName,
+		basicInfoList,
+		specificationsList,
+		registrationList,
+		ownershipList,
+		carActions,
+	} = useCarInformation(carId as string)
 
 	if (isLoading) {
 		return <Loader color="gray" />
@@ -38,7 +47,7 @@ const CarInformation: FC = () => {
 	}
 
 	return (
-		car && (
+		!isError && (
 			<article>
 				<ImageBox
 					imageUrl={carPoster}
@@ -48,116 +57,62 @@ const CarInformation: FC = () => {
 					isShadow={true}
 					gradient="var(--black-transparent-gradient)"
 				>
-					<Name>
-						{basicInfo?.make} {basicInfo?.model}
-					</Name>
-					<ShortName>{basicInfo?.shortName}</ShortName>
+					<Name>{carName}</Name>
+					<ShortName>{shortName}</ShortName>
 				</ImageBox>
-				<Paragraph color={'gray'}>Hello world</Paragraph>
-				<div>
-					<div>
+				<Paragraph color={'gray'} margin=" 15px 0">
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
+					neque quas molestiae, totam perferendis officiis? Ex facilis deleniti
+					autem possimus doloribus consequuntur quidem culpa, perspiciatis non?
+					Officia in soluta totam sit quisquam. Excepturi ipsam iusto odio
+					tempore dolorum totam error illum vel consequuntur, repellat
+					necessitatibus iure harum fugit nesciunt impedit?
+				</Paragraph>
+
+				<WarnList>
+					<WarnItem>
+						<p>Insurance policy</p>
+						<IoNewspaper size={54} />
+						<p>Ends in: 29.03.2026</p>
+					</WarnItem>
+					<WarnItem>
+						<p>Technical inspection</p>
+						<MdMiscellaneousServices size={54} />
+						<p>Ends in: 25.03.2026</p>
+					</WarnItem>
+					<WarnItem>
+						<p>Oil service</p>
+						<FaOilCan size={54} />
+						<p>Made: 15.03.2025</p>
+					</WarnItem>
+				</WarnList>
+
+				<Container>
+					<InformationWrapper>
 						<Title fontSize={28} textAlign="left" color="black">
 							Basic information
 						</Title>
-						<ul>
-							<li>
-								<p>Make:</p>
-								<p>{basicInfo?.make}</p>
-							</li>
-							<li>
-								<p>Model:</p>
-								<p>{basicInfo?.model}</p>
-							</li>
-							<li>
-								<p>Year:</p>
-								<p>{basicInfo?.year}</p>
-							</li>
-							<li>
-								<p>Short name:</p>
-								<p>{basicInfo?.shortName}</p>
-							</li>
-							<li>
-								<p>Generation:</p>
-								<p>{basicInfo?.generation}</p>
-							</li>
-						</ul>
+						<PropertyList elements={basicInfoList} />
 
 						<Title fontSize={28} textAlign="left" color="black">
 							Specifications
 						</Title>
-						<ul>
-							<li>
-								<p>Mileage:</p>
-								<p>{specifications?.mileage}</p>
-							</li>
-							<li>
-								<p>Fuel type:</p>
-								<p>{specifications?.fuelType}</p>
-							</li>
-							<li>
-								<p>Transmission:</p>
-								<p>{specifications?.transmission}</p>
-							</li>
-							<li>
-								<p>Drivetrain:</p>
-								<p>{specifications?.drivetrain}</p>
-							</li>
-							<li>
-								<p>Body type:</p>
-								<p>{specifications?.bodyType}</p>
-							</li>
-							<li>
-								<p>Engine volume:</p>
-								<p>{engine?.volume}</p>
-							</li>
-							<li>
-								<p>Engine power:</p>
-								<p>{engine?.power}</p>
-							</li>
-							<li>
-								<p>Number of doors:</p>
-								<p>{specifications?.doors}</p>
-							</li>
-							<li>
-								<p>Number of seats:</p>
-								<p>{specifications?.seats}</p>
-							</li>
-						</ul>
+						<PropertyList elements={specificationsList} />
 
 						<Title fontSize={28} textAlign="left" color="black">
 							Registration details
 						</Title>
-						<ul>
-							<li>
-								<p>Vin number:</p>
-								<p>{registration?.vin}</p>
-							</li>
-							<li>
-								<p>Registration number:</p>
-								<p>{registration?.regNumber}</p>
-							</li>
-							<li>
-								<p>Date of first registration:</p>
-								<p>{parsedDateToString(registration?.firstRegDate)}</p>
-							</li>
-						</ul>
+						<PropertyList elements={registrationList} />
 
 						<Title fontSize={28} textAlign="left" color="black">
 							Owner details
 						</Title>
-						<ul>
-							<li>
-								<p>Date of purchase:</p>
-								<p>{parsedDateToString(ownership?.purchaseDate)}</p>
-							</li>
-							<li>
-								<p>Date of sale:</p>
-								<p>{parsedDateToString(ownership?.saleDate)}</p>
-							</li>
-						</ul>
-					</div>
-					<div></div>
-				</div>
+						<PropertyList elements={ownershipList} />
+					</InformationWrapper>
+					<SideMenu>
+						<ActionMenu actions={carActions} />
+					</SideMenu>
+				</Container>
 			</article>
 		)
 	)
