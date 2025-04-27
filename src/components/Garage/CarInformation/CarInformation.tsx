@@ -1,33 +1,25 @@
 import { FC } from 'react'
-import { FaOilCan } from 'react-icons/fa'
-import { IoNewspaper } from 'react-icons/io5'
-import { MdMiscellaneousServices } from 'react-icons/md'
 import { useParams } from 'react-router-dom'
 
 import ActionMenu from '@/components/Layout/ActionMenu'
 import PropertyList from '@/components/Layout/PropertyList'
-import ImageBox from '@/components/UI/ImageBox'
 import Loader from '@/components/UI/Loader'
-import Paragraph from '@/components/UI/Paragraph'
 import Title from '@/components/UI/Title'
 
 import { useCarInformation } from '@/hooks/ui/useCarInformation'
-
-import { parsedDateToString } from '@/utils/parsedDateToString'
+import useResponsive from '@/hooks/ui/useResponsive'
 
 import {
 	Container,
 	InformationWrapper,
-	Name,
-	ShortName,
 	SideMenu,
-	Text,
-	WarnItem,
-	WarnList,
 } from './CarInformation.styled'
+import Header from './Header'
+import MaintenanceReminders from './MaintenanceReminders'
 
 const CarInformation: FC = () => {
 	const { carId } = useParams()
+	const { maxMobile } = useResponsive()
 	const {
 		isLoading,
 		isError,
@@ -54,68 +46,56 @@ const CarInformation: FC = () => {
 	return (
 		!isError && (
 			<article>
-				<ImageBox
-					imageUrl={carPoster}
-					width="100%"
-					height="240px"
-					padding="30px"
-					isShadow={true}
-					gradient="var(--black-transparent-gradient)"
-				>
-					<Name>{carName}</Name>
-					<ShortName>{shortName}</ShortName>
-				</ImageBox>
-				<Text>ID: {carId}</Text>
-				<Text>Latest changes: {parsedDateToString(updatedDate)}</Text>
-				<Paragraph
-					background="white"
-					color="black"
-					margin=" 15px 0"
-					padding="10px 10px 10px 40px"
-				>
-					{description || 'A little story about your car...'}
-				</Paragraph>
+				<Header
+					carPoster={carPoster}
+					carName={carName}
+					shortName={shortName}
+					carId={carId}
+					updatedDate={updatedDate}
+					description={description}
+				/>
 
-				<WarnList>
-					<WarnItem>
-						<p>Insurance policy</p>
-						<IoNewspaper size={54} />
-						<p>Ends in: 29.03.2026</p>
-					</WarnItem>
-					<WarnItem>
-						<p>Technical inspection</p>
-						<MdMiscellaneousServices size={54} />
-						<p>Ends in: 25.03.2026</p>
-					</WarnItem>
-					<WarnItem>
-						<p>Oil service</p>
-						<FaOilCan size={54} />
-						<p>Made: 15.03.2025</p>
-					</WarnItem>
-				</WarnList>
+				<MaintenanceReminders />
 
 				<Container>
 					<InformationWrapper>
-						<Title fontSize={28} textAlign="left" color="black">
+						<Title
+							fontSize={maxMobile ? 20 : 28}
+							textAlign="left"
+							color="black"
+						>
 							Basic information
 						</Title>
 						<PropertyList elements={basicInfoList} />
 
-						<Title fontSize={28} textAlign="left" color="black">
+						<Title
+							fontSize={maxMobile ? 20 : 28}
+							textAlign="left"
+							color="black"
+						>
 							Specifications
 						</Title>
 						<PropertyList elements={specificationsList} />
 
-						<Title fontSize={28} textAlign="left" color="black">
+						<Title
+							fontSize={maxMobile ? 20 : 28}
+							textAlign="left"
+							color="black"
+						>
 							Registration details
 						</Title>
 						<PropertyList elements={registrationList} />
 
-						<Title fontSize={28} textAlign="left" color="black">
+						<Title
+							fontSize={maxMobile ? 20 : 28}
+							textAlign="left"
+							color="black"
+						>
 							Owner details
 						</Title>
 						<PropertyList elements={ownershipList} />
 					</InformationWrapper>
+
 					<SideMenu>
 						<ActionMenu actions={carActions} />
 					</SideMenu>

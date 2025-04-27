@@ -5,7 +5,7 @@ import { TextProps } from '@/types/props/UI/ParagraphProps'
 import { getColor } from '@/styles/helpers/getColor'
 
 export const Text = styled.p<TextProps>`
-	font-size: ${({ fontSize }) => fontSize};
+	font-size: ${({ fontSize }) => `${fontSize}px`};
 	font-weight: ${({ fontWeight }) => fontWeight};
 	line-height: ${({ lineHeight }) => lineHeight};
 	text-align: ${({ textAlign }) => textAlign};

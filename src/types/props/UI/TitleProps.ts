@@ -1,8 +1,10 @@
+import { ReactNode } from 'react'
+
 import { TextAlign } from '@/types/types/TextAlign'
 import { ThemeColor } from '@/types/types/ThemeColor'
 
 export type TitleProps = {
-	children: string
+	children: ReactNode
 	fontSize: number
 	textAlign: TextAlign
 	color: ThemeColor

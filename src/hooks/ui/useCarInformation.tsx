@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid'
 import { useMemo } from 'react'
 import { BiSolidSelectMultiple } from 'react-icons/bi'
 import { BsFillFuelPumpFill } from 'react-icons/bs'
-import { IoNewspaper } from 'react-icons/io5'
+import { IoDocumentText } from 'react-icons/io5'
 import {
 	MdCloudUpload,
 	MdDelete,
@@ -87,7 +87,7 @@ export const useCarInformation = (carId: string) => {
 			{
 				id: nanoid(),
 				property: 'Mileage',
-				value: `${formatMileage(specifications?.mileage || 0)}} km`,
+				value: `${formatMileage(specifications?.mileage || 0)} km`,
 			},
 			{
 				id: nanoid(),
@@ -204,7 +204,7 @@ export const useCarInformation = (carId: string) => {
 				id: nanoid(),
 				callback: () => null,
 				label: 'Insurance policy',
-				icon: <IoNewspaper size={20} />,
+				icon: <IoDocumentText size={20} />,
 			},
 			{
 				id: nanoid(),
