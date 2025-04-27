@@ -47,16 +47,16 @@ const ResendEmail: FC<ResendEmailProps> = ({ showButtonGoBack = false }) => {
 					margin="0 0 15px 0"
 				/>
 			)}
-			<Paragraph background="white" color="black" margin="0 0 10px 0">
+			<Paragraph color="black" margin="0 0 10px 0">
 				It looks like you haven’t activated your account yet. No worries—just
 				enter your email address below, and we’ll send you a new activation
 				link.
 			</Paragraph>
-			<Paragraph background="white" color="black" margin="0 0 10px 0">
+			<Paragraph color="black" margin="0 0 10px 0">
 				Please check your spam or junk folder if you don’t see the email in your
 				inbox.
 			</Paragraph>
-			<Paragraph background="white" color="black" margin="0 0 10px 0">
+			<Paragraph color="black" margin="0 0 10px 0">
 				If you still don’t receive the email, please contact our support team
 				for further assistance.
 			</Paragraph>

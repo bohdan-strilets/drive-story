@@ -47,29 +47,13 @@ const Header: FC<HeaderProps> = ({
 					{shortName}
 				</Title>
 			</ImageBox>
-			<Paragraph
-				color="black"
-				background="white"
-				fontSize={12}
-				textAlign="right"
-				margin="5px 0"
-			>
+			<Paragraph color="black" fontSize={12} textAlign="right" margin="5px 0">
 				ID: {carId}
 			</Paragraph>
-			<Paragraph
-				color="black"
-				background="white"
-				fontSize={12}
-				textAlign="right"
-			>
+			<Paragraph color="black" fontSize={12} textAlign="right">
 				Latest changes: {parsedDateToString(updatedDate)}
 			</Paragraph>
-			<Paragraph
-				background="white"
-				color="black"
-				margin=" 15px 0"
-				padding="10px 10px 10px 40px"
-			>
+			<Paragraph color="black" margin=" 15px 0" padding="10px 10px 10px 40px">
 				{description || 'A little story about your car...'}
 			</Paragraph>
 		</>

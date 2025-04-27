@@ -14,5 +14,5 @@ export const Text = styled.p<TextProps>`
 	padding: ${({ padding }) => padding};
 
 	color: ${({ color }) => getColor(color)};
-	background-color: ${({ background }) => getColor(background)};
+	background-color: ${({ background }) => getColor(background as string)};
 `

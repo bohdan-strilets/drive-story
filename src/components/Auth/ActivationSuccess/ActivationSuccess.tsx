@@ -26,7 +26,7 @@ const ActivationSuccess: FC = () => {
 			>
 				Congratulations
 			</Title>
-			<Paragraph background="white" color="green" textAlign="center">
+			<Paragraph color="green" textAlign="center">
 				Thank you for confirming your email. Now you can use all the features of
 				our site!
 			</Paragraph>

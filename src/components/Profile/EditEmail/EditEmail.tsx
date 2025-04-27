@@ -35,12 +35,12 @@ const EditEmail: FC = () => {
 
 	return (
 		<>
-			<Paragraph background="white" color="black" margin="0 0 10px 0">
+			<Paragraph color="black" margin="0 0 10px 0">
 				Enter the new email address you want to use. After making the changes,
 				the system will automatically send an activation email to the new
 				address.
 			</Paragraph>
-			<Paragraph background="white" color="black" margin="0 0 10px 0">
+			<Paragraph color="black" margin="0 0 10px 0">
 				Please ensure the accuracy of the entered email address, as an email
 				with activation instructions will be sent to it. If you don't receive
 				the activation email within a few minutes, check your 'Spam' or 'Junk'

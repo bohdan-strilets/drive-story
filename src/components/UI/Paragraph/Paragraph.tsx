@@ -7,7 +7,7 @@ import { Text } from './Paragraph.styled'
 const Paragraph: FC<ParagraphProps> = ({
 	children,
 	color = 'black',
-	background = 'white',
+	background = '',
 	fontSize = 16,
 	fontWeight = 400,
 	margin = '',
