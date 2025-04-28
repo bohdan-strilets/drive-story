@@ -1,11 +1,15 @@
 import { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 
+import ButtonGoBack from '@/components/UI/ButtonGoBack'
 import DecorativeLine from '@/components/UI/DecorativeLine'
 import ImageBox from '@/components/UI/ImageBox'
 import Paragraph from '@/components/UI/Paragraph'
 import Title from '@/components/UI/Title'
 
 import useResponsive from '@/hooks/ui/useResponsive'
+
+import { routes } from '@/config/routes'
 
 import { parsedDateToString } from '@/utils/parsedDateToString'
 
@@ -20,9 +24,16 @@ const Header: FC<HeaderProps> = ({
 	description,
 }) => {
 	const { maxMobile } = useResponsive()
+	const navigate = useNavigate()
 
 	return (
 		<>
+			<ButtonGoBack
+				label="garage"
+				onClick={() => navigate(routes.GARAGE)}
+				margin="0 0 5px 0"
+				color="black"
+			/>
 			<ImageBox
 				imageUrl={carPoster}
 				width="100%"

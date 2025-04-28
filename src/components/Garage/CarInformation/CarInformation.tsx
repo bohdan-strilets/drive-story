@@ -23,6 +23,7 @@ import MaintenanceReminders from './MaintenanceReminders'
 const CarInformation: FC = () => {
 	const { carId } = useParams()
 	const { maxMobile } = useResponsive()
+
 	const {
 		isLoading,
 		isError,

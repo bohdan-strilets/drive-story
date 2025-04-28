@@ -12,8 +12,9 @@ export const Button = styled.button<ButtonProps>`
 
 	width: 100%;
 	height: 30px;
+	margin: ${({ margin }) => margin};
 
-	color: ${getColor('green')};
+	color: ${({ color }) => `${getColor(color as string)}`};
 	background-color: transparent;
 
 	cursor: pointer;
