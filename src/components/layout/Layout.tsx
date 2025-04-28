@@ -2,6 +2,8 @@ import { FC } from 'react'
 
 import { LayoutProps } from '@/types/props/Layout/LayoutProps'
 
+import ButtonToTop from '../UI/ButtonToTop'
+
 import Container from './Container'
 import Footer from './Footer'
 import Header from './Header'
@@ -13,6 +15,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
 			<Header />
 			<Container>
 				<Main>{children}</Main>
+				<ButtonToTop />
 			</Container>
 			<Footer />
 		</>
