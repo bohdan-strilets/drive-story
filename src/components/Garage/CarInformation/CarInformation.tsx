@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { useParams } from 'react-router-dom'
 
+import Gallery from '@/components/Gallery'
 import ActionMenu from '@/components/Layout/ActionMenu'
 import PropertyList from '@/components/Layout/PropertyList'
 import Loader from '@/components/UI/Loader'
@@ -8,6 +9,8 @@ import Title from '@/components/UI/Title'
 
 import { useCarInformation } from '@/hooks/ui/useCarInformation'
 import useResponsive from '@/hooks/ui/useResponsive'
+
+import { isImage } from '@/types/guards/isImage'
 
 import {
 	Container,
@@ -28,6 +31,7 @@ const CarInformation: FC = () => {
 		shortName,
 		updatedDate,
 		description,
+		photos,
 		basicInfoList,
 		specificationsList,
 		registrationList,
@@ -56,6 +60,24 @@ const CarInformation: FC = () => {
 				/>
 
 				<MaintenanceReminders />
+
+				{photos && isImage(photos) && (
+					<>
+						<Title
+							fontSize={maxMobile ? 20 : 28}
+							textAlign="left"
+							color="black"
+						>
+							Gallery
+						</Title>
+						<Gallery
+							images={photos.resources}
+							overlayActions={[]}
+							isActionLoading={false}
+							itemsPerPage={maxMobile ? 3 : 6}
+						/>
+					</>
+				)}
 
 				<Container>
 					<InformationWrapper>

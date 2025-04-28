@@ -17,10 +17,9 @@ const Gallery: FC<GalleryProps> = ({
 	isOverlay = false,
 	overlayActions,
 	isActionLoading,
+	itemsPerPage = 6,
 }) => {
 	const [currentPageData, setCurrentPageData] = useState<string[]>([])
-
-	const itemsPerPage = 6
 
 	const handlePageChange = (pageData: string[]) => {
 		setCurrentPageData(pageData)
@@ -31,7 +30,7 @@ const Gallery: FC<GalleryProps> = ({
 			const initialPageData = images.slice(0, itemsPerPage)
 			handlePageChange(initialPageData)
 		}
-	}, [images])
+	}, [images, itemsPerPage])
 
 	return (
 		images.length !== 0 && (

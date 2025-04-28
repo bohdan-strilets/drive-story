@@ -1,0 +1,10 @@
+export type BorderType =
+	| 'none'
+	| 'dotted'
+	| 'dashed'
+	| 'solid'
+	| 'double'
+	| 'groove'
+	| 'ridge'
+	| 'inset'
+	| 'outset '

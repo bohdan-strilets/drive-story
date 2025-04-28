@@ -6,7 +6,7 @@ import { breakpoints } from '@/styles/media/breakpoints'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 
 export const List = styled.ul`
-	margin-bottom: 15px;
+	margin-bottom: 30px;
 
 	@media screen and (min-width: ${breakpoints.tabletMin}) {
 		${flexCenterDirection()}
@@ -36,7 +36,7 @@ export const Item = styled(motion.li)<{ isDatePassed: boolean }>`
 	@media screen and (min-width: ${breakpoints.tabletMin}) {
 		font-size: 16px;
 
-		width: 30%;
+		width: 33%;
 		padding: 15px;
 		margin-bottom: 0;
 	}

@@ -22,6 +22,7 @@ const useModal = () => {
 		UPLOAD_AVATAR: 'upload-avatar',
 		UPLOAD_POSTER: 'upload-poster',
 		ADD_CAR: 'add-car',
+		UPLOAD_CAR_PHOTO: 'upload-car-photo',
 	}
 
 	const onOpen = useCallback(

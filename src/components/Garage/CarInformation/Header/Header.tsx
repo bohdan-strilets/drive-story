@@ -1,5 +1,6 @@
 import { FC } from 'react'
 
+import DecorativeLine from '@/components/UI/DecorativeLine'
 import ImageBox from '@/components/UI/ImageBox'
 import Paragraph from '@/components/UI/Paragraph'
 import Title from '@/components/UI/Title'
@@ -53,6 +54,10 @@ const Header: FC<HeaderProps> = ({
 			<Paragraph color="black" fontSize={12} textAlign="right">
 				Latest changes: {parsedDateToString(updatedDate)}
 			</Paragraph>
+			<DecorativeLine type="dashed" color="#ccc" margin="10px 0" />
+			<Title fontSize={maxMobile ? 20 : 28} textAlign="left" color="black">
+				Story
+			</Title>
 			<Paragraph color="black" margin=" 15px 0" padding="10px 10px 10px 40px">
 				{description || 'A little story about your car...'}
 			</Paragraph>

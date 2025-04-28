@@ -25,9 +25,11 @@ import { PropertyListItem } from '@/types/props/Layout/PropertyListProps'
 import { useGetByIdCar } from '../car/useGetByIdCar'
 
 import { useGetImage } from './useGetImage'
+import useModal from './useModal'
 
 export const useCarInformation = (carId: string) => {
 	const { data: car, isLoading, isError } = useGetByIdCar(carId)
+	const { onOpen, modalNames } = useModal()
 
 	const basicInfo = car?.basicInfo
 	const specifications = car?.specifications
@@ -44,6 +46,7 @@ export const useCarInformation = (carId: string) => {
 	const shortName = basicInfo?.shortName
 	const updatedDate = car?.updatedAt
 	const description = car?.description
+	const photos = car?.photos
 
 	const basicInfoList: PropertyListItem[] = useMemo(
 		() => [
@@ -184,7 +187,7 @@ export const useCarInformation = (carId: string) => {
 		() => [
 			{
 				id: nanoid(),
-				callback: () => null,
+				callback: () => onOpen(modalNames.UPLOAD_CAR_PHOTO),
 				label: 'Upload photo',
 				icon: <MdCloudUpload size={20} />,
 			},
@@ -243,7 +246,7 @@ export const useCarInformation = (carId: string) => {
 				icon: <MdDelete size={20} />,
 			},
 		],
-		[]
+		[modalNames.UPLOAD_CAR_PHOTO, onOpen]
 	)
 
 	return {
@@ -254,6 +257,7 @@ export const useCarInformation = (carId: string) => {
 		shortName,
 		updatedDate,
 		description,
+		photos,
 		basicInfoList,
 		specificationsList,
 		registrationList,
