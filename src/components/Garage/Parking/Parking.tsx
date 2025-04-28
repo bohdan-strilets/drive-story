@@ -24,7 +24,7 @@ const Parking: FC = () => {
 				<Item key={car._id}>
 					<CarCard
 						id={car._id}
-						posterUrl={''}
+						photos={car.photos}
 						make={car.basicInfo.make}
 						model={car.basicInfo.model}
 						year={car.basicInfo.year}

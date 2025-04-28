@@ -1,6 +1,8 @@
+import { Image } from '@/types/types/Image'
+
 export type CarCardProps = {
 	id: string
-	posterUrl: string
+	photos: string | null | Image
 	make: string
 	model: string
 	year: number

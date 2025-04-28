@@ -1,11 +1,14 @@
 import { FC } from 'react'
+import { FaRoad } from 'react-icons/fa6'
 import { IoCarSportSharp } from 'react-icons/io5'
-import { PiEngineFill, PiSpeedometerFill } from 'react-icons/pi'
+import { PiEngineFill } from 'react-icons/pi'
 import { TbManualGearboxFilled } from 'react-icons/tb'
 import { useNavigate } from 'react-router-dom'
 
 import Button from '@/components/UI/Button'
 import ImageBox from '@/components/UI/ImageBox'
+
+import { useGetImage } from '@/hooks/ui/useGetImage'
 
 import { routes } from '@/config/routes'
 
@@ -34,7 +37,7 @@ import {
 
 const CarCard: FC<CarCardProps> = ({
 	id,
-	posterUrl,
+	photos,
 	make,
 	model,
 	year,
@@ -46,14 +49,14 @@ const CarCard: FC<CarCardProps> = ({
 }) => {
 	const navigate = useNavigate()
 
+	const carPoster = useGetImage({
+		image: photos,
+		defaultImage: defaultImages.poster,
+	})
+
 	return (
 		<Wrapper>
-			<ImageBox
-				imageUrl={posterUrl || defaultImages.photo}
-				width="100%"
-				height="200px"
-				size="cover"
-			/>
+			<ImageBox imageUrl={carPoster} width="100%" height="200px" size="cover" />
 			<Information>
 				<Header>
 					<Name>
@@ -71,7 +74,7 @@ const CarCard: FC<CarCardProps> = ({
 					</Item>
 					<Item>
 						<IconWrapper>
-							<PiSpeedometerFill color={getColor('yellow')} />
+							<FaRoad color={getColor('yellow')} />
 							<Label>Mileage</Label>
 						</IconWrapper>
 						<Value>{formatMileage(mileage)} KM</Value>
