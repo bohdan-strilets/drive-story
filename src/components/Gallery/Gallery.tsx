@@ -18,6 +18,7 @@ const Gallery: FC<GalleryProps> = ({
 	overlayActions,
 	isActionLoading,
 	itemsPerPage = 6,
+	itemHeight = 'auto',
 }) => {
 	const [currentPageData, setCurrentPageData] = useState<string[]>([])
 
@@ -40,6 +41,7 @@ const Gallery: FC<GalleryProps> = ({
 						{currentPageData.map((imageUrl, index) => (
 							<Item
 								key={index}
+								itemHeight={itemHeight}
 								{...fadeSlide(0, -30, index * 0.1, 0.2, 'easeOut', false)}
 							>
 								<ImageContainer>

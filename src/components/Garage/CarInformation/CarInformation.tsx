@@ -75,6 +75,7 @@ const CarInformation: FC = () => {
 							overlayActions={[]}
 							isActionLoading={false}
 							itemsPerPage={maxMobile ? 3 : 6}
+							itemHeight="240px"
 						/>
 					</>
 				)}

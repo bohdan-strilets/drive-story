@@ -7,7 +7,7 @@ export const cardGridItem = (gap: string = '5px') => css`
 	box-sizing: border-box;
 
 	max-width: 100%;
-	height: 240px;
+	height: auto;
 
 	@media screen and (min-width: ${breakpoints.tabletMin}) {
 		flex: 1 1 calc(50% - ${gap});
