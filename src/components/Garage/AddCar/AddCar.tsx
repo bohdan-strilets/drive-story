@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import Button from '@/components/UI/Button'
@@ -14,10 +14,7 @@ import Title from '@/components/UI/Title'
 import { useCreateCar } from '@/hooks/car/useCreateCar'
 import useSubmit from '@/hooks/ui/useSubmit'
 
-import {
-	formatValue,
-	generateDropdownOptions,
-} from '@/utils/generateDropdownOptions'
+import { generateDropdownOptions } from '@/utils/generateDropdownOptions'
 
 import { CarDto } from '@/types/dto/CarDto'
 import { BodyType } from '@/types/enums/BodyType'
@@ -30,7 +27,20 @@ import { AddCarFields, AddCarValidation } from '@/validation/AddCarSchema'
 
 const AddCar: FC = () => {
 	const { mutateAsync: createCar, isPending } = useCreateCar()
-	const { control, handleSubmit } = useForm<AddCarFields>(AddCarValidation)
+	const { control, handleSubmit, setValue, watch } =
+		useForm<AddCarFields>(AddCarValidation)
+
+	const yearIssue = watch('basicInfo.year')
+
+	useEffect(() => {
+		if (yearIssue) {
+			// Задаём первое число января выбранного года
+			setValue('registration.firstRegDate', new Date(`${yearIssue}-01-01`), {
+				shouldValidate: true,
+				shouldDirty: true,
+			})
+		}
+	}, [yearIssue, setValue])
 
 	const submitCreateCar = useSubmit<Car | null, CarDto>({
 		callback: createCar,
@@ -155,7 +165,7 @@ const AddCar: FC = () => {
 					margin="0 0 15px 0"
 					placeholder="2004"
 					rules={{ required: true, min: 0 }}
-					defaultValue={1}
+					defaultValue={0}
 				/>
 				<DropdownList<AddCarFields>
 					control={control}
@@ -166,7 +176,6 @@ const AddCar: FC = () => {
 					margin="0 0 15px 0"
 					placeholder="Select fuel type"
 					rules={{ required: true }}
-					defaultValue={formatValue(FuelType.NOT_SELECTED)}
 				/>
 				<DropdownList<AddCarFields>
 					control={control}
@@ -206,6 +215,7 @@ const AddCar: FC = () => {
 					margin="0 0 15px 0"
 					placeholder="1999"
 					rules={{ required: true }}
+					defaultValue={0}
 				/>
 				<NumberInput<AddCarFields>
 					control={control}
@@ -215,6 +225,7 @@ const AddCar: FC = () => {
 					margin="0 0 15px 0"
 					placeholder="150"
 					rules={{ required: true }}
+					defaultValue={0}
 				/>
 				<RangeInput<AddCarFields>
 					control={control}
@@ -285,7 +296,7 @@ const AddCar: FC = () => {
 				<DatePicker<AddCarFields>
 					control={control}
 					name="ownership.saleDate"
-					label="Date of sale"
+					label="Date of sale (Leave the current date as is if the car has not been sold yet)"
 					placeholder="Select date"
 					width="100%"
 					margin="0 0 15px 0"
@@ -300,7 +311,7 @@ const AddCar: FC = () => {
 					control={control}
 					name="description"
 					label="A few words about the car"
-					placeholder="My car is the best..."
+					placeholder="A little story about your car..."
 					width="100%"
 					margin="0 0 15px 0"
 				/>

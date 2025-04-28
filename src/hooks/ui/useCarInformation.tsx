@@ -17,6 +17,7 @@ import { convertEngineVolume } from '@/utils/convertEngineVolume'
 import { defaultImages } from '@/utils/defaultImages'
 import { formatMileage } from '@/utils/formatMileage'
 import { formatLabel } from '@/utils/generateDropdownOptions'
+import { isWithinThreshold } from '@/utils/isWithinThreshold'
 import { parsedDateToString } from '@/utils/parsedDateToString'
 
 import { Action } from '@/types/props/Layout/ActionMenuProps'
@@ -177,7 +178,9 @@ export const useCarInformation = (carId: string) => {
 			{
 				id: nanoid(),
 				property: 'Date of sale',
-				value: parsedDateToString(ownership?.saleDate),
+				value: isWithinThreshold(new Date())
+					? 'Vehicle in use'
+					: parsedDateToString(ownership?.saleDate),
 			},
 		],
 		[ownership?.purchaseDate, ownership?.saleDate]
