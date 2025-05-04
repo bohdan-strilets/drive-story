@@ -118,19 +118,7 @@ export const useProfile = () => {
 				value: user?.location?.postalCode || '---',
 			},
 		],
-		[
-			modalNames.RESEND_EMAIL,
-			onOpen,
-			user?.birthDate,
-			user?.email,
-			user?.gender,
-			user?.isActivated,
-			user?.location?.city,
-			user?.location?.country,
-			user?.location?.postalCode,
-			user?.phoneNumber,
-			userAge.detailedAge,
-		]
+		[user, userAge.detailedAge]
 	)
 
 	const settingActions: Action[] = useMemo(

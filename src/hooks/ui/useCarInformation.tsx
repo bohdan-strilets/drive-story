@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { nanoid } from 'nanoid'
 import { useMemo } from 'react'
 import { BiSolidSelectMultiple } from 'react-icons/bi'
@@ -77,13 +78,7 @@ export const useCarInformation = (carId: string) => {
 				value: basicInfo?.generation,
 			},
 		],
-		[
-			basicInfo?.generation,
-			basicInfo?.make,
-			basicInfo?.model,
-			basicInfo?.shortName,
-			basicInfo?.year,
-		]
+		[basicInfo]
 	)
 
 	const specificationsList: PropertyListItem[] = useMemo(
@@ -134,17 +129,7 @@ export const useCarInformation = (carId: string) => {
 				value: specifications?.seats || 0,
 			},
 		],
-		[
-			engine?.power,
-			engine?.volume,
-			specifications?.bodyType,
-			specifications?.doors,
-			specifications?.drivetrain,
-			specifications?.fuelType,
-			specifications?.mileage,
-			specifications?.seats,
-			specifications?.transmission,
-		]
+		[engine, specifications]
 	)
 
 	const registrationList: PropertyListItem[] = useMemo(
@@ -165,7 +150,7 @@ export const useCarInformation = (carId: string) => {
 				value: parsedDateToString(registration?.firstRegDate),
 			},
 		],
-		[registration?.firstRegDate, registration?.regNumber, registration?.vin]
+		[registration]
 	)
 
 	const ownershipList: PropertyListItem[] = useMemo(
@@ -183,7 +168,7 @@ export const useCarInformation = (carId: string) => {
 					: parsedDateToString(ownership?.saleDate),
 			},
 		],
-		[ownership?.purchaseDate, ownership?.saleDate]
+		[ownership]
 	)
 
 	const carActions: Action[] = useMemo(
@@ -249,7 +234,7 @@ export const useCarInformation = (carId: string) => {
 				icon: <MdDelete size={20} />,
 			},
 		],
-		[modalNames.UPLOAD_CAR_PHOTO, onOpen]
+		[]
 	)
 
 	return {
