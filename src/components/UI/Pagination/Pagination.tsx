@@ -1,8 +1,6 @@
-import { FC } from 'react'
+import { FC, useMemo } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { RiArrowLeftSFill, RiArrowRightSFill } from 'react-icons/ri'
-
-import usePagination from '@/hooks/ui/usePagination'
 
 import { PaginationProps } from '@/types/props/UI/PaginationProps'
 
@@ -11,25 +9,36 @@ import Button from '../Button'
 import { PageButton, Wrapper } from './Pagination.styled'
 
 const Pagination: FC<PaginationProps> = ({
-	images,
-	itemsPerPage,
-	handlePageChange,
+	goToPage,
+	nextPage,
+	prevPage,
+	currentPage,
+	totalPages,
 }) => {
-	const paginationParams = {
-		count: images.length,
-		itemsPerPage,
-		handlePageChange,
-		images,
-	}
+	const paginationGaps = useMemo(() => {
+		const showBefore = currentPage > 3
+		const showAfter = currentPage < totalPages - 2
 
-	const {
-		totalPages,
-		nextPage,
-		prevPage,
-		goToPage,
-		currentPage,
-		paginationGaps,
-	} = usePagination(paginationParams)
+		let paginationGroup
+		if (totalPages <= 5) {
+			paginationGroup = Array.from(
+				{ length: totalPages },
+				(_, i) => i + 1
+			).slice(1, -1)
+		} else if (!showBefore) {
+			paginationGroup = [2, 3, 4]
+		} else if (!showAfter) {
+			paginationGroup = [totalPages - 3, totalPages - 2, totalPages - 1]
+		} else {
+			paginationGroup = [currentPage - 1, currentPage, currentPage + 1]
+		}
+
+		return {
+			before: showBefore,
+			after: showAfter,
+			paginationGroup,
+		}
+	}, [currentPage, totalPages])
 
 	return (
 		<Wrapper>

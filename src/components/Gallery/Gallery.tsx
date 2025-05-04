@@ -3,6 +3,8 @@ import { FC, useEffect, useState } from 'react'
 
 import ImageBox from '@/components/UI/ImageBox'
 
+import useClientPagination from '@/hooks/ui/useClientPagination'
+
 import { GalleryProps } from '@/types/props/Gallery/GalleryProps'
 
 import { fadeSlide } from '@/animations/fadeSlide'
@@ -25,6 +27,14 @@ const Gallery: FC<GalleryProps> = ({
 	const handlePageChange = (pageData: string[]) => {
 		setCurrentPageData(pageData)
 	}
+
+	const { currentPage, goToPage, nextPage, prevPage, totalPages } =
+		useClientPagination<string>({
+			items: images,
+			totalItems: images.length,
+			itemsPerPage,
+			handlePageChange,
+		})
 
 	useEffect(() => {
 		if (images.length > 0) {
@@ -60,9 +70,11 @@ const Gallery: FC<GalleryProps> = ({
 				</AnimatePresence>
 				{images.length > itemsPerPage && (
 					<Pagination
-						images={images}
-						itemsPerPage={itemsPerPage}
-						handlePageChange={handlePageChange}
+						goToPage={goToPage}
+						nextPage={nextPage}
+						prevPage={prevPage}
+						totalPages={totalPages}
+						currentPage={currentPage}
 					/>
 				)}
 			</>

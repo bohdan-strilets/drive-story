@@ -143,7 +143,7 @@ const ProfilePage: FC = () => {
 								isOverlay={true}
 								overlayActions={avatarActions}
 								isActionLoading={isAvatarActionLoading}
-								itemHeight="240px"
+								itemHeight="210px"
 							/>
 						)}
 					</Modal>
@@ -157,7 +157,7 @@ const ProfilePage: FC = () => {
 								isOverlay={true}
 								overlayActions={posterActions}
 								isActionLoading={isPosterActionLoading}
-								itemHeight="240px"
+								itemHeight="210px"
 							/>
 						)}
 					</Modal>

@@ -7,6 +7,7 @@ import { PaginationDto } from '@/types/dto/PaginationDto'
 import { UpdateCarDto } from '@/types/dto/UpdateCarDto'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Car } from '@/types/types/Car'
+import { PaginationMeta } from '@/types/types/PaginationMeta'
 
 const ENDPOINT = '/car'
 
@@ -56,7 +57,9 @@ export const getById = async (
 export const getAll = async ({
 	page,
 	limit,
-}: PaginationDto): Promise<ApiResponse<Car[] | null>> => {
+}: PaginationDto): Promise<
+	ApiResponse<{ data: Car[]; meta: PaginationMeta } | null>
+> => {
 	try {
 		const { data } = await apiClient.get(`${ENDPOINT}/get-all`, {
 			params: { page, limit },

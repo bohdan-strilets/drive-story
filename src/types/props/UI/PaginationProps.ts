@@ -1,5 +1,7 @@
 export type PaginationProps = {
-	images: string[]
-	itemsPerPage: number
-	handlePageChange: (pageData: string[]) => void
+	goToPage: (page: number) => void
+	nextPage: () => void
+	prevPage: () => void
+	currentPage: number
+	totalPages: number
 }
