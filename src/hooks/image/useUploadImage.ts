@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query'
 import { upload } from '@/api/imageApi'
 
 import { queryClient } from '@/config/queryClient'
-import { UserKey } from '@/config/queryKeys'
+import { CarKey, UserKey } from '@/config/queryKeys'
 
 import { UploadImageDto } from '@/types/dto/UploadImageDto'
 import { ApiResponse } from '@/types/types/ApiResponse'
@@ -14,9 +14,11 @@ export const useUploadImage = () => {
 		mutationFn: ({ file, entityId, entityType }) =>
 			upload({ file, entityId, entityType }),
 
-		onSuccess: (response) => {
+		onSuccess: (response, { entityId }) => {
 			if (response.success) {
 				queryClient.invalidateQueries({ queryKey: [UserKey] })
+				queryClient.invalidateQueries({ queryKey: [CarKey, entityId] })
+				queryClient.invalidateQueries({ queryKey: [CarKey] })
 			}
 		},
 	})
