@@ -15,7 +15,12 @@ const WelcomeMessage: FC = () => {
 
 	return (
 		<>
-			<ImageBox imageUrl={successImage} width="100%" height="300px" />
+			<ImageBox
+				imageUrl={successImage}
+				width="100%"
+				height="300px"
+				size="contain"
+			/>
 			<Paragraph
 				color="black"
 				fontWeight={700}
