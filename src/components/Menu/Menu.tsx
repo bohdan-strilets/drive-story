@@ -36,6 +36,7 @@ const Menu: FC<MenuProps> = ({ onClose, onBackdropClick }) => {
 				/>
 				<Logo color="white" scale="small" />
 				<Navigation
+					closeMenu={onClose}
 					margin={minTablet ? '45px 0 0 0' : '25px 0 0 0'}
 					itemHeight="60px"
 				/>

@@ -1,4 +1,5 @@
 export type NavigationProps = {
+	closeMenu: () => void
 	margin?: string
 	itemHeight?: string
 }
