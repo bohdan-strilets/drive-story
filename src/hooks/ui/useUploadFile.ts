@@ -1,13 +1,14 @@
 import { useRef, useState } from 'react'
 
-import { useUploadFileParams } from '@/types/hooks/useUploadFileParams'
+import { Params, Result } from '@/types/hooks/useUploadFileParams'
 import { FileInformation } from '@/types/types/FileInformation'
 import { Image } from '@/types/types/Image'
 
 import useSubmit from './useSubmit'
 
-const useUploadFile = ({ fileName, callback }: useUploadFileParams) => {
+const useUploadFile = ({ fileName, callback }: Params): Result => {
 	const hiddenFileInput = useRef<HTMLInputElement>(null)
+
 	const [previewSource, setPreviewSource] = useState('')
 	const [fileInfo, setFileInfo] = useState<FileInformation | null>(null)
 

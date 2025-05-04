@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { handleError } from '@/utils/handleError'
 
-import { useSubmitParams } from '@/types/hooks/useSubmitParams'
+import { Params } from '@/types/hooks/useSubmitParams'
 
 import useModal from './useModal'
 
@@ -14,7 +14,7 @@ const useSubmit = <T, U = void>({
 	navigateOptions,
 	successMessage,
 	isCloseModal = false,
-}: useSubmitParams<T, U>) => {
+}: Params<T, U>) => {
 	const navigate = useNavigate()
 	const { onClose } = useModal()
 

@@ -71,7 +71,7 @@ const Uploader: FC<UploaderProps> = ({
 					hoverColor="white"
 					width="100%"
 					type="submit"
-					disabled={isLoading}
+					disabled={isLoading || !fileInfo}
 				>
 					{isLoading ? '...' : 'upload'}
 				</Button>
