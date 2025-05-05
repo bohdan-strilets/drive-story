@@ -9,6 +9,7 @@ export const routes = {
 	RECOVER_PASSWORD: '/recover-password',
 	GARAGE: '/garage',
 	CAR_INFORMATION: '/garage/car-information',
+	INSURANCE_POLICY: 'insurance-policy',
 	SERVICE: '/service',
 	FUEL: '/fuel',
 	ACCESSORIES: '/accessories',

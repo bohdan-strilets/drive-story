@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import Gallery from '@/components/Gallery'
 import ActionMenu from '@/components/Layout/ActionMenu'
@@ -41,7 +41,13 @@ const CarInformation: FC<CarInformationProps> = ({
 	const { maxMobile } = useResponsive()
 
 	const { onOpen, modalNames } = useModal()
-	const actionCtx: ActionContext = { onOpen, modalNames }
+	const navigate = useNavigate()
+	const actionCtx: ActionContext = {
+		onOpen,
+		modalNames,
+		navigate,
+		carId: carId ?? '',
+	}
 
 	const { data: car, isLoading, isError } = useFetchCar(carId ?? '')
 

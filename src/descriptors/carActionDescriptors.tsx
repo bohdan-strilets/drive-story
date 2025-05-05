@@ -11,6 +11,8 @@ import {
 import { RiCarWashingFill } from 'react-icons/ri'
 import { TiSpanner } from 'react-icons/ti'
 
+import { routes } from '@/config/routes'
+
 import { ActionContext, ActionDescriptor } from '@/types/types/ActionDescriptor'
 
 export const carActionDescriptors: ActionDescriptor<ActionContext>[] = [
@@ -42,7 +44,12 @@ export const carActionDescriptors: ActionDescriptor<ActionContext>[] = [
 		key: 'insurance-policy',
 		label: 'Insurance policy',
 		icon: <IoDocumentText size={20} />,
-		getCallback: () => () => null,
+		getCallback:
+			({ navigate, carId }) =>
+			() =>
+				navigate(
+					`${routes.CAR_INFORMATION}/${carId}/${routes.INSURANCE_POLICY}`
+				),
 	},
 	{
 		key: 'technical-inspection',
