@@ -16,26 +16,24 @@ export const carTechnicalSpecsDescriptors: FieldDescriptor<CarSpecifications>[] 
 		{
 			key: 'fuel-type',
 			label: 'Fuel type',
-			render: (specifications) =>
-				formatLabel(specifications?.fuelType || '---'),
+			render: (specifications) => formatLabel(specifications?.fuelType || '—'),
 		},
 		{
 			key: 'transmission',
 			label: 'Transmission',
 			render: (specifications) =>
-				formatLabel(specifications?.transmission || '---'),
+				formatLabel(specifications?.transmission || '—'),
 		},
 		{
 			key: 'drivetrain',
 			label: 'Drivetrain',
 			render: (specifications) =>
-				formatLabel(specifications?.drivetrain || '---'),
+				formatLabel(specifications?.drivetrain || '—'),
 		},
 		{
 			key: 'body-type',
 			label: 'Body type',
-			render: (specifications) =>
-				formatLabel(specifications?.bodyType || '---'),
+			render: (specifications) => formatLabel(specifications?.bodyType || '—'),
 		},
 		{
 			key: 'engine-volume',

@@ -8,7 +8,7 @@ export const carRegistrationDetailsDescriptors: FieldDescriptor<CarRegistration>
 		{
 			key: 'vin-number',
 			label: 'Vin number',
-			render: (registration) => registration?.vin || '---',
+			render: (registration) => registration?.vin || '—',
 		},
 		{
 			key: 'registration-number',
