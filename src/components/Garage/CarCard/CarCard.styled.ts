@@ -5,6 +5,8 @@ import { getColor } from '@/styles/helpers/getColor'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 
 export const Wrapper = styled.article`
+	position: relative;
+
 	width: 100%;
 	height: auto;
 
