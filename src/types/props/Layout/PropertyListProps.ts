@@ -1,11 +1,6 @@
-import { ReactNode } from 'react'
+import { FieldDescriptor } from '@/types/types/FieldDescriptor'
 
-export type PropertyListItem = {
-	id: string
-	property: string
-	value?: string | number | null | ReactNode
-}
-
-export type PropertyListProps = {
-	elements: PropertyListItem[]
+export type PropertyListProps<T> = {
+	descriptors: FieldDescriptor<T>[]
+	context: T | null
 }

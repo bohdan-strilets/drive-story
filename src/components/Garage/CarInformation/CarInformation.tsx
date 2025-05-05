@@ -7,10 +7,21 @@ import PropertyList from '@/components/Layout/PropertyList'
 import Loader from '@/components/UI/Loader'
 import Title from '@/components/UI/Title'
 
-import { useCarInformation } from '@/hooks/ui/useCarInformation'
+import { useGetByIdCar } from '@/hooks/car/useGetByIdCar'
+import { useGetImage } from '@/hooks/ui/useGetImage'
+import useModal from '@/hooks/ui/useModal'
 import useResponsive from '@/hooks/ui/useResponsive'
 
+import { carActionDescriptors } from '@/descriptors/carActionDescriptors'
+import { carOverviewDescriptors } from '@/descriptors/carOverviewDescriptors'
+import { carOwnershipHistoryDescriptors } from '@/descriptors/carOwnershipHistoryDescriptors'
+import { carRegistrationDetailsDescriptors } from '@/descriptors/carRegistrationDetailsDescriptors'
+import { carTechnicalSpecsDescriptors } from '@/descriptors/carTechnicalSpecsDescriptors'
+
+import { defaultImages } from '@/utils/defaultImages'
+
 import { isImage } from '@/types/guards/isImage'
+import { ActionContext } from '@/types/types/ActionDescriptor'
 
 import {
 	Container,
@@ -24,21 +35,16 @@ const CarInformation: FC = () => {
 	const { carId } = useParams()
 	const { maxMobile } = useResponsive()
 
-	const {
-		isLoading,
-		isError,
-		carPoster,
-		carName,
-		shortName,
-		updatedDate,
-		description,
-		photos,
-		basicInfoList,
-		specificationsList,
-		registrationList,
-		ownershipList,
-		carActions,
-	} = useCarInformation(carId as string)
+	const { onOpen, modalNames } = useModal()
+	const actionCtx: ActionContext = { onOpen, modalNames }
+
+	const { data: car, isLoading, isError } = useGetByIdCar(carId ?? '')
+
+	const photos = car?.photos
+	const carPoster = useGetImage({
+		image: photos,
+		defaultImage: defaultImages.poster,
+	})
 
 	if (isLoading) {
 		return <Loader color="gray" />
@@ -49,15 +55,16 @@ const CarInformation: FC = () => {
 	}
 
 	return (
+		car &&
 		!isError && (
 			<article>
 				<Header
 					carPoster={carPoster}
-					carName={carName}
-					shortName={shortName}
+					carName={`${car?.basicInfo?.make} ${car?.basicInfo?.model}`}
+					shortName={car?.basicInfo?.shortName}
 					carId={carId}
-					updatedDate={updatedDate}
-					description={description}
+					updatedDate={car?.updatedAt}
+					description={car?.description}
 				/>
 
 				<MaintenanceReminders />
@@ -90,7 +97,10 @@ const CarInformation: FC = () => {
 						>
 							Basic information
 						</Title>
-						<PropertyList elements={basicInfoList} />
+						<PropertyList
+							descriptors={carOverviewDescriptors}
+							context={car?.basicInfo}
+						/>
 
 						<Title
 							fontSize={maxMobile ? 20 : 28}
@@ -99,7 +109,10 @@ const CarInformation: FC = () => {
 						>
 							Specifications
 						</Title>
-						<PropertyList elements={specificationsList} />
+						<PropertyList
+							descriptors={carTechnicalSpecsDescriptors}
+							context={car.specifications}
+						/>
 
 						<Title
 							fontSize={maxMobile ? 20 : 28}
@@ -108,7 +121,10 @@ const CarInformation: FC = () => {
 						>
 							Registration details
 						</Title>
-						<PropertyList elements={registrationList} />
+						<PropertyList
+							descriptors={carRegistrationDetailsDescriptors}
+							context={car.registration}
+						/>
 
 						<Title
 							fontSize={maxMobile ? 20 : 28}
@@ -117,11 +133,17 @@ const CarInformation: FC = () => {
 						>
 							Owner details
 						</Title>
-						<PropertyList elements={ownershipList} />
+						<PropertyList
+							descriptors={carOwnershipHistoryDescriptors}
+							context={car.ownership}
+						/>
 					</InformationWrapper>
 
 					<SideMenu>
-						<ActionMenu actions={carActions} />
+						<ActionMenu
+							descriptors={carActionDescriptors}
+							context={actionCtx}
+						/>
 					</SideMenu>
 				</Container>
 			</article>

@@ -1,7 +1,17 @@
 import { FC } from 'react'
 
+import { useGetImage } from '@/hooks/ui/useGetImage'
 import useModal from '@/hooks/ui/useModal'
-import { useProfile } from '@/hooks/ui/useProfile'
+
+import { userActionDescriptors } from '@/descriptors/userActionDescriptors'
+import { userFieldDescriptors } from '@/descriptors/userFieldDescriptors'
+import { userUploadActionDescriptors } from '@/descriptors/userUploadActionDescriptors'
+
+import { useUserStore } from '@/store/useUserStore'
+
+import { defaultImages } from '@/utils/defaultImages'
+
+import { ActionContext } from '@/types/types/ActionDescriptor'
 
 import ActionMenu from '../Layout/ActionMenu'
 import PropertyList from '../Layout/PropertyList'
@@ -15,16 +25,19 @@ import ProfileMeta from './ProfileMeta'
 
 const Profile: FC = () => {
 	const { onOpen, modalNames } = useModal()
-	const {
-		fullName,
-		nickname,
-		userAvatar,
-		userPoster,
-		userInfoList,
-		uploadActions,
-		settingActions,
-		isLoading,
-	} = useProfile()
+	const actionCtx: ActionContext = { onOpen, modalNames }
+
+	const user = useUserStore((state) => state.user)
+	const isLoading = useUserStore((state) => state.isLoading)
+
+	const userAvatar = useGetImage({
+		image: user?.avatars,
+		defaultImage: defaultImages.avatar,
+	})
+	const userPoster = useGetImage({
+		image: user?.posters,
+		defaultImage: defaultImages.poster,
+	})
 
 	if (isLoading) {
 		return <Loader color={'gray'} />
@@ -32,10 +45,14 @@ const Profile: FC = () => {
 
 	return (
 		<>
-			<Header posterUrl={userPoster} fullName={fullName} nickname={nickname} />
+			<Header
+				posterUrl={userPoster}
+				fullName={`${user?.firstName} ${user?.lastName}`}
+				nickname={user?.nickname}
+			/>
 			<Information>
 				<InformationWrapper>
-					<PropertyList elements={userInfoList} />
+					<PropertyList descriptors={userFieldDescriptors} context={user} />
 				</InformationWrapper>
 				<SideMenu>
 					<OpenGalleryButton
@@ -50,9 +67,12 @@ const Profile: FC = () => {
 							isShadow={true}
 						/>
 					</OpenGalleryButton>
-					<ActionMenu actions={uploadActions} />
+					<ActionMenu
+						descriptors={userUploadActionDescriptors}
+						context={actionCtx}
+					/>
 					<ProfileMeta />
-					<ActionMenu actions={settingActions} />
+					<ActionMenu descriptors={userActionDescriptors} context={actionCtx} />
 				</SideMenu>
 			</Information>
 		</>

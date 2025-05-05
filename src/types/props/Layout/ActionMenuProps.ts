@@ -1,12 +1,6 @@
-import { ReactNode } from 'react'
+import { ActionDescriptor } from '@/types/types/ActionDescriptor'
 
-export type Action = {
-	id: string
-	callback: () => void
-	label: string
-	icon: ReactNode
-}
-
-export type ActionMenuProps = {
-	actions: Action[]
+export type ActionMenuProps<T> = {
+	descriptors: ActionDescriptor<T>[]
+	context: T
 }

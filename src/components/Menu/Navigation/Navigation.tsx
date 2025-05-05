@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { navigationItems } from '@/config/navigationItems'
+import { navigationDescriptors } from '@/descriptors/navigationDescriptors'
 
 import { NavigationProps } from '@/types/props/Menu/NavigationProps'
 
@@ -11,10 +11,10 @@ import { Item, Label, List, StyledLink } from './Navigation.styled'
 const Navigation: FC<NavigationProps> = ({ closeMenu, margin, itemHeight }) => {
 	return (
 		<List margin={margin}>
-			{navigationItems.map(({ id, icon, label, route }, index) => {
+			{navigationDescriptors.map(({ key, label, route, icon }, index) => {
 				return (
 					<Item
-						key={id}
+						key={key}
 						{...fadeSlide(0, -20, index * 0.1, 0.5)}
 						itemHeight={itemHeight}
 					>
