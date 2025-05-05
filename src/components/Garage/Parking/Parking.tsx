@@ -1,5 +1,6 @@
 import { FC, useState } from 'react'
 
+import EmptyState from '@/components/UI/EmptyState'
 import Loader from '@/components/UI/Loader'
 import Pagination from '@/components/UI/Pagination'
 
@@ -41,6 +42,10 @@ const Parking: FC = () => {
 
 	if (isLoading) {
 		return <Loader color="gray" />
+	}
+
+	if (cars.length === 0) {
+		return <EmptyState />
 	}
 
 	return (
