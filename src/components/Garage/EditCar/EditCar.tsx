@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import Button from '@/components/UI/Button'
 import DatePicker from '@/components/UI/DatePicker'
 import DropdownList from '@/components/UI/DropdownList'
+import ErrorMessage from '@/components/UI/ErrorMessage'
 import Loader from '@/components/UI/Loader'
 import NumberInput from '@/components/UI/NumberInput'
 import RangeInput from '@/components/UI/RangeInput'
@@ -100,6 +101,14 @@ const EditCar: FC = () => {
 
 	if (isLoading) {
 		return <Loader color="gray" />
+	}
+
+	if (isError) {
+		return (
+			<ErrorMessage
+				message={`Car with current ID: ${carId} was not selected.`}
+			/>
+		)
 	}
 
 	return (

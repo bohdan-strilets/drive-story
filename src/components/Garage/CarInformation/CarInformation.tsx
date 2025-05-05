@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import Gallery from '@/components/Gallery'
 import ActionMenu from '@/components/Layout/ActionMenu'
 import PropertyList from '@/components/Layout/PropertyList'
+import ErrorMessage from '@/components/UI/ErrorMessage'
 import Loader from '@/components/UI/Loader'
 import Title from '@/components/UI/Title'
 
@@ -55,7 +56,11 @@ const CarInformation: FC<CarInformationProps> = ({
 	}
 
 	if (isError) {
-		return <p>Car with current ID was not selected.</p>
+		return (
+			<ErrorMessage
+				message={`Car with current ID: ${carId} was not selected.`}
+			/>
+		)
 	}
 
 	return (
