@@ -21,6 +21,7 @@ import { carTechnicalSpecsDescriptors } from '@/descriptors/carTechnicalSpecsDes
 import { defaultImages } from '@/utils/defaultImages'
 
 import { isImage } from '@/types/guards/isImage'
+import { CarInformationProps } from '@/types/props/Garage/CarInformationProps'
 import { ActionContext } from '@/types/types/ActionDescriptor'
 
 import {
@@ -31,7 +32,10 @@ import {
 import Header from './Header'
 import MaintenanceReminders from './MaintenanceReminders'
 
-const CarInformation: FC = () => {
+const CarInformation: FC<CarInformationProps> = ({
+	imageActions,
+	isActionLoading,
+}) => {
 	const { carId } = useParams()
 	const { maxMobile } = useResponsive()
 
@@ -80,10 +84,11 @@ const CarInformation: FC = () => {
 						</Title>
 						<Gallery
 							images={photos.resources}
-							overlayActions={[]}
-							isActionLoading={false}
+							overlayActions={imageActions}
+							isActionLoading={isActionLoading}
 							itemsPerPage={maxMobile ? 3 : 6}
 							itemHeight="240px"
+							isOverlay={true}
 						/>
 					</>
 				)}

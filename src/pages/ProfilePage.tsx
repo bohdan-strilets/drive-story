@@ -13,8 +13,8 @@ import Paragraph from '@/components/UI/Paragraph'
 import Uploader from '@/components/Uploader'
 
 import { useLogout } from '@/hooks/auth/useLogout'
+import { useGalleryManager } from '@/hooks/ui/useGalleryManager'
 import useModal from '@/hooks/ui/useModal'
-import { useProfileGallery } from '@/hooks/ui/useProfileGallery'
 import useSubmit from '@/hooks/ui/useSubmit'
 import { useRemoveProfile } from '@/hooks/user/useRemoveProfile'
 
@@ -56,7 +56,7 @@ const ProfilePage: FC = () => {
 		showImageViewer: showAvatarViewer,
 		currentImage: currentAvatar,
 		closeViewer: closeAvatarViewer,
-	} = useProfileGallery(EntityType.AVATARS)
+	} = useGalleryManager({ entityType: EntityType.AVATARS, entityId: user?._id })
 
 	const {
 		actions: posterActions,
@@ -65,7 +65,7 @@ const ProfilePage: FC = () => {
 		showImageViewer: showPosterViewer,
 		currentImage: currentPoster,
 		closeViewer: closePosterViewer,
-	} = useProfileGallery(EntityType.POSTERS)
+	} = useGalleryManager({ entityType: EntityType.POSTERS, entityId: user?._id })
 
 	return (
 		<>

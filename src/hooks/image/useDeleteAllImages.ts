@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query'
 import { removeAll } from '@/api/imageApi'
 
 import { queryClient } from '@/config/queryClient'
-import { UserKey } from '@/config/queryKeys'
+import { CarKey, UserKey } from '@/config/queryKeys'
 
 import { DeleteAllImagesDto } from '@/types/dto/DeleteAllImagesDto'
 import { ApiResponse } from '@/types/types/ApiResponse'
@@ -14,9 +14,11 @@ export const useDeleteAllImages = () => {
 		mutationFn: ({ entityId, entityType, imageId }) =>
 			removeAll({ entityId, entityType, imageId }),
 
-		onSuccess: (response) => {
+		onSuccess: (response, { entityId }) => {
 			if (response.success) {
 				queryClient.invalidateQueries({ queryKey: [UserKey] })
+				queryClient.invalidateQueries({ queryKey: [CarKey, entityId] })
+				queryClient.invalidateQueries({ queryKey: [CarKey] })
 			}
 		},
 	})

@@ -4,12 +4,10 @@ import { BiSolidSelectMultiple } from 'react-icons/bi'
 import { MdDelete } from 'react-icons/md'
 import { PiResizeBold } from 'react-icons/pi'
 
-import { useUserStore } from '@/store/useUserStore'
-
 import { extractPublicId } from '@/utils/extractImagePublicId'
 
 import { SelectImageDto } from '@/types/dto/SelectImageDto'
-import { EntityType } from '@/types/enums/EntityType'
+import { Params, Result } from '@/types/hooks/useGalleryManager'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Image } from '@/types/types/Image'
 
@@ -19,11 +17,9 @@ import { useUploadImage } from '../image/useUploadImage'
 
 import useSubmit from './useSubmit'
 
-export const useProfileGallery = (entityType: EntityType) => {
+export const useGalleryManager = ({ entityType, entityId }: Params): Result => {
 	const [showImageViewer, setShowImageViewer] = useState(false)
 	const [currentImage, setCurrentImage] = useState<string | null>(null)
-
-	const user = useUserStore((state) => state.user)
 
 	const { mutateAsync: selectImage, isPending: isSelectImagePending } =
 		useSelectImage()
@@ -47,28 +43,28 @@ export const useProfileGallery = (entityType: EntityType) => {
 		successMessage: 'Image successfully deleted',
 	})
 
-	const select = async (imageUrl: string) => {
-		const imagePublicId = extractPublicId(imageUrl)
+	const select = async (imageUrl: string): Promise<void> => {
+		const publicId = extractPublicId(imageUrl)
 
-		if (user && imagePublicId) {
-			await submitSelectImage({
-				entityId: user?._id,
-				entityType: entityType,
-				publicId: imagePublicId,
-			})
+		if (entityId && publicId) {
+			await submitSelectImage({ entityId, entityType, publicId })
 		}
 	}
 
-	const remove = async (imageUrl: string) => {
-		const imagePublicId = extractPublicId(imageUrl)
+	const remove = async (imageUrl: string): Promise<void> => {
+		const publicId = extractPublicId(imageUrl)
 
-		if (user && imagePublicId) {
-			await submitDeleteImage({
-				entityId: user?._id,
-				entityType: entityType,
-				publicId: imagePublicId,
-			})
+		if (entityId && publicId) {
+			return await submitDeleteImage({ entityId, entityType, publicId })
 		}
+	}
+
+	const upload = async (file: FormData): Promise<ApiResponse<Image | null>> => {
+		if (!entityId) {
+			throw new Error('Missing entityId')
+		}
+
+		return uploadImage({ entityId, entityType, file })
 	}
 
 	const openViewer = (imageUrl: string) => {
@@ -79,18 +75,6 @@ export const useProfileGallery = (entityType: EntityType) => {
 	const closeViewer = () => {
 		setShowImageViewer(false)
 		setCurrentImage(null)
-	}
-
-	const upload = async (
-		file: FormData
-	): Promise<ApiResponse<Image | null> | undefined> => {
-		if (user) {
-			return await uploadImage({
-				entityId: user?._id,
-				entityType: entityType,
-				file,
-			})
-		}
 	}
 
 	const actions = [

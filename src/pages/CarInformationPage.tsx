@@ -2,42 +2,38 @@ import { AnimatePresence } from 'motion/react'
 import { FC } from 'react'
 import { useParams } from 'react-router-dom'
 
+import ImageViewer from '@/components/Gallery/ImageViewer'
 import CarInformation from '@/components/Garage/CarInformation'
 import EditCar from '@/components/Garage/EditCar'
 import Modal from '@/components/Modal'
 import Uploader from '@/components/Uploader'
 
-import { useUploadImage } from '@/hooks/image/useUploadImage'
+import { useGalleryManager } from '@/hooks/ui/useGalleryManager'
 import useModal from '@/hooks/ui/useModal'
 
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
-import { ApiResponse } from '@/types/types/ApiResponse'
-import { Image } from '@/types/types/Image'
 
 const CarInformationPage: FC = () => {
 	const { checkQueryParam, modalNames } = useModal()
 	const { carId } = useParams()
 
-	const { mutateAsync: uploadImage, isPending: isUploadImagePending } =
-		useUploadImage()
-
-	const upload = async (
-		file: FormData
-	): Promise<ApiResponse<Image | null> | undefined> => {
-		if (carId) {
-			return await uploadImage({
-				entityId: carId,
-				entityType: EntityType.CARS,
-				file,
-			})
-		}
-	}
+	const {
+		actions: imageActions,
+		isLoading: isImageLoading,
+		upload: uploadImage,
+		showImageViewer: showImageViewer,
+		currentImage: currentImage,
+		closeViewer: closeImageViewer,
+	} = useGalleryManager({ entityType: EntityType.CARS, entityId: carId })
 
 	return (
 		<>
-			<CarInformation />
+			<CarInformation
+				imageActions={imageActions}
+				isActionLoading={isImageLoading}
+			/>
 
 			<AnimatePresence>
 				{checkQueryParam(modalNames.UPLOAD_CAR_PHOTO) && (
@@ -46,10 +42,14 @@ const CarInformationPage: FC = () => {
 							fileName="image"
 							fileTypes={uploadFileParams.types}
 							fileSize={uploadFileParams.size}
-							isLoading={isUploadImagePending}
-							callback={upload}
+							isLoading={isImageLoading}
+							callback={uploadImage}
 						/>
 					</Modal>
+				)}
+
+				{showImageViewer && (
+					<ImageViewer imageUrl={currentImage} closeViewer={closeImageViewer} />
 				)}
 
 				{checkQueryParam(modalNames.EDIT_CAR) && (
