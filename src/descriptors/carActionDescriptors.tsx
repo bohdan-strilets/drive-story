@@ -27,7 +27,10 @@ export const carActionDescriptors: ActionDescriptor<ActionContext>[] = [
 		key: 'edit-car-information',
 		label: 'Edit car information',
 		icon: <MdModeEdit size={20} />,
-		getCallback: () => () => null,
+		getCallback:
+			({ onOpen, modalNames }) =>
+			() =>
+				onOpen(modalNames.EDIT_CAR),
 	},
 	{
 		key: 'select-current-car',

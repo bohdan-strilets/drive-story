@@ -23,12 +23,12 @@ import { FuelType } from '@/types/enums/FuelType'
 import { Transmission } from '@/types/enums/Transmission'
 import { Car } from '@/types/types/Car'
 
-import { AddCarFields, AddCarValidation } from '@/validation/AddCarSchema'
+import { CarFields, CarValidation } from '@/validation/CarSchema'
 
 const AddCar: FC = () => {
 	const { mutateAsync: createCar, isPending } = useCreateCar()
 	const { control, handleSubmit, setValue, watch } =
-		useForm<AddCarFields>(AddCarValidation)
+		useForm<CarFields>(CarValidation)
 
 	const yearIssue = watch('basicInfo.year')
 
@@ -48,7 +48,7 @@ const AddCar: FC = () => {
 		isCloseModal: true,
 	})
 
-	const onSubmit: SubmitHandler<AddCarFields> = async (data) => {
+	const onSubmit: SubmitHandler<CarFields> = async (data) => {
 		const dto: CarDto = {
 			basicInfo: {
 				make: data.basicInfo.make,
@@ -104,7 +104,7 @@ const AddCar: FC = () => {
 				<Title fontSize={24} textAlign="left" color="black">
 					Basic information
 				</Title>
-				<TextInput<AddCarFields>
+				<TextInput<CarFields>
 					control={control}
 					label="Make"
 					name="basicInfo.make"
@@ -114,7 +114,7 @@ const AddCar: FC = () => {
 					placeholder="Audi"
 					rules={{ required: true }}
 				/>
-				<TextInput<AddCarFields>
+				<TextInput<CarFields>
 					control={control}
 					label="Model"
 					name="basicInfo.model"
@@ -124,7 +124,7 @@ const AddCar: FC = () => {
 					placeholder="A6"
 					rules={{ required: true }}
 				/>
-				<NumberInput<AddCarFields>
+				<NumberInput<CarFields>
 					control={control}
 					label="Year"
 					name="basicInfo.year"
@@ -134,7 +134,7 @@ const AddCar: FC = () => {
 					rules={{ required: true, max: new Date().getFullYear() }}
 					defaultValue={new Date().getFullYear()}
 				/>
-				<TextInput<AddCarFields>
+				<TextInput<CarFields>
 					control={control}
 					label="Generation"
 					name="basicInfo.generation"
@@ -143,7 +143,7 @@ const AddCar: FC = () => {
 					margin="0 0 15px 0"
 					placeholder="C6"
 				/>
-				<TextInput<AddCarFields>
+				<TextInput<CarFields>
 					control={control}
 					label="Short name"
 					name="basicInfo.shortName"
@@ -157,7 +157,7 @@ const AddCar: FC = () => {
 				<Title fontSize={24} textAlign="left" color="black">
 					Specifications
 				</Title>
-				<NumberInput<AddCarFields>
+				<NumberInput<CarFields>
 					control={control}
 					label="Mileage"
 					name="specifications.mileage"
@@ -167,7 +167,7 @@ const AddCar: FC = () => {
 					rules={{ required: true, min: 0 }}
 					defaultValue={0}
 				/>
-				<DropdownList<AddCarFields>
+				<DropdownList<CarFields>
 					control={control}
 					options={fuelTypeDropdownOptions}
 					label="Fuel type"
@@ -177,7 +177,7 @@ const AddCar: FC = () => {
 					placeholder="Select fuel type"
 					rules={{ required: true }}
 				/>
-				<DropdownList<AddCarFields>
+				<DropdownList<CarFields>
 					control={control}
 					options={transmissionDropdownOptions}
 					label="Transmission"
@@ -187,7 +187,7 @@ const AddCar: FC = () => {
 					placeholder="Select transmission"
 					rules={{ required: true }}
 				/>
-				<DropdownList<AddCarFields>
+				<DropdownList<CarFields>
 					control={control}
 					options={drivetrainDropdownOptions}
 					label="Drivetrain"
@@ -197,7 +197,7 @@ const AddCar: FC = () => {
 					placeholder="Select drivetrain"
 					rules={{ required: true }}
 				/>
-				<DropdownList<AddCarFields>
+				<DropdownList<CarFields>
 					control={control}
 					options={bodyTypeDropdownOptions}
 					label="Body type"
@@ -207,7 +207,7 @@ const AddCar: FC = () => {
 					placeholder="Select body type"
 					rules={{ required: true }}
 				/>
-				<NumberInput<AddCarFields>
+				<NumberInput<CarFields>
 					control={control}
 					label="Engine volume"
 					name="specifications.engine.volume"
@@ -217,7 +217,7 @@ const AddCar: FC = () => {
 					rules={{ required: true }}
 					defaultValue={0}
 				/>
-				<NumberInput<AddCarFields>
+				<NumberInput<CarFields>
 					control={control}
 					label="Engine power"
 					name="specifications.engine.power"
@@ -227,7 +227,7 @@ const AddCar: FC = () => {
 					rules={{ required: true }}
 					defaultValue={0}
 				/>
-				<RangeInput<AddCarFields>
+				<RangeInput<CarFields>
 					control={control}
 					label="Number of doors"
 					name="specifications.doors"
@@ -237,7 +237,7 @@ const AddCar: FC = () => {
 					max={6}
 					defaultValue={5}
 				/>
-				<RangeInput<AddCarFields>
+				<RangeInput<CarFields>
 					control={control}
 					label="Number of seats"
 					name="specifications.seats"
@@ -252,7 +252,7 @@ const AddCar: FC = () => {
 				<Title fontSize={24} textAlign="left" color="black">
 					Registration details
 				</Title>
-				<TextInput<AddCarFields>
+				<TextInput<CarFields>
 					control={control}
 					label="Vin number"
 					name="registration.vin"
@@ -261,7 +261,7 @@ const AddCar: FC = () => {
 					margin="0 0 15px 0"
 					placeholder="VU563************"
 				/>
-				<TextInput<AddCarFields>
+				<TextInput<CarFields>
 					control={control}
 					label="Registration number"
 					name="registration.regNumber"
@@ -270,7 +270,7 @@ const AddCar: FC = () => {
 					margin="0 0 15px 0"
 					placeholder="VOI2589K"
 				/>
-				<DatePicker<AddCarFields>
+				<DatePicker<CarFields>
 					control={control}
 					name="registration.firstRegDate"
 					label="Date of first registration"
@@ -284,7 +284,7 @@ const AddCar: FC = () => {
 				<Title fontSize={24} textAlign="left" color="black">
 					Owner details
 				</Title>
-				<DatePicker<AddCarFields>
+				<DatePicker<CarFields>
 					control={control}
 					name="ownership.purchaseDate"
 					label="Date of purchase"
@@ -293,7 +293,7 @@ const AddCar: FC = () => {
 					margin="0 0 15px 0"
 					defaultValue={new Date()}
 				/>
-				<DatePicker<AddCarFields>
+				<DatePicker<CarFields>
 					control={control}
 					name="ownership.saleDate"
 					label="Date of sale (Leave the current date as is if the car has not been sold yet)"
@@ -307,7 +307,7 @@ const AddCar: FC = () => {
 				<Title fontSize={24} textAlign="left" color="black">
 					Short description
 				</Title>
-				<Textarea<AddCarFields>
+				<Textarea<CarFields>
 					control={control}
 					name="description"
 					label="A few words about the car"

@@ -6,7 +6,7 @@ import { CarOwnerShipSchema } from './CarOwnerShipSchema'
 import { CarRegistrationSchema } from './CarRegistrationSchema'
 import { CarSpecificationsSchema } from './CarSpecificationsSchema'
 
-export const AddCarSchema = yup.object().shape({
+export const CarSchema = yup.object().shape({
 	basicInfo: CarBasicInfoSchema,
 	specifications: CarSpecificationsSchema,
 	registration: CarRegistrationSchema,
@@ -19,8 +19,8 @@ export const AddCarSchema = yup.object().shape({
 		.optional(),
 })
 
-export type AddCarFields = yup.InferType<typeof AddCarSchema>
+export type CarFields = yup.InferType<typeof CarSchema>
 
-export const AddCarValidation = {
-	resolver: yupResolver<AddCarFields>(AddCarSchema),
+export const CarValidation = {
+	resolver: yupResolver<CarFields>(CarSchema),
 }

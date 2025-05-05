@@ -4,7 +4,7 @@ import { getById } from '@/api/carApi'
 
 import { CarKey } from '@/config/queryKeys'
 
-export const useGetByIdCar = (carId: string) => {
+export const useFetchCar = (carId: string) => {
 	return useQuery({
 		queryKey: [CarKey, carId],
 		queryFn: async () => {

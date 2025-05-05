@@ -3,6 +3,7 @@ import { FC } from 'react'
 import { useParams } from 'react-router-dom'
 
 import CarInformation from '@/components/Garage/CarInformation'
+import EditCar from '@/components/Garage/EditCar'
 import Modal from '@/components/Modal'
 import Uploader from '@/components/Uploader'
 
@@ -48,6 +49,12 @@ const CarInformationPage: FC = () => {
 							isLoading={isUploadImagePending}
 							callback={upload}
 						/>
+					</Modal>
+				)}
+
+				{checkQueryParam(modalNames.EDIT_CAR) && (
+					<Modal key={modalNames.EDIT_CAR} title="Edit car information">
+						<EditCar />
 					</Modal>
 				)}
 			</AnimatePresence>

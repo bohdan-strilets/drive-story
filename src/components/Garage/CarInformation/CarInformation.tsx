@@ -7,7 +7,7 @@ import PropertyList from '@/components/Layout/PropertyList'
 import Loader from '@/components/UI/Loader'
 import Title from '@/components/UI/Title'
 
-import { useGetByIdCar } from '@/hooks/car/useGetByIdCar'
+import { useFetchCar } from '@/hooks/car/useFetchCar'
 import { useGetImage } from '@/hooks/ui/useGetImage'
 import useModal from '@/hooks/ui/useModal'
 import useResponsive from '@/hooks/ui/useResponsive'
@@ -38,7 +38,7 @@ const CarInformation: FC = () => {
 	const { onOpen, modalNames } = useModal()
 	const actionCtx: ActionContext = { onOpen, modalNames }
 
-	const { data: car, isLoading, isError } = useGetByIdCar(carId ?? '')
+	const { data: car, isLoading, isError } = useFetchCar(carId ?? '')
 
 	const photos = car?.photos
 	const carPoster = useGetImage({

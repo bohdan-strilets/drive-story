@@ -6,7 +6,7 @@ import { CarKey } from '@/config/queryKeys'
 
 import { PaginationDto } from '@/types/dto/PaginationDto'
 
-export const useGetAllCar = (dto: PaginationDto) => {
+export const useFetchCars = (dto: PaginationDto) => {
 	return useQuery({
 		queryKey: [CarKey, dto.page, dto.limit],
 		queryFn: async () => {

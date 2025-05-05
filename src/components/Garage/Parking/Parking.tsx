@@ -3,7 +3,7 @@ import { FC, useState } from 'react'
 import Loader from '@/components/UI/Loader'
 import Pagination from '@/components/UI/Pagination'
 
-import { useGetAllCar } from '@/hooks/car/useGetAllCar'
+import { useFetchCars } from '@/hooks/car/useFetchCars'
 import useResponsive from '@/hooks/ui/useResponsive'
 import useServerPagination from '@/hooks/ui/useServerPagination'
 
@@ -23,7 +23,7 @@ const Parking: FC = () => {
 
 	const paginationDto: PaginationDto = { limit, page }
 
-	const { isLoading, data } = useGetAllCar(paginationDto)
+	const { isLoading, data } = useFetchCars(paginationDto)
 	const cars = data?.data ?? []
 	const paginationMeta = data?.meta ?? {
 		totalItems: 0,
