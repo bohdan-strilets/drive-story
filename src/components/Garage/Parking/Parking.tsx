@@ -45,7 +45,13 @@ const Parking: FC = () => {
 	}
 
 	if (cars.length === 0) {
-		return <EmptyState />
+		return (
+			<EmptyState
+				title="Nothing added yet..."
+				message="Looks like you haven't added anything yet.... Seems like it's high time
+				to do it"
+			/>
+		)
 	}
 
 	return (

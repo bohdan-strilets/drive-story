@@ -4,19 +4,21 @@ import useResponsive from '@/hooks/ui/useResponsive'
 
 import emptyListImage from '@/assets/emptyList/empty-list.webp'
 
+import { EmptyStateProps } from '@/types/props/UI/EmptyStateProps'
+
 import ImageBox from '../ImageBox'
 import Paragraph from '../Paragraph'
 import Title from '../Title'
 
 import { Wrapper } from './EmptyState.styled'
 
-const EmptyState: FC = () => {
+const EmptyState: FC<EmptyStateProps> = ({ title, message }) => {
 	const { maxTablet } = useResponsive()
 
 	return (
 		<Wrapper>
 			<Title fontSize={22} textAlign="center" color="yellow">
-				Nothing added yet...
+				{title}
 			</Title>
 			<ImageBox
 				imageUrl={emptyListImage}
@@ -25,8 +27,7 @@ const EmptyState: FC = () => {
 				size="contain"
 			/>
 			<Paragraph color="black" fontWeight={600} textAlign="center">
-				Looks like you haven't added anything yet.... Seems like it's high time
-				to do it
+				{message}
 			</Paragraph>
 		</Wrapper>
 	)
