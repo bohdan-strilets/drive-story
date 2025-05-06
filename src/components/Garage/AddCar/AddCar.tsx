@@ -287,6 +287,10 @@ const AddCar: FC = () => {
 					width="100%"
 					margin="0 0 15px 0"
 					defaultValue={new Date()}
+					rules={{
+						minDate: new Date(`${yearIssue}-01-01`),
+						maxDate: new Date(),
+					}}
 				/>
 			</>
 			<>
@@ -301,6 +305,10 @@ const AddCar: FC = () => {
 					width="100%"
 					margin="0 0 15px 0"
 					defaultValue={new Date()}
+					rules={{
+						minDate: new Date(`${yearIssue}-01-01`),
+						maxDate: new Date(),
+					}}
 				/>
 				<DatePicker<CarFields>
 					control={control}
@@ -310,6 +318,10 @@ const AddCar: FC = () => {
 					width="100%"
 					margin="0 0 15px 0"
 					defaultValue={new Date()}
+					rules={{
+						minDate: new Date(`${yearIssue}-01-01`),
+						maxDate: new Date(),
+					}}
 				/>
 			</>
 			<>

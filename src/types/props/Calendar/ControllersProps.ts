@@ -5,4 +5,6 @@ export type ControllersProps = {
 	handleNextMonth: () => void
 	handlePreviousMonth: () => void
 	control: Control
+	minDate: Date
+	maxDate: Date
 }

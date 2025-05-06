@@ -117,6 +117,7 @@ const EditProfile: FC = () => {
 				width="100%"
 				margin="0 0 15px 0"
 				defaultValue={user.birthDate || new Date()}
+				rules={{ minDate: new Date('1950-01-01'), maxDate: new Date() }}
 			/>
 			<TextInput<EditProfileFields>
 				control={control}

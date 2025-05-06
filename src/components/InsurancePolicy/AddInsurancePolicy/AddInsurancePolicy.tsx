@@ -69,6 +69,8 @@ const AddInsurancePolicy: FC = () => {
 	const insuranceType = Object.values(InsuranceType)
 	const insuranceTypeDropdownOptions = generateDropdownOptions(insuranceType)
 
+	const currentDate = new Date()
+
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<TextInput<InsurancePolicyFields>
@@ -101,7 +103,11 @@ const AddInsurancePolicy: FC = () => {
 				width="100%"
 				margin="0 0 15px 0"
 				defaultValue={new Date()}
-				rules={{ required: true }}
+				rules={{
+					required: true,
+					minDate: new Date(`${currentDate.getFullYear() - 1}-01-01`),
+					maxDate: new Date(`${currentDate.getFullYear() + 1}-01-01`),
+				}}
 			/>
 			<DatePicker<InsurancePolicyFields>
 				control={control}
@@ -111,7 +117,11 @@ const AddInsurancePolicy: FC = () => {
 				width="100%"
 				margin="0 0 15px 0"
 				defaultValue={new Date()}
-				rules={{ required: true }}
+				rules={{
+					required: true,
+					minDate: new Date(`${currentDate.getFullYear() - 1}-01-01`),
+					maxDate: new Date(`${currentDate.getFullYear() + 1}-01-01`),
+				}}
 			/>
 			<DropdownList<InsurancePolicyFields>
 				control={control}

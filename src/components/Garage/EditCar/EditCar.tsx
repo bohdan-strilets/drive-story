@@ -35,6 +35,7 @@ import { CarFields, CarValidation } from '@/validation/CarSchema'
 const EditCar: FC = () => {
 	const { carId } = useParams()
 	const { data: car, isError, isLoading } = useFetchCar(carId ?? '')
+	const yearProduction = car?.basicInfo.year
 
 	const { mutateAsync: updateCar, isPending } = useUpdateCar()
 	const { control, handleSubmit } = useForm<CarFields>(CarValidation)
@@ -312,6 +313,10 @@ const EditCar: FC = () => {
 						width="100%"
 						margin="0 0 15px 0"
 						defaultValue={car.registration.firstRegDate}
+						rules={{
+							minDate: new Date(`${yearProduction}-01-01`),
+							maxDate: new Date(),
+						}}
 					/>
 				</>
 				<>
@@ -326,6 +331,10 @@ const EditCar: FC = () => {
 						width="100%"
 						margin="0 0 15px 0"
 						defaultValue={car.ownership.purchaseDate}
+						rules={{
+							minDate: new Date(`${yearProduction}-01-01`),
+							maxDate: new Date(),
+						}}
 					/>
 					<DatePicker<CarFields>
 						control={control}
@@ -335,6 +344,10 @@ const EditCar: FC = () => {
 						width="100%"
 						margin="0 0 15px 0"
 						defaultValue={car.ownership.saleDate}
+						rules={{
+							minDate: new Date(`${yearProduction}-01-01`),
+							maxDate: new Date(),
+						}}
 					/>
 				</>
 				<>
@@ -349,6 +362,8 @@ const EditCar: FC = () => {
 						width="100%"
 						margin="0 0 15px 0"
 						defaultValue={car.description}
+						rules={{ minLength: 0, maxLength: 500 }}
+						isShowCharCounter={true}
 					/>
 				</>
 				{isPending && <Loader color="gray" margin="15px 0" />}

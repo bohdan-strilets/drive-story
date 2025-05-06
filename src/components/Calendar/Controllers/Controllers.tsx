@@ -24,8 +24,14 @@ const Controllers: FC<ControllersProps> = ({
 	handleNextMonth,
 	handlePreviousMonth,
 	control,
+	minDate,
+	maxDate,
 }) => {
-	const yearValues = generateNumberArray(1950, new Date().getFullYear())
+	const yearValues = generateNumberArray(
+		new Date(minDate).getFullYear(),
+		new Date(maxDate).getFullYear()
+	)
+
 	const yearDropdownOptions = generateDropdownOptions(yearValues)
 
 	const months = Object.values(Months)

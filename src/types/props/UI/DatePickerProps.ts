@@ -1,6 +1,8 @@
 import { Control, FieldValues, Path, PathValue } from 'react-hook-form'
 
 export type Rules = {
+	minDate: Date
+	maxDate: Date
 	required?: boolean
 	disabled?: boolean
 }
@@ -11,7 +13,7 @@ export type DatePickerProps<T extends FieldValues> = {
 	placeholder: string
 	label?: string
 	defaultValue?: PathValue<T, Path<T>>
-	rules?: Rules
+	rules: Rules
 	width?: string
 	margin?: string
 }

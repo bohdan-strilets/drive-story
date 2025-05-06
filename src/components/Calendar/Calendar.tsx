@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import useCalendar from '@/hooks/ui/useCalendar'
@@ -20,10 +20,15 @@ const Calendar: FC<CalendarProps> = ({
 	setCurrentDate,
 	onChange,
 	toggle,
+	minDate,
+	maxDate,
 }) => {
-	const { control, setValue, getValues } = useForm<SelectMonthYearFields>(
+	const { control, setValue, watch } = useForm<SelectMonthYearFields>(
 		SelectMonthYearValidation
 	)
+
+	const month = watch('month')
+	const year = watch('year')
 
 	const handlePreviousMonth = () => {
 		let year = currentDate.getFullYear()
@@ -65,16 +70,17 @@ const Calendar: FC<CalendarProps> = ({
 		setCurrentDate(newDate)
 	}
 
+	useEffect(() => {
+		setCurrentDate(new Date(Number(year), Number(month), 1))
+	}, [month, year, setCurrentDate])
+
 	const { getDaysOfMonth, getCurrentDate } = useCalendar(currentDate)
 
 	const currentMonth = getDaysOfMonth()
 	const currentDay = getCurrentDate()
 
 	const handleDayClick = (day: Date) => {
-		const { month, year } = getValues()
-		const numericMonth = Number(month)
-		const numericYear = Number(year)
-		const newDate = new Date(numericYear, numericMonth, day.getDate())
+		const newDate = new Date(Number(year), Number(month), day.getDate())
 
 		onChange(newDate)
 		setCurrentDate(newDate)
@@ -88,6 +94,8 @@ const Calendar: FC<CalendarProps> = ({
 				handleNextMonth={handleNextMonth}
 				handlePreviousMonth={handlePreviousMonth}
 				control={control}
+				minDate={new Date(minDate)}
+				maxDate={new Date(maxDate)}
 			/>
 			<NamesDaysWeek />
 			<Month

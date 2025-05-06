@@ -68,6 +68,8 @@ const DatePicker = <T extends FieldValues>({
 					setCurrentDate={setCurrentDate}
 					onChange={onChange}
 					toggle={toggleList}
+					minDate={new Date(rules.minDate)}
+					maxDate={new Date(rules.maxDate)}
 				/>
 			)}
 			<InputErrorMessage error={error} />
