@@ -6,7 +6,7 @@ export const PaymentStatusSchema = yup.object({
 	isPaid: yup.boolean().required('isPaid is required'),
 
 	installmentsCount: yup
-		.mixed<InstallmentsCount>()
+		.string()
 		.oneOf(Object.values(InstallmentsCount), 'Invalid installments count')
 		.optional(),
 

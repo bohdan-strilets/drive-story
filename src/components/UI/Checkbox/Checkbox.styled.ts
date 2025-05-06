@@ -9,6 +9,7 @@ import {
 import { getColor } from '@/styles/helpers/getColor'
 import { breakpoints } from '@/styles/media/breakpoints'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
+import { outline } from '@/styles/mixins/outline'
 
 export const Wrapper = styled.div<WrapperProps>`
 	margin: ${({ margin }) => margin};
@@ -25,7 +26,7 @@ export const HiddenInput = styled.input`
 	overflow: hidden;
 
 	:focus + .checkbox {
-		outline: 3px solid ${getColor('rgba(109, 109, 109, 0.3)')};
+		${outline()}
 	}
 `
 

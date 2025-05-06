@@ -31,9 +31,9 @@ export const InsurancePolicySchema = yup.object({
 		.required('End date is required'),
 
 	insuranceType: yup
-		.mixed<InsuranceType>()
+		.string()
 		.oneOf(Object.values(InsuranceType), 'Invalid insurance type')
-		.optional(),
+		.required('Transmission is required'),
 
 	coverageAmount: yup
 		.number()
