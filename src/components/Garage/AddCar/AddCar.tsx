@@ -16,12 +16,12 @@ import useSubmit from '@/hooks/ui/useSubmit'
 
 import { generateDropdownOptions } from '@/utils/generateDropdownOptions'
 
-import { CarDto } from '@/types/dto/CarDto'
+import { CarDetailsDto } from '@/types/dto/CarDetailsDto'
 import { BodyType } from '@/types/enums/BodyType'
 import { Drivetrain } from '@/types/enums/Drivetrain'
 import { FuelType } from '@/types/enums/FuelType'
 import { Transmission } from '@/types/enums/Transmission'
-import { Car } from '@/types/types/Car'
+import { CarEntity } from '@/types/types/CarEntity'
 
 import { CarFields, CarValidation } from '@/validation/CarSchema'
 
@@ -41,14 +41,14 @@ const AddCar: FC = () => {
 		}
 	}, [yearIssue, setValue])
 
-	const submitCreateCar = useSubmit<Car | null, CarDto>({
+	const submitCreateCar = useSubmit<CarEntity | null, CarDetailsDto>({
 		callback: createCar,
 		successMessage: 'The car has been successfully created',
 		isCloseModal: true,
 	})
 
 	const onSubmit: SubmitHandler<CarFields> = async (data) => {
-		const dto: CarDto = {
+		const dto: CarDetailsDto = {
 			basicInfo: {
 				make: data.basicInfo.make,
 				model: data.basicInfo.model,

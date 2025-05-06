@@ -1,12 +1,16 @@
-import { useQuery } from '@tanstack/react-query'
+import { UseQueryResult, useQuery } from '@tanstack/react-query'
 
 import { getAll } from '@/api/carApi'
 
 import { CarKey } from '@/config/queryKeys'
 
-import { PaginationDto } from '@/types/dto/PaginationDto'
+import { PaginationParams } from '@/types/params/PaginationParams'
+import { CarEntity } from '@/types/types/CarEntity'
+import { PaginatedResponse } from '@/types/types/PaginatedResponse'
 
-export const useFetchCars = (dto: PaginationDto) => {
+export const useFetchCars = (
+	dto: PaginationParams
+): UseQueryResult<PaginatedResponse<CarEntity> | undefined, unknown> => {
 	return useQuery({
 		queryKey: [CarKey, dto.page, dto.limit],
 		queryFn: async () => {

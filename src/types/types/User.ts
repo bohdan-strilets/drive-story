@@ -1,7 +1,12 @@
 import { Gender } from '../enums/Gender'
 
 import { Image } from './Image'
-import { Location } from './Location'
+
+export type Location = {
+	country?: string | null
+	city?: string | null
+	postalCode?: string | null
+}
 
 export type User = {
 	_id: string

@@ -2,22 +2,25 @@ import apiClient from '@/config/axiosConfig'
 
 import { handleApiError } from '@/utils/handleApiError'
 
-import { AddInsuranceDto } from '@/types/dto/AddInsuranceDto'
-import { UpdateInsuranceDto } from '@/types/dto/UpdateInsuranceDto'
+import { AddInsuranceParams } from '@/types/params/AddInsuranceParams'
 import { InsurancePathParams } from '@/types/params/InsurancePathParams'
 import { ListInsuranceParams } from '@/types/params/ListInsuranceParams'
+import { UpdateInsuranceParams } from '@/types/params/UpdateInsuranceParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { InsurancePolicy } from '@/types/types/InsurancePolicy'
-import { PaginationMeta } from '@/types/types/PaginationMeta'
+import { PaginatedResponse } from '@/types/types/PaginatedResponse'
 
 const ENDPOINT = '/insurance'
 
 export const create = async ({
-	dto,
+	payload,
 	carId,
-}: AddInsuranceDto): Promise<ApiResponse<InsurancePolicy | null>> => {
+}: AddInsuranceParams): Promise<ApiResponse<InsurancePolicy | null>> => {
 	try {
-		const { data } = await apiClient.post(`${ENDPOINT}/create/${carId}`, dto)
+		const { data } = await apiClient.post(
+			`${ENDPOINT}/create/${carId}`,
+			payload
+		)
 		return data
 	} catch (error) {
 		return handleApiError(error)
@@ -25,14 +28,14 @@ export const create = async ({
 }
 
 export const update = async ({
-	dto,
+	payload,
 	carId,
 	insuranceId,
-}: UpdateInsuranceDto): Promise<ApiResponse<InsurancePolicy | null>> => {
+}: UpdateInsuranceParams): Promise<ApiResponse<InsurancePolicy | null>> => {
 	try {
 		const { data } = await apiClient.patch(
 			`${ENDPOINT}/update/${carId}/${insuranceId}`,
-			dto
+			payload
 		)
 		return data
 	} catch (error) {
@@ -68,12 +71,13 @@ export const getById = async ({
 	}
 }
 
-export const getAll = async (
-	params: ListInsuranceParams
-): Promise<
-	ApiResponse<{ data: InsurancePolicy[]; meta: PaginationMeta } | null>
+export const getAll = async ({
+	carId,
+	pagination,
+}: ListInsuranceParams): Promise<
+	ApiResponse<PaginatedResponse<InsurancePolicy> | null>
 > => {
-	const { carId, page, limit } = params
+	const { page, limit } = pagination
 
 	try {
 		const { data } = await apiClient.get(`${ENDPOINT}/get-all/${carId}`, {

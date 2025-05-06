@@ -1,7 +1,7 @@
 import { EntityType } from '../enums/EntityType'
 
-export type DeleteImageDto = {
+export type DeleteImagesParams = {
 	entityId: string
+	imageId: string
 	entityType: EntityType
-	publicId: string
 }

@@ -1,6 +1,6 @@
 import { ResetPasswordDto } from '../dto/ResetPasswordDto'
 
-export type ResetPasswordMutationArgs = {
+export type ResetPasswordParams = {
 	dto: ResetPasswordDto
 	resetToken: string
 }

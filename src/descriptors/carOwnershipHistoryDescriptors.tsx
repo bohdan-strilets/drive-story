@@ -1,7 +1,7 @@
 import { isWithinThreshold } from '@/utils/isWithinThreshold'
 import { parsedDateToString } from '@/utils/parsedDateToString'
 
-import { CarOwnership } from '@/types/types/CarOwnership'
+import { CarOwnership } from '@/types/types/CarEntity'
 import { FieldDescriptor } from '@/types/types/FieldDescriptor'
 
 export const carOwnershipHistoryDescriptors: FieldDescriptor<CarOwnership>[] = [

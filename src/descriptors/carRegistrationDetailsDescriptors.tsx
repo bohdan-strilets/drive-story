@@ -1,6 +1,6 @@
 import { parsedDateToString } from '@/utils/parsedDateToString'
 
-import { CarRegistration } from '@/types/types/CarRegistration'
+import { CarRegistration } from '@/types/types/CarEntity'
 import { FieldDescriptor } from '@/types/types/FieldDescriptor'
 
 export const carRegistrationDetailsDescriptors: FieldDescriptor<CarRegistration>[] =

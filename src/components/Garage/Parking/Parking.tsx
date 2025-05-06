@@ -8,7 +8,7 @@ import { useFetchCars } from '@/hooks/car/useFetchCars'
 import useResponsive from '@/hooks/ui/useResponsive'
 import useServerPagination from '@/hooks/ui/useServerPagination'
 
-import { PaginationDto } from '@/types/dto/PaginationDto'
+import { PaginationParams } from '@/types/params/PaginationParams'
 
 import { fadeSlide } from '@/animations/fadeSlide'
 
@@ -22,9 +22,9 @@ const Parking: FC = () => {
 	const [page, setPage] = useState(1)
 	const limit = maxTablet ? 6 : 9
 
-	const paginationDto: PaginationDto = { limit, page }
+	const paginationParams: PaginationParams = { limit, page }
 
-	const { isLoading, data } = useFetchCars(paginationDto)
+	const { isLoading, data } = useFetchCars(paginationParams)
 	const cars = data?.data ?? []
 	const paginationMeta = data?.meta ?? {
 		totalItems: 0,

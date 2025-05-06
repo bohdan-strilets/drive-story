@@ -1,4 +1,4 @@
-import { PaginationDto } from '@/types/dto/PaginationDto'
+import { PaginationDto } from '@/types/params/PaginationParams'
 
 export interface ListInsuranceParams extends PaginationDto {
 	pagination: PaginationDto

@@ -5,12 +5,12 @@ import { upload } from '@/api/imageApi'
 import { queryClient } from '@/config/queryClient'
 import { CarKey, UserKey } from '@/config/queryKeys'
 
-import { UploadImageDto } from '@/types/dto/UploadImageDto'
+import { UploadImageParams } from '@/types/params/UploadImageParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Image } from '@/types/types/Image'
 
 export const useUploadImage = () => {
-	return useMutation<ApiResponse<Image | null>, unknown, UploadImageDto>({
+	return useMutation<ApiResponse<Image | null>, unknown, UploadImageParams>({
 		mutationFn: ({ file, entityId, entityType }) =>
 			upload({ file, entityId, entityType }),
 

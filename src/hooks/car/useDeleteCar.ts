@@ -6,10 +6,10 @@ import { queryClient } from '@/config/queryClient'
 import { CarKey } from '@/config/queryKeys'
 
 import { ApiResponse } from '@/types/types/ApiResponse'
-import { Car } from '@/types/types/Car'
+import { CarEntity } from '@/types/types/CarEntity'
 
 export const useDeleteCar = () => {
-	return useMutation<ApiResponse<Car | null>, unknown, string>({
+	return useMutation<ApiResponse<CarEntity | null>, unknown, string>({
 		mutationFn: (carId) => remove(carId),
 		onSuccess: (response) => {
 			if (response.success) {

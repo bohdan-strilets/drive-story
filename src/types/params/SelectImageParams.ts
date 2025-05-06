@@ -1,7 +1,7 @@
 import { EntityType } from '../enums/EntityType'
 
-export type UploadImageDto = {
-	file: FormData
+export type SelectImageParams = {
 	entityId: string
 	entityType: EntityType
+	publicId: string
 }

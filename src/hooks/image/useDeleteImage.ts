@@ -5,12 +5,12 @@ import { remove } from '@/api/imageApi'
 import { queryClient } from '@/config/queryClient'
 import { CarKey, UserKey } from '@/config/queryKeys'
 
-import { DeleteImageDto } from '@/types/dto/DeleteImageDto'
+import { DeleteImageParams } from '@/types/params/DeleteImageParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Image } from '@/types/types/Image'
 
 export const useDeleteImage = () => {
-	return useMutation<ApiResponse<Image | null>, unknown, DeleteImageDto>({
+	return useMutation<ApiResponse<Image | null>, unknown, DeleteImageParams>({
 		mutationFn: ({ entityId, entityType, publicId }) =>
 			remove({ entityId, entityType, publicId }),
 

@@ -5,12 +5,12 @@ import { select } from '@/api/imageApi'
 import { queryClient } from '@/config/queryClient'
 import { CarKey, UserKey } from '@/config/queryKeys'
 
-import { SelectImageDto } from '@/types/dto/SelectImageDto'
+import { SelectImageParams } from '@/types/params/SelectImageParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Image } from '@/types/types/Image'
 
 export const useSelectImage = () => {
-	return useMutation<ApiResponse<Image | null>, unknown, SelectImageDto>({
+	return useMutation<ApiResponse<Image | null>, unknown, SelectImageParams>({
 		mutationFn: ({ entityId, entityType, publicId }) =>
 			select({ entityId, entityType, publicId }),
 

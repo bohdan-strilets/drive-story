@@ -5,7 +5,7 @@ import { handleApiError } from '@/utils/handleApiError'
 import { EditPasswordDto } from '@/types/dto/EditPasswordDto'
 import { EmailDto } from '@/types/dto/EmailDto'
 import { ProfileDto } from '@/types/dto/ProfileDto'
-import { ResetPasswordDto } from '@/types/dto/ResetPasswordDto'
+import { ResetPasswordParams } from '@/types/params/ResetPasswordParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { User } from '@/types/types/User'
 
@@ -70,10 +70,10 @@ export const requestResetPassword = async (
 	}
 }
 
-export const resetPassword = async (
-	dto: ResetPasswordDto,
-	resetToken: string
-): Promise<ApiResponse> => {
+export const resetPassword = async ({
+	dto,
+	resetToken,
+}: ResetPasswordParams): Promise<ApiResponse> => {
 	try {
 		const { data } = await apiClient.post(
 			`${ENDPOINT}/reset-password/${resetToken}`,

@@ -1,4 +1,4 @@
-import { CarBasicInfo } from '@/types/types/CarBasicInfo'
+import { CarBasicInfo } from '@/types/types/CarEntity'
 import { FieldDescriptor } from '@/types/types/FieldDescriptor'
 
 export const carOverviewDescriptors: FieldDescriptor<CarBasicInfo>[] = [

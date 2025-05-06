@@ -6,8 +6,8 @@ import { PiResizeBold } from 'react-icons/pi'
 
 import { extractPublicId } from '@/utils/extractImagePublicId'
 
-import { SelectImageDto } from '@/types/dto/SelectImageDto'
 import { Params, Result } from '@/types/hooks/useGalleryManager'
+import { SelectImageDto } from '@/types/params/SelectImageParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Image } from '@/types/types/Image'
 

@@ -5,7 +5,7 @@ import { create } from '@/api/insuranceApi'
 import { queryClient } from '@/config/queryClient'
 import { InsuranceKey } from '@/config/queryKeys'
 
-import { AddInsuranceDto } from '@/types/dto/AddInsuranceDto'
+import { AddInsuranceParams } from '@/types/params/AddInsuranceParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { InsurancePolicy } from '@/types/types/InsurancePolicy'
 
@@ -13,7 +13,7 @@ export const useCreateInsurance = () => {
 	return useMutation<
 		ApiResponse<InsurancePolicy | null>,
 		unknown,
-		AddInsuranceDto
+		AddInsuranceParams
 	>({
 		mutationFn: (dto) => create(dto),
 		onSuccess: (response) => {

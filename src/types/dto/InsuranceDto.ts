@@ -1,6 +1,13 @@
+import { InstallmentsCount } from '../enums/InstallmentsCount'
 import { InsuranceType } from '../enums/InsuranceType'
 
-import { PaymentStatusDto } from './PaymentStatusDto'
+export type PaymentStatusDto = {
+	isPaid: boolean
+	installmentsCount?: InstallmentsCount
+	installmentCost?: number
+	totalInstallmentsSum?: number
+	paymentDates?: Date[]
+}
 
 export type InsuranceDto = {
 	insurerName: string

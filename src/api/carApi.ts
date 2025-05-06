@@ -2,16 +2,18 @@ import apiClient from '@/config/axiosConfig'
 
 import { handleApiError } from '@/utils/handleApiError'
 
-import { CarDto } from '@/types/dto/CarDto'
-import { PaginationDto } from '@/types/dto/PaginationDto'
-import { UpdateCarDto } from '@/types/dto/UpdateCarDto'
+import { CarDetailsDto } from '@/types/dto/CarDetailsDto'
+import { PaginationParams } from '@/types/params/PaginationParams'
+import { UpdateCarParams } from '@/types/params/UpdateCarParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
-import { Car } from '@/types/types/Car'
-import { PaginationMeta } from '@/types/types/PaginationMeta'
+import { CarEntity } from '@/types/types/CarEntity'
+import { PaginatedResponse } from '@/types/types/PaginatedResponse'
 
 const ENDPOINT = '/car'
 
-export const create = async (dto: CarDto): Promise<ApiResponse<Car | null>> => {
+export const create = async (
+	dto: CarDetailsDto
+): Promise<ApiResponse<CarEntity | null>> => {
 	try {
 		const { data } = await apiClient.post(`${ENDPOINT}/create`, dto)
 		return data
@@ -21,11 +23,14 @@ export const create = async (dto: CarDto): Promise<ApiResponse<Car | null>> => {
 }
 
 export const update = async ({
-	dto,
+	payload,
 	carId,
-}: UpdateCarDto): Promise<ApiResponse<Car | null>> => {
+}: UpdateCarParams): Promise<ApiResponse<CarEntity | null>> => {
 	try {
-		const { data } = await apiClient.patch(`${ENDPOINT}/update/${carId}`, dto)
+		const { data } = await apiClient.patch(
+			`${ENDPOINT}/update/${carId}`,
+			payload
+		)
 		return data
 	} catch (error) {
 		return handleApiError(error)
@@ -34,7 +39,7 @@ export const update = async ({
 
 export const remove = async (
 	carId: string
-): Promise<ApiResponse<Car | null>> => {
+): Promise<ApiResponse<CarEntity | null>> => {
 	try {
 		const { data } = await apiClient.delete(`${ENDPOINT}/delete/${carId}`)
 		return data
@@ -45,7 +50,7 @@ export const remove = async (
 
 export const getById = async (
 	carId: string
-): Promise<ApiResponse<Car | null>> => {
+): Promise<ApiResponse<CarEntity | null>> => {
 	try {
 		const { data } = await apiClient.get(`${ENDPOINT}/get-by-id/${carId}`)
 		return data
@@ -57,8 +62,8 @@ export const getById = async (
 export const getAll = async ({
 	page,
 	limit,
-}: PaginationDto): Promise<
-	ApiResponse<{ data: Car[]; meta: PaginationMeta } | null>
+}: PaginationParams): Promise<
+	ApiResponse<PaginatedResponse<CarEntity> | null>
 > => {
 	try {
 		const { data } = await apiClient.get(`${ENDPOINT}/get-all`, {

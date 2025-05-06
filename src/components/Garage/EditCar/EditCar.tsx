@@ -22,13 +22,13 @@ import {
 	generateDropdownOptions,
 } from '@/utils/generateDropdownOptions'
 
-import { CarDto } from '@/types/dto/CarDto'
-import { UpdateCarDto } from '@/types/dto/UpdateCarDto'
+import { CarDetailsDto } from '@/types/dto/CarDetailsDto'
 import { BodyType } from '@/types/enums/BodyType'
 import { Drivetrain } from '@/types/enums/Drivetrain'
 import { FuelType } from '@/types/enums/FuelType'
 import { Transmission } from '@/types/enums/Transmission'
-import { Car } from '@/types/types/Car'
+import { UpdateCarParams } from '@/types/params/UpdateCarParams'
+import { CarEntity } from '@/types/types/CarEntity'
 
 import { CarFields, CarValidation } from '@/validation/CarSchema'
 
@@ -39,14 +39,14 @@ const EditCar: FC = () => {
 	const { mutateAsync: updateCar, isPending } = useUpdateCar()
 	const { control, handleSubmit } = useForm<CarFields>(CarValidation)
 
-	const submitCreateCar = useSubmit<Car | null, UpdateCarDto>({
+	const submitCreateCar = useSubmit<CarEntity | null, UpdateCarParams>({
 		callback: updateCar,
 		successMessage: 'The car has been successfully updated',
 		isCloseModal: true,
 	})
 
 	const onSubmit: SubmitHandler<CarFields> = async (data) => {
-		const carDto: CarDto = {
+		const payload: CarDetailsDto = {
 			basicInfo: {
 				make: data.basicInfo.make,
 				model: data.basicInfo.model,
@@ -79,8 +79,8 @@ const EditCar: FC = () => {
 			},
 			description: data.description,
 		}
-		const updateCarDto: UpdateCarDto = {
-			dto: carDto,
+		const updateCarDto: UpdateCarParams = {
+			payload,
 			carId: carId ?? '',
 		}
 

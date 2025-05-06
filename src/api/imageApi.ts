@@ -2,10 +2,10 @@ import apiClient from '@/config/axiosConfig'
 
 import { handleApiError } from '@/utils/handleApiError'
 
-import { DeleteAllImagesDto } from '@/types/dto/DeleteAllImagesDto'
-import { DeleteImageDto } from '@/types/dto/DeleteImageDto'
-import { SelectImageDto } from '@/types/dto/SelectImageDto'
-import { UploadImageDto } from '@/types/dto/UploadImageDto'
+import { DeleteImageParams } from '@/types/params/DeleteImageParams'
+import { DeleteImagesParams } from '@/types/params/DeleteImagesParams'
+import { SelectImageParams } from '@/types/params/SelectImageParams'
+import { UploadImageParams } from '@/types/params/UploadImageParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Image } from '@/types/types/Image'
 
@@ -15,7 +15,7 @@ export const upload = async ({
 	file,
 	entityId,
 	entityType,
-}: UploadImageDto): Promise<ApiResponse<Image | null>> => {
+}: UploadImageParams): Promise<ApiResponse<Image | null>> => {
 	try {
 		const { data } = await apiClient.post(
 			`${ENDPOINT}/upload/${entityId}`,
@@ -32,7 +32,7 @@ export const remove = async ({
 	entityId,
 	entityType,
 	publicId,
-}: DeleteImageDto): Promise<ApiResponse<Image | null>> => {
+}: DeleteImageParams): Promise<ApiResponse<Image | null>> => {
 	try {
 		const { data } = await apiClient.delete(`${ENDPOINT}/delete/${entityId}`, {
 			params: { entityType, publicId },
@@ -47,7 +47,7 @@ export const select = async ({
 	entityId,
 	entityType,
 	publicId,
-}: SelectImageDto): Promise<ApiResponse<Image | null>> => {
+}: SelectImageParams): Promise<ApiResponse<Image | null>> => {
 	try {
 		const { data } = await apiClient.patch(
 			`${ENDPOINT}/select/${entityId}`,
@@ -64,7 +64,7 @@ export const removeAll = async ({
 	entityId,
 	imageId,
 	entityType,
-}: DeleteAllImagesDto): Promise<ApiResponse<Image | null>> => {
+}: DeleteImagesParams): Promise<ApiResponse<Image | null>> => {
 	try {
 		const { data } = await apiClient.delete(
 			`${ENDPOINT}/delete-all/${entityId}/${imageId}`,
