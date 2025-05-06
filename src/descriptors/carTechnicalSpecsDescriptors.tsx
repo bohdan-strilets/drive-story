@@ -1,5 +1,5 @@
 import { convertEngineVolume } from '@/utils/convertEngineVolume'
-import { formatMileage } from '@/utils/formatMileage'
+import { formatNumberWithSpaces } from '@/utils/formatNumberWithSpaces'
 import { formatLabel } from '@/utils/generateDropdownOptions'
 
 import { CarSpecs } from '@/types/types/CarEntity'
@@ -10,7 +10,7 @@ export const carTechnicalSpecsDescriptors: FieldDescriptor<CarSpecs>[] = [
 		key: 'mileage',
 		label: 'Mileage',
 		render: (specifications) =>
-			`${formatMileage(specifications?.mileage || 0)} km`,
+			`${formatNumberWithSpaces(specifications?.mileage || 0)} km`,
 	},
 	{
 		key: 'fuel-type',

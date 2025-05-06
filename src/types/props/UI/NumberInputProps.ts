@@ -1,17 +1,18 @@
 import { Control, FieldValues, Path, PathValue } from 'react-hook-form'
 
 export type Rules = {
+	min: number
+	max: number
+	step?: number
 	required?: boolean
-	min?: number
-	max?: number
 	disabled?: boolean
 }
 
 export type NumberInputProps<T extends FieldValues> = {
 	control: Control<T>
 	name: Path<T>
+	rules: Rules
 	label?: string
-	rules?: Rules
 	defaultValue?: PathValue<T, Path<T>>
 	placeholder?: string
 	width?: string

@@ -131,7 +131,7 @@ const AddInsurancePolicy: FC = () => {
 				width="100%"
 				margin="0 0 15px 0"
 				placeholder="0"
-				rules={{ required: true }}
+				rules={{ required: true, min: 0, max: 500000 }}
 				defaultValue={0}
 			/>
 			<>
@@ -164,6 +164,7 @@ const AddInsurancePolicy: FC = () => {
 					margin="0 0 15px 0"
 					placeholder="0"
 					defaultValue={0}
+					rules={{ min: 0, max: 10000 }}
 				/>
 				<NumberInput<InsurancePolicyFields>
 					control={control}
@@ -173,6 +174,7 @@ const AddInsurancePolicy: FC = () => {
 					margin="0 0 15px 0"
 					placeholder="0"
 					defaultValue={0}
+					rules={{ min: 0, max: 50000 }}
 				/>
 			</>
 

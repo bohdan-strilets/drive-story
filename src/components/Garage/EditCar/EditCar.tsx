@@ -149,7 +149,7 @@ const EditCar: FC = () => {
 						width="100%"
 						margin="0 0 15px 0"
 						placeholder="2004"
-						rules={{ required: true, max: new Date().getFullYear() }}
+						rules={{ required: true, min: 1886, max: new Date().getFullYear() }}
 						defaultValue={car.basicInfo.year}
 					/>
 					<TextInput<CarFields>
@@ -188,7 +188,7 @@ const EditCar: FC = () => {
 						width="100%"
 						margin="0 0 15px 0"
 						placeholder="2004"
-						rules={{ required: true, min: 0 }}
+						rules={{ required: true, min: 0, max: 1000000 }}
 						defaultValue={car.specifications.mileage}
 					/>
 					<DropdownList<CarFields>
@@ -242,7 +242,7 @@ const EditCar: FC = () => {
 						width="100%"
 						margin="0 0 15px 0"
 						placeholder="1999"
-						rules={{ required: true }}
+						rules={{ required: true, min: 500, max: 10000 }}
 						defaultValue={car.specifications.engine.volume}
 					/>
 					<NumberInput<CarFields>
@@ -252,7 +252,7 @@ const EditCar: FC = () => {
 						width="100%"
 						margin="0 0 15px 0"
 						placeholder="150"
-						rules={{ required: true }}
+						rules={{ required: true, min: 20, max: 2000 }}
 						defaultValue={car.specifications.engine.power}
 					/>
 					<RangeInput<CarFields>

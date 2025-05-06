@@ -14,7 +14,7 @@ import { routes } from '@/config/routes'
 
 import { convertEngineVolume } from '@/utils/convertEngineVolume'
 import { defaultImages } from '@/utils/defaultImages'
-import { formatMileage } from '@/utils/formatMileage'
+import { formatNumberWithSpaces } from '@/utils/formatNumberWithSpaces'
 import { formatLabel } from '@/utils/generateDropdownOptions'
 
 import { CarCardProps } from '@/types/props/Garage/CarCardProps'
@@ -77,7 +77,7 @@ const CarCard: FC<CarCardProps> = ({
 							<FaRoad color={getColor('yellow')} />
 							<Label>Mileage</Label>
 						</IconWrapper>
-						<Value>{formatMileage(mileage)} KM</Value>
+						<Value>{formatNumberWithSpaces(mileage)} KM</Value>
 					</Item>
 					<Item>
 						<IconWrapper>

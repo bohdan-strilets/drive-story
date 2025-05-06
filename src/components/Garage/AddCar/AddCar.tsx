@@ -132,7 +132,7 @@ const AddCar: FC = () => {
 					width="100%"
 					margin="0 0 15px 0"
 					placeholder="2004"
-					rules={{ required: true, max: new Date().getFullYear() }}
+					rules={{ required: true, min: 1886, max: new Date().getFullYear() }}
 					defaultValue={new Date().getFullYear()}
 				/>
 				<TextInput<CarFields>
@@ -169,7 +169,7 @@ const AddCar: FC = () => {
 					width="100%"
 					margin="0 0 15px 0"
 					placeholder="2004"
-					rules={{ required: true, min: 0 }}
+					rules={{ required: true, min: 1, max: 1000000 }}
 					defaultValue={0}
 				/>
 				<DropdownList<CarFields>
@@ -219,7 +219,7 @@ const AddCar: FC = () => {
 					width="100%"
 					margin="0 0 15px 0"
 					placeholder="1999"
-					rules={{ required: true }}
+					rules={{ required: true, min: 500, max: 10000 }}
 					defaultValue={0}
 				/>
 				<NumberInput<CarFields>
@@ -229,7 +229,7 @@ const AddCar: FC = () => {
 					width="100%"
 					margin="0 0 15px 0"
 					placeholder="150"
-					rules={{ required: true }}
+					rules={{ required: true, min: 20, max: 2000 }}
 					defaultValue={0}
 				/>
 				<RangeInput<CarFields>
