@@ -34,7 +34,6 @@ const AddCar: FC = () => {
 
 	useEffect(() => {
 		if (yearIssue) {
-			// Задаём первое число января выбранного года
 			setValue('registration.firstRegDate', new Date(`${yearIssue}-01-01`), {
 				shouldValidate: true,
 				shouldDirty: true,

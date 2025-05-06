@@ -1,8 +1,8 @@
 import { Control, FieldValues, Path, PathValue } from 'react-hook-form'
 
 export type Rules = {
-	required: boolean
-	disabled: boolean
+	required?: boolean
+	disabled?: boolean
 }
 
 export type DatePickerProps<T extends FieldValues> = {

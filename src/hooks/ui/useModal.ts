@@ -24,6 +24,7 @@ const useModal = () => {
 		ADD_CAR: 'add-car',
 		EDIT_CAR: 'edit-car',
 		UPLOAD_CAR_PHOTO: 'upload-car-photo',
+		ADD_INSURANCE_POLICY: 'add-insurance-policy',
 	}
 
 	const onOpen = useCallback(
