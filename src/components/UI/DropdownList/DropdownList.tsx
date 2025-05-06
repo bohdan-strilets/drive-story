@@ -86,7 +86,7 @@ const DropdownList = <T extends FieldValues>({
 							>
 								{item.label}
 								{item.value === value && (
-									<ImCheckmark color={getColor('yellow')} />
+									<ImCheckmark color={getColor('black')} />
 								)}
 							</Button>
 						</Item>
