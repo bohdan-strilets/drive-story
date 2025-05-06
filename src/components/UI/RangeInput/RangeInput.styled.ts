@@ -7,6 +7,7 @@ import {
 
 import { getColor } from '@/styles/helpers/getColor'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
+import { outline } from '@/styles/mixins/outline'
 
 export const Wrapper = styled.div<WrapperProps>`
 	display: flex;
@@ -47,27 +48,31 @@ export const FilledTrack = styled.div<FilledTrackProps>`
 export const Thumb = styled.div<FilledTrackProps>`
 	position: absolute;
 	top: 50%;
-	left: ${({ percentage }) => `calc(${percentage * 100}% - ${14 / 2}px)`};
+	left: ${({ percentage }) => `calc(${percentage * 100}% - ${12 / 1.5}px)`};
 	transform: translateY(-50%);
 
-	width: 14px;
-	height: 14px;
+	width: 12px;
+	height: 12px;
 
 	border-radius: 5px;
 	background-color: ${getColor('yellow')};
 
 	cursor: pointer;
 	user-select: none;
+
+	&:focus {
+		${outline()}
+	}
 `
 
 export const ValueContainer = styled.div`
 	${flexCenterDirection()}
 	justify-content: space-between;
 
-	margin-top: 8px;
+	margin-top: 5px;
 `
 
 export const ValueLabel = styled.span`
-	font-size: 12px;
+	font-size: 10px;
 	color: ${getColor('black')};
 `
