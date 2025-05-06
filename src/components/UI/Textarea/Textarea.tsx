@@ -2,6 +2,7 @@ import { FieldValues, useController } from 'react-hook-form'
 
 import { TextareaProps } from '@/types/props/UI/TextareaProps'
 
+import CharCounter from '../CharCounter'
 import InputErrorMessage from '../InputErrorMessage'
 import InputLabel from '../InputLabel'
 
@@ -18,6 +19,7 @@ const Textarea = <T extends FieldValues>({
 	height = '150px',
 	margin,
 	padding = '10px',
+	isShowCharCounter = false,
 }: TextareaProps<T>) => {
 	const {
 		field,
@@ -30,18 +32,28 @@ const Textarea = <T extends FieldValues>({
 	})
 
 	const required = rules?.required
+	const inputValue = (field.value ?? '') as string
+	const currentLength = inputValue.length
 
 	return (
 		<Wrapper margin={margin} width={width}>
 			<InputLabel label={label} required={required} />
-			<Input
-				{...field}
-				value={field.value || ''}
-				placeholder={placeholder}
-				height={height}
-				padding={padding}
-				aria-invalid={!!error}
-			/>
+			<div>
+				<Input
+					{...field}
+					value={field.value || ''}
+					placeholder={placeholder}
+					height={height}
+					padding={padding}
+					aria-invalid={!!error}
+				/>
+				{isShowCharCounter && (
+					<CharCounter
+						currentLength={currentLength}
+						maxLength={rules?.maxLength ?? 0}
+					/>
+				)}
+			</div>
 			<InputErrorMessage error={error} />
 		</Wrapper>
 	)

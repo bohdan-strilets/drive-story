@@ -55,7 +55,8 @@ const Login: FC = () => {
 				name="password"
 				width="100%"
 				margin="0 0 15px 0"
-				rules={{ required: true }}
+				rules={{ required: true, minLength: 6, maxLength: 12 }}
+				isShowCharCounter={true}
 				defaultValue=""
 			/>
 			<ButtonAsLink

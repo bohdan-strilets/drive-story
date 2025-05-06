@@ -20,6 +20,7 @@ const PasswordInput = <T extends FieldValues>({
 	height,
 	margin,
 	padding,
+	isShowCharCounter,
 }: PasswordInputProps<T>) => {
 	const [type, setType] = useState<'password' | 'text'>('password')
 
@@ -39,6 +40,7 @@ const PasswordInput = <T extends FieldValues>({
 			height={height}
 			margin={margin}
 			padding={padding}
+			isShowCharCounter={isShowCharCounter}
 		>
 			<Button type="button" onClick={onChangeType}>
 				{type === 'password' ? <IoEyeSharp /> : <IoIosEyeOff />}

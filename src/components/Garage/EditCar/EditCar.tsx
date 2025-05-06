@@ -127,8 +127,9 @@ const EditCar: FC = () => {
 						width="100%"
 						margin="0 0 15px 0"
 						placeholder="Audi"
-						rules={{ required: true }}
+						rules={{ required: true, minLength: 2, maxLength: 50 }}
 						defaultValue={car.basicInfo.make}
+						isShowCharCounter={true}
 					/>
 					<TextInput<CarFields>
 						control={control}
@@ -137,9 +138,9 @@ const EditCar: FC = () => {
 						type="text"
 						width="100%"
 						margin="0 0 15px 0"
-						placeholder="A6"
-						rules={{ required: true }}
+						rules={{ required: true, minLength: 2, maxLength: 50 }}
 						defaultValue={car.basicInfo.model}
+						isShowCharCounter={true}
 					/>
 					<NumberInput<CarFields>
 						control={control}
@@ -160,6 +161,8 @@ const EditCar: FC = () => {
 						margin="0 0 15px 0"
 						placeholder="C6"
 						defaultValue={car.basicInfo.generation}
+						rules={{ minLength: 1, maxLength: 50 }}
+						isShowCharCounter={true}
 					/>
 					<TextInput<CarFields>
 						control={control}
@@ -170,6 +173,8 @@ const EditCar: FC = () => {
 						margin="0 0 15px 0"
 						placeholder="Black shark"
 						defaultValue={car.basicInfo.shortName}
+						rules={{ minLength: 2, maxLength: 50 }}
+						isShowCharCounter={true}
 					/>
 				</>
 				<>
@@ -284,6 +289,8 @@ const EditCar: FC = () => {
 						margin="0 0 15px 0"
 						placeholder="VU563************"
 						defaultValue={car.registration.vin}
+						rules={{ maxLength: 17 }}
+						isShowCharCounter={true}
 					/>
 					<TextInput<CarFields>
 						control={control}
@@ -294,6 +301,8 @@ const EditCar: FC = () => {
 						margin="0 0 15px 0"
 						placeholder="VOI2589K"
 						defaultValue={car.registration.regNumber}
+						rules={{ minLength: 1, maxLength: 15 }}
+						isShowCharCounter={true}
 					/>
 					<DatePicker<CarFields>
 						control={control}

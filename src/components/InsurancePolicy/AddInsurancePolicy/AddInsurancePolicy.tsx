@@ -79,7 +79,8 @@ const AddInsurancePolicy: FC = () => {
 				width="100%"
 				margin="0 0 15px 0"
 				placeholder="Insurance name"
-				rules={{ required: true }}
+				rules={{ required: true, minLength: 2, maxLength: 100 }}
+				isShowCharCounter={true}
 			/>
 			<TextInput<InsurancePolicyFields>
 				control={control}
@@ -89,7 +90,8 @@ const AddInsurancePolicy: FC = () => {
 				width="100%"
 				margin="0 0 15px 0"
 				placeholder="WAA12345"
-				rules={{ required: true }}
+				rules={{ required: true, minLength: 5, maxLength: 50 }}
+				isShowCharCounter={true}
 			/>
 			<DatePicker<InsurancePolicyFields>
 				control={control}

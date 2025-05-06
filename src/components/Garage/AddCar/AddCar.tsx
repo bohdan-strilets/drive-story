@@ -111,7 +111,8 @@ const AddCar: FC = () => {
 					width="100%"
 					margin="0 0 15px 0"
 					placeholder="Audi"
-					rules={{ required: true }}
+					rules={{ required: true, minLength: 2, maxLength: 50 }}
+					isShowCharCounter={true}
 				/>
 				<TextInput<CarFields>
 					control={control}
@@ -121,7 +122,8 @@ const AddCar: FC = () => {
 					width="100%"
 					margin="0 0 15px 0"
 					placeholder="A6"
-					rules={{ required: true }}
+					rules={{ required: true, minLength: 2, maxLength: 50 }}
+					isShowCharCounter={true}
 				/>
 				<NumberInput<CarFields>
 					control={control}
@@ -141,6 +143,8 @@ const AddCar: FC = () => {
 					width="100%"
 					margin="0 0 15px 0"
 					placeholder="C6"
+					rules={{ minLength: 1, maxLength: 50 }}
+					isShowCharCounter={true}
 				/>
 				<TextInput<CarFields>
 					control={control}
@@ -150,6 +154,8 @@ const AddCar: FC = () => {
 					width="100%"
 					margin="0 0 15px 0"
 					placeholder="Black shark"
+					rules={{ minLength: 2, maxLength: 50 }}
+					isShowCharCounter={true}
 				/>
 			</>
 			<>
@@ -259,6 +265,8 @@ const AddCar: FC = () => {
 					width="100%"
 					margin="0 0 15px 0"
 					placeholder="VU563************"
+					rules={{ maxLength: 17 }}
+					isShowCharCounter={true}
 				/>
 				<TextInput<CarFields>
 					control={control}
@@ -268,6 +276,8 @@ const AddCar: FC = () => {
 					width="100%"
 					margin="0 0 15px 0"
 					placeholder="VOI2589K"
+					rules={{ minLength: 1, maxLength: 15 }}
+					isShowCharCounter={true}
 				/>
 				<DatePicker<CarFields>
 					control={control}
@@ -313,6 +323,8 @@ const AddCar: FC = () => {
 					placeholder="A little story about your car..."
 					width="100%"
 					margin="0 0 15px 0"
+					rules={{ minLength: 20, maxLength: 500 }}
+					isShowCharCounter={true}
 				/>
 			</>
 			{isPending && <Loader color="gray" margin="15px 0" />}

@@ -82,6 +82,8 @@ const EditProfile: FC = () => {
 				margin="0 0 15px 0"
 				placeholder="Madison"
 				defaultValue={user?.firstName || ''}
+				rules={{ minLength: 2, maxLength: 50 }}
+				isShowCharCounter={true}
 			/>
 			<TextInput<EditProfileFields>
 				control={control}
@@ -92,6 +94,8 @@ const EditProfile: FC = () => {
 				margin="0 0 15px 0"
 				placeholder="Carter"
 				defaultValue={user?.lastName || ''}
+				rules={{ minLength: 2, maxLength: 50 }}
+				isShowCharCounter={true}
 			/>
 			<TextInput<EditProfileFields>
 				control={control}
@@ -102,6 +106,8 @@ const EditProfile: FC = () => {
 				margin="0 0 15px 0"
 				placeholder="Tabasco"
 				defaultValue={user?.nickname || ''}
+				rules={{ minLength: 2, maxLength: 50 }}
+				isShowCharCounter={true}
 			/>
 			<DatePicker<EditProfileFields>
 				control={control}
@@ -123,6 +129,8 @@ const EditProfile: FC = () => {
 				defaultValue={formatPhoneNumber(user?.phoneNumber || '')}
 				mask="000 000 000"
 				unmask={true}
+				rules={{ maxLength: 11 }}
+				isShowCharCounter={true}
 			/>
 			<DropdownList<EditProfileFields>
 				control={control}
@@ -152,6 +160,8 @@ const EditProfile: FC = () => {
 				margin="0 0 15px 0"
 				placeholder="Poland"
 				defaultValue={user?.location?.country || ''}
+				rules={{ minLength: 2, maxLength: 100 }}
+				isShowCharCounter={true}
 			/>
 			<TextInput<EditProfileFields>
 				control={control}
@@ -162,6 +172,8 @@ const EditProfile: FC = () => {
 				margin="0 0 15px 0"
 				placeholder="Warsaw"
 				defaultValue={user?.location?.city || ''}
+				rules={{ minLength: 2, maxLength: 100 }}
+				isShowCharCounter={true}
 			/>
 			<TextInput<EditProfileFields>
 				control={control}
@@ -174,6 +186,8 @@ const EditProfile: FC = () => {
 				defaultValue={formatPhoneNumber(user?.location?.postalCode || '')}
 				mask="00-000"
 				unmask={false}
+				rules={{ maxLength: 6 }}
+				isShowCharCounter={true}
 			/>
 			{isPending && <Loader color="gray" margin="15px 0" />}
 			<Button

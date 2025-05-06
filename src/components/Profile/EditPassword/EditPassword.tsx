@@ -45,7 +45,8 @@ const EditPassword: FC = () => {
 				name="password"
 				width="100%"
 				margin="0 0 15px 0"
-				rules={{ required: true }}
+				rules={{ required: true, minLength: 6, maxLength: 12 }}
+				isShowCharCounter={true}
 				defaultValue=""
 			/>
 			<PasswordInput<EditPasswordFields>
@@ -54,7 +55,8 @@ const EditPassword: FC = () => {
 				name="newPassword"
 				width="100%"
 				margin="0 0 15px 0"
-				rules={{ required: true }}
+				rules={{ required: true, minLength: 6, maxLength: 12 }}
+				isShowCharCounter={true}
 				defaultValue=""
 			/>
 			<PasswordInput<EditPasswordFields>
@@ -63,7 +65,8 @@ const EditPassword: FC = () => {
 				name="passwordAgain"
 				width="100%"
 				margin="0 0 15px 0"
-				rules={{ required: true }}
+				rules={{ required: true, minLength: 6, maxLength: 12 }}
+				isShowCharCounter={true}
 				defaultValue=""
 			/>
 			{isPending && <Loader color="gray" margin="15px 0" />}

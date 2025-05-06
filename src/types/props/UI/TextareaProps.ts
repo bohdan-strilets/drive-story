@@ -18,6 +18,7 @@ export type TextareaProps<T extends FieldValues> = {
 	height?: string
 	margin?: string
 	padding?: string
+	isShowCharCounter?: boolean
 }
 
 export type WrapperProps = Pick<TextareaProps<FieldValues>, 'margin' | 'width'>

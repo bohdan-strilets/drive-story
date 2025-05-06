@@ -14,4 +14,5 @@ export type PasswordInputProps<T extends FieldValues> = Pick<
 	| 'height'
 	| 'margin'
 	| 'padding'
+	| 'isShowCharCounter'
 >

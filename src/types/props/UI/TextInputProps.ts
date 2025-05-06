@@ -2,11 +2,11 @@ import { ReactNode } from 'react'
 import { Control, FieldValues, Path, PathValue } from 'react-hook-form'
 
 export type Rules = {
-	required?: boolean
 	min?: number
 	max?: number
 	minLength?: number
 	maxLength?: number
+	required?: boolean
 	disabled?: boolean
 }
 
@@ -25,6 +25,7 @@ export type TextInputProps<T extends FieldValues> = {
 	padding?: string
 	mask?: string
 	unmask?: boolean
+	isShowCharCounter?: boolean
 }
 
 export type WrapperProps = Pick<TextInputProps<FieldValues>, 'margin' | 'width'>

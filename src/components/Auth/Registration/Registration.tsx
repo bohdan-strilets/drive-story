@@ -65,7 +65,8 @@ const Registration: FC = () => {
 					width={maxMobile ? '100%' : '49%'}
 					margin="0 0 15px 0"
 					placeholder="Madison"
-					rules={{ required: true }}
+					rules={{ required: true, minLength: 2, maxLength: 50 }}
+					isShowCharCounter={true}
 					defaultValue=""
 				/>
 				<TextInput<RegistrationFields>
@@ -76,7 +77,8 @@ const Registration: FC = () => {
 					width={maxMobile ? '100%' : '49%'}
 					margin="0 0 15px 0"
 					placeholder="Carter"
-					rules={{ required: true }}
+					rules={{ required: true, minLength: 2, maxLength: 50 }}
+					isShowCharCounter={true}
 					defaultValue=""
 				/>
 			</Group>
@@ -98,7 +100,8 @@ const Registration: FC = () => {
 					name="password"
 					width={maxMobile ? '100%' : '49%'}
 					margin="0 0 15px 0"
-					rules={{ required: true }}
+					rules={{ required: true, minLength: 6, maxLength: 12 }}
+					isShowCharCounter={true}
 					defaultValue=""
 				/>
 				<PasswordInput<RegistrationFields>
@@ -107,7 +110,8 @@ const Registration: FC = () => {
 					name="passwordAgain"
 					width={maxMobile ? '100%' : '49%'}
 					margin="0 0 15px 0"
-					rules={{ required: true }}
+					rules={{ required: true, minLength: 6, maxLength: 12 }}
+					isShowCharCounter={true}
 					defaultValue=""
 				/>
 			</Group>

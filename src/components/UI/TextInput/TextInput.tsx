@@ -4,6 +4,7 @@ import { formatPhoneNumber } from '@/utils/formatPhoneNumber'
 
 import { TextInputProps } from '@/types/props/UI/TextInputProps'
 
+import CharCounter from '../CharCounter'
 import InputErrorMessage from '../InputErrorMessage'
 import InputLabel from '../InputLabel'
 
@@ -29,6 +30,7 @@ const TextInput = <T extends FieldValues>({
 	padding,
 	mask,
 	unmask,
+	isShowCharCounter = false,
 }: TextInputProps<T>) => {
 	const {
 		field,
@@ -41,6 +43,8 @@ const TextInput = <T extends FieldValues>({
 	})
 
 	const required = rules?.required
+	const inputValue = (field.value ?? '') as string
+	const currentLength = inputValue.length
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		let newValue = e.target.value
@@ -62,6 +66,7 @@ const TextInput = <T extends FieldValues>({
 						unmask={unmask}
 						placeholder={placeholder}
 						aria-invalid={!!error}
+						{...rules}
 					/>
 				) : (
 					<Input
@@ -73,9 +78,16 @@ const TextInput = <T extends FieldValues>({
 						height={height}
 						padding={padding}
 						aria-invalid={!!error}
+						{...rules}
 					/>
 				)}
 				{children && children}
+				{isShowCharCounter && (
+					<CharCounter
+						currentLength={currentLength}
+						maxLength={rules?.maxLength ?? 0}
+					/>
+				)}
 			</InputContainer>
 			<InputErrorMessage error={error} />
 		</Wrapper>
