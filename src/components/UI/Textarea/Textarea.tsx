@@ -46,6 +46,7 @@ const Textarea = <T extends FieldValues>({
 					height={height}
 					padding={padding}
 					aria-invalid={!!error}
+					{...rules}
 				/>
 				{isShowCharCounter && (
 					<CharCounter

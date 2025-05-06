@@ -32,6 +32,11 @@ export const CustomInput = styled.button`
 	cursor: pointer;
 	transition: border-bottom-color var(--hover-effect);
 
+	:hover,
+	:focus {
+		border-bottom-color: ${getColor('green')};
+	}
+
 	@media screen and (min-width: ${breakpoints.tabletMin}) {
 		height: 35px;
 		font-size: 16px;
