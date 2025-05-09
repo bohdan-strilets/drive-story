@@ -25,18 +25,14 @@ import { InsuranceType } from '@/types/enums/InsuranceType'
 import { AddInsuranceParams } from '@/types/params/AddInsuranceParams'
 import { InsurancePolicy } from '@/types/types/InsurancePolicy'
 
-import {
-	InsurancePolicyFields,
-	InsurancePolicyValidation,
-} from '@/validation/InsurancePolicySchema'
+import { insurancePolicyRules } from '@/validation/rules/insurancePolicyRules'
+import { Fields, Validation } from '@/validation/schemas/InsurancePolicySchema'
 
 const AddInsurancePolicy: FC = () => {
 	const { carId } = useParams()
 	const { mutateAsync: createInsurance, isPending } = useCreateInsurance()
 
-	const { control, handleSubmit } = useForm<InsurancePolicyFields>(
-		InsurancePolicyValidation
-	)
+	const { control, handleSubmit } = useForm<Fields>(Validation)
 
 	const submitCreateInsurance = useSubmit<
 		InsurancePolicy | null,
@@ -47,7 +43,7 @@ const AddInsurancePolicy: FC = () => {
 		isCloseModal: true,
 	})
 
-	const onSubmit: SubmitHandler<InsurancePolicyFields> = async (data) => {
+	const onSubmit: SubmitHandler<Fields> = async (data) => {
 		const payload: InsuranceDto = {
 			insurerName: data.insurerName,
 			policyNumber: data.policyNumber,
@@ -69,33 +65,39 @@ const AddInsurancePolicy: FC = () => {
 	const insuranceType = Object.values(InsuranceType)
 	const insuranceTypeDropdownOptions = generateDropdownOptions(insuranceType)
 
-	const currentDate = new Date()
-
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<TextInput<InsurancePolicyFields>
+			<TextInput
 				control={control}
 				label="Name of the insurance company"
 				name="insurerName"
 				type="text"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder="Insurance name"
-				rules={{ required: true, minLength: 2, maxLength: 100 }}
+				placeholder={insurancePolicyRules.insurerName.placeholder}
+				rules={{
+					required: true,
+					minLength: insurancePolicyRules.insurerName.min,
+					maxLength: insurancePolicyRules.insurerName.max,
+				}}
 				isShowCharCounter={true}
 			/>
-			<TextInput<InsurancePolicyFields>
+			<TextInput
 				control={control}
 				label="Insurance policy number"
 				name="policyNumber"
 				type="text"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder="WAA12345"
-				rules={{ required: true, minLength: 5, maxLength: 50 }}
+				placeholder={insurancePolicyRules.policyNumber.placeholder}
+				rules={{
+					required: true,
+					minLength: insurancePolicyRules.policyNumber.min,
+					maxLength: insurancePolicyRules.policyNumber.max,
+				}}
 				isShowCharCounter={true}
 			/>
-			<DatePicker<InsurancePolicyFields>
+			<DatePicker
 				control={control}
 				name="startDate"
 				label="Commencement of the insurance policy"
@@ -105,11 +107,11 @@ const AddInsurancePolicy: FC = () => {
 				defaultValue={new Date()}
 				rules={{
 					required: true,
-					minDate: new Date(`${currentDate.getFullYear() - 1}-01-01`),
-					maxDate: new Date(`${currentDate.getFullYear() + 1}-01-01`),
+					minDate: insurancePolicyRules.startDate.min,
+					maxDate: insurancePolicyRules.startDate.max,
 				}}
 			/>
-			<DatePicker<InsurancePolicyFields>
+			<DatePicker
 				control={control}
 				name="endDate"
 				label="Expiry of insurance policy"
@@ -119,11 +121,11 @@ const AddInsurancePolicy: FC = () => {
 				defaultValue={new Date()}
 				rules={{
 					required: true,
-					minDate: new Date(`${currentDate.getFullYear() - 1}-01-01`),
-					maxDate: new Date(`${currentDate.getFullYear() + 1}-01-01`),
+					minDate: insurancePolicyRules.endDate.min,
+					maxDate: insurancePolicyRules.endDate.max,
 				}}
 			/>
-			<DropdownList<InsurancePolicyFields>
+			<DropdownList
 				control={control}
 				options={insuranceTypeDropdownOptions}
 				label="Type of insurance policy"
@@ -132,23 +134,27 @@ const AddInsurancePolicy: FC = () => {
 				margin="0 0 15px 0"
 				placeholder="Select fuel type"
 				rules={{ required: true }}
-				defaultValue={formatValue(InsuranceType.OC)}
+				defaultValue={formatValue<InsuranceType>(InsuranceType.OC)}
 			/>
-			<NumberInput<InsurancePolicyFields>
+			<NumberInput
 				control={control}
 				label="Insurance policy coverage amount"
 				name="coverageAmount"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder="0"
-				rules={{ required: true, min: 0, max: 500000 }}
+				placeholder={insurancePolicyRules.coverageAmount.placeholder}
+				rules={{
+					required: true,
+					min: insurancePolicyRules.coverageAmount.min,
+					max: insurancePolicyRules.coverageAmount.max,
+				}}
 				defaultValue={0}
 			/>
 			<>
 				<Title fontSize={24} textAlign="left" color="black">
 					Payment
 				</Title>
-				<Switch<InsurancePolicyFields>
+				<Switch
 					control={control}
 					label="Was the insurance policy paid in full or was it split into parts?"
 					name="paymentStatus.isPaid"
@@ -156,39 +162,50 @@ const AddInsurancePolicy: FC = () => {
 					rules={{ required: true }}
 					defaultValue={false}
 				/>
-				<RangeInput<InsurancePolicyFields>
+				<RangeInput
 					control={control}
 					label="Number of rats"
 					name="paymentStatus.installmentsCount"
 					width="100%"
 					margin="0 0 15px 0"
-					min={1}
-					max={12}
-					defaultValue={1}
+					min={insurancePolicyRules.paymentStatus.installmentsCount.min}
+					max={insurancePolicyRules.paymentStatus.installmentsCount.max}
+					defaultValue={4}
 				/>
-				<NumberInput<InsurancePolicyFields>
+				<NumberInput
 					control={control}
 					label="Cost of the rata"
 					name="paymentStatus.installmentCost"
 					width="100%"
 					margin="0 0 15px 0"
-					placeholder="0"
+					placeholder={
+						insurancePolicyRules.paymentStatus.installmentCost.placeholder
+					}
 					defaultValue={0}
-					rules={{ min: 0, max: 10000 }}
+					rules={{
+						min: insurancePolicyRules.paymentStatus.installmentCost.min,
+						max: insurancePolicyRules.paymentStatus.installmentCost.max,
+					}}
 				/>
-				<NumberInput<InsurancePolicyFields>
+				<NumberInput
 					control={control}
 					label="Total cost for payment of all rats"
 					name="paymentStatus.totalInstallmentsSum"
 					width="100%"
 					margin="0 0 15px 0"
-					placeholder="0"
+					placeholder={
+						insurancePolicyRules.paymentStatus.totalInstallmentsSum.placeholder
+					}
 					defaultValue={0}
-					rules={{ min: 0, max: 50000 }}
+					rules={{
+						min: insurancePolicyRules.paymentStatus.totalInstallmentsSum.min,
+						max: insurancePolicyRules.paymentStatus.totalInstallmentsSum.max,
+					}}
 				/>
 			</>
 
 			{isPending && <Loader color="gray" margin="15px 0" />}
+
 			<Button
 				background="yellow"
 				color="black"

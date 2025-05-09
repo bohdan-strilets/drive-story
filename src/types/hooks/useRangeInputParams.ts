@@ -5,9 +5,12 @@ import {
 	PathValue,
 } from 'react-hook-form'
 
-export type useRangeInputParams<T extends FieldValues> = {
+export type Params<
+	TFieldValues extends FieldValues,
+	TName extends Path<TFieldValues>,
+> = {
 	min: number
 	max: number
-	field: ControllerRenderProps<T, Path<T>>
-	defaultValue?: PathValue<T, Path<T>>
+	field: ControllerRenderProps<TFieldValues, TName>
+	defaultValue?: PathValue<TFieldValues, TName>
 }

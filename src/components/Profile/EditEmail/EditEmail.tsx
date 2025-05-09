@@ -12,16 +12,12 @@ import { useEditEmail } from '@/hooks/user/useEditEmail'
 import { EmailDto } from '@/types/dto/EmailDto'
 import { User } from '@/types/types/User'
 
-import {
-	EditEmailFields,
-	EditEmailValidation,
-} from '@/validation/EditEmailSchema'
+import { userRules } from '@/validation/rules/userRules'
+import { Fields, Validation } from '@/validation/schemas/EmailSchema'
 
 const EditEmail: FC = () => {
 	const { mutateAsync: editEmail, isPending } = useEditEmail()
-
-	const { control, handleSubmit } =
-		useForm<EditEmailFields>(EditEmailValidation)
+	const { control, handleSubmit } = useForm<Fields>(Validation)
 
 	const submitEditEmail = useSubmit<User | null, EmailDto>({
 		callback: editEmail,
@@ -29,7 +25,7 @@ const EditEmail: FC = () => {
 		isCloseModal: true,
 	})
 
-	const onSubmit: SubmitHandler<EditEmailFields> = async (data) => {
+	const onSubmit: SubmitHandler<Fields> = async (data) => {
 		submitEditEmail(data)
 	}
 
@@ -50,18 +46,20 @@ const EditEmail: FC = () => {
 				don't hesitate to contact our support team.
 			</Paragraph>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<TextInput<EditEmailFields>
+				<TextInput
 					control={control}
 					label="Email"
 					name="email"
 					type="email"
 					width="100%"
 					margin="0 0 15px 0"
-					placeholder="madison.carter@gmail.com"
+					placeholder={userRules.email.placeholder}
 					rules={{ required: true }}
 					defaultValue=""
 				/>
+
 				{isPending && <Loader color="gray" margin="15px 0" />}
+
 				<Button
 					background="yellow"
 					color="black"

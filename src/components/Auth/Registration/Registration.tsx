@@ -19,10 +19,8 @@ import { routes } from '@/config/routes'
 import { RegistrationDto } from '@/types/dto/RegistrationDto'
 import { AuthResponse } from '@/types/types/AuthResponse'
 
-import {
-	RegistrationFields,
-	RegistrationValidation,
-} from '@/validation/RegistrationSchema'
+import { userRules } from '@/validation/rules/userRules'
+import { Fields, Validation } from '@/validation/schemas/RegistrationSchema'
 
 import { fadeSlide } from '@/animations/fadeSlide'
 
@@ -33,9 +31,7 @@ const Registration: FC = () => {
 	const { mutateAsync: registration, isPending } = useRegistration()
 	const { modalNames } = useModal()
 
-	const { control, handleSubmit } = useForm<RegistrationFields>(
-		RegistrationValidation
-	)
+	const { control, handleSubmit } = useForm<Fields>(Validation)
 
 	const submitRegistration = useSubmit<AuthResponse | null, RegistrationDto>({
 		callback: registration,
@@ -44,7 +40,7 @@ const Registration: FC = () => {
 		navigateTo: routes.HOME,
 	})
 
-	const onSubmit: SubmitHandler<RegistrationFields> = async (data) => {
+	const onSubmit: SubmitHandler<Fields> = async (data) => {
 		const dto: RegistrationDto = {
 			firstName: data.firstName,
 			lastName: data.lastName,
@@ -57,65 +53,83 @@ const Registration: FC = () => {
 	return (
 		<motion.form onSubmit={handleSubmit(onSubmit)} {...fadeSlide()}>
 			<Group>
-				<TextInput<RegistrationFields>
+				<TextInput
 					control={control}
 					label="First name"
 					name="firstName"
 					type="text"
 					width={maxMobile ? '100%' : '49%'}
 					margin="0 0 15px 0"
-					placeholder="Madison"
-					rules={{ required: true, minLength: 2, maxLength: 50 }}
+					placeholder={userRules.firstName.placeholder}
+					rules={{
+						required: true,
+						minLength: userRules.firstName.min,
+						maxLength: userRules.firstName.max,
+					}}
 					isShowCharCounter={true}
 					defaultValue=""
 				/>
-				<TextInput<RegistrationFields>
+				<TextInput
 					control={control}
 					label="Last name"
 					name="lastName"
 					type="text"
 					width={maxMobile ? '100%' : '49%'}
 					margin="0 0 15px 0"
-					placeholder="Carter"
-					rules={{ required: true, minLength: 2, maxLength: 50 }}
+					placeholder={userRules.lastName.placeholder}
+					rules={{
+						required: true,
+						minLength: userRules.lastName.min,
+						maxLength: userRules.lastName.max,
+					}}
 					isShowCharCounter={true}
 					defaultValue=""
 				/>
 			</Group>
-			<TextInput<RegistrationFields>
+			<TextInput
 				control={control}
 				label="Email"
 				name="email"
 				type="email"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder="madison.carter@gmail.com"
+				placeholder={userRules.email.placeholder}
 				rules={{ required: true }}
 				defaultValue=""
 			/>
 			<Group>
-				<PasswordInput<RegistrationFields>
+				<PasswordInput
 					control={control}
 					label="Password"
 					name="password"
 					width={maxMobile ? '100%' : '49%'}
 					margin="0 0 15px 0"
-					rules={{ required: true, minLength: 6, maxLength: 12 }}
+					placeholder={userRules.password.placeholder}
+					rules={{
+						required: true,
+						minLength: userRules.password.min,
+						maxLength: userRules.password.max,
+					}}
 					isShowCharCounter={true}
 					defaultValue=""
 				/>
-				<PasswordInput<RegistrationFields>
+				<PasswordInput
 					control={control}
 					label="Password again"
 					name="passwordAgain"
 					width={maxMobile ? '100%' : '49%'}
 					margin="0 0 15px 0"
-					rules={{ required: true, minLength: 6, maxLength: 12 }}
+					placeholder={userRules.password.placeholder}
+					rules={{
+						required: true,
+						minLength: userRules.password.min,
+						maxLength: userRules.password.max,
+					}}
 					isShowCharCounter={true}
 					defaultValue=""
 				/>
 			</Group>
-			<Checkbox<RegistrationFields>
+			<Checkbox
 				control={control}
 				name="isAccessRight"
 				margin="0 0 15px 0"
@@ -138,7 +152,9 @@ const Registration: FC = () => {
 					/>
 				</p>
 			</Checkbox>
+
 			{isPending && <Loader color="gray" margin="15px 0" />}
+
 			<Button
 				background="yellow"
 				color="black"

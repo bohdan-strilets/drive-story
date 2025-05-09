@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FieldValues } from 'react-hook-form'
+import { FieldValues, Path } from 'react-hook-form'
 import { IoIosEyeOff } from 'react-icons/io'
 import { IoEyeSharp } from 'react-icons/io5'
 
@@ -9,7 +9,10 @@ import TextInput from '../TextInput'
 
 import { Button } from './PasswordInput.styled'
 
-const PasswordInput = <T extends FieldValues>({
+const PasswordInput = <
+	TFieldValues extends FieldValues,
+	TName extends Path<TFieldValues>,
+>({
 	control,
 	name,
 	label,
@@ -21,14 +24,14 @@ const PasswordInput = <T extends FieldValues>({
 	margin,
 	padding,
 	isShowCharCounter,
-}: PasswordInputProps<T>) => {
+}: PasswordInputProps<TFieldValues, TName>) => {
 	const [type, setType] = useState<'password' | 'text'>('password')
 
 	const onChangeType = () =>
 		type === 'password' ? setType('text') : setType('password')
 
 	return (
-		<TextInput<T>
+		<TextInput
 			control={control}
 			type={type}
 			name={name}

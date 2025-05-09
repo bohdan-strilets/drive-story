@@ -12,25 +12,21 @@ import { useRequestResetPassword } from '@/hooks/user/useRequestResetPassword'
 import { EmailDto } from '@/types/dto/EmailDto'
 import { User } from '@/types/types/User'
 
-import {
-	ForgotPasswordFields,
-	ForgotPasswordValidation,
-} from '@/validation/ForgotPasswordSchema'
+import { userRules } from '@/validation/rules/userRules'
+import { Fields, Validation } from '@/validation/schemas/EmailSchema'
 
 const ForgotPassword: FC = () => {
 	const { mutateAsync: requestResetPassword, isPending } =
 		useRequestResetPassword()
 
-	const { control, handleSubmit } = useForm<ForgotPasswordFields>(
-		ForgotPasswordValidation
-	)
+	const { control, handleSubmit } = useForm<Fields>(Validation)
 
 	const submitResetPasswordRequest = useSubmit<User | null, EmailDto>({
 		callback: requestResetPassword,
 		successMessage: 'The letter has been sent successfully',
 	})
 
-	const onSubmit: SubmitHandler<ForgotPasswordFields> = async (data) => {
+	const onSubmit: SubmitHandler<Fields> = async (data) => {
 		submitResetPasswordRequest(data)
 	}
 
@@ -42,18 +38,20 @@ const ForgotPassword: FC = () => {
 				reset your password securely.
 			</Paragraph>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<TextInput<ForgotPasswordFields>
+				<TextInput
 					control={control}
 					label="Email"
 					name="email"
 					type="email"
 					width="100%"
 					margin="0 0 15px 0"
-					placeholder="madison.carter@gmail.com"
+					placeholder={userRules.email.placeholder}
 					rules={{ required: true }}
 					defaultValue=""
 				/>
+
 				{isPending && <Loader color="gray" margin="15px 0" />}
+
 				<Button
 					background="yellow"
 					color="black"

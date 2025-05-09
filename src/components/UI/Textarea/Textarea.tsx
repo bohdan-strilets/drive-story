@@ -1,4 +1,4 @@
-import { FieldValues, useController } from 'react-hook-form'
+import { FieldValues, Path, useController } from 'react-hook-form'
 
 import { TextareaProps } from '@/types/props/UI/TextareaProps'
 
@@ -8,7 +8,10 @@ import InputLabel from '../InputLabel'
 
 import { Input, Wrapper } from './Textarea.styled'
 
-const Textarea = <T extends FieldValues>({
+const Textarea = <
+	TFieldValues extends FieldValues,
+	TName extends Path<TFieldValues>,
+>({
 	control,
 	name,
 	label,
@@ -20,7 +23,7 @@ const Textarea = <T extends FieldValues>({
 	margin,
 	padding = '10px',
 	isShowCharCounter = false,
-}: TextareaProps<T>) => {
+}: TextareaProps<TFieldValues, TName>) => {
 	const {
 		field,
 		fieldState: { error },

@@ -30,7 +30,8 @@ import { Transmission } from '@/types/enums/Transmission'
 import { UpdateCarParams } from '@/types/params/UpdateCarParams'
 import { CarEntity } from '@/types/types/CarEntity'
 
-import { CarFields, CarValidation } from '@/validation/CarSchema'
+import { carRules } from '@/validation/rules/carRules'
+import { Fields, Validation } from '@/validation/schemas/CarSchema'
 
 const EditCar: FC = () => {
 	const { carId } = useParams()
@@ -38,7 +39,7 @@ const EditCar: FC = () => {
 	const yearProduction = car?.basicInfo.year
 
 	const { mutateAsync: updateCar, isPending } = useUpdateCar()
-	const { control, handleSubmit } = useForm<CarFields>(CarValidation)
+	const { control, handleSubmit } = useForm<Fields>(Validation)
 
 	const submitCreateCar = useSubmit<CarEntity | null, UpdateCarParams>({
 		callback: updateCar,
@@ -46,7 +47,7 @@ const EditCar: FC = () => {
 		isCloseModal: true,
 	})
 
-	const onSubmit: SubmitHandler<CarFields> = async (data) => {
+	const onSubmit: SubmitHandler<Fields> = async (data) => {
 		const payload: CarDetailsDto = {
 			basicInfo: {
 				make: data.basicInfo.make,
@@ -120,61 +121,80 @@ const EditCar: FC = () => {
 					<Title fontSize={24} textAlign="left" color="black">
 						Basic information
 					</Title>
-					<TextInput<CarFields>
+					<TextInput
 						control={control}
 						label="Make"
 						name="basicInfo.make"
 						type="text"
 						width="100%"
 						margin="0 0 15px 0"
-						placeholder="Audi"
-						rules={{ required: true, minLength: 2, maxLength: 50 }}
+						placeholder={carRules.basicInfo.make.placeholder}
+						rules={{
+							required: true,
+							minLength: carRules.basicInfo.make.min,
+							maxLength: carRules.basicInfo.make.max,
+						}}
 						defaultValue={car.basicInfo.make}
 						isShowCharCounter={true}
 					/>
-					<TextInput<CarFields>
+					<TextInput
 						control={control}
 						label="Model"
 						name="basicInfo.model"
 						type="text"
 						width="100%"
 						margin="0 0 15px 0"
-						rules={{ required: true, minLength: 2, maxLength: 50 }}
+						placeholder={carRules.basicInfo.model.placeholder}
+						rules={{
+							required: true,
+							minLength: carRules.basicInfo.model.min,
+							maxLength: carRules.basicInfo.model.max,
+						}}
 						defaultValue={car.basicInfo.model}
 						isShowCharCounter={true}
 					/>
-					<NumberInput<CarFields>
+					<NumberInput
 						control={control}
 						label="Year"
 						name="basicInfo.year"
 						width="100%"
 						margin="0 0 15px 0"
-						placeholder="2004"
-						rules={{ required: true, min: 1886, max: new Date().getFullYear() }}
+						placeholder={carRules.basicInfo.year.placeholder}
+						rules={{
+							required: true,
+							min: carRules.basicInfo.year.min,
+							max: carRules.basicInfo.year.max,
+						}}
 						defaultValue={car.basicInfo.year}
 					/>
-					<TextInput<CarFields>
+					<TextInput
 						control={control}
 						label="Generation"
 						name="basicInfo.generation"
 						type="text"
 						width="100%"
 						margin="0 0 15px 0"
-						placeholder="C6"
+						placeholder={carRules.basicInfo.generation.placeholder}
 						defaultValue={car.basicInfo.generation}
-						rules={{ minLength: 1, maxLength: 50 }}
+						rules={{
+							minLength: carRules.basicInfo.generation.min,
+							maxLength: carRules.basicInfo.generation.max,
+						}}
 						isShowCharCounter={true}
 					/>
-					<TextInput<CarFields>
+					<TextInput
 						control={control}
 						label="Short name"
 						name="basicInfo.shortName"
 						type="text"
 						width="100%"
 						margin="0 0 15px 0"
-						placeholder="Black shark"
+						placeholder={carRules.basicInfo.shortName.placeholder}
 						defaultValue={car.basicInfo.shortName}
-						rules={{ minLength: 2, maxLength: 50 }}
+						rules={{
+							minLength: carRules.basicInfo.shortName.min,
+							maxLength: carRules.basicInfo.shortName.max,
+						}}
 						isShowCharCounter={true}
 					/>
 				</>
@@ -182,17 +202,21 @@ const EditCar: FC = () => {
 					<Title fontSize={24} textAlign="left" color="black">
 						Specifications
 					</Title>
-					<NumberInput<CarFields>
+					<NumberInput
 						control={control}
 						label="Mileage"
 						name="specifications.mileage"
 						width="100%"
 						margin="0 0 15px 0"
-						placeholder="2004"
-						rules={{ required: true, min: 0, max: 1000000 }}
+						placeholder={carRules.specifications.mileage.placeholder}
+						rules={{
+							required: true,
+							min: carRules.specifications.mileage.min,
+							max: carRules.specifications.mileage.max,
+						}}
 						defaultValue={car.specifications.mileage}
 					/>
-					<DropdownList<CarFields>
+					<DropdownList
 						control={control}
 						options={fuelTypeDropdownOptions}
 						label="Fuel type"
@@ -201,9 +225,9 @@ const EditCar: FC = () => {
 						margin="0 0 15px 0"
 						placeholder="Select fuel type"
 						rules={{ required: true }}
-						defaultValue={formatValue(car.specifications.fuelType)}
+						defaultValue={formatValue<FuelType>(car.specifications.fuelType)}
 					/>
-					<DropdownList<CarFields>
+					<DropdownList
 						control={control}
 						options={transmissionDropdownOptions}
 						label="Transmission"
@@ -212,9 +236,11 @@ const EditCar: FC = () => {
 						margin="0 0 15px 0"
 						placeholder="Select transmission"
 						rules={{ required: true }}
-						defaultValue={formatValue(car.specifications.transmission)}
+						defaultValue={formatValue<Transmission>(
+							car.specifications.transmission
+						)}
 					/>
-					<DropdownList<CarFields>
+					<DropdownList
 						control={control}
 						options={drivetrainDropdownOptions}
 						label="Drivetrain"
@@ -223,9 +249,11 @@ const EditCar: FC = () => {
 						margin="0 0 15px 0"
 						placeholder="Select drivetrain"
 						rules={{ required: true }}
-						defaultValue={formatValue(car.specifications.drivetrain)}
+						defaultValue={formatValue<Drivetrain>(
+							car.specifications.drivetrain
+						)}
 					/>
-					<DropdownList<CarFields>
+					<DropdownList
 						control={control}
 						options={bodyTypeDropdownOptions}
 						label="Body type"
@@ -234,46 +262,54 @@ const EditCar: FC = () => {
 						margin="0 0 15px 0"
 						placeholder="Select body type"
 						rules={{ required: true }}
-						defaultValue={formatValue(car.specifications.bodyType)}
+						defaultValue={formatValue<BodyType>(car.specifications.bodyType)}
 					/>
-					<NumberInput<CarFields>
+					<NumberInput
 						control={control}
 						label="Engine volume"
 						name="specifications.engine.volume"
 						width="100%"
 						margin="0 0 15px 0"
-						placeholder="1999"
-						rules={{ required: true, min: 500, max: 10000 }}
+						placeholder={carRules.specifications.engine.volume.placeholder}
+						rules={{
+							required: true,
+							min: carRules.specifications.engine.volume.min,
+							max: carRules.specifications.engine.volume.max,
+						}}
 						defaultValue={car.specifications.engine.volume}
 					/>
-					<NumberInput<CarFields>
+					<NumberInput
 						control={control}
 						label="Engine power"
 						name="specifications.engine.power"
 						width="100%"
 						margin="0 0 15px 0"
-						placeholder="150"
-						rules={{ required: true, min: 20, max: 2000 }}
+						placeholder={carRules.specifications.engine.power.placeholder}
+						rules={{
+							required: true,
+							min: carRules.specifications.engine.power.min,
+							max: carRules.specifications.engine.power.max,
+						}}
 						defaultValue={car.specifications.engine.power}
 					/>
-					<RangeInput<CarFields>
+					<RangeInput
 						control={control}
 						label="Number of doors"
 						name="specifications.doors"
 						width="100%"
 						margin="0 0 15px 0"
-						min={2}
-						max={6}
+						min={carRules.specifications.doors.min}
+						max={carRules.specifications.doors.max}
 						defaultValue={car.specifications.doors}
 					/>
-					<RangeInput<CarFields>
+					<RangeInput
 						control={control}
 						label="Number of seats"
 						name="specifications.seats"
 						width="100%"
 						margin="0 0 15px 0"
-						min={1}
-						max={9}
+						min={carRules.specifications.seats.min}
+						max={carRules.specifications.seats.max}
 						defaultValue={car.specifications.seats}
 					/>
 				</>
@@ -281,31 +317,37 @@ const EditCar: FC = () => {
 					<Title fontSize={24} textAlign="left" color="black">
 						Registration details
 					</Title>
-					<TextInput<CarFields>
+					<TextInput
 						control={control}
 						label="Vin number"
 						name="registration.vin"
 						type="text"
 						width="100%"
 						margin="0 0 15px 0"
-						placeholder="VU563************"
+						placeholder={carRules.registration.vin.placeholder}
+						rules={{
+							minLength: carRules.registration.vin.min,
+							maxLength: carRules.registration.vin.max,
+						}}
 						defaultValue={car.registration.vin}
-						rules={{ maxLength: 17 }}
 						isShowCharCounter={true}
 					/>
-					<TextInput<CarFields>
+					<TextInput
 						control={control}
 						label="Registration number"
 						name="registration.regNumber"
 						type="text"
 						width="100%"
 						margin="0 0 15px 0"
-						placeholder="VOI2589K"
+						placeholder={carRules.registration.regNumber.placeholder}
+						rules={{
+							minLength: carRules.registration.regNumber.min,
+							maxLength: carRules.registration.regNumber.max,
+						}}
 						defaultValue={car.registration.regNumber}
-						rules={{ minLength: 1, maxLength: 15 }}
 						isShowCharCounter={true}
 					/>
-					<DatePicker<CarFields>
+					<DatePicker
 						control={control}
 						name="registration.firstRegDate"
 						label="Date of first registration"
@@ -315,7 +357,7 @@ const EditCar: FC = () => {
 						defaultValue={car.registration.firstRegDate}
 						rules={{
 							minDate: new Date(`${yearProduction}-01-01`),
-							maxDate: new Date(),
+							maxDate: carRules.registration.firstRegDate.max,
 						}}
 					/>
 				</>
@@ -323,7 +365,7 @@ const EditCar: FC = () => {
 					<Title fontSize={24} textAlign="left" color="black">
 						Owner details
 					</Title>
-					<DatePicker<CarFields>
+					<DatePicker
 						control={control}
 						name="ownership.purchaseDate"
 						label="Date of purchase"
@@ -333,10 +375,10 @@ const EditCar: FC = () => {
 						defaultValue={car.ownership.purchaseDate}
 						rules={{
 							minDate: new Date(`${yearProduction}-01-01`),
-							maxDate: new Date(),
+							maxDate: carRules.ownership.purchaseDate.max,
 						}}
 					/>
-					<DatePicker<CarFields>
+					<DatePicker
 						control={control}
 						name="ownership.saleDate"
 						label="Date of sale (Leave the current date as is if the car has not been sold yet)"
@@ -346,7 +388,7 @@ const EditCar: FC = () => {
 						defaultValue={car.ownership.saleDate}
 						rules={{
 							minDate: new Date(`${yearProduction}-01-01`),
-							maxDate: new Date(),
+							maxDate: carRules.ownership.saleDate.max,
 						}}
 					/>
 				</>
@@ -354,7 +396,7 @@ const EditCar: FC = () => {
 					<Title fontSize={24} textAlign="left" color="black">
 						Short description
 					</Title>
-					<Textarea<CarFields>
+					<Textarea
 						control={control}
 						name="description"
 						label="A few words about the car"
@@ -362,11 +404,16 @@ const EditCar: FC = () => {
 						width="100%"
 						margin="0 0 15px 0"
 						defaultValue={car.description}
-						rules={{ minLength: 0, maxLength: 500 }}
+						rules={{
+							minLength: carRules.description.min,
+							maxLength: carRules.description.max,
+						}}
 						isShowCharCounter={true}
 					/>
 				</>
+
 				{isPending && <Loader color="gray" margin="15px 0" />}
+
 				<Button
 					background="yellow"
 					color="black"

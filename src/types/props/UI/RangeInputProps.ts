@@ -7,21 +7,21 @@ export type Rules = {
 	disabled?: boolean
 }
 
-export type RangeInputProps<T extends FieldValues> = {
-	control: Control<T>
-	name: Path<T>
+export type RangeInputProps<
+	TFieldValues extends FieldValues = FieldValues,
+	TName extends Path<TFieldValues> = Path<TFieldValues>,
+> = {
+	control: Control<TFieldValues>
+	name: TName
 	label: string
 	rules?: Rules
-	defaultValue?: PathValue<T, Path<T>>
+	defaultValue?: PathValue<TFieldValues, TName>
 	min?: number
 	max?: number
 	width?: string
 	margin?: string
 }
 
-export type WrapperProps = Pick<
-	RangeInputProps<FieldValues>,
-	'width' | 'margin'
->
+export type WrapperProps = Pick<RangeInputProps, 'width' | 'margin'>
 
 export type FilledTrackProps = { percentage: number }

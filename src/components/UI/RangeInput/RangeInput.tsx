@@ -1,4 +1,4 @@
-import { FieldValues, useController } from 'react-hook-form'
+import { FieldValues, Path, useController } from 'react-hook-form'
 
 import { useRangeInput } from '@/hooks/ui/useRangeInput'
 
@@ -17,7 +17,10 @@ import {
 	Wrapper,
 } from './RangeInput.styled'
 
-const RangeInput = <T extends FieldValues>({
+const RangeInput = <
+	TFieldValues extends FieldValues,
+	TName extends Path<TFieldValues>,
+>({
 	control,
 	name,
 	label,
@@ -27,7 +30,7 @@ const RangeInput = <T extends FieldValues>({
 	max = 100,
 	width = '100%',
 	margin,
-}: RangeInputProps<T>) => {
+}: RangeInputProps<TFieldValues, TName>) => {
 	const {
 		field,
 		fieldState: { error },
@@ -44,7 +47,7 @@ const RangeInput = <T extends FieldValues>({
 		percentage,
 		values,
 		trackRef,
-	} = useRangeInput<T>({ min, max, field, defaultValue })
+	} = useRangeInput<TFieldValues, TName>({ min, max, field, defaultValue })
 
 	const handleKeyDown = (e: React.KeyboardEvent) => {
 		switch (e.key) {

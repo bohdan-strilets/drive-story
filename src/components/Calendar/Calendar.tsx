@@ -5,10 +5,7 @@ import useCalendar from '@/hooks/ui/useCalendar'
 
 import { CalendarProps } from '@/types/props/Calendar/CalendarProps'
 
-import {
-	SelectMonthYearFields,
-	SelectMonthYearValidation,
-} from '@/validation/SelectMonthYearSchema'
+import { Fields, Validation } from '@/validation/schemas/MonthYearSchema'
 
 import { Wrapper } from './Calendar.styled'
 import Controllers from './Controllers'
@@ -23,9 +20,7 @@ const Calendar: FC<CalendarProps> = ({
 	minDate,
 	maxDate,
 }) => {
-	const { control, setValue, watch } = useForm<SelectMonthYearFields>(
-		SelectMonthYearValidation
-	)
+	const { control, setValue, watch } = useForm<Fields>(Validation)
 
 	const month = watch('month')
 	const year = watch('year')

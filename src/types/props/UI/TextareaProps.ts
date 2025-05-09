@@ -7,12 +7,15 @@ export type Rules = {
 	disabled?: boolean
 }
 
-export type TextareaProps<T extends FieldValues> = {
-	control: Control<T>
-	name: Path<T>
+export type TextareaProps<
+	TFieldValues extends FieldValues = FieldValues,
+	TName extends Path<TFieldValues> = Path<TFieldValues>,
+> = {
+	control: Control<TFieldValues>
+	name: TName
 	label?: string
 	rules?: Rules
-	defaultValue?: PathValue<T, Path<T>>
+	defaultValue?: PathValue<TFieldValues, TName>
 	placeholder?: string
 	width?: string
 	height?: string
@@ -21,6 +24,6 @@ export type TextareaProps<T extends FieldValues> = {
 	isShowCharCounter?: boolean
 }
 
-export type WrapperProps = Pick<TextareaProps<FieldValues>, 'margin' | 'width'>
+export type WrapperProps = Pick<TextareaProps, 'margin' | 'width'>
 
-export type InputProps = Pick<TextareaProps<FieldValues>, 'height' | 'padding'>
+export type InputProps = Pick<TextareaProps, 'height' | 'padding'>

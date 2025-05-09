@@ -1,43 +1,37 @@
-import { BodyType } from '../enums/BodyType'
-import { Drivetrain } from '../enums/Drivetrain'
-import { FuelType } from '../enums/FuelType'
-import { Transmission } from '../enums/Transmission'
+import {
+	CarBasicInfo,
+	CarOwnership,
+	CarRegistration,
+	CarSpecs,
+	EngineSpecs,
+} from '../types/CarEntity'
 
-export type CarBasicInfoDto = {
-	make: string
-	model: string
-	year: number
-	shortName?: string | null
-	generation?: string | null
-}
+export type CarBasicInfoDto = Pick<
+	CarBasicInfo,
+	'make' | 'model' | 'generation' | 'shortName' | 'year'
+>
 
-export type CarEngineDto = {
-	volume: number
-	power: number
-}
+export type CarEngineDto = Pick<EngineSpecs, 'power' | 'volume'>
 
-export type CarSpecsDto = {
-	mileage: number
-	fuelType: FuelType
-	transmission: Transmission
-	drivetrain: Drivetrain
-	bodyType: BodyType
-	engine: CarEngineDto
-	color?: string
-	doors?: number
-	seats?: number
-}
+export type CarSpecsDto = Pick<
+	CarSpecs,
+	| 'bodyType'
+	| 'color'
+	| 'doors'
+	| 'drivetrain'
+	| 'engine'
+	| 'fuelType'
+	| 'mileage'
+	| 'seats'
+	| 'transmission'
+>
 
-export type CarRegistrationDto = {
-	vin?: string | null
-	regNumber?: string | null
-	firstRegDate?: Date | null
-}
+export type CarRegistrationDto = Pick<
+	CarRegistration,
+	'firstRegDate' | 'regNumber' | 'vin'
+>
 
-export type CarOwnershipDto = {
-	purchaseDate?: Date | null
-	saleDate?: Date | null
-}
+export type CarOwnershipDto = Pick<CarOwnership, 'purchaseDate' | 'saleDate'>
 
 export type CarDetailsDto = {
 	basicInfo: CarBasicInfoDto

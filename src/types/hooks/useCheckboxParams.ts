@@ -1,8 +1,8 @@
-import { FieldValues } from 'react-hook-form'
+import { FieldValues, Path } from 'react-hook-form'
 
 import { CheckboxProps } from '../props/UI/CheckboxProps'
 
-export type useCheckboxParams<T extends FieldValues> = Pick<
-	CheckboxProps<T>,
-	'name' | 'control' | 'rules'
->
+export type Params<
+	TFieldValues extends FieldValues,
+	TName extends Path<TFieldValues>,
+> = Pick<CheckboxProps<TFieldValues, TName>, 'name' | 'control' | 'rules'>

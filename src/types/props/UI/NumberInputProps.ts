@@ -8,12 +8,15 @@ export type Rules = {
 	disabled?: boolean
 }
 
-export type NumberInputProps<T extends FieldValues> = {
-	control: Control<T>
-	name: Path<T>
+export type NumberInputProps<
+	TFieldValues extends FieldValues = FieldValues,
+	TName extends Path<TFieldValues> = Path<TFieldValues>,
+> = {
+	control: Control<TFieldValues>
+	name: TName
 	rules: Rules
 	label?: string
-	defaultValue?: PathValue<T, Path<T>>
+	defaultValue?: PathValue<TFieldValues, TName>
 	placeholder?: string
 	width?: string
 	height?: string
@@ -21,12 +24,6 @@ export type NumberInputProps<T extends FieldValues> = {
 	padding?: string
 }
 
-export type WrapperProps = Pick<
-	NumberInputProps<FieldValues>,
-	'margin' | 'width'
->
+export type WrapperProps = Pick<NumberInputProps, 'margin' | 'width'>
 
-export type InputProps = Pick<
-	NumberInputProps<FieldValues>,
-	'height' | 'padding'
->
+export type InputProps = Pick<NumberInputProps, 'height' | 'padding'>

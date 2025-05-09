@@ -7,8 +7,12 @@ export const formatLabel = (input: string): string => {
 	return withSpaces.charAt(0).toUpperCase() + withSpaces.slice(1)
 }
 
-export const formatValue = (input: string): string => {
-	return input.replace(/\s+/g, '-').replace(/_+/g, '-').toLowerCase().trim()
+export const formatValue = <T extends string>(input: string): T => {
+	return input
+		.replace(/\s+/g, '-')
+		.replace(/_+/g, '-')
+		.toLowerCase()
+		.trim() as T
 }
 
 export function generateDropdownOptions(labels: string[]): DropdownOption[]

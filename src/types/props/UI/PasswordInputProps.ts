@@ -1,9 +1,12 @@
-import { FieldValues } from 'react-hook-form'
+import { FieldValues, Path } from 'react-hook-form'
 
 import { TextInputProps } from './TextInputProps'
 
-export type PasswordInputProps<T extends FieldValues> = Pick<
-	TextInputProps<T>,
+export type PasswordInputProps<
+	TFieldValues extends FieldValues = FieldValues,
+	TName extends Path<TFieldValues> = Path<TFieldValues>,
+> = Pick<
+	TextInputProps<TFieldValues, TName>,
 	| 'control'
 	| 'name'
 	| 'label'

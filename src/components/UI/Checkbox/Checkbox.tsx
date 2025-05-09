@@ -1,4 +1,4 @@
-import { FieldError, FieldValues } from 'react-hook-form'
+import { FieldError, FieldValues, Path } from 'react-hook-form'
 import { HiCheck } from 'react-icons/hi'
 
 import useCheckbox from '@/hooks/ui/useCheckbox'
@@ -14,13 +14,16 @@ import {
 	Wrapper,
 } from './Checkbox.styled'
 
-const Checkbox = <T extends FieldValues>({
+const Checkbox = <
+	TFieldValues extends FieldValues,
+	TName extends Path<TFieldValues>,
+>({
 	children,
 	control,
 	name,
 	rules,
 	margin,
-}: CheckboxProps<T>) => {
+}: CheckboxProps<TFieldValues, TName>) => {
 	const {
 		toggleCheckbox,
 		isChecked,
@@ -30,7 +33,7 @@ const Checkbox = <T extends FieldValues>({
 		disabled,
 		error,
 		animationControls,
-	} = useCheckbox<T>({ name, control, rules })
+	} = useCheckbox<TFieldValues, TName>({ name, control, rules })
 
 	useKeyboard({
 		Space: toggleCheckbox,

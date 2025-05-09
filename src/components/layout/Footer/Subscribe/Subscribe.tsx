@@ -5,20 +5,18 @@ import Button from '@/components/UI/Button'
 import TextInput from '@/components/UI/TextInput'
 import Title from '@/components/UI/Title'
 
-import {
-	SubscribeFields,
-	SubscribeValidation,
-} from '@/validation/SubscribeSchema'
+import { subscribeRules } from '@/validation/rules/subscribeRules'
+import { userRules } from '@/validation/rules/userRules'
+import { Fields, Validation } from '@/validation/schemas/SubscribeSchema'
 
 import { fadeSlide } from '@/animations/fadeSlide'
 
 import { Wrapper } from './Subscribe.styled'
 
 const Subscribe: FC = () => {
-	const { handleSubmit, control } =
-		useForm<SubscribeFields>(SubscribeValidation)
+	const { handleSubmit, control } = useForm<Fields>(Validation)
 
-	const onSubmit: SubmitHandler<SubscribeFields> = async (data) => {
+	const onSubmit: SubmitHandler<Fields> = async (data) => {
 		try {
 			console.log(data)
 			console.log('Subscribe form successfully sending')
@@ -32,23 +30,27 @@ const Subscribe: FC = () => {
 			<Title type="h2" fontSize={18} textAlign="left" color={'yellow'}>
 				Newsletter
 			</Title>
-			<TextInput<SubscribeFields>
+			<TextInput
 				control={control}
 				name="name"
 				type="text"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder="Name"
-				rules={{ required: true }}
+				placeholder={subscribeRules.name.placeholder}
+				rules={{
+					required: true,
+					minLength: subscribeRules.name.min,
+					max: subscribeRules.name.max,
+				}}
 				defaultValue=""
 			/>
-			<TextInput<SubscribeFields>
+			<TextInput
 				control={control}
 				name="email"
 				type="email"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder="Email"
+				placeholder={userRules.email.placeholder}
 				rules={{ required: true }}
 				defaultValue=""
 			/>

@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
-import { FieldValues, useController } from 'react-hook-form'
+import { FieldValues, Path, useController } from 'react-hook-form'
 import { FaCalendarAlt } from 'react-icons/fa'
 
 import Calendar from '@/components/Calendar'
@@ -15,7 +15,10 @@ import InputLabel from '../InputLabel'
 
 import { CustomInput, Wrapper } from './DatePicker.styled'
 
-const DatePicker = <T extends FieldValues>({
+const DatePicker = <
+	TFieldValues extends FieldValues,
+	TName extends Path<TFieldValues>,
+>({
 	control,
 	name,
 	placeholder,
@@ -24,7 +27,7 @@ const DatePicker = <T extends FieldValues>({
 	rules,
 	width = '100%',
 	margin,
-}: DatePickerProps<T>) => {
+}: DatePickerProps<TFieldValues, TName>) => {
 	const {
 		field: { onChange, value },
 		fieldState: { error },

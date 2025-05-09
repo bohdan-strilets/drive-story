@@ -11,17 +11,12 @@ import { useEditPassword } from '@/hooks/user/useEditPassword'
 import { EditPasswordDto } from '@/types/dto/EditPasswordDto'
 import { User } from '@/types/types/User'
 
-import {
-	EditPasswordFields,
-	EditPasswordValidation,
-} from '@/validation/EditPasswordSchema'
+import { userRules } from '@/validation/rules/userRules'
+import { Fields, Validation } from '@/validation/schemas/EditPasswordSchema'
 
 const EditPassword: FC = () => {
 	const { mutateAsync: editPassword, isPending } = useEditPassword()
-
-	const { control, handleSubmit } = useForm<EditPasswordFields>(
-		EditPasswordValidation
-	)
+	const { control, handleSubmit } = useForm<Fields>(Validation)
 
 	const submitEditPassword = useSubmit<User | null, EditPasswordDto>({
 		callback: editPassword,
@@ -29,7 +24,7 @@ const EditPassword: FC = () => {
 		isCloseModal: true,
 	})
 
-	const onSubmit: SubmitHandler<EditPasswordFields> = async (data) => {
+	const onSubmit: SubmitHandler<Fields> = async (data) => {
 		const dto: EditPasswordDto = {
 			password: data.password,
 			newPassword: data.newPassword,
@@ -39,37 +34,54 @@ const EditPassword: FC = () => {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<PasswordInput<EditPasswordFields>
+			<PasswordInput
 				control={control}
 				label="Enter your current password"
 				name="password"
 				width="100%"
 				margin="0 0 15px 0"
-				rules={{ required: true, minLength: 6, maxLength: 12 }}
+				placeholder={userRules.password.placeholder}
+				rules={{
+					required: true,
+					minLength: userRules.password.min,
+					maxLength: userRules.password.max,
+				}}
 				isShowCharCounter={true}
 				defaultValue=""
 			/>
-			<PasswordInput<EditPasswordFields>
+			<PasswordInput
 				control={control}
 				label="Create a new password"
 				name="newPassword"
 				width="100%"
 				margin="0 0 15px 0"
-				rules={{ required: true, minLength: 6, maxLength: 12 }}
+				placeholder={userRules.password.placeholder}
+				rules={{
+					required: true,
+					minLength: userRules.password.min,
+					maxLength: userRules.password.max,
+				}}
 				isShowCharCounter={true}
 				defaultValue=""
 			/>
-			<PasswordInput<EditPasswordFields>
+			<PasswordInput
 				control={control}
 				label="Repeat the entered password again"
 				name="passwordAgain"
 				width="100%"
 				margin="0 0 15px 0"
-				rules={{ required: true, minLength: 6, maxLength: 12 }}
+				placeholder={userRules.password.placeholder}
+				rules={{
+					required: true,
+					minLength: userRules.password.min,
+					maxLength: userRules.password.max,
+				}}
 				isShowCharCounter={true}
 				defaultValue=""
 			/>
+
 			{isPending && <Loader color="gray" margin="15px 0" />}
+
 			<Button
 				background="yellow"
 				color="black"

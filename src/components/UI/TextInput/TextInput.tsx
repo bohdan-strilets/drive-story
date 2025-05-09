@@ -1,4 +1,4 @@
-import { FieldValues, useController } from 'react-hook-form'
+import { FieldValues, Path, useController } from 'react-hook-form'
 
 import { formatPhoneNumber } from '@/utils/formatPhoneNumber'
 
@@ -15,7 +15,10 @@ import {
 	Wrapper,
 } from './TextInput.styled'
 
-const TextInput = <T extends FieldValues>({
+const TextInput = <
+	TFieldValues extends FieldValues,
+	TName extends Path<TFieldValues>,
+>({
 	control,
 	name,
 	type,
@@ -31,7 +34,7 @@ const TextInput = <T extends FieldValues>({
 	mask,
 	unmask,
 	isShowCharCounter = false,
-}: TextInputProps<T>) => {
+}: TextInputProps<TFieldValues, TName>) => {
 	const {
 		field,
 		fieldState: { error },

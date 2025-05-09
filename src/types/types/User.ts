@@ -10,8 +10,8 @@ export type Location = {
 
 export type User = {
 	_id: string
-	firstName: string | null
-	lastName: string | null
+	firstName: string
+	lastName: string
 	email: string
 	gender: Gender
 	avatars: string | null | Image

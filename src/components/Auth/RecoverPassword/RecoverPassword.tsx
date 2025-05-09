@@ -15,10 +15,8 @@ import { useResetPassword } from '@/hooks/user/useResetPassword'
 import { ResetPasswordDto } from '@/types/dto/ResetPasswordDto'
 import { User } from '@/types/types/User'
 
-import {
-	ReccoverPasswordFields,
-	ReccoverPasswordValidation,
-} from '@/validation/ReccoverPasswordSchema'
+import { userRules } from '@/validation/rules/userRules'
+import { Fields, Validation } from '@/validation/schemas/ReccoverPasswordSchema'
 
 import { fadeSlide } from '@/animations/fadeSlide'
 
@@ -28,9 +26,7 @@ const RecoverPassword: FC = () => {
 	const { mutateAsync: resetPassword, isPending } = useResetPassword()
 	const { resetToken } = useParams()
 
-	const { control, handleSubmit } = useForm<ReccoverPasswordFields>(
-		ReccoverPasswordValidation
-	)
+	const { control, handleSubmit } = useForm<Fields>(Validation)
 
 	const submitResetPassword = useSubmit<
 		User | null,
@@ -40,7 +36,7 @@ const RecoverPassword: FC = () => {
 		successMessage: 'The password has been changed successfully',
 	})
 
-	const onSubmit: SubmitHandler<ReccoverPasswordFields> = async (data) => {
+	const onSubmit: SubmitHandler<Fields> = async (data) => {
 		const dto: ResetPasswordDto = { password: data.password }
 		submitResetPassword({
 			dto,
@@ -60,27 +56,39 @@ const RecoverPassword: FC = () => {
 				saved, use this password to log in to your account.
 			</Paragraph>
 			<motion.form onSubmit={handleSubmit(onSubmit)} {...fadeSlide()}>
-				<PasswordInput<ReccoverPasswordFields>
+				<PasswordInput
 					control={control}
 					label="Password"
 					name="password"
 					width="100%"
 					margin="0 0 15px 0"
-					rules={{ required: true, minLength: 6, maxLength: 12 }}
+					placeholder={userRules.password.placeholder}
+					rules={{
+						required: true,
+						minLength: userRules.password.min,
+						maxLength: userRules.password.max,
+					}}
 					isShowCharCounter={true}
 					defaultValue=""
 				/>
-				<PasswordInput<ReccoverPasswordFields>
+				<PasswordInput
 					control={control}
 					label="Password again"
 					name="passwordAgain"
 					width="100%"
 					margin="0 0 15px 0"
-					rules={{ required: true, minLength: 6, maxLength: 12 }}
+					placeholder={userRules.password.placeholder}
+					rules={{
+						required: true,
+						minLength: userRules.password.min,
+						maxLength: userRules.password.max,
+					}}
 					isShowCharCounter={true}
 					defaultValue=""
 				/>
+
 				{isPending && <Loader color="gray" margin="15px 0" />}
+
 				<Button
 					background="yellow"
 					color="black"

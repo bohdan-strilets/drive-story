@@ -10,14 +10,17 @@ export type Rules = {
 	disabled?: boolean
 }
 
-export type TextInputProps<T extends FieldValues> = {
-	control: Control<T>
-	name: Path<T>
+export type TextInputProps<
+	TFieldValues extends FieldValues = FieldValues,
+	TName extends Path<TFieldValues> = Path<TFieldValues>,
+> = {
+	control: Control<TFieldValues>
+	name: TName
 	type: 'text' | 'password' | 'email' | 'tel'
 	label?: string
 	children?: ReactNode
 	rules?: Rules
-	defaultValue?: PathValue<T, Path<T>>
+	defaultValue?: PathValue<TFieldValues, TName>
 	placeholder?: string
 	width?: string
 	height?: string
@@ -28,6 +31,6 @@ export type TextInputProps<T extends FieldValues> = {
 	isShowCharCounter?: boolean
 }
 
-export type WrapperProps = Pick<TextInputProps<FieldValues>, 'margin' | 'width'>
+export type WrapperProps = Pick<TextInputProps, 'margin' | 'width'>
 
-export type InputProps = Pick<TextInputProps<FieldValues>, 'height' | 'padding'>
+export type InputProps = Pick<TextInputProps, 'height' | 'padding'>

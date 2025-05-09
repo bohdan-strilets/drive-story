@@ -15,26 +15,22 @@ import { EmailDto } from '@/types/dto/EmailDto'
 import { ResendEmailProps } from '@/types/props/Auth/ResendEmailProps'
 import { User } from '@/types/types/User'
 
-import {
-	ResendEmailFields,
-	ResendEmailValidation,
-} from '@/validation/ResendEmailSchema'
+import { userRules } from '@/validation/rules/userRules'
+import { Fields, Validation } from '@/validation/schemas/EmailSchema'
 
 const ResendEmail: FC<ResendEmailProps> = ({ showButtonGoBack = false }) => {
 	const navigate = useNavigate()
 	const { mutateAsync: resendActivationEmail, isPending } =
 		useResendActivationEmail()
 
-	const { control, handleSubmit } = useForm<ResendEmailFields>(
-		ResendEmailValidation
-	)
+	const { control, handleSubmit } = useForm<Fields>(Validation)
 
 	const submitResendActivationEmail = useSubmit<User | null, EmailDto>({
 		callback: resendActivationEmail,
 		successMessage: 'The letter has been sent successfully',
 	})
 
-	const onSubmit: SubmitHandler<ResendEmailFields> = async (data) => {
+	const onSubmit: SubmitHandler<Fields> = async (data) => {
 		submitResendActivationEmail(data)
 	}
 
@@ -61,18 +57,20 @@ const ResendEmail: FC<ResendEmailProps> = ({ showButtonGoBack = false }) => {
 				for further assistance.
 			</Paragraph>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<TextInput<ResendEmailFields>
+				<TextInput
 					control={control}
 					label="Email"
 					name="email"
 					type="email"
 					width="100%"
 					margin="0 0 15px 0"
-					placeholder="madison.carter@gmail.com"
+					placeholder={userRules.email.placeholder}
 					rules={{ required: true }}
 					defaultValue=""
 				/>
+
 				{isPending && <Loader color="gray" margin="15px 0" />}
+
 				<Button
 					background="yellow"
 					color="black"

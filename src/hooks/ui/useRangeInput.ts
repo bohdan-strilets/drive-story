@@ -1,14 +1,17 @@
 import { useCallback, useRef } from 'react'
-import { FieldValues } from 'react-hook-form'
+import { FieldValues, Path } from 'react-hook-form'
 
-import { useRangeInputParams } from '@/types/hooks/useRangeInputParams'
+import { Params } from '@/types/hooks/useRangeInputParams'
 
-export const useRangeInput = <T extends FieldValues>({
+export const useRangeInput = <
+	TFieldValues extends FieldValues,
+	TName extends Path<TFieldValues>,
+>({
 	min,
 	max,
 	field,
 	defaultValue,
-}: useRangeInputParams<T>) => {
+}: Params<TFieldValues, TName>) => {
 	const trackRef = useRef<HTMLDivElement>(null)
 
 	const getPercentage = (value: number) => (value - min) / (max - min)

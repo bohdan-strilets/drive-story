@@ -17,7 +17,8 @@ import { routes } from '@/config/routes'
 import { LoginDto } from '@/types/dto/LoginDto'
 import { AuthResponse } from '@/types/types/AuthResponse'
 
-import { LoginFields, LoginValidation } from '@/validation/LoginSchema'
+import { userRules } from '@/validation/rules/userRules'
+import { Fields, Validation } from '@/validation/schemas/LoginSchema'
 
 import { fadeSlide } from '@/animations/fadeSlide'
 
@@ -25,37 +26,42 @@ const Login: FC = () => {
 	const { modalNames, onOpen } = useModal()
 	const { mutateAsync: login, isPending } = useLogin()
 
-	const { control, handleSubmit } = useForm<LoginFields>(LoginValidation)
+	const { control, handleSubmit } = useForm<Fields>(Validation)
 
 	const submitLogin = useSubmit<AuthResponse | null, LoginDto>({
 		callback: login,
 		navigateTo: routes.HOME,
 	})
 
-	const onSubmit: SubmitHandler<LoginFields> = async (data) => {
+	const onSubmit: SubmitHandler<Fields> = async (data) => {
 		submitLogin(data)
 	}
 
 	return (
 		<motion.form onSubmit={handleSubmit(onSubmit)} {...fadeSlide()}>
-			<TextInput<LoginFields>
+			<TextInput
 				control={control}
 				label="Email"
 				name="email"
 				type="email"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder="madison.carter@gmail.com"
+				placeholder={userRules.email.placeholder}
 				rules={{ required: true }}
 				defaultValue=""
 			/>
-			<PasswordInput<LoginFields>
+			<PasswordInput
 				control={control}
 				label="Password"
 				name="password"
 				width="100%"
 				margin="0 0 15px 0"
-				rules={{ required: true, minLength: 6, maxLength: 12 }}
+				placeholder={userRules.email.placeholder}
+				rules={{
+					required: true,
+					minLength: userRules.password.min,
+					maxLength: userRules.password.max,
+				}}
 				isShowCharCounter={true}
 				defaultValue=""
 			/>
@@ -66,7 +72,9 @@ const Login: FC = () => {
 				label="Forgot your password?"
 				margin="0 0 15px 0"
 			/>
+
 			{isPending && <Loader color="gray" margin="15px 0" />}
+
 			<Button
 				background="yellow"
 				color="black"

@@ -15,8 +15,6 @@ import { generateNumberArray } from '@/utils/generateNumberArray'
 import { Months } from '@/types/enums/Months'
 import { ControllersProps } from '@/types/props/Calendar/ControllersProps'
 
-import { SelectMonthYearFields } from '@/validation/SelectMonthYearSchema'
-
 import { Group, Wrapper } from './Controllers.styled'
 
 const Controllers: FC<ControllersProps> = ({
@@ -77,7 +75,7 @@ const Controllers: FC<ControllersProps> = ({
 				<IoMdArrowDropleft size={26} />
 			</Button>
 			<Group>
-				<DropdownList<SelectMonthYearFields>
+				<DropdownList
 					control={control}
 					options={monthDropdownOptions}
 					name="month"
@@ -86,7 +84,7 @@ const Controllers: FC<ControllersProps> = ({
 					placeholder="Month"
 					defaultValue={defaultMonth}
 				/>
-				<DropdownList<SelectMonthYearFields>
+				<DropdownList
 					control={control}
 					options={yearDropdownOptions}
 					name="year"

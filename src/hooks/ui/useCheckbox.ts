@@ -1,20 +1,23 @@
 import { useAnimation } from 'motion/react'
 import { useCallback } from 'react'
-import { FieldValues, useController } from 'react-hook-form'
+import { FieldValues, Path, useController } from 'react-hook-form'
 
-import { useCheckboxParams } from '@/types/hooks/useCheckboxParams'
+import { Params } from '@/types/hooks/useCheckboxParams'
 
 import { checkboxScale } from '@/animations/checkboxScale'
 
-export const useCheckbox = <T extends FieldValues>({
+export const useCheckbox = <
+	TFieldValues extends FieldValues,
+	TName extends Path<TFieldValues>,
+>({
 	name,
 	control,
 	rules,
-}: useCheckboxParams<T>) => {
+}: Params<TFieldValues, TName>) => {
 	const {
 		field: { value, onChange, ref, ...inputProps },
 		fieldState: { error },
-	} = useController<T>({
+	} = useController<TFieldValues, TName>({
 		name,
 		control,
 		rules,

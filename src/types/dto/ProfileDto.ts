@@ -1,12 +1,12 @@
-import { Gender } from '../enums/Gender'
-import { Location } from '../types/Location'
+import { User } from '../types/User'
 
-export type ProfileDto = {
-	firstName?: string
-	lastName?: string
-	nickname?: string
-	birthDate?: Date
-	phoneNumber?: string
-	gender?: Gender
-	location?: Location
-}
+export type ProfileDto = Pick<
+	User,
+	| 'firstName'
+	| 'lastName'
+	| 'gender'
+	| 'nickname'
+	| 'birthDate'
+	| 'phoneNumber'
+	| 'location'
+>

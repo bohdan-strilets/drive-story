@@ -48,7 +48,7 @@ export type CarEntity = {
 	specifications: CarSpecs
 	registration: CarRegistration
 	ownership: CarOwnership
-	description: string | null
+	description?: string | null
 	photos: string | null | Image
 	createdAt: Date
 	updatedAt: Date

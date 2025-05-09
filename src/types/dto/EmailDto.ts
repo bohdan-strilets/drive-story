@@ -1,3 +1,3 @@
-export type EmailDto = {
-	email: string
-}
+import { User } from '../types/User'
+
+export type EmailDto = Pick<User, 'email'>

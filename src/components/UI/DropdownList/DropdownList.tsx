@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
-import { FieldValues, useController } from 'react-hook-form'
+import { FieldValues, Path, useController } from 'react-hook-form'
 import { ImCheckmark } from 'react-icons/im'
 
 import useClickOutside from '@/hooks/ui/useClickOutside'
@@ -22,7 +22,10 @@ import {
 	Wrapper,
 } from './DropdownList.styled'
 
-const DropdownList = <T extends FieldValues>({
+const DropdownList = <
+	TFieldValues extends FieldValues,
+	TName extends Path<TFieldValues>,
+>({
 	control,
 	options,
 	name,
@@ -34,7 +37,7 @@ const DropdownList = <T extends FieldValues>({
 	margin,
 	listHeight = 300,
 	listPosition = 'bottom',
-}: DropdownListProps<T>) => {
+}: DropdownListProps<TFieldValues, TName>) => {
 	const {
 		field: { onChange, value },
 		fieldState: { error },

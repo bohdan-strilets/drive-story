@@ -7,13 +7,16 @@ export type Rules = {
 	disabled?: boolean
 }
 
-export type DropdownListProps<T extends FieldValues> = {
-	control: Control<T>
+export type DropdownListProps<
+	TFieldValues extends FieldValues = FieldValues,
+	TName extends Path<TFieldValues> = Path<TFieldValues>,
+> = {
+	control: Control<TFieldValues>
+	name: TName
 	options: DropdownOption[]
-	name: Path<T>
 	placeholder: string
 	label?: string
-	defaultValue?: PathValue<T, Path<T>>
+	defaultValue?: PathValue<TFieldValues, TName>
 	rules?: Rules
 	width?: string
 	margin?: string
@@ -21,14 +24,8 @@ export type DropdownListProps<T extends FieldValues> = {
 	listPosition?: 'top' | 'bottom'
 }
 
-export type WrapperProps = Pick<
-	DropdownListProps<FieldValues>,
-	'width' | 'margin'
->
+export type WrapperProps = Pick<DropdownListProps, 'width' | 'margin'>
 
 export type ArrowIconProps = { isOpen: boolean }
 
-export type ListProps = Pick<
-	DropdownListProps<FieldValues>,
-	'listHeight' | 'listPosition'
->
+export type ListProps = Pick<DropdownListProps, 'listHeight' | 'listPosition'>

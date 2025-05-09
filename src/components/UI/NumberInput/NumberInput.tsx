@@ -1,4 +1,4 @@
-import { FieldValues, useController } from 'react-hook-form'
+import { FieldValues, Path, useController } from 'react-hook-form'
 import { FaMinus, FaPlus } from 'react-icons/fa6'
 
 import useResponsive from '@/hooks/ui/useResponsive'
@@ -20,7 +20,10 @@ import {
 	Wrapper,
 } from './NumberInput.styled'
 
-const NumberInput = <T extends FieldValues>({
+const NumberInput = <
+	TFieldValues extends FieldValues,
+	TName extends Path<TFieldValues>,
+>({
 	control,
 	name,
 	label,
@@ -31,7 +34,7 @@ const NumberInput = <T extends FieldValues>({
 	height,
 	margin,
 	padding,
-}: NumberInputProps<T>) => {
+}: NumberInputProps<TFieldValues, TName>) => {
 	const { maxMobile } = useResponsive()
 
 	const {

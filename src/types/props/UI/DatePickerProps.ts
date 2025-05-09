@@ -7,18 +7,18 @@ export type Rules = {
 	disabled?: boolean
 }
 
-export type DatePickerProps<T extends FieldValues> = {
-	control: Control<T>
-	name: Path<T>
+export type DatePickerProps<
+	TFieldValues extends FieldValues = FieldValues,
+	TName extends Path<TFieldValues> = Path<TFieldValues>,
+> = {
+	control: Control<TFieldValues>
+	name: TName
 	placeholder: string
 	label?: string
-	defaultValue?: PathValue<T, Path<T>>
+	defaultValue?: PathValue<TFieldValues, TName>
 	rules: Rules
 	width?: string
 	margin?: string
 }
 
-export type WrapperProps = Pick<
-	DatePickerProps<FieldValues>,
-	'width' | 'margin'
->
+export type WrapperProps = Pick<DatePickerProps, 'width' | 'margin'>

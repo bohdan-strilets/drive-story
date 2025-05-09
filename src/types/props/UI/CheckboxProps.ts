@@ -1,23 +1,29 @@
 import { ReactNode } from 'react'
 import { Control, FieldValues, Path, PathValue } from 'react-hook-form'
 
-export type Rules<T> = {
-	isChecked?: PathValue<T, Path<T>>
+export type Rules<
+	TFieldValues extends FieldValues,
+	TName extends Path<TFieldValues>,
+> = {
+	isChecked?: PathValue<TFieldValues, TName>
 	required?: boolean
 	disabled?: boolean
 	readOnly?: boolean
 }
 
-export type CheckboxProps<T extends FieldValues> = {
+export type CheckboxProps<
+	TFieldValues extends FieldValues = FieldValues,
+	TName extends Path<TFieldValues> = Path<TFieldValues>,
+> = {
+	control: Control<TFieldValues>
+	name: TName
 	children: ReactNode | string
-	control: Control<T>
-	name: Path<T>
-	rules?: Rules<T>
+	rules?: Rules<TFieldValues, TName>
 	margin?: string
 }
 
 export type CustomCheckboxProps = Pick<
-	Rules<FieldValues>,
+	Rules<FieldValues, Path<FieldValues>>,
 	'isChecked' | 'disabled'
 > & {
 	children?: ReactNode | string
