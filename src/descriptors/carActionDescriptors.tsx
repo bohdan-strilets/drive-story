@@ -47,6 +47,7 @@ export const carActionDescriptors: ActionDescriptor<ActionContext>[] = [
 		getCallback:
 			({ navigate, carId }) =>
 			() =>
+				navigate &&
 				navigate(
 					`${routes.CAR_INFORMATION}/${carId}/${routes.INSURANCE_POLICY}`
 				),

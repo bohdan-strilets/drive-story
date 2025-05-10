@@ -1,19 +1,18 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query'
 
-import { getById } from '@/api/insuranceApi'
+import { getByCar } from '@/api/insuranceApi'
 
 import { InsuranceKey } from '@/config/queryKeys'
 
-import { InsurancePathParams } from '@/types/params/InsurancePathParams'
 import { InsurancePolicy } from '@/types/types/InsurancePolicy'
 
 export const useFetchInsurance = (
-	params: InsurancePathParams
+	carId: string
 ): UseQueryResult<InsurancePolicy | undefined, unknown> => {
 	return useQuery({
-		queryKey: [InsuranceKey, params],
+		queryKey: [InsuranceKey, carId],
 		queryFn: async () => {
-			const response = await getById(params)
+			const response = await getByCar(carId)
 			if (response.success) {
 				return response.data
 			}

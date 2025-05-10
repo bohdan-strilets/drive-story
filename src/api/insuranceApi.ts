@@ -57,14 +57,11 @@ export const remove = async ({
 	}
 }
 
-export const getById = async ({
-	carId,
-	insuranceId,
-}: InsurancePathParams): Promise<ApiResponse<InsurancePolicy | null>> => {
+export const getByCar = async (
+	carId: string
+): Promise<ApiResponse<InsurancePolicy | null>> => {
 	try {
-		const { data } = await apiClient.get(
-			`${ENDPOINT}/get-by-id/${carId}/${insuranceId}`
-		)
+		const { data } = await apiClient.get(`${ENDPOINT}/get-by-car/${carId}`)
 		return data
 	} catch (error) {
 		return handleApiError(error)

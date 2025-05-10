@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
-import { insurancePolicyRules } from '../rules/insurancePolicyRules'
+import { insuranceRules } from '../rules/insuranceRules'
 
 const {
 	coverageAmount,
@@ -11,7 +11,7 @@ const {
 	paymentStatus,
 	policyNumber,
 	startDate,
-} = insurancePolicyRules
+} = insuranceRules
 const { installmentCost, installmentsCount, isPaid, totalInstallmentsSum } =
 	paymentStatus
 
@@ -32,14 +32,14 @@ export const Schema = yup.object().shape({
 
 	startDate: yup
 		.date()
-		.min(startDate.min)
-		.max(startDate.max)
+		.min(startDate.min, startDate.message)
+		.max(startDate.max, startDate.message)
 		.required(startDate.required),
 
 	endDate: yup
 		.date()
-		.min(startDate.min)
-		.max(startDate.max)
+		.min(endDate.min, endDate.message)
+		.max(endDate.max, endDate.message)
 		.required(endDate.required),
 
 	insuranceType: yup

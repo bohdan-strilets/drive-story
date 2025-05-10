@@ -2,7 +2,7 @@ import { InsuranceType } from '@/types/enums/InsuranceType'
 
 const currentDate = new Date()
 
-export const insurancePolicyRules = {
+export const insuranceRules = {
 	insurerName: {
 		placeholder: 'Acme Insurance Co.',
 		min: 2,
@@ -20,13 +20,16 @@ export const insurancePolicyRules = {
 	startDate: {
 		placeholder: '2025-06-01',
 		min: new Date(`${currentDate.getFullYear() - 1}-01-01`),
-		max: new Date(`${currentDate.getFullYear() + 1}-01-01`),
+		max: new Date(`${currentDate.getFullYear() + 1}-12-30`),
+		message: 'Please indicate the current start date of the insurance policy.',
 		required: 'Insurance policy start date required',
 	},
 	endDate: {
 		placeholder: '2026-06-01',
 		min: new Date(`${currentDate.getFullYear() - 1}-01-01`),
-		max: new Date(`${currentDate.getFullYear() + 1}-01-01`),
+		max: new Date(`${currentDate.getFullYear() + 1}-12-30`),
+		message:
+			'Please indicate the current expiration date of your insurance policy.',
 		required: 'Insurance policy expiration date required',
 	},
 	insuranceType: {

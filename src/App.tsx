@@ -9,7 +9,7 @@ import AuthPage from './pages/AuthPage'
 import CarInformationPage from './pages/CarInformationPage'
 import GaragePage from './pages/GaragePage'
 import HomePage from './pages/HomePage'
-import IncurancePolicyPage from './pages/IncurancePolicyPage'
+import IncurancePage from './pages/IncurancePage'
 import NotFoundPage from './pages/NotFoundPage'
 import ProfilePage from './pages/ProfilePage'
 import RecoverPasswordPage from './pages/RecoverPasswordPage'
@@ -44,7 +44,7 @@ const App: FC = () => {
 				/>
 				<Route
 					path={`${routes.CAR_INFORMATION}/:carId/${routes.INSURANCE_POLICY}`}
-					element={<IncurancePolicyPage />}
+					element={<IncurancePage />}
 				/>
 				<Route path="*" element={<NotFoundPage />} />
 			</Routes>

@@ -25,10 +25,10 @@ import { InsuranceType } from '@/types/enums/InsuranceType'
 import { AddInsuranceParams } from '@/types/params/AddInsuranceParams'
 import { InsurancePolicy } from '@/types/types/InsurancePolicy'
 
-import { insurancePolicyRules } from '@/validation/rules/insurancePolicyRules'
+import { insuranceRules } from '@/validation/rules/insuranceRules'
 import { Fields, Validation } from '@/validation/schemas/InsurancePolicySchema'
 
-const AddInsurancePolicy: FC = () => {
+const AddInsurance: FC = () => {
 	const { carId } = useParams()
 	const { mutateAsync: createInsurance, isPending } = useCreateInsurance()
 
@@ -74,11 +74,11 @@ const AddInsurancePolicy: FC = () => {
 				type="text"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder={insurancePolicyRules.insurerName.placeholder}
+				placeholder={insuranceRules.insurerName.placeholder}
 				rules={{
 					required: true,
-					minLength: insurancePolicyRules.insurerName.min,
-					maxLength: insurancePolicyRules.insurerName.max,
+					minLength: insuranceRules.insurerName.min,
+					maxLength: insuranceRules.insurerName.max,
 				}}
 				isShowCharCounter={true}
 			/>
@@ -89,11 +89,11 @@ const AddInsurancePolicy: FC = () => {
 				type="text"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder={insurancePolicyRules.policyNumber.placeholder}
+				placeholder={insuranceRules.policyNumber.placeholder}
 				rules={{
 					required: true,
-					minLength: insurancePolicyRules.policyNumber.min,
-					maxLength: insurancePolicyRules.policyNumber.max,
+					minLength: insuranceRules.policyNumber.min,
+					maxLength: insuranceRules.policyNumber.max,
 				}}
 				isShowCharCounter={true}
 			/>
@@ -107,8 +107,8 @@ const AddInsurancePolicy: FC = () => {
 				defaultValue={new Date()}
 				rules={{
 					required: true,
-					minDate: insurancePolicyRules.startDate.min,
-					maxDate: insurancePolicyRules.startDate.max,
+					minDate: insuranceRules.startDate.min,
+					maxDate: insuranceRules.startDate.max,
 				}}
 			/>
 			<DatePicker
@@ -121,8 +121,8 @@ const AddInsurancePolicy: FC = () => {
 				defaultValue={new Date()}
 				rules={{
 					required: true,
-					minDate: insurancePolicyRules.endDate.min,
-					maxDate: insurancePolicyRules.endDate.max,
+					minDate: insuranceRules.endDate.min,
+					maxDate: insuranceRules.endDate.max,
 				}}
 			/>
 			<DropdownList
@@ -142,11 +142,11 @@ const AddInsurancePolicy: FC = () => {
 				name="coverageAmount"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder={insurancePolicyRules.coverageAmount.placeholder}
+				placeholder={insuranceRules.coverageAmount.placeholder}
 				rules={{
 					required: true,
-					min: insurancePolicyRules.coverageAmount.min,
-					max: insurancePolicyRules.coverageAmount.max,
+					min: insuranceRules.coverageAmount.min,
+					max: insuranceRules.coverageAmount.max,
 				}}
 				defaultValue={0}
 			/>
@@ -168,8 +168,8 @@ const AddInsurancePolicy: FC = () => {
 					name="paymentStatus.installmentsCount"
 					width="100%"
 					margin="0 0 15px 0"
-					min={insurancePolicyRules.paymentStatus.installmentsCount.min}
-					max={insurancePolicyRules.paymentStatus.installmentsCount.max}
+					min={insuranceRules.paymentStatus.installmentsCount.min}
+					max={insuranceRules.paymentStatus.installmentsCount.max}
 					defaultValue={4}
 				/>
 				<NumberInput
@@ -178,13 +178,11 @@ const AddInsurancePolicy: FC = () => {
 					name="paymentStatus.installmentCost"
 					width="100%"
 					margin="0 0 15px 0"
-					placeholder={
-						insurancePolicyRules.paymentStatus.installmentCost.placeholder
-					}
+					placeholder={insuranceRules.paymentStatus.installmentCost.placeholder}
 					defaultValue={0}
 					rules={{
-						min: insurancePolicyRules.paymentStatus.installmentCost.min,
-						max: insurancePolicyRules.paymentStatus.installmentCost.max,
+						min: insuranceRules.paymentStatus.installmentCost.min,
+						max: insuranceRules.paymentStatus.installmentCost.max,
 					}}
 				/>
 				<NumberInput
@@ -194,12 +192,12 @@ const AddInsurancePolicy: FC = () => {
 					width="100%"
 					margin="0 0 15px 0"
 					placeholder={
-						insurancePolicyRules.paymentStatus.totalInstallmentsSum.placeholder
+						insuranceRules.paymentStatus.totalInstallmentsSum.placeholder
 					}
 					defaultValue={0}
 					rules={{
-						min: insurancePolicyRules.paymentStatus.totalInstallmentsSum.min,
-						max: insurancePolicyRules.paymentStatus.totalInstallmentsSum.max,
+						min: insuranceRules.paymentStatus.totalInstallmentsSum.min,
+						max: insuranceRules.paymentStatus.totalInstallmentsSum.max,
 					}}
 				/>
 			</>
@@ -221,4 +219,4 @@ const AddInsurancePolicy: FC = () => {
 	)
 }
 
-export default AddInsurancePolicy
+export default AddInsurance
