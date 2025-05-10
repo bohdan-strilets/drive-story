@@ -1,8 +1,19 @@
-import { MdContactEmergency, MdDelete, MdModeEdit } from 'react-icons/md'
+import {
+	MdCloudUpload,
+	MdContactEmergency,
+	MdDelete,
+	MdModeEdit,
+} from 'react-icons/md'
 
 import { ActionContext, ActionDescriptor } from '@/types/types/ActionDescriptor'
 
-export const insuranceActionsDescriptors: ActionDescriptor<ActionContext>[] = [
+export const insuranceActions: ActionDescriptor<ActionContext>[] = [
+	{
+		key: 'upload-car-photo',
+		label: 'Upload photo',
+		icon: <MdCloudUpload size={20} />,
+		getCallback: () => () => null,
+	},
 	{
 		key: 'edit-insurance',
 		label: 'Edit insurance',

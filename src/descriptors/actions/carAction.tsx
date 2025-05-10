@@ -15,7 +15,7 @@ import { routes } from '@/config/routes'
 
 import { ActionContext, ActionDescriptor } from '@/types/types/ActionDescriptor'
 
-export const carActionDescriptors: ActionDescriptor<ActionContext>[] = [
+export const carAction: ActionDescriptor<ActionContext>[] = [
 	{
 		key: 'upload-car-photo',
 		label: 'Upload photo',

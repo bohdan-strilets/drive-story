@@ -3,9 +3,9 @@ import { FC } from 'react'
 import { useGetImage } from '@/hooks/ui/useGetImage'
 import useModal from '@/hooks/ui/useModal'
 
-import { userActionDescriptors } from '@/descriptors/actions/userActionDescriptors'
-import { userUploadActionDescriptors } from '@/descriptors/actions/userUploadActionDescriptors'
-import { userFieldDescriptors } from '@/descriptors/fields/userFieldDescriptors'
+import { userAction } from '@/descriptors/actions/userAction'
+import { userUploadAction } from '@/descriptors/actions/userUploadAction'
+import { userField } from '@/descriptors/fields/userField'
 
 import { useUserStore } from '@/store/useUserStore'
 
@@ -52,7 +52,7 @@ const Profile: FC = () => {
 			/>
 			<Information>
 				<InformationWrapper>
-					<PropertyList descriptors={userFieldDescriptors} context={user} />
+					<PropertyList descriptors={userField} context={user} />
 				</InformationWrapper>
 				<SideMenu>
 					<OpenGalleryButton
@@ -67,12 +67,9 @@ const Profile: FC = () => {
 							isShadow={true}
 						/>
 					</OpenGalleryButton>
-					<ActionMenu
-						descriptors={userUploadActionDescriptors}
-						context={actionCtx}
-					/>
+					<ActionMenu descriptors={userUploadAction} context={actionCtx} />
 					<ProfileMeta />
-					<ActionMenu descriptors={userActionDescriptors} context={actionCtx} />
+					<ActionMenu descriptors={userAction} context={actionCtx} />
 				</SideMenu>
 			</Information>
 		</>

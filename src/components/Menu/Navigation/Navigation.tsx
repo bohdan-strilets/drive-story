@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { navigationDescriptors } from '@/descriptors/actions/navigationDescriptors'
+import { navigation } from '@/descriptors/actions/navigation'
 
 import { NavigationProps } from '@/types/props/Menu/NavigationProps'
 
@@ -11,7 +11,7 @@ import { Item, Label, List, StyledLink } from './Navigation.styled'
 const Navigation: FC<NavigationProps> = ({ closeMenu, margin, itemHeight }) => {
 	return (
 		<List margin={margin}>
-			{navigationDescriptors.map(({ key, label, route, icon }, index) => {
+			{navigation.map(({ key, label, route, icon }, index) => {
 				return (
 					<Item
 						key={key}

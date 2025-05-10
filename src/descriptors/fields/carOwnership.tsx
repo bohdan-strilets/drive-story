@@ -4,7 +4,7 @@ import { parsedDateToString } from '@/utils/parsedDateToString'
 import { CarOwnership } from '@/types/types/CarEntity'
 import { FieldDescriptor } from '@/types/types/FieldDescriptor'
 
-export const carOwnershipHistoryDescriptors: FieldDescriptor<CarOwnership>[] = [
+export const carOwnership: FieldDescriptor<CarOwnership>[] = [
 	{
 		key: 'date-of-purchase',
 		label: 'Date of purchase',

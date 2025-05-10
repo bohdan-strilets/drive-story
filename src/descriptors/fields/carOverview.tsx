@@ -1,7 +1,7 @@
 import { CarBasicInfo } from '@/types/types/CarEntity'
 import { FieldDescriptor } from '@/types/types/FieldDescriptor'
 
-export const carOverviewDescriptors: FieldDescriptor<CarBasicInfo>[] = [
+export const carOverview: FieldDescriptor<CarBasicInfo>[] = [
 	{
 		key: 'make',
 		label: 'Make',

@@ -1,10 +1,9 @@
-// src/descriptors/userActionDescriptors.ts
 import { BsImageFill } from 'react-icons/bs'
 import { MdImagesearchRoller } from 'react-icons/md'
 
 import { ActionContext, ActionDescriptor } from '@/types/types/ActionDescriptor'
 
-export const userUploadActionDescriptors: ActionDescriptor<ActionContext>[] = [
+export const userUploadAction: ActionDescriptor<ActionContext>[] = [
 	{
 		key: 'upload-avatar',
 		label: 'Upload avatar',

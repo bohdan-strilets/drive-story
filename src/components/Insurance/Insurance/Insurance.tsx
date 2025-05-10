@@ -19,9 +19,9 @@ import useResponsive from '@/hooks/ui/useResponsive'
 
 import { routes } from '@/config/routes'
 
-import { insuranceActionsDescriptors } from '@/descriptors/fields/insuranceActionsDescriptors'
-import { insuranceFieldDescriptors } from '@/descriptors/fields/insuranceFieldDescriptors'
-import { insurancePaymentStatusDescriptors } from '@/descriptors/fields/insurancePaymentStatusDescriptors'
+import { insuranceActions } from '@/descriptors/actions/insuranceActions'
+import { insuranceField } from '@/descriptors/fields/insuranceField'
+import { insurancePayment } from '@/descriptors/fields/insurancePayment'
 
 import { parsedDateToString } from '@/utils/parsedDateToString'
 
@@ -114,10 +114,7 @@ const Insurance: FC = () => {
 				</>
 				<Container>
 					<InformationWrapper>
-						<PropertyList
-							descriptors={insuranceFieldDescriptors}
-							context={insurance}
-						/>
+						<PropertyList descriptors={insuranceField} context={insurance} />
 						{insurance.paymentStatus && !insurance.paymentStatus.isPaid && (
 							<>
 								<Title
@@ -129,7 +126,7 @@ const Insurance: FC = () => {
 									Payment options
 								</Title>
 								<PropertyList
-									descriptors={insurancePaymentStatusDescriptors}
+									descriptors={insurancePayment}
 									context={insurance?.paymentStatus}
 								/>
 							</>
@@ -139,10 +136,7 @@ const Insurance: FC = () => {
 						<Title fontSize={110} textAlign="center" color="yellow">
 							{insurance.insuranceType}
 						</Title>
-						<ActionMenu
-							descriptors={insuranceActionsDescriptors}
-							context={actionCtx}
-						/>
+						<ActionMenu descriptors={insuranceActions} context={actionCtx} />
 					</SideMenu>
 				</Container>
 			</article>

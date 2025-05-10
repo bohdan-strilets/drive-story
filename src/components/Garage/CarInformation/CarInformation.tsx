@@ -13,11 +13,11 @@ import { useGetImage } from '@/hooks/ui/useGetImage'
 import useModal from '@/hooks/ui/useModal'
 import useResponsive from '@/hooks/ui/useResponsive'
 
-import { carActionDescriptors } from '@/descriptors/actions/carActionDescriptors'
-import { carOverviewDescriptors } from '@/descriptors/fields/carOverviewDescriptors'
-import { carOwnershipHistoryDescriptors } from '@/descriptors/fields/carOwnershipHistoryDescriptors'
-import { carRegistrationDetailsDescriptors } from '@/descriptors/fields/carRegistrationDetailsDescriptors'
-import { carTechnicalSpecsDescriptors } from '@/descriptors/fields/carTechnicalSpecsDescriptors'
+import { carAction } from '@/descriptors/actions/carAction'
+import { carOverview } from '@/descriptors/fields/carOverview'
+import { carOwnership } from '@/descriptors/fields/carOwnership'
+import { carRegistration } from '@/descriptors/fields/carRegistration'
+import { carSpecs } from '@/descriptors/fields/carSpecs'
 
 import { defaultImages } from '@/utils/defaultImages'
 
@@ -113,10 +113,7 @@ const CarInformation: FC<CarInformationProps> = ({
 						>
 							Basic information
 						</Title>
-						<PropertyList
-							descriptors={carOverviewDescriptors}
-							context={car?.basicInfo}
-						/>
+						<PropertyList descriptors={carOverview} context={car?.basicInfo} />
 
 						<Title
 							fontSize={maxMobile ? 20 : 28}
@@ -125,10 +122,7 @@ const CarInformation: FC<CarInformationProps> = ({
 						>
 							Specifications
 						</Title>
-						<PropertyList
-							descriptors={carTechnicalSpecsDescriptors}
-							context={car.specifications}
-						/>
+						<PropertyList descriptors={carSpecs} context={car.specifications} />
 
 						<Title
 							fontSize={maxMobile ? 20 : 28}
@@ -138,7 +132,7 @@ const CarInformation: FC<CarInformationProps> = ({
 							Registration details
 						</Title>
 						<PropertyList
-							descriptors={carRegistrationDetailsDescriptors}
+							descriptors={carRegistration}
 							context={car.registration}
 						/>
 
@@ -149,17 +143,11 @@ const CarInformation: FC<CarInformationProps> = ({
 						>
 							Owner details
 						</Title>
-						<PropertyList
-							descriptors={carOwnershipHistoryDescriptors}
-							context={car.ownership}
-						/>
+						<PropertyList descriptors={carOwnership} context={car.ownership} />
 					</InformationWrapper>
 
 					<SideMenu>
-						<ActionMenu
-							descriptors={carActionDescriptors}
-							context={actionCtx}
-						/>
+						<ActionMenu descriptors={carAction} context={actionCtx} />
 					</SideMenu>
 				</Container>
 			</article>

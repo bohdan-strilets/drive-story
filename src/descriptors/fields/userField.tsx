@@ -7,7 +7,7 @@ import { formatLabel } from '@/utils/generateDropdownOptions'
 import { FieldDescriptor } from '@/types/types/FieldDescriptor'
 import { User } from '@/types/types/User'
 
-export const userFieldDescriptors: FieldDescriptor<User>[] = [
+export const userField: FieldDescriptor<User>[] = [
 	{
 		key: 'email',
 		label: 'Email',

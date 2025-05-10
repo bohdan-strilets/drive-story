@@ -6,7 +6,7 @@ import { parsedDateToString } from '@/utils/parsedDateToString'
 import { FieldDescriptor } from '@/types/types/FieldDescriptor'
 import { InsurancePolicy } from '@/types/types/InsurancePolicy'
 
-export const insuranceFieldDescriptors: FieldDescriptor<InsurancePolicy>[] = [
+export const insuranceField: FieldDescriptor<InsurancePolicy>[] = [
 	{
 		key: 'start-date',
 		label: 'Start of insurance policy',

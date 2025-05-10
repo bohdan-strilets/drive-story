@@ -5,7 +5,7 @@ import { formatLabel } from '@/utils/generateDropdownOptions'
 import { CarSpecs } from '@/types/types/CarEntity'
 import { FieldDescriptor } from '@/types/types/FieldDescriptor'
 
-export const carTechnicalSpecsDescriptors: FieldDescriptor<CarSpecs>[] = [
+export const carSpecs: FieldDescriptor<CarSpecs>[] = [
 	{
 		key: 'mileage',
 		label: 'Mileage',

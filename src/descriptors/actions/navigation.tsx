@@ -10,7 +10,7 @@ import { routes } from '@/config/routes'
 
 import { NavigationDescriptor } from '@/types/types/NavigationDescriptor'
 
-export const navigationDescriptors: NavigationDescriptor[] = [
+export const navigation: NavigationDescriptor[] = [
 	{
 		key: 'home',
 		label: 'Home',

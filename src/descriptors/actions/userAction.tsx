@@ -4,7 +4,7 @@ import { RiLockPasswordFill, RiProfileFill } from 'react-icons/ri'
 
 import { ActionContext, ActionDescriptor } from '@/types/types/ActionDescriptor'
 
-export const userActionDescriptors: ActionDescriptor<ActionContext>[] = [
+export const userAction: ActionDescriptor<ActionContext>[] = [
 	{
 		key: 'edit-email',
 		label: 'Edit email',
