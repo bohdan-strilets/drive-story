@@ -19,9 +19,9 @@ import useResponsive from '@/hooks/ui/useResponsive'
 
 import { routes } from '@/config/routes'
 
-import { insuranceActionsDescriptors } from '@/descriptors/insuranceActionsDescriptors'
-import { insuranceFieldDescriptors } from '@/descriptors/insuranceFieldDescriptors'
-import { insurancePaymentStatusDescriptors } from '@/descriptors/insurancePaymentStatusDescriptors'
+import { insuranceActionsDescriptors } from '@/descriptors/fields/insuranceActionsDescriptors'
+import { insuranceFieldDescriptors } from '@/descriptors/fields/insuranceFieldDescriptors'
+import { insurancePaymentStatusDescriptors } from '@/descriptors/fields/insurancePaymentStatusDescriptors'
 
 import { parsedDateToString } from '@/utils/parsedDateToString'
 

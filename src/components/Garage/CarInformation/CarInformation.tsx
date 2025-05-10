@@ -13,11 +13,11 @@ import { useGetImage } from '@/hooks/ui/useGetImage'
 import useModal from '@/hooks/ui/useModal'
 import useResponsive from '@/hooks/ui/useResponsive'
 
-import { carActionDescriptors } from '@/descriptors/carActionDescriptors'
-import { carOverviewDescriptors } from '@/descriptors/carOverviewDescriptors'
-import { carOwnershipHistoryDescriptors } from '@/descriptors/carOwnershipHistoryDescriptors'
-import { carRegistrationDetailsDescriptors } from '@/descriptors/carRegistrationDetailsDescriptors'
-import { carTechnicalSpecsDescriptors } from '@/descriptors/carTechnicalSpecsDescriptors'
+import { carActionDescriptors } from '@/descriptors/actions/carActionDescriptors'
+import { carOverviewDescriptors } from '@/descriptors/fields/carOverviewDescriptors'
+import { carOwnershipHistoryDescriptors } from '@/descriptors/fields/carOwnershipHistoryDescriptors'
+import { carRegistrationDetailsDescriptors } from '@/descriptors/fields/carRegistrationDetailsDescriptors'
+import { carTechnicalSpecsDescriptors } from '@/descriptors/fields/carTechnicalSpecsDescriptors'
 
 import { defaultImages } from '@/utils/defaultImages'
 

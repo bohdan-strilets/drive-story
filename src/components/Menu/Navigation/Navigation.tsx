@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { navigationDescriptors } from '@/descriptors/navigationDescriptors'
+import { navigationDescriptors } from '@/descriptors/actions/navigationDescriptors'
 
 import { NavigationProps } from '@/types/props/Menu/NavigationProps'
 

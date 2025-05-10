@@ -3,9 +3,9 @@ import { FC } from 'react'
 import { useGetImage } from '@/hooks/ui/useGetImage'
 import useModal from '@/hooks/ui/useModal'
 
-import { userActionDescriptors } from '@/descriptors/userActionDescriptors'
-import { userFieldDescriptors } from '@/descriptors/userFieldDescriptors'
-import { userUploadActionDescriptors } from '@/descriptors/userUploadActionDescriptors'
+import { userActionDescriptors } from '@/descriptors/actions/userActionDescriptors'
+import { userUploadActionDescriptors } from '@/descriptors/actions/userUploadActionDescriptors'
+import { userFieldDescriptors } from '@/descriptors/fields/userFieldDescriptors'
 
 import { useUserStore } from '@/store/useUserStore'
 
