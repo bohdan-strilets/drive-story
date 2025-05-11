@@ -5,7 +5,7 @@ import { StyledTitleProps } from '@/types/props/UI/TitleProps'
 import { getColor } from '@/styles/helpers/getColor'
 
 export const StyledTitle = styled.h1<StyledTitleProps>`
-	font-weight: 900;
+	font-weight: 700;
 	text-transform: uppercase;
 	font-size: ${({ fontSize }) => `${fontSize}px`};
 	text-align: ${({ textAlign }) => textAlign};
