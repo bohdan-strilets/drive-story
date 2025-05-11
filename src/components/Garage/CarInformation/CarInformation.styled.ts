@@ -4,6 +4,8 @@ import { breakpoints } from '@/styles/media/breakpoints'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 
 export const Container = styled.div`
+	margin-top: 15px;
+
 	@media screen and (min-width: ${breakpoints.laptopMin}) {
 		${flexCenterDirection()}
 		justify-content: space-between;
