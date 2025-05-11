@@ -7,6 +7,7 @@ import PropertyList from '@/components/Layout/PropertyList'
 import AccentText from '@/components/UI/AccentText'
 import BigButton from '@/components/UI/BigButton'
 import ButtonGoBack from '@/components/UI/ButtonGoBack'
+import CountdownTimer from '@/components/UI/CountdownTimer'
 import DecorativeLine from '@/components/UI/DecorativeLine'
 import ErrorMessage from '@/components/UI/ErrorMessage'
 import Loader from '@/components/UI/Loader'
@@ -114,6 +115,10 @@ const Insurance: FC = () => {
 				</>
 				<Container>
 					<InformationWrapper>
+						<CountdownTimer
+							startDate={insurance.startDate}
+							endDate={insurance.endDate}
+						/>
 						<PropertyList descriptors={insuranceField} context={insurance} />
 						{insurance.paymentStatus && !insurance.paymentStatus.isPaid && (
 							<>
