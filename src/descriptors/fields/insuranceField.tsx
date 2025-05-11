@@ -25,7 +25,7 @@ export const insuranceField: FieldDescriptor<InsurancePolicy>[] = [
 	},
 	{
 		key: 'is-paid',
-		label: 'The policy is paid in full?',
+		label: 'The policy is paid in full',
 		render: (insurance) => (
 			<StatusBadge status={insurance?.paymentStatus?.isPaid ?? false} />
 		),
