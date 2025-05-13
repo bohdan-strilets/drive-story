@@ -1,9 +1,12 @@
+import { generateNumberArray } from '@/utils/generateNumberArray'
+
 import { BodyType } from '@/types/enums/BodyType'
 import { Drivetrain } from '@/types/enums/Drivetrain'
 import { FuelType } from '@/types/enums/FuelType'
 import { Transmission } from '@/types/enums/Transmission'
 
-const currentYearPlusOne = new Date().getFullYear() + 1
+const currentYear = new Date().getFullYear()
+const yearProduction = generateNumberArray(currentYear - 40, currentYear + 1)
 
 export const carRules = {
 	basicInfo: {
@@ -22,12 +25,9 @@ export const carRules = {
 			message: 'Model must be between 2 and 50 characters long',
 		},
 		year: {
-			placeholder: '2022',
-			min: 1886,
-			max: currentYearPlusOne,
+			oneOf: Object.values(yearProduction),
+			oneOfMessage: 'Year must be one of the options from the list',
 			required: 'Year of production is required',
-			message: `Year of production must be between 1886 and ${currentYearPlusOne}`,
-			integerMessage: 'Year must be a positive, integer number',
 		},
 		shortName: {
 			placeholder: 'Corolla E210',

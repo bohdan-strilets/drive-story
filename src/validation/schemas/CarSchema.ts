@@ -41,11 +41,9 @@ export const Schema = yup.object().shape({
 			.required(model.required),
 
 		year: yup
-			.number()
-			.integer(year.integerMessage)
-			.min(year.min, year.message)
-			.max(year.max, year.message)
-			.required(year.required),
+			.string()
+			.oneOf(year.oneOf, year.oneOfMessage)
+			.defined(year.required),
 
 		shortName: yup
 			.string()
