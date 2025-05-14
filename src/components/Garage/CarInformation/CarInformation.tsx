@@ -25,6 +25,8 @@ import { isImage } from '@/types/guards/isImage'
 import { CarInformationProps } from '@/types/props/Garage/CarInformationProps'
 import { ActionContext } from '@/types/types/ActionDescriptor'
 
+import LicensePlate from '../LicensePlate'
+
 import {
 	Container,
 	InformationWrapper,
@@ -148,6 +150,9 @@ const CarInformation: FC<CarInformationProps> = ({
 
 					<SideMenu>
 						<ActionMenu descriptors={carAction} context={actionCtx} />
+						{car.registration.regNumber && (
+							<LicensePlate licensePlate={car.registration.regNumber} />
+						)}
 					</SideMenu>
 				</Container>
 			</article>
