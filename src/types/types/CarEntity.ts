@@ -8,7 +8,7 @@ import { Image } from './Image'
 export type CarBasicInfo = {
 	make: string
 	model: string
-	year: number
+	year: string
 	shortName?: string | null
 	generation?: string | null
 }

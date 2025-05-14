@@ -2,7 +2,7 @@ import { AnimatePresence } from 'motion/react'
 import { FC } from 'react'
 import { RiFunctionAddFill } from 'react-icons/ri'
 
-import CreateCar from '@/components/Garage/CreateCar'
+import CarForm from '@/components/Garage/CarForm'
 import Parking from '@/components/Garage/Parking'
 import Modal from '@/components/Modal'
 import BigButton from '@/components/UI/BigButton'
@@ -29,7 +29,7 @@ const GaragePage: FC = () => {
 			<AnimatePresence>
 				{checkQueryParam(modalNames.ADD_CAR) && (
 					<Modal key={modalNames.ADD_CAR} title="Add new car">
-						<CreateCar />
+						<CarForm mode="create" />
 					</Modal>
 				)}
 			</AnimatePresence>

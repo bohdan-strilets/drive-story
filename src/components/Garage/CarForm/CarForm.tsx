@@ -1,26 +1,31 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import {
 	FieldPath,
 	FormProvider,
 	SubmitHandler,
 	useForm,
 } from 'react-hook-form'
+import { useParams } from 'react-router-dom'
 
-import Button from '@/components/UI/Button'
+import ErrorMessage from '@/components/UI/ErrorMessage'
+import FormNavigation from '@/components/UI/FormNavigation'
 import Loader from '@/components/UI/Loader'
 import Stepper from '@/components/UI/Stepper'
 
 import { useCreateCar } from '@/hooks/car/useCreateCar'
+import { useFetchCar } from '@/hooks/car/useFetchCar'
+import { useUpdateCar } from '@/hooks/car/useUpdateCar'
 import useSubmit from '@/hooks/ui/useSubmit'
 import { useWizard } from '@/hooks/ui/useWizard'
 
 import { CarDetailsDto } from '@/types/dto/CarDetailsDto'
+import { UpdateCarParams } from '@/types/params/UpdateCarParams'
+import { CarFormProps } from '@/types/props/Garage/CarFormProps'
 import { CarEntity } from '@/types/types/CarEntity'
 
 import { Fields, Validation } from '@/validation/schemas/CarSchema'
 
 import BasicInfoFields from './BasicInfoFields'
-import { Item, List } from './CreateCar.styled'
 import OwnershipAndDescFields from './OwnershipAndDescFields'
 import RegistrationFields from './RegistrationFields'
 import SpecificationsFields from './SpecificationsFields'
@@ -52,14 +57,30 @@ const fieldsByStep: Record<number, FieldPath<Fields>[]> = {
 	4: ['ownership.purchaseDate', 'ownership.saleDate', 'description'],
 }
 
-const CreateCar: FC = () => {
-	const { mutateAsync: createCar, isPending } = useCreateCar()
+const CarForm: FC<CarFormProps> = ({ mode }) => {
+	const { carId } = useParams()
+	const { data: car, isLoading: isFetching, isError } = useFetchCar(carId ?? '')
+
 	const methods = useForm<Fields>(Validation)
+
+	useEffect(() => {
+		if (car) methods.reset(car)
+	}, [car, methods])
 
 	const { step, maxStep, isFirst, isLast, next, prev } = useWizard<Fields>(
 		fieldsByStep,
 		methods.trigger
 	)
+
+	const { mutateAsync: updateCar, isPending: isUpdating } = useUpdateCar()
+	const { mutateAsync: createCar, isPending: isCreating } = useCreateCar()
+	const isLoading = isUpdating || isCreating
+
+	const submitUpdateCar = useSubmit<CarEntity | null, UpdateCarParams>({
+		callback: updateCar,
+		successMessage: 'The car has been successfully updated',
+		isCloseModal: true,
+	})
 
 	const submitCreateCar = useSubmit<CarEntity | null, CarDetailsDto>({
 		callback: createCar,
@@ -67,12 +88,12 @@ const CreateCar: FC = () => {
 		isCloseModal: true,
 	})
 
-	const onSubmit: SubmitHandler<Fields> = async (data) => {
-		const dto: CarDetailsDto = {
+	const onSubmit: SubmitHandler<Fields> = (data) => {
+		const payload: CarDetailsDto = {
 			basicInfo: {
 				make: data.basicInfo.make,
 				model: data.basicInfo.model,
-				year: Number(data.basicInfo.year),
+				year: data.basicInfo.year,
 				generation: data.basicInfo.generation,
 				shortName: data.basicInfo.shortName,
 			},
@@ -102,7 +123,23 @@ const CreateCar: FC = () => {
 			description: data.description,
 		}
 
-		submitCreateCar(dto)
+		const updateCarDto: UpdateCarParams = {
+			payload,
+			carId: carId ?? '',
+		}
+
+		return mode === 'create'
+			? submitCreateCar(payload)
+			: submitUpdateCar(updateCarDto)
+	}
+
+	if (mode === 'edit' && isFetching) {
+		return <Loader color="gray" />
+	}
+
+	if (mode === 'edit' && isError) {
+		const message = `Car with current ID: ${carId} was not selected.`
+		return <ErrorMessage message={message} />
 	}
 
 	return (
@@ -115,55 +152,19 @@ const CreateCar: FC = () => {
 				{step === 3 && <RegistrationFields />}
 				{step === 4 && <OwnershipAndDescFields />}
 
-				{isPending && <Loader color="gray" margin="15px 0" />}
+				{isLoading && <Loader color="gray" margin="15px 0" />}
 
-				<List>
-					<Item>
-						<Button
-							type="button"
-							width="100%"
-							margin="0 30px 0 0"
-							onClick={prev}
-							disabled={isFirst}
-							color="white"
-							background="black"
-							hoverColor="black"
-							hoverBackground="yellow"
-						>
-							Prev
-						</Button>
-					</Item>
-					<Item>
-						{!isLast ? (
-							<Button
-								type="button"
-								width="100%"
-								onClick={(e) => next(e)}
-								color="white"
-								background="black"
-								hoverColor="black"
-								hoverBackground="yellow"
-							>
-								Next
-							</Button>
-						) : (
-							<Button
-								type="submit"
-								width="100%"
-								color="white"
-								background="black"
-								hoverColor="black"
-								hoverBackground="yellow"
-								disabled={isPending}
-							>
-								{isPending ? '...' : 'create'}
-							</Button>
-						)}
-					</Item>
-				</List>
+				<FormNavigation
+					isFirst={isFirst}
+					isLast={isLast}
+					isLoading={isLoading}
+					onNext={next}
+					onPrev={prev}
+					mode={mode}
+				/>
 			</form>
 		</FormProvider>
 	)
 }
 
-export default CreateCar
+export default CarForm

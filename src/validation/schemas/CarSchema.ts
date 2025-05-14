@@ -93,6 +93,7 @@ export const Schema = yup.object().shape({
 			.string()
 			.min(color.min, color.message)
 			.max(color.max, color.message)
+			.nullable()
 			.optional(),
 
 		doors: yup

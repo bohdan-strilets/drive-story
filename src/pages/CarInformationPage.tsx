@@ -3,8 +3,8 @@ import { FC } from 'react'
 import { useParams } from 'react-router-dom'
 
 import ImageViewer from '@/components/Gallery/ImageViewer'
+import CarForm from '@/components/Garage/CarForm'
 import CarInformation from '@/components/Garage/CarInformation'
-import EditCar from '@/components/Garage/EditCar'
 import Modal from '@/components/Modal'
 import Uploader from '@/components/Uploader'
 
@@ -54,7 +54,7 @@ const CarInformationPage: FC = () => {
 
 				{checkQueryParam(modalNames.EDIT_CAR) && (
 					<Modal key={modalNames.EDIT_CAR} title="Edit car information">
-						<EditCar />
+						<CarForm mode="edit" />
 					</Modal>
 				)}
 			</AnimatePresence>
