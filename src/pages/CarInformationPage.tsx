@@ -5,9 +5,12 @@ import { useParams } from 'react-router-dom'
 import ImageViewer from '@/components/Gallery/ImageViewer'
 import CarForm from '@/components/Garage/CarForm'
 import CarInformation from '@/components/Garage/CarInformation'
+import ErrorState from '@/components/Garage/ErrorState'
 import Modal from '@/components/Modal'
+import Loader from '@/components/UI/Loader'
 import Uploader from '@/components/Uploader'
 
+import { useFetchCar } from '@/hooks/car/useFetchCar'
 import { useGalleryManager } from '@/hooks/ui/useGalleryManager'
 import useModal from '@/hooks/ui/useModal'
 
@@ -18,6 +21,7 @@ import { EntityType } from '@/types/enums/EntityType'
 const CarInformationPage: FC = () => {
 	const { checkQueryParam, modalNames } = useModal()
 	const { carId } = useParams()
+	const { data: car, isLoading, isError } = useFetchCar(carId ?? '')
 
 	const {
 		actions: imageActions,
@@ -28,9 +32,18 @@ const CarInformationPage: FC = () => {
 		closeViewer: closeImageViewer,
 	} = useGalleryManager({ entityType: EntityType.CARS, entityId: carId })
 
+	if (isLoading) {
+		return <Loader color="gray" />
+	}
+
+	if (isError) {
+		return <ErrorState />
+	}
+
 	return (
 		<>
 			<CarInformation
+				car={car}
 				imageActions={imageActions}
 				isActionLoading={isImageLoading}
 			/>

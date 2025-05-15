@@ -7,20 +7,18 @@ import {
 } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
-import ErrorMessage from '@/components/UI/ErrorMessage'
 import FormNavigation from '@/components/UI/FormNavigation'
 import Loader from '@/components/UI/Loader'
 import Stepper from '@/components/UI/Stepper'
 
 import { useCreateCar } from '@/hooks/car/useCreateCar'
-import { useFetchCar } from '@/hooks/car/useFetchCar'
 import { useUpdateCar } from '@/hooks/car/useUpdateCar'
 import useSubmit from '@/hooks/ui/useSubmit'
 import { useWizard } from '@/hooks/ui/useWizard'
 
 import { CarDetailsDto } from '@/types/dto/CarDetailsDto'
 import { UpdateCarParams } from '@/types/params/UpdateCarParams'
-import { FormProps } from '@/types/props/UI/FormProps'
+import { CarFormProps } from '@/types/props/Garage/CarFormProps'
 import { CarEntity } from '@/types/types/CarEntity'
 
 import { Fields, Validation } from '@/validation/schemas/CarSchema'
@@ -57,10 +55,8 @@ const fieldsByStep: Record<number, FieldPath<Fields>[]> = {
 	4: ['ownership.purchaseDate', 'ownership.saleDate', 'description'],
 }
 
-const CarForm: FC<FormProps> = ({ mode }) => {
+const CarForm: FC<CarFormProps> = ({ mode, car }) => {
 	const { carId } = useParams()
-	const { data: car, isLoading: isFetching, isError } = useFetchCar(carId ?? '')
-
 	const methods = useForm<Fields>(Validation)
 
 	useEffect(() => {
@@ -131,15 +127,6 @@ const CarForm: FC<FormProps> = ({ mode }) => {
 		return mode === 'create'
 			? submitCreateCar(payload)
 			: submitUpdateCar(updateCarDto)
-	}
-
-	if (mode === 'edit' && isFetching) {
-		return <Loader color="gray" />
-	}
-
-	if (mode === 'edit' && isError) {
-		const message = `Car with current ID: ${carId} was not selected.`
-		return <ErrorMessage message={message} />
 	}
 
 	return (

@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { RiFunctionAddFill } from 'react-icons/ri'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import BigButton from '@/components/UI/BigButton'
 import ButtonGoBack from '@/components/UI/ButtonGoBack'
@@ -10,11 +10,10 @@ import useModal from '@/hooks/ui/useModal'
 
 import { routes } from '@/config/routes'
 
-import { ErrorStateProps } from '@/types/props/Garage/ErrorStateProps'
-
-const ErrorState: FC<ErrorStateProps> = ({ carId }) => {
+const ErrorState: FC = () => {
 	const { onOpen, modalNames } = useModal()
 	const navigate = useNavigate()
+	const { carId } = useParams()
 
 	return (
 		<>

@@ -4,11 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Gallery from '@/components/Gallery'
 import ActionMenu from '@/components/Layout/ActionMenu'
 import PropertyList from '@/components/Layout/PropertyList'
-import ErrorMessage from '@/components/UI/ErrorMessage'
-import Loader from '@/components/UI/Loader'
 import Title from '@/components/UI/Title'
 
-import { useFetchCar } from '@/hooks/car/useFetchCar'
 import { useGetImage } from '@/hooks/ui/useGetImage'
 import useModal from '@/hooks/ui/useModal'
 import useResponsive from '@/hooks/ui/useResponsive'
@@ -36,6 +33,7 @@ import Header from './Header'
 import MaintenanceReminders from './MaintenanceReminders'
 
 const CarInformation: FC<CarInformationProps> = ({
+	car,
 	imageActions,
 	isActionLoading,
 }) => {
@@ -51,29 +49,14 @@ const CarInformation: FC<CarInformationProps> = ({
 		carId: carId ?? '',
 	}
 
-	const { data: car, isLoading, isError } = useFetchCar(carId ?? '')
-
 	const photos = car?.photos
 	const carPoster = useGetImage({
 		image: photos,
 		defaultImage: defaultImages.poster,
 	})
 
-	if (isLoading) {
-		return <Loader color="gray" />
-	}
-
-	if (isError) {
-		return (
-			<ErrorMessage
-				message={`Car with current ID: ${carId} was not selected.`}
-			/>
-		)
-	}
-
 	return (
-		car &&
-		!isError && (
+		car && (
 			<article>
 				<Header
 					carPoster={carPoster}

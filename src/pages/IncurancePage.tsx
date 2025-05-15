@@ -26,7 +26,7 @@ const IncurancePage: FC = () => {
 	}
 
 	if (isError) {
-		return <ErrorState carId={carId ?? ''} />
+		return <ErrorState />
 	}
 
 	return (
