@@ -13,7 +13,7 @@ export type PaymentStatus = {
 	updatedAt: Date
 }
 
-export type InsurancePolicy = {
+export type Insurance = {
 	_id: string
 	owner: string
 	contactId?: string | null

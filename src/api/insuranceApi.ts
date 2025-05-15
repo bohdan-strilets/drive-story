@@ -7,7 +7,7 @@ import { InsurancePathParams } from '@/types/params/InsurancePathParams'
 import { ListInsuranceParams } from '@/types/params/ListInsuranceParams'
 import { UpdateInsuranceParams } from '@/types/params/UpdateInsuranceParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
-import { InsurancePolicy } from '@/types/types/InsurancePolicy'
+import { Insurance } from '@/types/types/Insurance'
 import { PaginatedResponse } from '@/types/types/PaginatedResponse'
 
 const ENDPOINT = '/insurance'
@@ -15,7 +15,7 @@ const ENDPOINT = '/insurance'
 export const create = async ({
 	payload,
 	carId,
-}: AddInsuranceParams): Promise<ApiResponse<InsurancePolicy | null>> => {
+}: AddInsuranceParams): Promise<ApiResponse<Insurance | null>> => {
 	try {
 		const { data } = await apiClient.post(
 			`${ENDPOINT}/create/${carId}`,
@@ -31,7 +31,7 @@ export const update = async ({
 	payload,
 	carId,
 	insuranceId,
-}: UpdateInsuranceParams): Promise<ApiResponse<InsurancePolicy | null>> => {
+}: UpdateInsuranceParams): Promise<ApiResponse<Insurance | null>> => {
 	try {
 		const { data } = await apiClient.patch(
 			`${ENDPOINT}/update/${carId}/${insuranceId}`,
@@ -46,7 +46,7 @@ export const update = async ({
 export const remove = async ({
 	carId,
 	insuranceId,
-}: InsurancePathParams): Promise<ApiResponse<InsurancePolicy | null>> => {
+}: InsurancePathParams): Promise<ApiResponse<Insurance | null>> => {
 	try {
 		const { data } = await apiClient.delete(
 			`${ENDPOINT}/delete/${carId}/${insuranceId}`
@@ -59,7 +59,7 @@ export const remove = async ({
 
 export const getByCar = async (
 	carId: string
-): Promise<ApiResponse<InsurancePolicy | null>> => {
+): Promise<ApiResponse<Insurance | null>> => {
 	try {
 		const { data } = await apiClient.get(`${ENDPOINT}/get-by-car/${carId}`)
 		return data
@@ -72,7 +72,7 @@ export const getAll = async ({
 	carId,
 	pagination,
 }: ListInsuranceParams): Promise<
-	ApiResponse<PaginatedResponse<InsurancePolicy> | null>
+	ApiResponse<PaginatedResponse<Insurance> | null>
 > => {
 	const { page, limit } = pagination
 

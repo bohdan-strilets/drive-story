@@ -20,7 +20,7 @@ import { useWizard } from '@/hooks/ui/useWizard'
 
 import { CarDetailsDto } from '@/types/dto/CarDetailsDto'
 import { UpdateCarParams } from '@/types/params/UpdateCarParams'
-import { CarFormProps } from '@/types/props/Garage/CarFormProps'
+import { FormProps } from '@/types/props/UI/FormProps'
 import { CarEntity } from '@/types/types/CarEntity'
 
 import { Fields, Validation } from '@/validation/schemas/CarSchema'
@@ -57,7 +57,7 @@ const fieldsByStep: Record<number, FieldPath<Fields>[]> = {
 	4: ['ownership.purchaseDate', 'ownership.saleDate', 'description'],
 }
 
-const CarForm: FC<CarFormProps> = ({ mode }) => {
+const CarForm: FC<FormProps> = ({ mode }) => {
 	const { carId } = useParams()
 	const { data: car, isLoading: isFetching, isError } = useFetchCar(carId ?? '')
 

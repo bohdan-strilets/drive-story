@@ -1,12 +1,9 @@
 import { FC } from 'react'
-import { useParams } from 'react-router-dom'
 
 import ActionMenu from '@/components/Layout/ActionMenu'
 import PropertyList from '@/components/Layout/PropertyList'
-import Loader from '@/components/UI/Loader'
 import Title from '@/components/UI/Title'
 
-import { useFetchInsurance } from '@/hooks/insurance/useFetchInsurance'
 import useModal from '@/hooks/ui/useModal'
 import useResponsive from '@/hooks/ui/useResponsive'
 
@@ -14,40 +11,28 @@ import { insuranceActions } from '@/descriptors/actions/insuranceActions'
 import { insuranceField } from '@/descriptors/fields/insuranceField'
 import { insurancePayment } from '@/descriptors/fields/insurancePayment'
 
+import { InsuranceProps } from '@/types/props/Insurance/InsuranceProps'
 import { ActionContext } from '@/types/types/ActionDescriptor'
 
-import Error from '../Error'
 import Header from '../Header'
 import Timer from '../Timer'
 
 import { Container, InformationWrapper, SideMenu } from './Insurance.styled'
 
-const Insurance: FC = () => {
+const Insurance: FC<InsuranceProps> = ({ insurance }) => {
 	const { onOpen, modalNames } = useModal()
 	const { maxMobile } = useResponsive()
-	const { carId } = useParams()
-
-	const { data: insurance, isLoading, isError } = useFetchInsurance(carId ?? '')
 
 	const actionCtx: ActionContext = {
 		onOpen,
 		modalNames,
 	}
 
-	if (isLoading) {
-		return <Loader color="gray" />
-	}
-
-	if (!insurance && isError) {
-		return <Error />
-	}
-
 	return (
-		insurance &&
-		!isError && (
+		insurance && (
 			<article>
 				<Header
-					carId={carId ?? ''}
+					carId={insurance.carId}
 					insuranceId={insurance._id}
 					insurerName={insurance.insurerName}
 					policyNumber={insurance.policyNumber}

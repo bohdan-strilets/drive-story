@@ -7,11 +7,11 @@ import { InsuranceKey } from '@/config/queryKeys'
 
 import { AddInsuranceParams } from '@/types/params/AddInsuranceParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
-import { InsurancePolicy } from '@/types/types/InsurancePolicy'
+import { Insurance } from '@/types/types/Insurance'
 
 export const useCreateInsurance = () => {
 	return useMutation<
-		ApiResponse<InsurancePolicy | null>,
+		ApiResponse<Insurance | null>,
 		unknown,
 		AddInsuranceParams
 	>({

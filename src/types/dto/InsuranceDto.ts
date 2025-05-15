@@ -1,4 +1,4 @@
-import { InsurancePolicy, PaymentStatus } from '../types/InsurancePolicy'
+import { Insurance, PaymentStatus } from '../types/Insurance'
 
 export type PaymentStatusDto = Pick<
 	PaymentStatus,
@@ -10,7 +10,7 @@ export type PaymentStatusDto = Pick<
 >
 
 export type InsuranceDto = Pick<
-	InsurancePolicy,
+	Insurance,
 	| 'insurerName'
 	| 'policyNumber'
 	| 'startDate'

@@ -18,7 +18,10 @@ export const insuranceActions: ActionDescriptor<ActionContext>[] = [
 		key: 'edit-insurance',
 		label: 'Edit insurance',
 		icon: <MdModeEdit size={20} />,
-		getCallback: () => () => null,
+		getCallback:
+			({ onOpen, modalNames }) =>
+			() =>
+				onOpen(modalNames.EDIT_INSURANCE_POLICY),
 	},
 	{
 		key: 'bind-contact',

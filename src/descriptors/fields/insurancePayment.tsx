@@ -1,7 +1,7 @@
 import { formatNumberWithSpaces } from '@/utils/formatNumberWithSpaces'
 
 import { FieldDescriptor } from '@/types/types/FieldDescriptor'
-import { PaymentStatus } from '@/types/types/InsurancePolicy'
+import { PaymentStatus } from '@/types/types/Insurance'
 
 export const insurancePayment: FieldDescriptor<PaymentStatus>[] = [
 	{

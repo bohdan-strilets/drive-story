@@ -4,9 +4,9 @@ import { formatNumberWithSpaces } from '@/utils/formatNumberWithSpaces'
 import { parsedDateToString } from '@/utils/parsedDateToString'
 
 import { FieldDescriptor } from '@/types/types/FieldDescriptor'
-import { InsurancePolicy } from '@/types/types/InsurancePolicy'
+import { Insurance } from '@/types/types/Insurance'
 
-export const insuranceField: FieldDescriptor<InsurancePolicy>[] = [
+export const insuranceField: FieldDescriptor<Insurance>[] = [
 	{
 		key: 'start-date',
 		label: 'Start of insurance policy',

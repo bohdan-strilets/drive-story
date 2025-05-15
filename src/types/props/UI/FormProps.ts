@@ -1,5 +1,5 @@
 import { FormMode } from '@/types/types/FormMode'
 
-export type CarFormProps = {
+export type FormProps = {
 	mode: FormMode
 }

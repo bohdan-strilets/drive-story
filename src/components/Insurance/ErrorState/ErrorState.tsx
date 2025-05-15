@@ -1,16 +1,29 @@
 import { FC } from 'react'
 import { RiFunctionAddFill } from 'react-icons/ri'
+import { useNavigate } from 'react-router-dom'
 
 import BigButton from '@/components/UI/BigButton'
+import ButtonGoBack from '@/components/UI/ButtonGoBack'
 import ErrorMessage from '@/components/UI/ErrorMessage'
 
 import useModal from '@/hooks/ui/useModal'
 
-const Error: FC = () => {
+import { routes } from '@/config/routes'
+
+import { ErrorStateProps } from '@/types/props/Garage/ErrorStateProps'
+
+const ErrorState: FC<ErrorStateProps> = ({ carId }) => {
 	const { onOpen, modalNames } = useModal()
+	const navigate = useNavigate()
 
 	return (
 		<>
+			<ButtonGoBack
+				label="car"
+				onClick={() => navigate(`${routes.CAR_INFORMATION}/${carId}`)}
+				margin="0 0 5px 0"
+				color="black"
+			/>
 			<BigButton
 				onClick={() => onOpen(modalNames.ADD_INSURANCE_POLICY)}
 				icon={<RiFunctionAddFill />}
@@ -29,4 +42,4 @@ const Error: FC = () => {
 	)
 }
 
-export default Error
+export default ErrorState
