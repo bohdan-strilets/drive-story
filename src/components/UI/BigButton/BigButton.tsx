@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { RiFunctionAddFill } from 'react-icons/ri'
 
 import { BigButtonProps } from '@/types/props/UI/BigButtonProps'
 
@@ -6,7 +7,6 @@ import { Button, IconWrapper, Label } from './BigButton.styled'
 
 const BigButton: FC<BigButtonProps> = ({
 	onClick,
-	icon,
 	label,
 	width = '100%',
 	height = '260px',
@@ -23,7 +23,7 @@ const BigButton: FC<BigButtonProps> = ({
 			margin={margin}
 		>
 			<IconWrapper className="icon" iconSize={iconSize}>
-				{icon}
+				<RiFunctionAddFill />
 			</IconWrapper>
 			<Label labelSize={labelSize}>{label}</Label>
 		</Button>

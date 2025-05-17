@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import { RiFunctionAddFill } from 'react-icons/ri'
 
 import BigButton from '@/components/UI/BigButton'
 import EmptyState from '@/components/UI/EmptyState'
@@ -13,7 +12,6 @@ const NoInsuranceState: FC = () => {
 		<>
 			<BigButton
 				onClick={() => onOpen(modalNames.ADD_INSURANCE_POLICY)}
-				icon={<RiFunctionAddFill />}
 				label="Add insurance"
 				height="140px"
 				iconSize="80px"

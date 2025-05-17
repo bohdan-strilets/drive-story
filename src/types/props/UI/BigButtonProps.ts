@@ -1,8 +1,5 @@
-import { ReactNode } from 'react'
-
 export type BigButtonProps = {
 	onClick: () => void
-	icon: ReactNode
 	label: string
 	width?: string
 	height?: string

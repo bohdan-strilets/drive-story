@@ -1,6 +1,5 @@
 import { AnimatePresence } from 'motion/react'
 import { FC } from 'react'
-import { RiFunctionAddFill } from 'react-icons/ri'
 
 import CarForm from '@/components/Garage/CarForm'
 import Parking from '@/components/Garage/Parking'
@@ -16,7 +15,6 @@ const GaragePage: FC = () => {
 		<>
 			<BigButton
 				onClick={() => onOpen(modalNames.ADD_CAR)}
-				icon={<RiFunctionAddFill />}
 				label="Add new car"
 				height="140px"
 				iconSize="80px"
