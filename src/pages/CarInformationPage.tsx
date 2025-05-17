@@ -67,7 +67,7 @@ const CarInformationPage: FC = () => {
 
 				{checkQueryParam(modalNames.EDIT_CAR) && (
 					<Modal key={modalNames.EDIT_CAR} title="Edit car information">
-						<CarForm mode="edit" />
+						<CarForm mode="edit" car={car} />
 					</Modal>
 				)}
 			</AnimatePresence>
