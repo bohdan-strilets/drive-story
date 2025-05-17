@@ -10,10 +10,10 @@ import StyledLink from '@/components/UI/StyledLink'
 import TextInput from '@/components/UI/TextInput'
 
 import { useRegistration } from '@/hooks/auth/useRegistration'
-import useModal from '@/hooks/ui/useModal'
 import useResponsive from '@/hooks/ui/useResponsive'
 import useSubmit from '@/hooks/ui/useSubmit'
 
+import { modalNames } from '@/config/modalConfig'
 import { routes } from '@/config/routes'
 
 import { RegistrationDto } from '@/types/dto/RegistrationDto'
@@ -29,7 +29,6 @@ import { Group } from './Registration.styled'
 const Registration: FC = () => {
 	const { maxMobile } = useResponsive()
 	const { mutateAsync: registration, isPending } = useRegistration()
-	const { modalNames } = useModal()
 
 	const { control, handleSubmit } = useForm<Fields>(Validation)
 

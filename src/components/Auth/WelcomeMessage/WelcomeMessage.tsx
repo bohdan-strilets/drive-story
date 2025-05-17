@@ -8,10 +8,12 @@ import useModal from '@/hooks/ui/useModal'
 
 import successImage from '@/assets/welcome/success.webp'
 
+import { modalNames } from '@/config/modalConfig'
+
 import { Item, List } from './WelcomeMessage.styled'
 
 const WelcomeMessage: FC = () => {
-	const { onOpen, modalNames } = useModal()
+	const { onOpen } = useModal()
 
 	return (
 		<>

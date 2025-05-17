@@ -6,6 +6,8 @@ import {
 	MdModeEdit,
 } from 'react-icons/md'
 
+import { modalNames } from '@/config/modalConfig'
+
 import { ActionContext, ActionDescriptor } from '@/types/types/ActionDescriptor'
 
 export const insuranceActions: ActionDescriptor<ActionContext>[] = [
@@ -14,7 +16,7 @@ export const insuranceActions: ActionDescriptor<ActionContext>[] = [
 		label: 'Upload photo',
 		icon: <MdCloudUpload size={20} />,
 		getCallback:
-			({ onOpen, modalNames }) =>
+			({ onOpen }) =>
 			() =>
 				onOpen(modalNames.UPLOAD_INSURANCE_PHOTO),
 	},
@@ -23,7 +25,7 @@ export const insuranceActions: ActionDescriptor<ActionContext>[] = [
 		label: 'Clear gallery',
 		icon: <GiBroom size={20} />,
 		getCallback:
-			({ onOpen, modalNames }) =>
+			({ onOpen }) =>
 			() =>
 				onOpen(modalNames.CLEAR_INSURANCE_GALLERY),
 	},
@@ -32,7 +34,7 @@ export const insuranceActions: ActionDescriptor<ActionContext>[] = [
 		label: 'Edit insurance',
 		icon: <MdModeEdit size={20} />,
 		getCallback:
-			({ onOpen, modalNames }) =>
+			({ onOpen }) =>
 			() =>
 				onOpen(modalNames.EDIT_INSURANCE_POLICY),
 	},
@@ -47,8 +49,8 @@ export const insuranceActions: ActionDescriptor<ActionContext>[] = [
 		label: 'Delete insurance',
 		icon: <MdDelete size={20} />,
 		getCallback:
-			({ onOpen, modalNames }) =>
+			({ onOpen }) =>
 			() =>
-				onOpen(modalNames.DELETE_iNSURANCE_POLICY),
+				onOpen(modalNames.DELETE_INSURANCE_POLICY),
 	},
 ]

@@ -7,8 +7,10 @@ import Modal from '@/components/Modal'
 
 import useModal from '@/hooks/ui/useModal'
 
+import { modalNames } from '@/config/modalConfig'
+
 const AuthPage: FC = () => {
-	const { checkQueryParam, modalNames } = useModal()
+	const { checkQueryParam } = useModal()
 
 	return (
 		<>

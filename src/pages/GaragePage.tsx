@@ -8,8 +8,10 @@ import BigButton from '@/components/UI/BigButton'
 
 import useModal from '@/hooks/ui/useModal'
 
+import { modalNames } from '@/config/modalConfig'
+
 const GaragePage: FC = () => {
-	const { checkQueryParam, modalNames, onOpen } = useModal()
+	const { checkQueryParam, onOpen } = useModal()
 
 	return (
 		<>

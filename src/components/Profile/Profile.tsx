@@ -3,6 +3,8 @@ import { FC } from 'react'
 import { useGetImage } from '@/hooks/ui/useGetImage'
 import useModal from '@/hooks/ui/useModal'
 
+import { modalNames } from '@/config/modalConfig'
+
 import { userAction } from '@/descriptors/actions/userAction'
 import { userUploadAction } from '@/descriptors/actions/userUploadAction'
 import { userField } from '@/descriptors/fields/userField'
@@ -24,7 +26,7 @@ import { Information, InformationWrapper, SideMenu } from './Profile.styled'
 import ProfileMeta from './ProfileMeta'
 
 const Profile: FC = () => {
-	const { onOpen, modalNames } = useModal()
+	const { onOpen } = useModal()
 	const actionCtx: ActionContext = { onOpen, modalNames }
 
 	const user = useUserStore((state) => state.user)

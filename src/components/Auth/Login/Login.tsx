@@ -12,6 +12,7 @@ import { useLogin } from '@/hooks/auth/useLogin'
 import useModal from '@/hooks/ui/useModal'
 import useSubmit from '@/hooks/ui/useSubmit'
 
+import { modalNames } from '@/config/modalConfig'
 import { routes } from '@/config/routes'
 
 import { LoginDto } from '@/types/dto/LoginDto'
@@ -23,7 +24,7 @@ import { Fields, Validation } from '@/validation/schemas/LoginSchema'
 import { fadeSlide } from '@/animations/fadeSlide'
 
 const Login: FC = () => {
-	const { modalNames, onOpen } = useModal()
+	const { onOpen } = useModal()
 	const { mutateAsync: login, isPending } = useLogin()
 
 	const { control, handleSubmit } = useForm<Fields>(Validation)

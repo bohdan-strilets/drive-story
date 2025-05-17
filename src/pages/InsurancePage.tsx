@@ -20,6 +20,7 @@ import { useGalleryManager } from '@/hooks/ui/useGalleryManager'
 import useModal from '@/hooks/ui/useModal'
 import useSubmit from '@/hooks/ui/useSubmit'
 
+import { modalNames } from '@/config/modalConfig'
 import { routes } from '@/config/routes'
 
 import { uploadFileParams } from '@/utils/uploadFileParams'
@@ -33,7 +34,7 @@ import { Insurance } from '@/types/types/Insurance'
 
 const InsurancePage: FC = () => {
 	const { carId, insuranceId } = useParams()
-	const { modalNames, checkQueryParam, onClose } = useModal()
+	const { checkQueryParam, onClose } = useModal()
 	const navigate = useNavigate()
 
 	const {
@@ -130,9 +131,9 @@ const InsurancePage: FC = () => {
 						<InsuranceForm mode="edit" insurance={insurance} />
 					</Modal>
 				)}
-				{checkQueryParam(modalNames.DELETE_iNSURANCE_POLICY) && (
+				{checkQueryParam(modalNames.DELETE_INSURANCE_POLICY) && (
 					<Modal
-						key={modalNames.DELETE_iNSURANCE_POLICY}
+						key={modalNames.DELETE_INSURANCE_POLICY}
 						title="Delete insurance policy?"
 						isDialog={true}
 						isLoading={isDeleteInsurance}

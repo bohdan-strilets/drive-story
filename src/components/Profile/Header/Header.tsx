@@ -7,6 +7,8 @@ import Title from '@/components/UI/Title'
 import useModal from '@/hooks/ui/useModal'
 import useResponsive from '@/hooks/ui/useResponsive'
 
+import { modalNames } from '@/config/modalConfig'
+
 import { HeaderProps } from '@/types/props/Profile/HeaderProps'
 
 import { fadeIn } from '@/animations/fadeIn'
@@ -14,7 +16,7 @@ import { fadeIn } from '@/animations/fadeIn'
 import { Wrapper } from './Header.styled'
 
 const Header: FC<HeaderProps> = ({ posterUrl, fullName, nickname }) => {
-	const { onOpen, modalNames } = useModal()
+	const { onOpen } = useModal()
 	const { maxMobile } = useResponsive()
 
 	return (

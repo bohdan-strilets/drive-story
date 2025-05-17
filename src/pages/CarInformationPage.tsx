@@ -14,12 +14,14 @@ import { useFetchCar } from '@/hooks/car/useFetchCar'
 import { useGalleryManager } from '@/hooks/ui/useGalleryManager'
 import useModal from '@/hooks/ui/useModal'
 
+import { modalNames } from '@/config/modalConfig'
+
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
 
 const CarInformationPage: FC = () => {
-	const { checkQueryParam, modalNames } = useModal()
+	const { checkQueryParam } = useModal()
 	const { carId } = useParams()
 	const { data: car, isLoading, isError } = useFetchCar(carId ?? '')
 

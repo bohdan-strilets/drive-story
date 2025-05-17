@@ -11,6 +11,7 @@ import {
 import { RiCarWashingFill } from 'react-icons/ri'
 import { TiSpanner } from 'react-icons/ti'
 
+import { modalNames } from '@/config/modalConfig'
 import { routes } from '@/config/routes'
 
 import { ActionContext, ActionDescriptor } from '@/types/types/ActionDescriptor'
@@ -21,7 +22,7 @@ export const carAction: ActionDescriptor<ActionContext>[] = [
 		label: 'Upload photo',
 		icon: <MdCloudUpload size={20} />,
 		getCallback:
-			({ onOpen, modalNames }) =>
+			({ onOpen }) =>
 			() =>
 				onOpen(modalNames.UPLOAD_CAR_PHOTO),
 	},
@@ -30,7 +31,7 @@ export const carAction: ActionDescriptor<ActionContext>[] = [
 		label: 'Edit car information',
 		icon: <MdModeEdit size={20} />,
 		getCallback:
-			({ onOpen, modalNames }) =>
+			({ onOpen }) =>
 			() =>
 				onOpen(modalNames.EDIT_CAR),
 	},

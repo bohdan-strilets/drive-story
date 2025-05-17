@@ -5,12 +5,14 @@ import StatusBadge from '@/components/UI/StatusBadge'
 
 import useModal from '@/hooks/ui/useModal'
 
+import { modalNames } from '@/config/modalConfig'
+
 import { EmailActivationCellProps } from '@/types/props/Profile/EmailActivationCellProps'
 
 import { Wrapper } from './EmailActivationCell.styled'
 
 const EmailActivationCell: FC<EmailActivationCellProps> = ({ user }) => {
-	const { onOpen, modalNames } = useModal()
+	const { onOpen } = useModal()
 
 	return (
 		<Wrapper>

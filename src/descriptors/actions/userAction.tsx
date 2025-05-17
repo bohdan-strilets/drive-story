@@ -2,6 +2,8 @@ import { ImExit } from 'react-icons/im'
 import { MdDelete, MdEmail } from 'react-icons/md'
 import { RiLockPasswordFill, RiProfileFill } from 'react-icons/ri'
 
+import { modalNames } from '@/config/modalConfig'
+
 import { ActionContext, ActionDescriptor } from '@/types/types/ActionDescriptor'
 
 export const userAction: ActionDescriptor<ActionContext>[] = [
@@ -10,7 +12,7 @@ export const userAction: ActionDescriptor<ActionContext>[] = [
 		label: 'Edit email',
 		icon: <MdEmail />,
 		getCallback:
-			({ onOpen, modalNames }) =>
+			({ onOpen }) =>
 			() =>
 				onOpen(modalNames.EDIT_EMAIL),
 	},
@@ -19,7 +21,7 @@ export const userAction: ActionDescriptor<ActionContext>[] = [
 		label: 'Edit password',
 		icon: <RiLockPasswordFill />,
 		getCallback:
-			({ onOpen, modalNames }) =>
+			({ onOpen }) =>
 			() =>
 				onOpen(modalNames.EDIT_PASSWORD),
 	},
@@ -28,7 +30,7 @@ export const userAction: ActionDescriptor<ActionContext>[] = [
 		label: 'Edit profile',
 		icon: <RiProfileFill />,
 		getCallback:
-			({ onOpen, modalNames }) =>
+			({ onOpen }) =>
 			() =>
 				onOpen(modalNames.EDIT_PROFILE),
 	},
@@ -37,7 +39,7 @@ export const userAction: ActionDescriptor<ActionContext>[] = [
 		label: 'Delete profile',
 		icon: <MdDelete />,
 		getCallback:
-			({ onOpen, modalNames }) =>
+			({ onOpen }) =>
 			() =>
 				onOpen(modalNames.DELETE_PROFILE),
 	},
@@ -46,7 +48,7 @@ export const userAction: ActionDescriptor<ActionContext>[] = [
 		label: 'Exit',
 		icon: <ImExit />,
 		getCallback:
-			({ onOpen, modalNames }) =>
+			({ onOpen }) =>
 			() =>
 				onOpen(modalNames.EXIT_PROFILE),
 	},

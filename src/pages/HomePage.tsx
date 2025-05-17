@@ -8,8 +8,10 @@ import Modal from '@/components/Modal'
 
 import useModal from '@/hooks/ui/useModal'
 
+import { modalNames } from '@/config/modalConfig'
+
 const HomePage: FC = () => {
-	const { checkQueryParam, modalNames, onOpen } = useModal()
+	const { checkQueryParam, onOpen } = useModal()
 	const { state } = useLocation()
 
 	useEffect(() => {

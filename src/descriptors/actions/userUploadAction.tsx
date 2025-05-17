@@ -1,6 +1,8 @@
 import { BsImageFill } from 'react-icons/bs'
 import { MdImagesearchRoller } from 'react-icons/md'
 
+import { modalNames } from '@/config/modalConfig'
+
 import { ActionContext, ActionDescriptor } from '@/types/types/ActionDescriptor'
 
 export const userUploadAction: ActionDescriptor<ActionContext>[] = [
@@ -9,7 +11,7 @@ export const userUploadAction: ActionDescriptor<ActionContext>[] = [
 		label: 'Upload avatar',
 		icon: <BsImageFill />,
 		getCallback:
-			({ onOpen, modalNames }) =>
+			({ onOpen }) =>
 			() =>
 				onOpen(modalNames.UPLOAD_AVATAR),
 	},
@@ -18,7 +20,7 @@ export const userUploadAction: ActionDescriptor<ActionContext>[] = [
 		label: 'Upload poster',
 		icon: <MdImagesearchRoller />,
 		getCallback:
-			({ onOpen, modalNames }) =>
+			({ onOpen }) =>
 			() =>
 				onOpen(modalNames.UPLOAD_POSTER),
 	},

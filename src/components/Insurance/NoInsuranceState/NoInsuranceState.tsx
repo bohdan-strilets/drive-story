@@ -5,8 +5,10 @@ import EmptyState from '@/components/UI/EmptyState'
 
 import useModal from '@/hooks/ui/useModal'
 
+import { modalNames } from '@/config/modalConfig'
+
 const NoInsuranceState: FC = () => {
-	const { modalNames, onOpen } = useModal()
+	const { onOpen } = useModal()
 
 	return (
 		<>

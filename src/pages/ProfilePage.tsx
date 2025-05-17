@@ -18,6 +18,7 @@ import useModal from '@/hooks/ui/useModal'
 import useSubmit from '@/hooks/ui/useSubmit'
 import { useRemoveProfile } from '@/hooks/user/useRemoveProfile'
 
+import { modalNames } from '@/config/modalConfig'
 import { routes } from '@/config/routes'
 
 import { useUserStore } from '@/store/useUserStore'
@@ -30,7 +31,7 @@ import { AuthResponse } from '@/types/types/AuthResponse'
 import { User } from '@/types/types/User'
 
 const ProfilePage: FC = () => {
-	const { checkQueryParam, modalNames, onClose } = useModal()
+	const { checkQueryParam, onClose } = useModal()
 
 	const { mutateAsync: logout, isPending: isLogoutPending } = useLogout()
 	const { mutateAsync: removeProfile, isPending: isRemoveProfilePending } =
