@@ -7,7 +7,8 @@ import { PiResizeBold } from 'react-icons/pi'
 import { extractPublicId } from '@/utils/extractImagePublicId'
 
 import { Params, Result } from '@/types/hooks/useGalleryManager'
-import { SelectImageDto } from '@/types/params/SelectImageParams'
+import { DeleteImageParams } from '@/types/params/DeleteImageParams'
+import { SelectImageParams } from '@/types/params/SelectImageParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Image } from '@/types/types/Image'
 
@@ -33,12 +34,12 @@ export const useGalleryManager = ({ entityType, entityId }: Params): Result => {
 	const isLoading =
 		isSelectImagePending || isDeleteImagePending || isUploadImagePending
 
-	const submitSelectImage = useSubmit<Image | null, SelectImageDto>({
+	const submitSelectImage = useSubmit<Image | null, SelectImageParams>({
 		callback: selectImage,
 		successMessage: 'Image successfully changed',
 	})
 
-	const submitDeleteImage = useSubmit<Image | null, SelectImageDto>({
+	const submitDeleteImage = useSubmit<Image | null, DeleteImageParams>({
 		callback: deleteImage,
 		successMessage: 'Image successfully deleted',
 	})
@@ -51,7 +52,9 @@ export const useGalleryManager = ({ entityType, entityId }: Params): Result => {
 		}
 	}
 
-	const remove = async (imageUrl: string): Promise<void> => {
+	const remove = async (
+		imageUrl: string
+	): Promise<ApiResponse<Image | null> | undefined> => {
 		const publicId = extractPublicId(imageUrl)
 
 		if (entityId && publicId) {

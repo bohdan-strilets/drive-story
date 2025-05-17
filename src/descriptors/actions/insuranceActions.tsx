@@ -1,3 +1,4 @@
+import { GiBroom } from 'react-icons/gi'
 import {
 	MdCloudUpload,
 	MdContactEmergency,
@@ -16,6 +17,15 @@ export const insuranceActions: ActionDescriptor<ActionContext>[] = [
 			({ onOpen, modalNames }) =>
 			() =>
 				onOpen(modalNames.UPLOAD_INSURANCE_PHOTO),
+	},
+	{
+		key: 'clear-gallery',
+		label: 'Clear gallery',
+		icon: <GiBroom size={20} />,
+		getCallback:
+			({ onOpen, modalNames }) =>
+			() =>
+				onOpen(modalNames.CLEAR_INSURANCE_GALLERY),
 	},
 	{
 		key: 'edit-insurance',

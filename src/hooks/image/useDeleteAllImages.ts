@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query'
 import { removeAll } from '@/api/imageApi'
 
 import { queryClient } from '@/config/queryClient'
-import { CarKey, UserKey } from '@/config/queryKeys'
+import { CarKey, InsuranceKey, UserKey } from '@/config/queryKeys'
 
 import { DeleteImagesParams } from '@/types/params/DeleteImagesParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
@@ -19,6 +19,7 @@ export const useDeleteAllImages = () => {
 				queryClient.invalidateQueries({ queryKey: [UserKey] })
 				queryClient.invalidateQueries({ queryKey: [CarKey, entityId] })
 				queryClient.invalidateQueries({ queryKey: [CarKey] })
+				queryClient.invalidateQueries({ queryKey: [InsuranceKey, entityId] })
 			}
 		},
 	})

@@ -28,6 +28,7 @@ const useModal = () => {
 		EDIT_INSURANCE_POLICY: 'edit-insurance-policy',
 		DELETE_iNSURANCE_POLICY: 'delete-insurance-policy',
 		UPLOAD_INSURANCE_PHOTO: 'upload-insurance-photo',
+		CLEAR_INSURANCE_GALLERY: 'clear-insurance-gallery',
 	}
 
 	const onOpen = useCallback(

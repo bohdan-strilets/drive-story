@@ -13,6 +13,7 @@ import Loader from '@/components/UI/Loader'
 import Paragraph from '@/components/UI/Paragraph'
 import Uploader from '@/components/Uploader'
 
+import { useDeleteAllImages } from '@/hooks/image/useDeleteAllImages'
 import { useDeleteInsurance } from '@/hooks/insurance/useDeleteInsurance'
 import { useFetchInsurance } from '@/hooks/insurance/useFetchInsurance'
 import { useGalleryManager } from '@/hooks/ui/useGalleryManager'
@@ -24,7 +25,10 @@ import { routes } from '@/config/routes'
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
+import { isImage } from '@/types/guards/isImage'
+import { DeleteImagesParams } from '@/types/params/DeleteImagesParams'
 import { InsurancePathParams } from '@/types/params/InsurancePathParams'
+import { Image } from '@/types/types/Image'
 import { Insurance } from '@/types/types/Insurance'
 
 const InsurancePage: FC = () => {
@@ -50,6 +54,25 @@ const InsurancePage: FC = () => {
 		callback: deleteInsurance,
 		navigateTo: `${routes.CAR_INFORMATION}/${carId}`,
 		successMessage: 'The insurance policy has been successfully deleted',
+	})
+
+	const { mutateAsync: deleteAllImages, isPending: isDeleteallImages } =
+		useDeleteAllImages()
+
+	const imageId = String(
+		insurance && isImage(insurance?.photos) && insurance.photos._id
+	)
+
+	const deleteImagesParams: DeleteImagesParams = {
+		entityId: insuranceId || '',
+		entityType: EntityType.INSURANCE,
+		imageId,
+	}
+
+	const clearGallery = useSubmit<Image | null, DeleteImagesParams>({
+		callback: deleteAllImages,
+		isCloseModal: true,
+		successMessage: 'All photos were successfully deleted',
 	})
 
 	const {
@@ -138,7 +161,23 @@ const InsurancePage: FC = () => {
 				{showImageViewer && (
 					<ImageViewer imageUrl={currentImage} closeViewer={closeImageViewer} />
 				)}
-				``
+				{checkQueryParam(modalNames.CLEAR_INSURANCE_GALLERY) && (
+					<Modal
+						key={modalNames.CLEAR_INSURANCE_GALLERY}
+						title="Clear gallery?"
+						isDialog={true}
+						isLoading={isDeleteallImages}
+						negativeBtnLabel="no"
+						positiveBtnLabel="yes"
+						negativeCallback={onClose}
+						positiveCallback={() => clearGallery(deleteImagesParams)}
+					>
+						<Paragraph color="black" margin="0 0 15px 0">
+							After confirmation, all images from the gallery will be deleted
+							for this item. Do you want to continue?
+						</Paragraph>
+					</Modal>
+				)}
 			</AnimatePresence>
 		</>
 	)
