@@ -9,17 +9,17 @@ import { Insurance } from '@/types/types/Insurance'
 export const insuranceField: FieldDescriptor<Insurance>[] = [
 	{
 		key: 'start-date',
-		label: 'Start of insurance policy',
+		label: 'Start of insurance',
 		render: (insurance) => parsedDateToString(insurance?.startDate) || '—',
 	},
 	{
 		key: 'end-date',
-		label: 'End of insurance policy',
+		label: 'End of insurance',
 		render: (insurance) => parsedDateToString(insurance?.endDate) || '—',
 	},
 	{
 		key: 'coverage-amount',
-		label: 'Amount of coverage from the policy',
+		label: 'Coverage amount',
 		render: (insurance) =>
 			`${formatNumberWithSpaces(insurance?.coverageAmount ?? 0)} PLN`,
 	},
