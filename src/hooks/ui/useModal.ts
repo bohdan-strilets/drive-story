@@ -27,6 +27,7 @@ const useModal = () => {
 		ADD_INSURANCE_POLICY: 'add-insurance-policy',
 		EDIT_INSURANCE_POLICY: 'edit-insurance-policy',
 		DELETE_iNSURANCE_POLICY: 'delete-insurance-policy',
+		UPLOAD_INSURANCE_PHOTO: 'upload-insurance-photo',
 	}
 
 	const onOpen = useCallback(

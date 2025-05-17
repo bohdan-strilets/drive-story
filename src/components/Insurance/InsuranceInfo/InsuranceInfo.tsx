@@ -1,7 +1,10 @@
 import { FC } from 'react'
 
+import Gallery from '@/components/Gallery'
 import ActionMenu from '@/components/Layout/ActionMenu'
 import PropertyList from '@/components/Layout/PropertyList'
+import DecorativeLine from '@/components/UI/DecorativeLine'
+import Paragraph from '@/components/UI/Paragraph'
 import Title from '@/components/UI/Title'
 
 import useModal from '@/hooks/ui/useModal'
@@ -11,6 +14,7 @@ import { insuranceActions } from '@/descriptors/actions/insuranceActions'
 import { insuranceField } from '@/descriptors/fields/insuranceField'
 import { insurancePayment } from '@/descriptors/fields/insurancePayment'
 
+import { isImage } from '@/types/guards/isImage'
 import { InsuranceInfoProps } from '@/types/props/Insurance/InsuranceInfoProps'
 import { ActionContext } from '@/types/types/ActionDescriptor'
 
@@ -19,7 +23,11 @@ import Timer from '../Timer'
 
 import { Container, InformationWrapper, SideMenu } from './InsuranceInfo.styled'
 
-const InsuranceInfo: FC<InsuranceInfoProps> = ({ insurance }) => {
+const InsuranceInfo: FC<InsuranceInfoProps> = ({
+	insurance,
+	imageActions,
+	isActionLoading,
+}) => {
 	const { onOpen, modalNames } = useModal()
 	const { maxMobile } = useResponsive()
 
@@ -27,6 +35,8 @@ const InsuranceInfo: FC<InsuranceInfoProps> = ({ insurance }) => {
 		onOpen,
 		modalNames,
 	}
+
+	const photos = insurance?.photos
 
 	return (
 		insurance && (
@@ -60,6 +70,33 @@ const InsuranceInfo: FC<InsuranceInfoProps> = ({ insurance }) => {
 									context={insurance?.paymentStatus}
 								/>
 							</>
+						)}
+
+						<DecorativeLine type="dashed" />
+						<Title
+							fontSize={maxMobile ? 20 : 28}
+							textAlign="left"
+							color="black"
+						>
+							Gallery
+						</Title>
+						{!photos && (
+							<Paragraph color="green" textAlign="center">
+								You can upload photos of documents or other important
+								information related to this insurance policy so that you always
+								have it at hand.
+							</Paragraph>
+						)}
+
+						{photos && isImage(photos) && (
+							<Gallery
+								images={photos.resources}
+								overlayActions={imageActions}
+								isActionLoading={isActionLoading}
+								itemsPerPage={maxMobile ? 3 : 6}
+								itemHeight="240px"
+								isOverlay={true}
+							/>
 						)}
 					</InformationWrapper>
 					<SideMenu>

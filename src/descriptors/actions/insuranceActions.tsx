@@ -12,7 +12,10 @@ export const insuranceActions: ActionDescriptor<ActionContext>[] = [
 		key: 'upload-car-photo',
 		label: 'Upload photo',
 		icon: <MdCloudUpload size={20} />,
-		getCallback: () => () => null,
+		getCallback:
+			({ onOpen, modalNames }) =>
+			() =>
+				onOpen(modalNames.UPLOAD_INSURANCE_PHOTO),
 	},
 	{
 		key: 'edit-insurance',
