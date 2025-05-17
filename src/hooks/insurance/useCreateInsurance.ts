@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query'
 import { create } from '@/api/insuranceApi'
 
 import { queryClient } from '@/config/queryClient'
-import { InsuranceKey } from '@/config/queryKeys'
+import { CarKey, InsuranceKey } from '@/config/queryKeys'
 
 import { AddInsuranceParams } from '@/types/params/AddInsuranceParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
@@ -16,9 +16,10 @@ export const useCreateInsurance = () => {
 		AddInsuranceParams
 	>({
 		mutationFn: (dto) => create(dto),
-		onSuccess: (response) => {
+		onSuccess: (response, { carId }) => {
 			if (response.success) {
 				queryClient.invalidateQueries({ queryKey: [InsuranceKey] })
+				queryClient.invalidateQueries({ queryKey: [CarKey, carId] })
 			}
 		},
 	})

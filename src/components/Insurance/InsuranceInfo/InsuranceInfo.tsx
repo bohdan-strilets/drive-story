@@ -11,15 +11,15 @@ import { insuranceActions } from '@/descriptors/actions/insuranceActions'
 import { insuranceField } from '@/descriptors/fields/insuranceField'
 import { insurancePayment } from '@/descriptors/fields/insurancePayment'
 
-import { InsuranceProps } from '@/types/props/Insurance/InsuranceProps'
+import { InsuranceInfoProps } from '@/types/props/Insurance/InsuranceInfoProps'
 import { ActionContext } from '@/types/types/ActionDescriptor'
 
 import Header from '../Header'
 import Timer from '../Timer'
 
-import { Container, InformationWrapper, SideMenu } from './Insurance.styled'
+import { Container, InformationWrapper, SideMenu } from './InsuranceInfo.styled'
 
-const Insurance: FC<InsuranceProps> = ({ insurance }) => {
+const InsuranceInfo: FC<InsuranceInfoProps> = ({ insurance }) => {
 	const { onOpen, modalNames } = useModal()
 	const { maxMobile } = useResponsive()
 
@@ -74,4 +74,4 @@ const Insurance: FC<InsuranceProps> = ({ insurance }) => {
 	)
 }
 
-export default Insurance
+export default InsuranceInfo

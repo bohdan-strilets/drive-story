@@ -38,6 +38,8 @@ const useSubmit = <T, U = void>({
 			if (successMessage) {
 				toast.success(successMessage)
 			}
+
+			return response
 		} catch (error) {
 			handleError(error)
 		}

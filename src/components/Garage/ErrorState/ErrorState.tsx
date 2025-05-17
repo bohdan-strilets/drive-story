@@ -18,9 +18,7 @@ const ErrorState: FC = () => {
 				margin="0 0 5px 0"
 				color="black"
 			/>
-			<ErrorMessage
-				message={`Car with current ID: ${carId} was not selected.`}
-			/>
+			<ErrorMessage message={`Car with current ID: ${carId} was not found.`} />
 		</>
 	)
 }

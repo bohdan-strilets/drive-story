@@ -46,7 +46,8 @@ const CarInformation: FC<CarInformationProps> = ({
 		onOpen,
 		modalNames,
 		navigate,
-		carId: carId ?? '',
+		carId: carId,
+		insuranceId: car?.insuranceId || '',
 	}
 
 	const photos = car?.photos

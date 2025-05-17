@@ -1,15 +1,11 @@
 import { FC } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 import AccentText from '@/components/UI/AccentText'
-import ButtonGoBack from '@/components/UI/ButtonGoBack'
 import DecorativeLine from '@/components/UI/DecorativeLine'
 import Paragraph from '@/components/UI/Paragraph'
 import Title from '@/components/UI/Title'
 
 import useResponsive from '@/hooks/ui/useResponsive'
-
-import { routes } from '@/config/routes'
 
 import { parsedDateToString } from '@/utils/parsedDateToString'
 
@@ -25,16 +21,9 @@ const Header: FC<HeaderProps> = ({
 	updatedAt,
 }) => {
 	const { maxMobile } = useResponsive()
-	const navigate = useNavigate()
 
 	return (
 		<Wrapper>
-			<ButtonGoBack
-				label="car"
-				onClick={() => navigate(`${routes.CAR_INFORMATION}/${carId}`)}
-				margin="0 0 5px 0"
-				color="black"
-			/>
 			<Title
 				fontSize={maxMobile ? 20 : 44}
 				textAlign={'left'}

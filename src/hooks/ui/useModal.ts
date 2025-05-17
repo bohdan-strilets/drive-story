@@ -26,6 +26,7 @@ const useModal = () => {
 		UPLOAD_CAR_PHOTO: 'upload-car-photo',
 		ADD_INSURANCE_POLICY: 'add-insurance-policy',
 		EDIT_INSURANCE_POLICY: 'edit-insurance-policy',
+		DELETE_iNSURANCE_POLICY: 'delete-insurance-policy',
 	}
 
 	const onOpen = useCallback(

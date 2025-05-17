@@ -33,6 +33,9 @@ export const insuranceActions: ActionDescriptor<ActionContext>[] = [
 		key: 'delete-insurance',
 		label: 'Delete insurance',
 		icon: <MdDelete size={20} />,
-		getCallback: () => () => null,
+		getCallback:
+			({ onOpen, modalNames }) =>
+			() =>
+				onOpen(modalNames.DELETE_iNSURANCE_POLICY),
 	},
 ]

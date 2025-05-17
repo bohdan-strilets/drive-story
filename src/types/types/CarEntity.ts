@@ -50,6 +50,7 @@ export type CarEntity = {
 	ownership: CarOwnership
 	description?: string | null
 	photos: string | null | Image
+	insuranceId?: string | null
 	createdAt: Date
 	updatedAt: Date
 }

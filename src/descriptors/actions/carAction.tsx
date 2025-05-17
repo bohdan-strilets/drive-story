@@ -45,11 +45,11 @@ export const carAction: ActionDescriptor<ActionContext>[] = [
 		label: 'Insurance policy',
 		icon: <IoDocumentText size={20} />,
 		getCallback:
-			({ navigate, carId }) =>
+			({ navigate, carId = '', insuranceId = '' }) =>
 			() =>
 				navigate &&
 				navigate(
-					`${routes.CAR_INFORMATION}/${carId}/${routes.INSURANCE_POLICY}`
+					`${routes.CAR_INFORMATION}/${carId}/${routes.INSURANCE_POLICY}/${insuranceId}`
 				),
 	},
 	{

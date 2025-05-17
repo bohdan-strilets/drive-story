@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query'
 import { remove } from '@/api/insuranceApi'
 
 import { queryClient } from '@/config/queryClient'
-import { InsuranceKey } from '@/config/queryKeys'
+import { CarKey, InsuranceKey } from '@/config/queryKeys'
 
 import { InsurancePathParams } from '@/types/params/InsurancePathParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
@@ -16,9 +16,10 @@ export const useDeleteInsurance = () => {
 		InsurancePathParams
 	>({
 		mutationFn: (params) => remove(params),
-		onSuccess: (response) => {
+		onSuccess: (response, { carId }) => {
 			if (response.success) {
 				queryClient.invalidateQueries({ queryKey: [InsuranceKey] })
+				queryClient.invalidateQueries({ queryKey: [CarKey, carId] })
 			}
 		},
 	})

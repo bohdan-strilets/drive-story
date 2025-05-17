@@ -7,6 +7,7 @@ export type ActionContext = {
 	modalNames: Record<string, string>
 	navigate?: (route: string) => void
 	carId?: string
+	insuranceId?: string
 }
 
 export type ActionDescriptor<T> = {

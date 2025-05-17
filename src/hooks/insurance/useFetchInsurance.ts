@@ -1,27 +1,27 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query'
 
-import { getByCar } from '@/api/insuranceApi'
+import { getById } from '@/api/insuranceApi'
 
 import { InsuranceKey } from '@/config/queryKeys'
 
 import { Insurance } from '@/types/types/Insurance'
 
 export const useFetchInsurance = (
-	carId?: string
+	insuranceId?: string
 ): UseQueryResult<Insurance | undefined, unknown> => {
 	return useQuery({
-		queryKey: [InsuranceKey, carId],
+		queryKey: [InsuranceKey, insuranceId],
 		queryFn: async () => {
-			if (!carId) {
-				throw new Error('No carId provided')
+			if (!insuranceId) {
+				throw new Error('No insuranceId provided')
 			}
 
-			const response = await getByCar(carId)
+			const response = await getById(insuranceId)
 			if (response.success) {
 				return response.data
 			}
 		},
 
-		enabled: Boolean(carId),
+		enabled: Boolean(insuranceId),
 	})
 }

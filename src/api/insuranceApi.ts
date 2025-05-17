@@ -57,11 +57,11 @@ export const remove = async ({
 	}
 }
 
-export const getByCar = async (
-	carId: string
+export const getById = async (
+	insuranceId: string
 ): Promise<ApiResponse<Insurance | null>> => {
 	try {
-		const { data } = await apiClient.get(`${ENDPOINT}/get-by-car/${carId}`)
+		const { data } = await apiClient.get(`${ENDPOINT}/get-by-id/${insuranceId}`)
 		return data
 	} catch (error) {
 		return handleApiError(error)

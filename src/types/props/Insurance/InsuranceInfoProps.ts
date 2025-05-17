@@ -1,5 +1,5 @@
 import { Insurance } from '@/types/types/Insurance'
 
-export type InsuranceProps = {
+export type InsuranceInfoProps = {
 	insurance?: Insurance
 }
