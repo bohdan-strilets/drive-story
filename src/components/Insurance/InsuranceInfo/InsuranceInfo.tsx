@@ -4,7 +4,6 @@ import Gallery from '@/components/Gallery'
 import ActionMenu from '@/components/Layout/ActionMenu'
 import PropertyList from '@/components/Layout/PropertyList'
 import DecorativeLine from '@/components/UI/DecorativeLine'
-import Paragraph from '@/components/UI/Paragraph'
 import Title from '@/components/UI/Title'
 
 import useModal from '@/hooks/ui/useModal'
@@ -45,19 +44,15 @@ const InsuranceInfo: FC<InsuranceInfoProps> = ({
 					updatedAt={insurance.updatedAt}
 				/>
 
-				<>
-					<Title fontSize={maxMobile ? 20 : 28} textAlign="left" color="black">
-						Gallery
-					</Title>
-					{!photos && (
-						<Paragraph color="green" textAlign="center">
-							You can upload photos of documents or other important information
-							related to this insurance policy so that you always have it at
-							hand.
-						</Paragraph>
-					)}
-
-					{photos && isImage(photos) && (
+				{photos && isImage(photos) && (
+					<>
+						<Title
+							fontSize={maxMobile ? 20 : 28}
+							textAlign="left"
+							color="black"
+						>
+							Gallery
+						</Title>
 						<Gallery
 							images={photos.resources}
 							overlayActions={imageActions}
@@ -66,9 +61,9 @@ const InsuranceInfo: FC<InsuranceInfoProps> = ({
 							itemHeight="240px"
 							isOverlay={true}
 						/>
-					)}
-					<DecorativeLine color="gray" type="dashed" margin="20px 0" />
-				</>
+						<DecorativeLine color="gray" type="dashed" margin="20px 0" />
+					</>
+				)}
 
 				<Container>
 					<InformationWrapper>
