@@ -10,8 +10,6 @@ import { useGetImage } from '@/hooks/ui/useGetImage'
 import useModal from '@/hooks/ui/useModal'
 import useResponsive from '@/hooks/ui/useResponsive'
 
-import { modalNames } from '@/config/modalConfig'
-
 import { carAction } from '@/descriptors/actions/carAction'
 import { carOverview } from '@/descriptors/fields/carOverview'
 import { carOwnership } from '@/descriptors/fields/carOwnership'
@@ -46,7 +44,6 @@ const CarInformation: FC<CarInformationProps> = ({
 	const navigate = useNavigate()
 	const actionCtx: ActionContext = {
 		onOpen,
-		modalNames,
 		navigate,
 		carId: carId,
 		insuranceId: car?.insuranceId || '',

@@ -27,7 +27,7 @@ import ProfileMeta from './ProfileMeta'
 
 const Profile: FC = () => {
 	const { onOpen } = useModal()
-	const actionCtx: ActionContext = { onOpen, modalNames }
+	const actionCtx: ActionContext = { onOpen }
 
 	const user = useUserStore((state) => state.user)
 	const isLoading = useUserStore((state) => state.isLoading)

@@ -16,4 +16,4 @@ export const routes = {
 	GALLERY: '/gallery',
 	STATISTICS: '/statistics',
 	CONTACTS: '/contacts',
-}
+} as const

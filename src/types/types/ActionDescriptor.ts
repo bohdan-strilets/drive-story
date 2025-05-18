@@ -2,8 +2,10 @@ import { ReactNode } from 'react'
 
 import { Action } from '../hooks/useGalleryManager'
 
+import { ModalName } from './ModalName'
+
 export type ActionContext = {
-	onOpen: (name: string) => void
+	onOpen: (name: ModalName) => void
 	navigate?: (route: string) => void
 	carId?: string
 	insuranceId?: string
