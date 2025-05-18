@@ -2,6 +2,7 @@ import apiClient from '@/config/axiosConfig'
 
 import { handleApiError } from '@/utils/handleApiError'
 
+import { CurrentCarDto } from '@/types/dto/CurrentCarDto'
 import { EditPasswordDto } from '@/types/dto/EditPasswordDto'
 import { EmailDto } from '@/types/dto/EmailDto'
 import { ProfileDto } from '@/types/dto/ProfileDto'
@@ -99,6 +100,17 @@ export const editPassword = async (
 export const removeProfile = async (): Promise<ApiResponse<User | null>> => {
 	try {
 		const { data } = await apiClient.delete(`${ENDPOINT}/remove-profile`)
+		return data
+	} catch (error) {
+		return handleApiError(error)
+	}
+}
+
+export const setCurrentCar = async (
+	dto: CurrentCarDto
+): Promise<ApiResponse<User | null>> => {
+	try {
+		const { data } = await apiClient.patch(`${ENDPOINT}/set-current-car`, dto)
 		return data
 	} catch (error) {
 		return handleApiError(error)

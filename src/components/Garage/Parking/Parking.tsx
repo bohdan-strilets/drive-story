@@ -8,6 +8,8 @@ import { useFetchCars } from '@/hooks/car/useFetchCars'
 import useResponsive from '@/hooks/ui/useResponsive'
 import useServerPagination from '@/hooks/ui/useServerPagination'
 
+import { useUserStore } from '@/store/useUserStore'
+
 import { PaginationParams } from '@/types/params/PaginationParams'
 
 import { fadeSlide } from '@/animations/fadeSlide'
@@ -18,6 +20,7 @@ import { Item, List } from './Parking.styled'
 
 const Parking: FC = () => {
 	const { maxTablet } = useResponsive()
+	const user = useUserStore((state) => state.user)
 
 	const [page, setPage] = useState(1)
 	const limit = maxTablet ? 6 : 9
@@ -73,6 +76,7 @@ const Parking: FC = () => {
 							engineVolume={car.specifications.engine.volume}
 							fuelType={car.specifications.fuelType}
 							trnasmission={car.specifications.transmission}
+							isCurrentCar={user?.currentCar === car._id}
 						/>
 					</Item>
 				))}

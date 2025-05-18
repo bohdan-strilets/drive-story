@@ -5,6 +5,7 @@ import { PiEngineFill } from 'react-icons/pi'
 import { TbManualGearboxFilled } from 'react-icons/tb'
 import { useNavigate } from 'react-router-dom'
 
+import Badge from '@/components/UI/Badge'
 import Button from '@/components/UI/Button'
 import ImageBox from '@/components/UI/ImageBox'
 
@@ -46,6 +47,7 @@ const CarCard: FC<CarCardProps> = ({
 	engineVolume,
 	fuelType,
 	trnasmission,
+	isCurrentCar,
 }) => {
 	const navigate = useNavigate()
 
@@ -56,6 +58,7 @@ const CarCard: FC<CarCardProps> = ({
 
 	return (
 		<Wrapper>
+			{isCurrentCar && <Badge label={'Current car'} />}
 			<ImageBox imageUrl={carPoster} width="100%" height="200px" size="cover" />
 			<Information>
 				<Header>

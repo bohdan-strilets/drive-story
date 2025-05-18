@@ -8,20 +8,25 @@ import CarInformation from '@/components/Garage/CarInformation'
 import ErrorState from '@/components/Garage/ErrorState'
 import Modal from '@/components/Modal'
 import Loader from '@/components/UI/Loader'
+import Paragraph from '@/components/UI/Paragraph'
 import Uploader from '@/components/Uploader'
 
 import { useFetchCar } from '@/hooks/car/useFetchCar'
 import { useGalleryManager } from '@/hooks/ui/useGalleryManager'
 import useModal from '@/hooks/ui/useModal'
+import useSubmit from '@/hooks/ui/useSubmit'
+import { useSetCurrentCar } from '@/hooks/user/useSetCurrentCar'
 
 import { modalNames } from '@/config/modalConfig'
 
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
+import { CurrentCarDto } from '@/types/dto/CurrentCarDto'
 import { EntityType } from '@/types/enums/EntityType'
+import { User } from '@/types/types/User'
 
 const CarInformationPage: FC = () => {
-	const { checkQueryParam } = useModal()
+	const { checkQueryParam, onClose } = useModal()
 	const { carId } = useParams()
 	const { data: car, isLoading, isError } = useFetchCar(carId ?? '')
 
@@ -33,6 +38,14 @@ const CarInformationPage: FC = () => {
 		currentImage: currentImage,
 		closeViewer: closeImageViewer,
 	} = useGalleryManager({ entityType: EntityType.CARS, entityId: carId })
+
+	const { mutateAsync: setCurrentCar, isPending: isSetCar } = useSetCurrentCar()
+
+	const setCarSubmit = useSubmit<User | null, CurrentCarDto>({
+		callback: setCurrentCar,
+		isCloseModal: true,
+		successMessage: 'The current car has been modified',
+	})
 
 	if (isLoading) {
 		return <Loader color="gray" />
@@ -70,6 +83,24 @@ const CarInformationPage: FC = () => {
 				{checkQueryParam(modalNames.EDIT_CAR) && (
 					<Modal key={modalNames.EDIT_CAR} title="Edit car information">
 						<CarForm mode="edit" car={car} />
+					</Modal>
+				)}
+
+				{checkQueryParam(modalNames.SET_CURRENT_CAR) && (
+					<Modal
+						key={modalNames.SET_CURRENT_CAR}
+						title="Select this car?"
+						isDialog={true}
+						isLoading={isSetCar}
+						negativeBtnLabel="no"
+						positiveBtnLabel="yes"
+						negativeCallback={onClose}
+						positiveCallback={() => setCarSubmit({ carId: car?._id || '' })}
+					>
+						<Paragraph color="black" margin="0 0 15px 0">
+							By continuing, you will set this car as your current car that you
+							drive and maintain at this time.
+						</Paragraph>
 					</Modal>
 				)}
 			</AnimatePresence>

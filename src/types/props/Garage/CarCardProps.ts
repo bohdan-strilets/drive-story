@@ -5,10 +5,11 @@ export type CarCardProps = {
 	photos: string | null | Image
 	make: string
 	model: string
-	year: number
+	year: string
 	bodyType: string
 	mileage: number
 	engineVolume: number
 	fuelType: string
 	trnasmission: string
+	isCurrentCar: boolean
 }

@@ -21,4 +21,5 @@ export const modalNames = {
 	DELETE_INSURANCE_POLICY: 'delete-insurance-policy',
 	UPLOAD_INSURANCE_PHOTO: 'upload-insurance-photo',
 	CLEAR_INSURANCE_GALLERY: 'clear-insurance-gallery',
+	SET_CURRENT_CAR: 'set-current-car',
 } as const

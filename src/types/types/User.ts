@@ -23,4 +23,5 @@ export type User = {
 	birthDate?: Date | null
 	phoneNumber?: string | null
 	location?: Location | null
+	currentCar?: string | null
 }

@@ -39,7 +39,10 @@ export const carAction: ActionDescriptor<ActionContext>[] = [
 		key: 'select-current-car',
 		label: 'Select car as current',
 		icon: <BiSolidSelectMultiple size={20} />,
-		getCallback: () => () => null,
+		getCallback:
+			({ onOpen }) =>
+			() =>
+				onOpen(modalNames.SET_CURRENT_CAR),
 	},
 	{
 		key: 'insurance-policy',
