@@ -44,6 +44,32 @@ const InsuranceInfo: FC<InsuranceInfoProps> = ({
 					policyNumber={insurance.policyNumber}
 					updatedAt={insurance.updatedAt}
 				/>
+
+				<>
+					<Title fontSize={maxMobile ? 20 : 28} textAlign="left" color="black">
+						Gallery
+					</Title>
+					{!photos && (
+						<Paragraph color="green" textAlign="center">
+							You can upload photos of documents or other important information
+							related to this insurance policy so that you always have it at
+							hand.
+						</Paragraph>
+					)}
+
+					{photos && isImage(photos) && (
+						<Gallery
+							images={photos.resources}
+							overlayActions={imageActions}
+							isActionLoading={isActionLoading}
+							itemsPerPage={maxMobile ? 3 : 6}
+							itemHeight="240px"
+							isOverlay={true}
+						/>
+					)}
+					<DecorativeLine color="gray" type="dashed" margin="20px 0" />
+				</>
+
 				<Container>
 					<InformationWrapper>
 						<Timer
@@ -66,33 +92,6 @@ const InsuranceInfo: FC<InsuranceInfoProps> = ({
 									context={insurance?.paymentStatus}
 								/>
 							</>
-						)}
-
-						<DecorativeLine type="dashed" />
-						<Title
-							fontSize={maxMobile ? 20 : 28}
-							textAlign="left"
-							color="black"
-						>
-							Gallery
-						</Title>
-						{!photos && (
-							<Paragraph color="green" textAlign="center">
-								You can upload photos of documents or other important
-								information related to this insurance policy so that you always
-								have it at hand.
-							</Paragraph>
-						)}
-
-						{photos && isImage(photos) && (
-							<Gallery
-								images={photos.resources}
-								overlayActions={imageActions}
-								isActionLoading={isActionLoading}
-								itemsPerPage={maxMobile ? 3 : 6}
-								itemHeight="240px"
-								isOverlay={true}
-							/>
 						)}
 					</InformationWrapper>
 					<SideMenu>
