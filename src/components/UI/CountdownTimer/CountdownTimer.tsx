@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 import { CountdownTimerProps } from '@/types/props/UI/CountdownTimerProps'
 
-import { Cell, Wrapper } from './CountdownTimer.styled'
+import { Cell, Label, Wrapper } from './CountdownTimer.styled'
 
 const CountdownTimer: React.FC<CountdownTimerProps> = ({
 	startDate,
@@ -51,10 +51,22 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
 
 	return (
 		<Wrapper>
-			<Cell>{timeLeft.days} days</Cell>
-			<Cell>{timeLeft.hours} hours</Cell>
-			<Cell>{timeLeft.minutes} minutes</Cell>
-			<Cell>{timeLeft.seconds} seconds</Cell>
+			<Cell>
+				<p>{timeLeft.days}</p>
+				<Label>days</Label>
+			</Cell>
+			<Cell>
+				<p>{timeLeft.hours}</p>
+				<Label>hours</Label>
+			</Cell>
+			<Cell>
+				<p>{timeLeft.minutes}</p>
+				<Label>minutes</Label>
+			</Cell>
+			<Cell>
+				<p>{timeLeft.seconds}</p>
+				<Label>seconds</Label>
+			</Cell>
 		</Wrapper>
 	)
 }
