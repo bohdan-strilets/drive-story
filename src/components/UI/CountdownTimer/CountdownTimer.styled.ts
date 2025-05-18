@@ -28,8 +28,6 @@ export const Cell = styled.div`
 	}
 `
 
-export const Value = styled.p``
-
 export const Label = styled.p`
 	font-size: 10px;
 
