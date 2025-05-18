@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import { IoMdCloudUpload } from 'react-icons/io'
 
 import useUploadFile from '@/hooks/ui/useUploadFile'
 
@@ -48,7 +47,6 @@ const Uploader: FC<UploaderProps> = ({
 					/>
 					<BigButton
 						onClick={triggerFileInput}
-						icon={<IoMdCloudUpload />}
 						label="Select file"
 						margin="0 0 15px 0"
 					/>
