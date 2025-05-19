@@ -51,6 +51,7 @@ export type CarEntity = {
 	description?: string | null
 	photos: string | null | Image
 	insuranceId?: string | null
+	inspectionId?: string | null
 	createdAt: Date
 	updatedAt: Date
 }

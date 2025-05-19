@@ -49,7 +49,7 @@ export const carAction: ActionDescriptor<ActionContext>[] = [
 		label: 'Insurance policy',
 		icon: <IoDocumentText size={20} />,
 		getCallback:
-			({ navigate, carId, insuranceId }) =>
+			({ navigate, carId, insuranceId = '' }) =>
 			() =>
 				navigate &&
 				navigate(
@@ -61,7 +61,7 @@ export const carAction: ActionDescriptor<ActionContext>[] = [
 		label: 'Technical inspection',
 		icon: <MdMiscellaneousServices size={20} />,
 		getCallback:
-			({ navigate, carId, inspectionId }) =>
+			({ navigate, carId, inspectionId = '' }) =>
 			() =>
 				navigate &&
 				navigate(

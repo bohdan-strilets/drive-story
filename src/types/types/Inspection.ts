@@ -1,5 +1,3 @@
-import { InspectionStatus } from '../enums/InspectionStatus'
-
 import { Image } from './Image'
 
 export type Inspection = {
@@ -9,7 +7,7 @@ export type Inspection = {
 	carId: string
 	inspectionDate: Date
 	organization: string
-	inspectionStatus: InspectionStatus
+	isInspectionPassed: boolean
 	nextInspectionDate?: Date | null
 	comments?: string[]
 	photos: string | null | Image

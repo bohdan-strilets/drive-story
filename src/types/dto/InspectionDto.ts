@@ -1,9 +1,10 @@
-import { InspectionStatus } from '../enums/InspectionStatus'
+import { Inspection } from '../types/Inspection'
 
-export type InspectionDto = {
-	inspectionDate: Date
-	organization: string
-	inspectionStatus: InspectionStatus
-	nextInspectionDate?: Date | null
-	comments?: string[]
-}
+export type InspectionDto = Pick<
+	Inspection,
+	| 'inspectionDate'
+	| 'organization'
+	| 'isInspectionPassed'
+	| 'nextInspectionDate'
+	| 'comments'
+>
