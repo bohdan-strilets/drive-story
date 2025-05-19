@@ -9,6 +9,7 @@ import AuthPage from './pages/AuthPage'
 import CarInformationPage from './pages/CarInformationPage'
 import GaragePage from './pages/GaragePage'
 import HomePage from './pages/HomePage'
+import InspectionPage from './pages/InspectionPage'
 import InsurancePage from './pages/InsurancePage'
 import NotFoundPage from './pages/NotFoundPage'
 import ProfilePage from './pages/ProfilePage'
@@ -43,12 +44,12 @@ const App: FC = () => {
 					element={<CarInformationPage />}
 				/>
 				<Route
-					path={`${routes.CAR_INFORMATION}/:carId/${routes.INSURANCE}/:insuranceId?`}
+					path={`${routes.CAR_INFORMATION}/:carId${routes.INSURANCE}/:insuranceId?`}
 					element={<InsurancePage />}
 				/>
 				<Route
-					path={`${routes.CAR_INFORMATION}/:carId/${routes.INSURANCE}/:insuranceId?`}
-					element={<InsurancePage />}
+					path={`${routes.CAR_INFORMATION}/:carId${routes.INSPECTION}/:inspectionId?`}
+					element={<InspectionPage />}
 				/>
 				<Route path="*" element={<NotFoundPage />} />
 			</Routes>

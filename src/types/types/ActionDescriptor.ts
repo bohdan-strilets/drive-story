@@ -9,6 +9,7 @@ export type ActionContext = {
 	navigate?: (route: string) => void
 	carId?: string
 	insuranceId?: string
+	inspectionId?: string
 }
 
 export type ActionDescriptor<T> = {

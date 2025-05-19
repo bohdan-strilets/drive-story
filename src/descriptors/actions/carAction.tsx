@@ -49,18 +49,24 @@ export const carAction: ActionDescriptor<ActionContext>[] = [
 		label: 'Insurance policy',
 		icon: <IoDocumentText size={20} />,
 		getCallback:
-			({ navigate, carId = '', insuranceId = '' }) =>
+			({ navigate, carId, insuranceId }) =>
 			() =>
 				navigate &&
 				navigate(
-					`${routes.CAR_INFORMATION}/${carId}/${routes.INSURANCE}/${insuranceId}`
+					`${routes.CAR_INFORMATION}/${carId}${routes.INSURANCE}/${insuranceId}`
 				),
 	},
 	{
 		key: 'technical-inspection',
 		label: 'Technical inspection',
 		icon: <MdMiscellaneousServices size={20} />,
-		getCallback: () => () => null,
+		getCallback:
+			({ navigate, carId, inspectionId }) =>
+			() =>
+				navigate &&
+				navigate(
+					`${routes.CAR_INFORMATION}/${carId}${routes.INSPECTION}/${inspectionId}`
+				),
 	},
 	{
 		key: 'refueling-sessions',
