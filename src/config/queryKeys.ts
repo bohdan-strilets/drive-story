@@ -7,3 +7,5 @@ export const ImageKey = 'image'
 export const CarKey = 'car'
 
 export const InsuranceKey = 'insurance'
+
+export const InspectionKey = 'inspection'

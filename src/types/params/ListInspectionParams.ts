@@ -1,6 +1,6 @@
 import { PaginationParams } from '@/types/params/PaginationParams'
 
-export interface ListInsuranceParams extends PaginationParams {
+export interface ListInspectionParams extends PaginationParams {
 	pagination: PaginationParams
 	carId: string
 }
