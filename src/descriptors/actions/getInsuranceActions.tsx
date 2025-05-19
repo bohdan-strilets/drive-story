@@ -8,49 +8,39 @@ import {
 
 import { modalNames } from '@/config/modalConfig'
 
-import { ActionContext, ActionDescriptor } from '@/types/types/ActionDescriptor'
+import { ActionDescriptor, ActionParams } from '@/types/types/ActionDescriptor'
 
-export const insuranceActions: ActionDescriptor<ActionContext>[] = [
+export const getInsuranceActions = ({
+	onOpen,
+}: ActionParams): ActionDescriptor[] => [
 	{
-		key: 'upload-car-photo',
+		key: 'upload-insurance-photo',
 		label: 'Upload photo',
 		icon: <MdCloudUpload size={20} />,
-		getCallback:
-			({ onOpen }) =>
-			() =>
-				onOpen(modalNames.UPLOAD_INSURANCE_PHOTO),
+		callback: () => onOpen(modalNames.UPLOAD_INSURANCE_PHOTO),
 	},
 	{
 		key: 'clear-gallery',
 		label: 'Clear gallery',
 		icon: <GiBroom size={20} />,
-		getCallback:
-			({ onOpen }) =>
-			() =>
-				onOpen(modalNames.CLEAR_INSURANCE_GALLERY),
+		callback: () => onOpen(modalNames.CLEAR_INSURANCE_GALLERY),
 	},
 	{
 		key: 'edit-insurance',
 		label: 'Edit insurance',
 		icon: <MdModeEdit size={20} />,
-		getCallback:
-			({ onOpen }) =>
-			() =>
-				onOpen(modalNames.EDIT_INSURANCE),
+		callback: () => onOpen(modalNames.EDIT_INSURANCE),
 	},
 	{
 		key: 'bind-contact',
 		label: 'Bind contact',
 		icon: <MdContactEmergency size={20} />,
-		getCallback: () => () => null,
+		callback: () => {},
 	},
 	{
 		key: 'delete-insurance',
 		label: 'Delete insurance',
 		icon: <MdDelete size={20} />,
-		getCallback:
-			({ onOpen }) =>
-			() =>
-				onOpen(modalNames.DELETE_INSURANCE),
+		callback: () => onOpen(modalNames.DELETE_INSURANCE),
 	},
 ]

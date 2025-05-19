@@ -39,18 +39,9 @@ const App: FC = () => {
 				<Route path={routes.RESET_PASSWORD} element={<ResetPasswordPage />} />
 				<Route path={routes.PROFILE} element={<ProfilePage />} />
 				<Route path={routes.GARAGE} element={<GaragePage />} />
-				<Route
-					path={`${routes.CAR_INFORMATION}/:carId`}
-					element={<CarInformationPage />}
-				/>
-				<Route
-					path={`${routes.CAR_INFORMATION}/:carId${routes.INSURANCE}/:insuranceId?`}
-					element={<InsurancePage />}
-				/>
-				<Route
-					path={`${routes.CAR_INFORMATION}/:carId${routes.INSPECTION}/:inspectionId?`}
-					element={<InspectionPage />}
-				/>
+				<Route path={routes.CAR_BY_ID} element={<CarInformationPage />} />
+				<Route path={routes.INSURANCE_BY_ID} element={<InsurancePage />} />
+				<Route path={routes.INSPECTION_BY_ID} element={<InspectionPage />} />
 				<Route path="*" element={<NotFoundPage />} />
 			</Routes>
 		</>

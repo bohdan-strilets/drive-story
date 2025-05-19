@@ -25,7 +25,6 @@ const InspectionPage: FC = () => {
 		isLoading: isFetching,
 		isError,
 	} = useFetchInspection(inspectionId)
-	console.log(inspection)
 
 	if (isFetching) {
 		return <Loader color="gray" />

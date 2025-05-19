@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useNavigate, useParams } from 'react-router-dom'
+import { generatePath, useNavigate, useParams } from 'react-router-dom'
 
 import Button from '@/components/UI/Button'
 import DatePicker from '@/components/UI/DatePicker'
@@ -77,9 +77,11 @@ const InspectionForm: FC<InspectionFormProps> = ({ mode, inspection }) => {
 				: await submitUpdateInspection(updateInspectionDto)
 
 		const inspectionId = response?.data?._id
-		navigate(
-			`${routes.CAR_INFORMATION}/${carId}${routes.INSPECTION}/${inspectionId}`
-		)
+		const path = generatePath(routes.INSPECTION_BY_ID, {
+			carId: carId!,
+			inspectionId: inspectionId!,
+		})
+		navigate(path)
 
 		return response
 	}

@@ -9,13 +9,12 @@ import Title from '@/components/UI/Title'
 import useModal from '@/hooks/ui/useModal'
 import useResponsive from '@/hooks/ui/useResponsive'
 
-import { insuranceActions } from '@/descriptors/actions/insuranceActions'
+import { getInsuranceActions } from '@/descriptors/actions/getInsuranceActions'
 import { insuranceField } from '@/descriptors/fields/insuranceField'
 import { insurancePayment } from '@/descriptors/fields/insurancePayment'
 
 import { isImage } from '@/types/guards/isImage'
 import { InsuranceInfoProps } from '@/types/props/Insurance/InsuranceInfoProps'
-import { ActionContext } from '@/types/types/ActionDescriptor'
 
 import Header from '../Header'
 import Timer from '../Timer'
@@ -30,8 +29,8 @@ const InsuranceInfo: FC<InsuranceInfoProps> = ({
 	const { onOpen } = useModal()
 	const { maxMobile } = useResponsive()
 
-	const actionCtx: ActionContext = { onOpen }
 	const photos = insurance?.photos
+	const actions = getInsuranceActions({ onOpen })
 
 	return (
 		insurance && (
@@ -93,7 +92,7 @@ const InsuranceInfo: FC<InsuranceInfoProps> = ({
 						<Title fontSize={110} textAlign="center" color="yellow">
 							{insurance.insuranceType}
 						</Title>
-						<ActionMenu descriptors={insuranceActions} context={actionCtx} />
+						<ActionMenu descriptors={actions} />
 					</SideMenu>
 				</Container>
 			</article>

@@ -3,7 +3,7 @@ import { FaRoad } from 'react-icons/fa6'
 import { IoCarSportSharp } from 'react-icons/io5'
 import { PiEngineFill } from 'react-icons/pi'
 import { TbManualGearboxFilled } from 'react-icons/tb'
-import { useNavigate } from 'react-router-dom'
+import { generatePath, useNavigate } from 'react-router-dom'
 
 import Badge from '@/components/UI/Badge'
 import Button from '@/components/UI/Button'
@@ -50,6 +50,7 @@ const CarCard: FC<CarCardProps> = ({
 	isCurrentCar,
 }) => {
 	const navigate = useNavigate()
+	const path = generatePath(routes.CAR_BY_ID, { carId: id })
 
 	const carPoster = useGetImage({
 		image: photos,
@@ -101,7 +102,7 @@ const CarCard: FC<CarCardProps> = ({
 				</List>
 			</Information>
 			<Button
-				onClick={() => navigate(`${routes.CAR_INFORMATION}/${id}`)}
+				onClick={() => navigate(path)}
 				color="black"
 				background="yellow"
 				hoverColor="white"

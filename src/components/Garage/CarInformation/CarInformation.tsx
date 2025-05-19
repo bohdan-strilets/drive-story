@@ -10,7 +10,7 @@ import { useGetImage } from '@/hooks/ui/useGetImage'
 import useModal from '@/hooks/ui/useModal'
 import useResponsive from '@/hooks/ui/useResponsive'
 
-import { carAction } from '@/descriptors/actions/carAction'
+import { getCarActions } from '@/descriptors/actions/getCarActions'
 import { carOverview } from '@/descriptors/fields/carOverview'
 import { carOwnership } from '@/descriptors/fields/carOwnership'
 import { carRegistration } from '@/descriptors/fields/carRegistration'
@@ -20,7 +20,6 @@ import { defaultImages } from '@/utils/defaultImages'
 
 import { isImage } from '@/types/guards/isImage'
 import { CarInformationProps } from '@/types/props/Garage/CarInformationProps'
-import { ActionContext } from '@/types/types/ActionDescriptor'
 
 import LicensePlate from '../LicensePlate'
 
@@ -42,17 +41,19 @@ const CarInformation: FC<CarInformationProps> = ({
 
 	const { onOpen } = useModal()
 	const navigate = useNavigate()
-	const actionCtx: ActionContext = {
-		onOpen,
-		navigate,
-		carId: carId,
-		insuranceId: car?.insuranceId || '',
-	}
 
 	const photos = car?.photos
 	const carPoster = useGetImage({
 		image: photos,
 		defaultImage: defaultImages.poster,
+	})
+
+	const actions = getCarActions({
+		onOpen,
+		navigate,
+		carId: carId!,
+		insuranceId: car?.insuranceId || '',
+		inspectionId: car?.inspectionId || '',
 	})
 
 	return (
@@ -132,7 +133,7 @@ const CarInformation: FC<CarInformationProps> = ({
 					</InformationWrapper>
 
 					<SideMenu>
-						<ActionMenu descriptors={carAction} context={actionCtx} />
+						<ActionMenu descriptors={actions} />
 						{car.registration.regNumber && (
 							<LicensePlate licensePlate={car.registration.regNumber} />
 						)}

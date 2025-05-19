@@ -5,7 +5,7 @@ import {
 	SubmitHandler,
 	useForm,
 } from 'react-hook-form'
-import { useNavigate, useParams } from 'react-router-dom'
+import { generatePath, useNavigate, useParams } from 'react-router-dom'
 
 import FormNavigation from '@/components/UI/FormNavigation'
 import Loader from '@/components/UI/Loader'
@@ -114,9 +114,11 @@ const InsuranceForm: FC<InsuranceFormProps> = ({ mode, insurance }) => {
 				: await submitUpdateInsurance(updateInsuranceDto)
 
 		const insuranceId = response?.data?._id
-		navigate(
-			`${routes.CAR_INFORMATION}/${carId}/${routes.INSURANCE}/${insuranceId}`
-		)
+		const path = generatePath(routes.INSURANCE_BY_ID, {
+			carId: carId!,
+			insuranceId: insuranceId!,
+		})
+		navigate(path)
 
 		return response
 	}

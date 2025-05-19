@@ -5,15 +5,13 @@ import useModal from '@/hooks/ui/useModal'
 
 import { modalNames } from '@/config/modalConfig'
 
-import { userAction } from '@/descriptors/actions/userAction'
-import { userUploadAction } from '@/descriptors/actions/userUploadAction'
+import { getUserActions } from '@/descriptors/actions/getUserActions'
+import { getUserUploadActions } from '@/descriptors/actions/getUserUploadActions'
 import { userField } from '@/descriptors/fields/userField'
 
 import { useUserStore } from '@/store/useUserStore'
 
 import { defaultImages } from '@/utils/defaultImages'
-
-import { ActionContext } from '@/types/types/ActionDescriptor'
 
 import ActionMenu from '../Layout/ActionMenu'
 import PropertyList from '../Layout/PropertyList'
@@ -27,7 +25,8 @@ import ProfileMeta from './ProfileMeta'
 
 const Profile: FC = () => {
 	const { onOpen } = useModal()
-	const actionCtx: ActionContext = { onOpen }
+	const userActions = getUserActions({ onOpen })
+	const userUploadActions = getUserUploadActions({ onOpen })
 
 	const user = useUserStore((state) => state.user)
 	const isLoading = useUserStore((state) => state.isLoading)
@@ -69,9 +68,9 @@ const Profile: FC = () => {
 							isShadow={true}
 						/>
 					</OpenGalleryButton>
-					<ActionMenu descriptors={userUploadAction} context={actionCtx} />
+					<ActionMenu descriptors={userUploadActions} />
 					<ProfileMeta />
-					<ActionMenu descriptors={userAction} context={actionCtx} />
+					<ActionMenu descriptors={userActions} />
 				</SideMenu>
 			</Information>
 		</>
