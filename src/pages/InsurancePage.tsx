@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'motion/react'
 import { FC } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { generatePath, useNavigate, useParams } from 'react-router-dom'
 
 import ImageViewer from '@/components/Gallery/ImageViewer'
 import ErrorState from '@/components/Insurance/ErrorState'
@@ -23,6 +23,7 @@ import useSubmit from '@/hooks/ui/useSubmit'
 import { modalNames } from '@/config/modalConfig'
 import { routes } from '@/config/routes'
 
+import { assertString } from '@/utils/assertString'
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
@@ -35,7 +36,12 @@ import { Insurance } from '@/types/types/Insurance'
 const InsurancePage: FC = () => {
 	const { carId, insuranceId } = useParams()
 	const { checkQueryParam, onClose } = useModal()
+
+	assertString(carId, 'carId')
+	assertString(insuranceId, 'insuranceId')
+
 	const navigate = useNavigate()
+	const path = generatePath(routes.CAR_BY_ID, { carId })
 
 	const {
 		data: insurance,
@@ -47,13 +53,13 @@ const InsurancePage: FC = () => {
 		useDeleteInsurance()
 
 	const insurancePathParams: InsurancePathParams = {
-		carId: insurance?.carId ?? '',
-		insuranceId: insurance?._id ?? '',
+		carId,
+		insuranceId,
 	}
 
 	const deleteAndNavigate = useSubmit<Insurance | null, InsurancePathParams>({
 		callback: deleteInsurance,
-		navigateTo: `${routes.CAR_INFORMATION}/${carId}`,
+		navigateTo: path,
 		successMessage: 'The insurance policy has been successfully deleted',
 	})
 
@@ -65,7 +71,7 @@ const InsurancePage: FC = () => {
 	)
 
 	const deleteImagesParams: DeleteImagesParams = {
-		entityId: insuranceId || '',
+		entityId: insuranceId,
 		entityType: EntityType.INSURANCE,
 		imageId,
 	}
@@ -100,7 +106,7 @@ const InsurancePage: FC = () => {
 		<>
 			<ButtonGoBack
 				label="car"
-				onClick={() => navigate(`${routes.CAR_INFORMATION}/${carId}`)}
+				onClick={() => navigate(path)}
 				margin="0 0 5px 0"
 				color="black"
 			/>
@@ -120,11 +126,13 @@ const InsurancePage: FC = () => {
 						<InsuranceForm mode="create" />
 					</Modal>
 				)}
+
 				{checkQueryParam(modalNames.EDIT_INSURANCE) && (
 					<Modal key={modalNames.EDIT_INSURANCE} title="Edit insurance policy">
 						<InsuranceForm mode="edit" insurance={insurance} />
 					</Modal>
 				)}
+
 				{checkQueryParam(modalNames.DELETE_INSURANCE) && (
 					<Modal
 						key={modalNames.DELETE_INSURANCE}
@@ -142,6 +150,7 @@ const InsurancePage: FC = () => {
 						</Paragraph>
 					</Modal>
 				)}
+
 				{checkQueryParam(modalNames.UPLOAD_INSURANCE_PHOTO) && (
 					<Modal key={modalNames.UPLOAD_INSURANCE_PHOTO} title="Upload photo">
 						<Uploader
@@ -156,6 +165,7 @@ const InsurancePage: FC = () => {
 				{showImageViewer && (
 					<ImageViewer imageUrl={currentImage} closeViewer={closeImageViewer} />
 				)}
+
 				{checkQueryParam(modalNames.CLEAR_INSURANCE_GALLERY) && (
 					<Modal
 						key={modalNames.CLEAR_INSURANCE_GALLERY}

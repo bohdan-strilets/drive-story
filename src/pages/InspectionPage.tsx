@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'motion/react'
 import { FC } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { generatePath, useNavigate, useParams } from 'react-router-dom'
 
 import ErrorState from '@/components/Inspection/ErrorState'
 import InspectionForm from '@/components/Inspection/InspectionForm'
@@ -15,10 +15,16 @@ import useModal from '@/hooks/ui/useModal'
 import { modalNames } from '@/config/modalConfig'
 import { routes } from '@/config/routes'
 
+import { assertString } from '@/utils/assertString'
+
 const InspectionPage: FC = () => {
 	const { carId, inspectionId } = useParams()
-	const navigate = useNavigate()
 	const { checkQueryParam } = useModal()
+
+	assertString(carId, 'carId')
+
+	const navigate = useNavigate()
+	const path = generatePath(routes.CAR_BY_ID, { carId })
 
 	const {
 		data: inspection,
@@ -38,7 +44,7 @@ const InspectionPage: FC = () => {
 		<>
 			<ButtonGoBack
 				label="car"
-				onClick={() => navigate(`${routes.CAR_INFORMATION}/${carId}`)}
+				onClick={() => navigate(path)}
 				margin="0 0 5px 0"
 				color="black"
 			/>

@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { generatePath, useNavigate, useParams } from 'react-router-dom'
+import { generatePath, useNavigate } from 'react-router-dom'
 
 import Button from '@/components/UI/Button'
 import DatePicker from '@/components/UI/DatePicker'
@@ -14,6 +14,8 @@ import useSubmit from '@/hooks/ui/useSubmit'
 
 import { routes } from '@/config/routes'
 
+import { assertString } from '@/utils/assertString'
+
 import { InspectionDto } from '@/types/dto/InspectionDto'
 import { AddInspectionParams } from '@/types/params/AddInspectionParams'
 import { UpdateInspectionParams } from '@/types/params/UpdateInspectionParams'
@@ -24,9 +26,9 @@ import { inspectionRules } from '@/validation/rules/inspectionRules'
 import { Fields, Validation } from '@/validation/schemas/InspectionSchema'
 
 const InspectionForm: FC<InspectionFormProps> = ({ mode, inspection }) => {
-	const { carId } = useParams()
-	const navigate = useNavigate()
+	assertString(inspection?.carId, 'carId')
 
+	const navigate = useNavigate()
 	const { control, handleSubmit, reset } = useForm<Fields>(Validation)
 
 	useEffect(() => {
@@ -63,11 +65,11 @@ const InspectionForm: FC<InspectionFormProps> = ({ mode, inspection }) => {
 
 		const createInpsectionDto: AddInspectionParams = {
 			payload,
-			carId: carId ?? '',
+			carId: inspection?.carId,
 		}
 		const updateInspectionDto: UpdateInspectionParams = {
 			payload,
-			carId: carId ?? '',
+			carId: inspection?.carId,
 			inspectionId: inspection?._id ?? '',
 		}
 
@@ -78,7 +80,7 @@ const InspectionForm: FC<InspectionFormProps> = ({ mode, inspection }) => {
 
 		const inspectionId = response?.data?._id
 		const path = generatePath(routes.INSPECTION_BY_ID, {
-			carId: carId!,
+			carId: inspection?.carId,
 			inspectionId: inspectionId!,
 		})
 		navigate(path)

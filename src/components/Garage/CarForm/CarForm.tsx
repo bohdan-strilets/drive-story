@@ -5,7 +5,6 @@ import {
 	SubmitHandler,
 	useForm,
 } from 'react-hook-form'
-import { useParams } from 'react-router-dom'
 
 import FormNavigation from '@/components/UI/FormNavigation'
 import Loader from '@/components/UI/Loader'
@@ -15,6 +14,8 @@ import { useCreateCar } from '@/hooks/car/useCreateCar'
 import { useUpdateCar } from '@/hooks/car/useUpdateCar'
 import useSubmit from '@/hooks/ui/useSubmit'
 import { useWizard } from '@/hooks/ui/useWizard'
+
+import { assertString } from '@/utils/assertString'
 
 import { CarDetailsDto } from '@/types/dto/CarDetailsDto'
 import { UpdateCarParams } from '@/types/params/UpdateCarParams'
@@ -56,7 +57,8 @@ const fieldsByStep: Record<number, FieldPath<Fields>[]> = {
 }
 
 const CarForm: FC<CarFormProps> = ({ mode, car }) => {
-	const { carId } = useParams()
+	assertString(car?._id, 'carId')
+
 	const methods = useForm<Fields>(Validation)
 
 	useEffect(() => {
@@ -121,7 +123,7 @@ const CarForm: FC<CarFormProps> = ({ mode, car }) => {
 
 		const updateCarDto: UpdateCarParams = {
 			payload,
-			carId: carId ?? '',
+			carId: car?._id,
 		}
 
 		return mode === 'create'

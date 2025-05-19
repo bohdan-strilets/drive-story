@@ -5,7 +5,7 @@ import {
 	SubmitHandler,
 	useForm,
 } from 'react-hook-form'
-import { generatePath, useNavigate, useParams } from 'react-router-dom'
+import { generatePath, useNavigate } from 'react-router-dom'
 
 import FormNavigation from '@/components/UI/FormNavigation'
 import Loader from '@/components/UI/Loader'
@@ -17,6 +17,8 @@ import useSubmit from '@/hooks/ui/useSubmit'
 import { useWizard } from '@/hooks/ui/useWizard'
 
 import { routes } from '@/config/routes'
+
+import { assertString } from '@/utils/assertString'
 
 import { InsuranceDto } from '@/types/dto/InsuranceDto'
 import { AddInsuranceParams } from '@/types/params/AddInsuranceParams'
@@ -48,7 +50,8 @@ const fieldsByStep: Record<number, FieldPath<Fields>[]> = {
 }
 
 const InsuranceForm: FC<InsuranceFormProps> = ({ mode, insurance }) => {
-	const { carId } = useParams()
+	assertString(insurance?._id, 'carId')
+
 	const methods = useForm<Fields>(Validation)
 	const navigate = useNavigate()
 
@@ -101,10 +104,10 @@ const InsuranceForm: FC<InsuranceFormProps> = ({ mode, insurance }) => {
 			},
 		}
 
-		const createInsuranceDto = { payload, carId: carId ?? '' }
+		const createInsuranceDto = { payload, carId: insurance?.carId }
 		const updateInsuranceDto = {
 			payload,
-			carId: carId ?? '',
+			carId: insurance?.carId,
 			insuranceId: insurance?._id ?? '',
 		}
 
@@ -115,7 +118,7 @@ const InsuranceForm: FC<InsuranceFormProps> = ({ mode, insurance }) => {
 
 		const insuranceId = response?.data?._id
 		const path = generatePath(routes.INSURANCE_BY_ID, {
-			carId: carId!,
+			carId: insurance?.carId,
 			insuranceId: insuranceId!,
 		})
 		navigate(path)

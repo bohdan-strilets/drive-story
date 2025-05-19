@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import Gallery from '@/components/Gallery'
 import ActionMenu from '@/components/Layout/ActionMenu'
@@ -36,7 +36,6 @@ const CarInformation: FC<CarInformationProps> = ({
 	imageActions,
 	isActionLoading,
 }) => {
-	const { carId } = useParams()
 	const { maxMobile } = useResponsive()
 
 	const { onOpen } = useModal()
@@ -51,7 +50,7 @@ const CarInformation: FC<CarInformationProps> = ({
 	const actions = getCarActions({
 		onOpen,
 		navigate,
-		carId: carId!,
+		carId: car?._id,
 		insuranceId: car?.insuranceId || '',
 		inspectionId: car?.inspectionId || '',
 	})
@@ -63,7 +62,7 @@ const CarInformation: FC<CarInformationProps> = ({
 					carPoster={carPoster}
 					carName={`${car?.basicInfo?.make} ${car?.basicInfo?.model}`}
 					shortName={car?.basicInfo?.shortName}
-					carId={carId}
+					carId={car?._id}
 					updatedDate={car?.updatedAt}
 					description={car?.description}
 				/>

@@ -19,6 +19,7 @@ import { useSetCurrentCar } from '@/hooks/user/useSetCurrentCar'
 
 import { modalNames } from '@/config/modalConfig'
 
+import { assertString } from '@/utils/assertString'
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { CurrentCarDto } from '@/types/dto/CurrentCarDto'
@@ -28,7 +29,10 @@ import { User } from '@/types/types/User'
 const CarInformationPage: FC = () => {
 	const { checkQueryParam, onClose } = useModal()
 	const { carId } = useParams()
-	const { data: car, isLoading, isError } = useFetchCar(carId ?? '')
+
+	assertString(carId, 'carId')
+
+	const { data: car, isLoading, isError } = useFetchCar(carId)
 
 	const {
 		actions: imageActions,
@@ -95,7 +99,7 @@ const CarInformationPage: FC = () => {
 						negativeBtnLabel="no"
 						positiveBtnLabel="yes"
 						negativeCallback={onClose}
-						positiveCallback={() => setCarSubmit({ carId: car?._id || '' })}
+						positiveCallback={() => setCarSubmit({ carId })}
 					>
 						<Paragraph color="black" margin="0 0 15px 0">
 							By continuing, you will set this car as your current car that you
