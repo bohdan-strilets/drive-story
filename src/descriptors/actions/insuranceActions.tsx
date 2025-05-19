@@ -36,7 +36,7 @@ export const insuranceActions: ActionDescriptor<ActionContext>[] = [
 		getCallback:
 			({ onOpen }) =>
 			() =>
-				onOpen(modalNames.EDIT_INSURANCE_POLICY),
+				onOpen(modalNames.EDIT_INSURANCE),
 	},
 	{
 		key: 'bind-contact',
@@ -51,6 +51,6 @@ export const insuranceActions: ActionDescriptor<ActionContext>[] = [
 		getCallback:
 			({ onOpen }) =>
 			() =>
-				onOpen(modalNames.DELETE_INSURANCE_POLICY),
+				onOpen(modalNames.DELETE_INSURANCE),
 	},
 ]

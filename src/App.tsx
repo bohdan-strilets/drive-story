@@ -43,7 +43,11 @@ const App: FC = () => {
 					element={<CarInformationPage />}
 				/>
 				<Route
-					path={`${routes.CAR_INFORMATION}/:carId/${routes.INSURANCE_POLICY}/:insuranceId?`}
+					path={`${routes.CAR_INFORMATION}/:carId/${routes.INSURANCE}/:insuranceId?`}
+					element={<InsurancePage />}
+				/>
+				<Route
+					path={`${routes.CAR_INFORMATION}/:carId/${routes.INSURANCE}/:insuranceId?`}
 					element={<InsurancePage />}
 				/>
 				<Route path="*" element={<NotFoundPage />} />

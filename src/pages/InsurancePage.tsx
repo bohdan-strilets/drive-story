@@ -115,25 +115,19 @@ const InsurancePage: FC = () => {
 			)}
 
 			<AnimatePresence>
-				{checkQueryParam(modalNames.ADD_INSURANCE_POLICY) && (
-					<Modal
-						key={modalNames.ADD_INSURANCE_POLICY}
-						title="Add insurance policy"
-					>
+				{checkQueryParam(modalNames.ADD_INSURANCE) && (
+					<Modal key={modalNames.ADD_INSURANCE} title="Add insurance policy">
 						<InsuranceForm mode="create" />
 					</Modal>
 				)}
-				{checkQueryParam(modalNames.EDIT_INSURANCE_POLICY) && (
-					<Modal
-						key={modalNames.EDIT_INSURANCE_POLICY}
-						title="Edit insurance policy"
-					>
+				{checkQueryParam(modalNames.EDIT_INSURANCE) && (
+					<Modal key={modalNames.EDIT_INSURANCE} title="Edit insurance policy">
 						<InsuranceForm mode="edit" insurance={insurance} />
 					</Modal>
 				)}
-				{checkQueryParam(modalNames.DELETE_INSURANCE_POLICY) && (
+				{checkQueryParam(modalNames.DELETE_INSURANCE) && (
 					<Modal
-						key={modalNames.DELETE_INSURANCE_POLICY}
+						key={modalNames.DELETE_INSURANCE}
 						title="Delete insurance policy?"
 						isDialog={true}
 						isLoading={isDeleteInsurance}

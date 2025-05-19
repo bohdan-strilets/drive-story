@@ -115,7 +115,7 @@ const InsuranceForm: FC<InsuranceFormProps> = ({ mode, insurance }) => {
 
 		const insuranceId = response?.data?._id
 		navigate(
-			`${routes.CAR_INFORMATION}/${carId}/${routes.INSURANCE_POLICY}/${insuranceId}`
+			`${routes.CAR_INFORMATION}/${carId}/${routes.INSURANCE}/${insuranceId}`
 		)
 
 		return response

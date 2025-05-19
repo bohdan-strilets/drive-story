@@ -53,7 +53,7 @@ export const carAction: ActionDescriptor<ActionContext>[] = [
 			() =>
 				navigate &&
 				navigate(
-					`${routes.CAR_INFORMATION}/${carId}/${routes.INSURANCE_POLICY}/${insuranceId}`
+					`${routes.CAR_INFORMATION}/${carId}/${routes.INSURANCE}/${insuranceId}`
 				),
 	},
 	{

@@ -13,7 +13,7 @@ const NoInsuranceState: FC = () => {
 	return (
 		<>
 			<BigButton
-				onClick={() => onOpen(modalNames.ADD_INSURANCE_POLICY)}
+				onClick={() => onOpen(modalNames.ADD_INSURANCE)}
 				label="Add insurance"
 				height="140px"
 				iconSize="80px"
