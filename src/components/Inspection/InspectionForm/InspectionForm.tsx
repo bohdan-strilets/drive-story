@@ -14,8 +14,6 @@ import useSubmit from '@/hooks/ui/useSubmit'
 
 import { routes } from '@/config/routes'
 
-import { assertString } from '@/utils/assertString'
-
 import { InspectionDto } from '@/types/dto/InspectionDto'
 import { AddInspectionParams } from '@/types/params/AddInspectionParams'
 import { UpdateInspectionParams } from '@/types/params/UpdateInspectionParams'
@@ -25,9 +23,11 @@ import { Inspection } from '@/types/types/Inspection'
 import { inspectionRules } from '@/validation/rules/inspectionRules'
 import { Fields, Validation } from '@/validation/schemas/InspectionSchema'
 
-const InspectionForm: FC<InspectionFormProps> = ({ mode, inspection }) => {
-	assertString(inspection?.carId, 'carId')
-
+const InspectionForm: FC<InspectionFormProps> = ({
+	mode,
+	carId,
+	inspection,
+}) => {
 	const navigate = useNavigate()
 	const { control, handleSubmit, reset } = useForm<Fields>(Validation)
 
@@ -63,29 +63,25 @@ const InspectionForm: FC<InspectionFormProps> = ({ mode, inspection }) => {
 	const onSubmit: SubmitHandler<Fields> = async (data) => {
 		const payload: InspectionDto = data
 
-		const createInpsectionDto: AddInspectionParams = {
-			payload,
-			carId: inspection?.carId,
+		if (mode === 'create') {
+			const addInspectionParams: AddInspectionParams = { payload, carId }
+			const response = await submitCreateInspection(addInspectionParams)
+
+			const path = generatePath(routes.INSPECTION_BY_ID, {
+				carId,
+				inspectionId: response?.data?._id || null,
+			})
+
+			return navigate(path)
 		}
-		const updateInspectionDto: UpdateInspectionParams = {
+
+		const updateInspectionParams: UpdateInspectionParams = {
 			payload,
-			carId: inspection?.carId,
-			inspectionId: inspection?._id ?? '',
+			carId,
+			inspectionId: inspection!._id,
 		}
 
-		const response =
-			mode === 'create'
-				? await submitCreateInspection(createInpsectionDto)
-				: await submitUpdateInspection(updateInspectionDto)
-
-		const inspectionId = response?.data?._id
-		const path = generatePath(routes.INSPECTION_BY_ID, {
-			carId: inspection?.carId,
-			inspectionId: inspectionId!,
-		})
-		navigate(path)
-
-		return response
+		return await submitUpdateInspection(updateInspectionParams)
 	}
 
 	return (

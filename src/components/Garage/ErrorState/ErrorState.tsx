@@ -14,7 +14,7 @@ const ErrorState: FC = () => {
 		<>
 			<ButtonGoBack
 				label="garage"
-				onClick={() => navigate(`${routes.GARAGE}`)}
+				onClick={() => navigate(routes.GARAGE)}
 				margin="0 0 5px 0"
 				color="black"
 			/>

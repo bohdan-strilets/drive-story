@@ -16,14 +16,13 @@ import { modalNames } from '@/config/modalConfig'
 import { routes } from '@/config/routes'
 
 import { ActionDescriptor, ActionParams } from '@/types/types/ActionDescriptor'
-import { RouteName } from '@/types/types/RouteName'
 
 export const getCarActions = ({
 	onOpen,
 	navigate,
-	carId,
-	insuranceId,
-	inspectionId,
+	carId = null,
+	insuranceId = null,
+	inspectionId = null,
 }: ActionParams): ActionDescriptor[] => {
 	return [
 		{
@@ -49,9 +48,11 @@ export const getCarActions = ({
 			label: 'Insurance policy',
 			icon: <IoDocumentText size={20} />,
 			callback: () => {
-				const template: RouteName = routes.INSURANCE_BY_ID
-				if (navigate && carId && insuranceId) {
-					const path = generatePath(template, { carId, insuranceId })
+				if (navigate) {
+					const path = generatePath(routes.INSURANCE_BY_ID, {
+						carId: carId,
+						insuranceId: insuranceId,
+					})
 					navigate(path)
 				}
 			},
@@ -61,9 +62,11 @@ export const getCarActions = ({
 			label: 'Technical inspection',
 			icon: <MdMiscellaneousServices size={20} />,
 			callback: () => {
-				const template: RouteName = routes.INSPECTION_BY_ID
-				if (navigate && carId && inspectionId) {
-					const path = generatePath(template, { carId, inspectionId })
+				if (navigate) {
+					const path = generatePath(routes.INSPECTION_BY_ID, {
+						carId: carId,
+						inspectionId: inspectionId,
+					})
 					navigate(path)
 				}
 			},

@@ -23,7 +23,6 @@ import useSubmit from '@/hooks/ui/useSubmit'
 import { modalNames } from '@/config/modalConfig'
 import { routes } from '@/config/routes'
 
-import { assertString } from '@/utils/assertString'
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
@@ -34,14 +33,11 @@ import { Image } from '@/types/types/Image'
 import { Insurance } from '@/types/types/Insurance'
 
 const InsurancePage: FC = () => {
-	const { carId, insuranceId } = useParams()
 	const { checkQueryParam, onClose } = useModal()
-
-	assertString(carId, 'carId')
-	assertString(insuranceId, 'insuranceId')
+	const { carId, insuranceId } = useParams()
 
 	const navigate = useNavigate()
-	const path = generatePath(routes.CAR_BY_ID, { carId })
+	const path = generatePath(routes.CAR_BY_ID, { carId: carId! })
 
 	const {
 		data: insurance,
@@ -53,7 +49,7 @@ const InsurancePage: FC = () => {
 		useDeleteInsurance()
 
 	const insurancePathParams: InsurancePathParams = {
-		carId,
+		carId: carId!,
 		insuranceId,
 	}
 
@@ -66,14 +62,13 @@ const InsurancePage: FC = () => {
 	const { mutateAsync: deleteAllImages, isPending: isDeleteallImages } =
 		useDeleteAllImages()
 
-	const imageId = String(
-		insurance && isImage(insurance?.photos) && insurance.photos._id
-	)
+	const imageId =
+		insurance && isImage(insurance.photos) ? insurance.photos._id : undefined
 
 	const deleteImagesParams: DeleteImagesParams = {
 		entityId: insuranceId,
-		entityType: EntityType.INSURANCE,
 		imageId,
+		entityType: EntityType.INSURANCE,
 	}
 
 	const clearGallery = useSubmit<Image | null, DeleteImagesParams>({
@@ -94,13 +89,8 @@ const InsurancePage: FC = () => {
 		entityId: insuranceId,
 	})
 
-	if (isFetching) {
-		return <Loader color="gray" />
-	}
-
-	if (isError) {
-		return <ErrorState />
-	}
+	if (isFetching) return <Loader color="gray" />
+	if (isError) return <ErrorState />
 
 	return (
 		<>
@@ -123,13 +113,13 @@ const InsurancePage: FC = () => {
 			<AnimatePresence>
 				{checkQueryParam(modalNames.ADD_INSURANCE) && (
 					<Modal key={modalNames.ADD_INSURANCE} title="Add insurance policy">
-						<InsuranceForm mode="create" />
+						<InsuranceForm mode="create" carId={carId!} />
 					</Modal>
 				)}
 
 				{checkQueryParam(modalNames.EDIT_INSURANCE) && (
 					<Modal key={modalNames.EDIT_INSURANCE} title="Edit insurance policy">
-						<InsuranceForm mode="edit" insurance={insurance} />
+						<InsuranceForm mode="edit" carId={carId!} insurance={insurance} />
 					</Modal>
 				)}
 

@@ -8,9 +8,9 @@ export type ActionContext = {
 }
 
 export type ActionParams = ActionContext & {
-	carId?: string
-	insuranceId?: string
-	inspectionId?: string
+	carId?: string | null
+	insuranceId?: string | null
+	inspectionId?: string | null
 }
 
 export type ActionDescriptor = {

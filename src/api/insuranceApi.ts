@@ -17,10 +17,8 @@ export const create = async ({
 	carId,
 }: AddInsuranceParams): Promise<ApiResponse<Insurance | null>> => {
 	try {
-		const { data } = await apiClient.post(
-			`${ENDPOINT}/create/${carId}`,
-			payload
-		)
+		const path = `${ENDPOINT}/create/${carId}`
+		const { data } = await apiClient.post(path, payload)
 		return data
 	} catch (error) {
 		return handleApiError(error)
@@ -33,10 +31,8 @@ export const update = async ({
 	insuranceId,
 }: UpdateInsuranceParams): Promise<ApiResponse<Insurance | null>> => {
 	try {
-		const { data } = await apiClient.patch(
-			`${ENDPOINT}/update/${carId}/${insuranceId}`,
-			payload
-		)
+		const path = `${ENDPOINT}/update/${carId}/${insuranceId}`
+		const { data } = await apiClient.patch(path, payload)
 		return data
 	} catch (error) {
 		return handleApiError(error)
@@ -48,9 +44,8 @@ export const remove = async ({
 	insuranceId,
 }: InsurancePathParams): Promise<ApiResponse<Insurance | null>> => {
 	try {
-		const { data } = await apiClient.delete(
-			`${ENDPOINT}/delete/${carId}/${insuranceId}`
-		)
+		const path = `${ENDPOINT}/delete/${carId}/${insuranceId}`
+		const { data } = await apiClient.delete(path)
 		return data
 	} catch (error) {
 		return handleApiError(error)
@@ -61,7 +56,8 @@ export const getById = async (
 	insuranceId: string
 ): Promise<ApiResponse<Insurance | null>> => {
 	try {
-		const { data } = await apiClient.get(`${ENDPOINT}/get-by-id/${insuranceId}`)
+		const path = `${ENDPOINT}/get-by-id/${insuranceId}`
+		const { data } = await apiClient.get(path)
 		return data
 	} catch (error) {
 		return handleApiError(error)
@@ -74,12 +70,11 @@ export const getAll = async ({
 }: ListInsuranceParams): Promise<
 	ApiResponse<PaginatedResponse<Insurance> | null>
 > => {
-	const { page, limit } = pagination
-
 	try {
-		const { data } = await apiClient.get(`${ENDPOINT}/get-all/${carId}`, {
-			params: { page, limit },
-		})
+		const path = `${ENDPOINT}/get-all/${carId}`
+		const { page, limit } = pagination
+		const params = { page, limit }
+		const { data } = await apiClient.get(path, { params })
 		return data
 	} catch (error) {
 		return handleApiError(error)

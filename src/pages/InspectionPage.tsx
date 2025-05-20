@@ -15,16 +15,13 @@ import useModal from '@/hooks/ui/useModal'
 import { modalNames } from '@/config/modalConfig'
 import { routes } from '@/config/routes'
 
-import { assertString } from '@/utils/assertString'
-
 const InspectionPage: FC = () => {
-	const { carId, inspectionId } = useParams()
 	const { checkQueryParam } = useModal()
 
-	assertString(carId, 'carId')
+	const { carId, inspectionId } = useParams()
 
 	const navigate = useNavigate()
-	const path = generatePath(routes.CAR_BY_ID, { carId })
+	const path = generatePath(routes.CAR_BY_ID, { carId: carId! })
 
 	const {
 		data: inspection,
@@ -32,13 +29,8 @@ const InspectionPage: FC = () => {
 		isError,
 	} = useFetchInspection(inspectionId)
 
-	if (isFetching) {
-		return <Loader color="gray" />
-	}
-
-	if (isError) {
-		return <ErrorState />
-	}
+	if (isFetching) return <Loader color="gray" />
+	if (isError) return <ErrorState />
 
 	return (
 		<>
@@ -58,7 +50,7 @@ const InspectionPage: FC = () => {
 						key={modalNames.ADD_INSPECTION}
 						title="Add technical inspection"
 					>
-						<InspectionForm mode="create" />
+						<InspectionForm mode="create" carId={carId!} />
 					</Modal>
 				)}
 			</AnimatePresence>

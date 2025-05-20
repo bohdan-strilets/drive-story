@@ -8,7 +8,7 @@ export type PaymentStatus = {
 	installmentsCount?: number
 	installmentCost?: number
 	totalInstallmentsSum?: number
-	paymentDates?: Date[]
+	paymentDates?: (Date | undefined)[]
 	createdAt: Date
 	updatedAt: Date
 }

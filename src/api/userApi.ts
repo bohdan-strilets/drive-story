@@ -22,13 +22,11 @@ export const getCurrentUser = async (): Promise<ApiResponse<User | null>> => {
 }
 
 export const resendActivationEmail = async (
-	dto: EmailDto
+	payload: EmailDto
 ): Promise<ApiResponse> => {
 	try {
-		const { data } = await apiClient.post(
-			`${ENDPOINT}/request-activation-email-resend`,
-			dto
-		)
+		const path = `${ENDPOINT}/request-activation-email-resend`
+		const { data } = await apiClient.post(path, payload)
 		return data
 	} catch (error) {
 		return handleApiError(error)
@@ -36,10 +34,11 @@ export const resendActivationEmail = async (
 }
 
 export const editProfile = async (
-	dto: ProfileDto
+	payload: ProfileDto
 ): Promise<ApiResponse<User | null>> => {
 	try {
-		const { data } = await apiClient.patch(`${ENDPOINT}/edit-profile`, dto)
+		const path = `${ENDPOINT}/edit-profile`
+		const { data } = await apiClient.patch(path, payload)
 		return data
 	} catch (error) {
 		return handleApiError(error)
@@ -47,10 +46,11 @@ export const editProfile = async (
 }
 
 export const editEmail = async (
-	dto: EmailDto
+	payload: EmailDto
 ): Promise<ApiResponse<User | null>> => {
 	try {
-		const { data } = await apiClient.patch(`${ENDPOINT}/edit-email`, dto)
+		const path = `${ENDPOINT}/edit-email`
+		const { data } = await apiClient.patch(path, payload)
 		return data
 	} catch (error) {
 		return handleApiError(error)
@@ -58,13 +58,11 @@ export const editEmail = async (
 }
 
 export const requestResetPassword = async (
-	dto: EmailDto
+	payload: EmailDto
 ): Promise<ApiResponse> => {
 	try {
-		const { data } = await apiClient.post(
-			`${ENDPOINT}/request-reset-password`,
-			dto
-		)
+		const path = `${ENDPOINT}/request-reset-password`
+		const { data } = await apiClient.post(path, payload)
 		return data
 	} catch (error) {
 		return handleApiError(error)
@@ -72,14 +70,12 @@ export const requestResetPassword = async (
 }
 
 export const resetPassword = async ({
-	dto,
+	payload,
 	resetToken,
 }: ResetPasswordParams): Promise<ApiResponse> => {
 	try {
-		const { data } = await apiClient.post(
-			`${ENDPOINT}/reset-password/${resetToken}`,
-			dto
-		)
+		const path = `${ENDPOINT}/reset-password/${resetToken}`
+		const { data } = await apiClient.post(path, payload)
 		return data
 	} catch (error) {
 		return handleApiError(error)
@@ -87,10 +83,11 @@ export const resetPassword = async ({
 }
 
 export const editPassword = async (
-	dto: EditPasswordDto
+	payload: EditPasswordDto
 ): Promise<ApiResponse> => {
 	try {
-		const { data } = await apiClient.patch(`${ENDPOINT}/edit-password`, dto)
+		const path = `${ENDPOINT}/edit-password`
+		const { data } = await apiClient.patch(path, payload)
 		return data
 	} catch (error) {
 		return handleApiError(error)
@@ -99,7 +96,8 @@ export const editPassword = async (
 
 export const removeProfile = async (): Promise<ApiResponse<User | null>> => {
 	try {
-		const { data } = await apiClient.delete(`${ENDPOINT}/remove-profile`)
+		const path = `${ENDPOINT}/remove-profile`
+		const { data } = await apiClient.delete(path)
 		return data
 	} catch (error) {
 		return handleApiError(error)
@@ -107,10 +105,11 @@ export const removeProfile = async (): Promise<ApiResponse<User | null>> => {
 }
 
 export const setCurrentCar = async (
-	dto: CurrentCarDto
+	payload: CurrentCarDto
 ): Promise<ApiResponse<User | null>> => {
 	try {
-		const { data } = await apiClient.patch(`${ENDPOINT}/set-current-car`, dto)
+		const path = `${ENDPOINT}/set-current-car`
+		const { data } = await apiClient.patch(path, payload)
 		return data
 	} catch (error) {
 		return handleApiError(error)

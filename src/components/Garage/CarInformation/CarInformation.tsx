@@ -41,7 +41,7 @@ const CarInformation: FC<CarInformationProps> = ({
 	const { onOpen } = useModal()
 	const navigate = useNavigate()
 
-	const photos = car?.photos
+	const photos = car.photos
 	const carPoster = useGetImage({
 		image: photos,
 		defaultImage: defaultImages.poster,
@@ -50,96 +50,74 @@ const CarInformation: FC<CarInformationProps> = ({
 	const actions = getCarActions({
 		onOpen,
 		navigate,
-		carId: car?._id,
-		insuranceId: car?.insuranceId || '',
-		inspectionId: car?.inspectionId || '',
+		carId: car._id,
+		insuranceId: car.insuranceId || null,
+		inspectionId: car.inspectionId || null,
 	})
 
 	return (
-		car && (
-			<article>
-				<Header
-					carPoster={carPoster}
-					carName={`${car?.basicInfo?.make} ${car?.basicInfo?.model}`}
-					shortName={car?.basicInfo?.shortName}
-					carId={car?._id}
-					updatedDate={car?.updatedAt}
-					description={car?.description}
-				/>
+		<article>
+			<Header
+				carPoster={carPoster}
+				carName={`${car.basicInfo.make} ${car.basicInfo.model}`}
+				shortName={car.basicInfo.shortName}
+				carId={car._id}
+				updatedDate={car.updatedAt}
+				description={car.description}
+			/>
 
-				<MaintenanceReminders />
+			<MaintenanceReminders />
 
-				{photos && isImage(photos) && (
-					<>
-						<Title
-							fontSize={maxMobile ? 20 : 28}
-							textAlign="left"
-							color="black"
-						>
-							Gallery
-						</Title>
-						<Gallery
-							images={photos.resources}
-							overlayActions={imageActions}
-							isActionLoading={isActionLoading}
-							itemsPerPage={maxMobile ? 3 : 6}
-							itemHeight="240px"
-							isOverlay={true}
-						/>
-					</>
-				)}
+			{photos && isImage(photos) && (
+				<>
+					<Title fontSize={maxMobile ? 20 : 28} textAlign="left" color="black">
+						Gallery
+					</Title>
+					<Gallery
+						images={photos.resources}
+						overlayActions={imageActions}
+						isActionLoading={isActionLoading}
+						itemsPerPage={maxMobile ? 3 : 6}
+						itemHeight="240px"
+						isOverlay={true}
+					/>
+				</>
+			)}
 
-				<Container>
-					<InformationWrapper>
-						<Title
-							fontSize={maxMobile ? 20 : 28}
-							textAlign="left"
-							color="black"
-						>
-							Basic information
-						</Title>
-						<PropertyList descriptors={carOverview} context={car?.basicInfo} />
+			<Container>
+				<InformationWrapper>
+					<Title fontSize={maxMobile ? 20 : 28} textAlign="left" color="black">
+						Basic information
+					</Title>
+					<PropertyList descriptors={carOverview} context={car.basicInfo} />
 
-						<Title
-							fontSize={maxMobile ? 20 : 28}
-							textAlign="left"
-							color="black"
-						>
-							Specifications
-						</Title>
-						<PropertyList descriptors={carSpecs} context={car.specifications} />
+					<Title fontSize={maxMobile ? 20 : 28} textAlign="left" color="black">
+						Specifications
+					</Title>
+					<PropertyList descriptors={carSpecs} context={car.specifications} />
 
-						<Title
-							fontSize={maxMobile ? 20 : 28}
-							textAlign="left"
-							color="black"
-						>
-							Registration details
-						</Title>
-						<PropertyList
-							descriptors={carRegistration}
-							context={car.registration}
-						/>
+					<Title fontSize={maxMobile ? 20 : 28} textAlign="left" color="black">
+						Registration details
+					</Title>
+					<PropertyList
+						descriptors={carRegistration}
+						context={car.registration}
+					/>
 
-						<Title
-							fontSize={maxMobile ? 20 : 28}
-							textAlign="left"
-							color="black"
-						>
-							Owner details
-						</Title>
-						<PropertyList descriptors={carOwnership} context={car.ownership} />
-					</InformationWrapper>
+					<Title fontSize={maxMobile ? 20 : 28} textAlign="left" color="black">
+						Owner details
+					</Title>
+					<PropertyList descriptors={carOwnership} context={car.ownership} />
+				</InformationWrapper>
 
-					<SideMenu>
-						<ActionMenu descriptors={actions} />
-						{car.registration.regNumber && (
-							<LicensePlate licensePlate={car.registration.regNumber} />
-						)}
-					</SideMenu>
-				</Container>
-			</article>
-		)
+				<SideMenu>
+					<ActionMenu descriptors={actions} />
+					{car.registration.regNumber && (
+						<LicensePlate licensePlate={car.registration.regNumber} />
+					)}
+				</SideMenu>
+			</Container>
+		</article>
 	)
 }
 

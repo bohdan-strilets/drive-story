@@ -19,7 +19,6 @@ import { useSetCurrentCar } from '@/hooks/user/useSetCurrentCar'
 
 import { modalNames } from '@/config/modalConfig'
 
-import { assertString } from '@/utils/assertString'
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { CurrentCarDto } from '@/types/dto/CurrentCarDto'
@@ -29,8 +28,6 @@ import { User } from '@/types/types/User'
 const CarInformationPage: FC = () => {
 	const { checkQueryParam, onClose } = useModal()
 	const { carId } = useParams()
-
-	assertString(carId, 'carId')
 
 	const { data: car, isLoading, isError } = useFetchCar(carId)
 
@@ -51,21 +48,18 @@ const CarInformationPage: FC = () => {
 		successMessage: 'The current car has been modified',
 	})
 
-	if (isLoading) {
-		return <Loader color="gray" />
-	}
-
-	if (isError) {
-		return <ErrorState />
-	}
+	if (isLoading) return <Loader color="gray" />
+	if (isError) return <ErrorState />
 
 	return (
 		<>
-			<CarInformation
-				car={car}
-				imageActions={imageActions}
-				isActionLoading={isImageLoading}
-			/>
+			{car && (
+				<CarInformation
+					car={car}
+					imageActions={imageActions}
+					isActionLoading={isImageLoading}
+				/>
+			)}
 
 			<AnimatePresence>
 				{checkQueryParam(modalNames.UPLOAD_CAR_PHOTO) && (
@@ -99,7 +93,7 @@ const CarInformationPage: FC = () => {
 						negativeBtnLabel="no"
 						positiveBtnLabel="yes"
 						negativeCallback={onClose}
-						positiveCallback={() => setCarSubmit({ carId })}
+						positiveCallback={() => setCarSubmit({ carId: carId! })}
 					>
 						<Paragraph color="black" margin="0 0 15px 0">
 							By continuing, you will set this car as your current car that you

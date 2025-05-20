@@ -1,6 +1,6 @@
 import { ResetPasswordDto } from '../dto/ResetPasswordDto'
 
 export type ResetPasswordParams = {
-	dto: ResetPasswordDto
+	payload: ResetPasswordDto
 	resetToken: string
 }

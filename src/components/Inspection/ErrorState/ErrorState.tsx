@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { generatePath, useNavigate, useParams } from 'react-router-dom'
 
 import ButtonGoBack from '@/components/UI/ButtonGoBack'
 import ErrorMessage from '@/components/UI/ErrorMessage'
@@ -7,19 +7,21 @@ import ErrorMessage from '@/components/UI/ErrorMessage'
 import { routes } from '@/config/routes'
 
 const ErrorState: FC = () => {
+	const { carId, inspectionId } = useParams()
+
 	const navigate = useNavigate()
-	const { inspectionId, carId } = useParams()
+	const path = generatePath(routes.CAR_BY_ID, { carId: carId || null })
 
 	return (
 		<>
 			<ButtonGoBack
 				label="car"
-				onClick={() => navigate(`${routes.CAR_INFORMATION}/${carId}`)}
+				onClick={() => navigate(path)}
 				margin="0 0 5px 0"
 				color="black"
 			/>
 			<ErrorMessage
-				message={`Technical inspection with current ID: ${inspectionId} was not found.`}
+				message={`Technical inspection with ID: ${inspectionId} was not found.`}
 			/>
 		</>
 	)

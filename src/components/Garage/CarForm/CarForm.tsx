@@ -15,8 +15,6 @@ import { useUpdateCar } from '@/hooks/car/useUpdateCar'
 import useSubmit from '@/hooks/ui/useSubmit'
 import { useWizard } from '@/hooks/ui/useWizard'
 
-import { assertString } from '@/utils/assertString'
-
 import { CarDetailsDto } from '@/types/dto/CarDetailsDto'
 import { UpdateCarParams } from '@/types/params/UpdateCarParams'
 import { CarFormProps } from '@/types/props/Garage/CarFormProps'
@@ -57,8 +55,6 @@ const fieldsByStep: Record<number, FieldPath<Fields>[]> = {
 }
 
 const CarForm: FC<CarFormProps> = ({ mode, car }) => {
-	assertString(car?._id, 'carId')
-
 	const methods = useForm<Fields>(Validation)
 
 	useEffect(() => {
@@ -87,48 +83,14 @@ const CarForm: FC<CarFormProps> = ({ mode, car }) => {
 	})
 
 	const onSubmit: SubmitHandler<Fields> = (data) => {
-		const payload: CarDetailsDto = {
-			basicInfo: {
-				make: data.basicInfo.make,
-				model: data.basicInfo.model,
-				year: data.basicInfo.year,
-				generation: data.basicInfo.generation,
-				shortName: data.basicInfo.shortName,
-			},
-			specifications: {
-				bodyType: data.specifications.bodyType,
-				drivetrain: data.specifications.drivetrain,
-				fuelType: data.specifications.fuelType,
-				transmission: data.specifications.transmission,
-				engine: {
-					power: Number(data.specifications.engine.power),
-					volume: Number(data.specifications.engine.volume),
-				},
-				mileage: Number(data.specifications.mileage),
-				color: data.specifications.color,
-				doors: data.specifications.doors,
-				seats: data.specifications.seats,
-			},
-			registration: {
-				vin: data.registration.vin,
-				regNumber: data.registration.regNumber,
-				firstRegDate: data.registration.firstRegDate,
-			},
-			ownership: {
-				purchaseDate: data.ownership.purchaseDate,
-				saleDate: data.ownership.saleDate,
-			},
-			description: data.description,
+		const payload: CarDetailsDto = data
+
+		if (mode === 'create') {
+			return submitCreateCar(payload)
 		}
 
-		const updateCarDto: UpdateCarParams = {
-			payload,
-			carId: car?._id,
-		}
-
-		return mode === 'create'
-			? submitCreateCar(payload)
-			: submitUpdateCar(updateCarDto)
+		const updateCarParams: UpdateCarParams = { payload, carId: car?._id }
+		return submitUpdateCar(updateCarParams)
 	}
 
 	return (

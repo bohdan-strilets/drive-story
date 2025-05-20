@@ -1,4 +1,4 @@
 export type InspectionPathParams = {
-	carId: string
-	inspectionId: string
+	carId?: string
+	inspectionId?: string
 }

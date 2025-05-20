@@ -17,11 +17,9 @@ export const upload = async ({
 	entityType,
 }: UploadImageParams): Promise<ApiResponse<Image | null>> => {
 	try {
-		const { data } = await apiClient.post(
-			`${ENDPOINT}/upload/${entityId}`,
-			file,
-			{ params: { entityType } }
-		)
+		const path = `${ENDPOINT}/upload/${entityId}`
+		const params = { entityType }
+		const { data } = await apiClient.post(path, file, { params })
 		return data
 	} catch (error) {
 		return handleApiError(error)
@@ -34,9 +32,9 @@ export const remove = async ({
 	publicId,
 }: DeleteImageParams): Promise<ApiResponse<Image | null>> => {
 	try {
-		const { data } = await apiClient.delete(`${ENDPOINT}/delete/${entityId}`, {
-			params: { entityType, publicId },
-		})
+		const path = `${ENDPOINT}/delete/${entityId}`
+		const params = { entityType, publicId }
+		const { data } = await apiClient.delete(path, { params })
 		return data
 	} catch (error) {
 		return handleApiError(error)
@@ -49,11 +47,9 @@ export const select = async ({
 	publicId,
 }: SelectImageParams): Promise<ApiResponse<Image | null>> => {
 	try {
-		const { data } = await apiClient.patch(
-			`${ENDPOINT}/select/${entityId}`,
-			null,
-			{ params: { entityType, publicId } }
-		)
+		const path = `${ENDPOINT}/select/${entityId}`
+		const params = { entityType, publicId }
+		const { data } = await apiClient.patch(path, null, { params })
 		return data
 	} catch (error) {
 		return handleApiError(error)
@@ -66,10 +62,9 @@ export const removeAll = async ({
 	entityType,
 }: DeleteImagesParams): Promise<ApiResponse<Image | null>> => {
 	try {
-		const { data } = await apiClient.delete(
-			`${ENDPOINT}/delete-all/${entityId}/${imageId}`,
-			{ params: { entityType } }
-		)
+		const path = `${ENDPOINT}/delete-all/${entityId}/${imageId}`
+		const params = { entityType }
+		const { data } = await apiClient.delete(path, { params })
 		return data
 	} catch (error) {
 		return handleApiError(error)

@@ -33,70 +33,61 @@ const InsuranceInfo: FC<InsuranceInfoProps> = ({
 	const actions = getInsuranceActions({ onOpen })
 
 	return (
-		insurance && (
-			<article>
-				<Header
-					carId={insurance.carId}
-					insuranceId={insurance._id}
-					insurerName={insurance.insurerName}
-					policyNumber={insurance.policyNumber}
-					updatedAt={insurance.updatedAt}
-				/>
+		<article>
+			<Header
+				carId={insurance.carId}
+				insuranceId={insurance._id}
+				insurerName={insurance.insurerName}
+				policyNumber={insurance.policyNumber}
+				updatedAt={insurance.updatedAt}
+			/>
 
-				{photos && isImage(photos) && (
-					<>
-						<Title
-							fontSize={maxMobile ? 20 : 28}
-							textAlign="left"
-							color="black"
-						>
-							Gallery
-						</Title>
-						<Gallery
-							images={photos.resources}
-							overlayActions={imageActions}
-							isActionLoading={isActionLoading}
-							itemsPerPage={maxMobile ? 3 : 6}
-							itemHeight="240px"
-							isOverlay={true}
-						/>
-						<DecorativeLine color="gray" type="dashed" margin="20px 0" />
-					</>
-				)}
+			{photos && isImage(photos) && (
+				<>
+					<Title fontSize={maxMobile ? 20 : 28} textAlign="left" color="black">
+						Gallery
+					</Title>
+					<Gallery
+						images={photos.resources}
+						overlayActions={imageActions}
+						isActionLoading={isActionLoading}
+						itemsPerPage={maxMobile ? 3 : 6}
+						itemHeight="240px"
+						isOverlay={true}
+					/>
+					<DecorativeLine color="gray" type="dashed" margin="20px 0" />
+				</>
+			)}
 
-				<Container>
-					<InformationWrapper>
-						<Timer
-							startDate={insurance.startDate}
-							endDate={insurance.endDate}
-						/>
-						<PropertyList descriptors={insuranceField} context={insurance} />
-						{insurance.paymentStatus && !insurance.paymentStatus.isPaid && (
-							<>
-								<Title
-									fontSize={maxMobile ? 20 : 44}
-									textAlign={'left'}
-									color="black"
-									type="h1"
-								>
-									Payment options
-								</Title>
-								<PropertyList
-									descriptors={insurancePayment}
-									context={insurance?.paymentStatus}
-								/>
-							</>
-						)}
-					</InformationWrapper>
-					<SideMenu>
-						<Title fontSize={110} textAlign="center" color="yellow">
-							{insurance.insuranceType}
-						</Title>
-						<ActionMenu descriptors={actions} />
-					</SideMenu>
-				</Container>
-			</article>
-		)
+			<Container>
+				<InformationWrapper>
+					<Timer startDate={insurance.startDate} endDate={insurance.endDate} />
+					<PropertyList descriptors={insuranceField} context={insurance} />
+					{insurance.paymentStatus && insurance.paymentStatus.isPaid && (
+						<>
+							<Title
+								fontSize={maxMobile ? 20 : 44}
+								textAlign={'left'}
+								color="black"
+								type="h1"
+							>
+								Payment options
+							</Title>
+							<PropertyList
+								descriptors={insurancePayment}
+								context={insurance.paymentStatus}
+							/>
+						</>
+					)}
+				</InformationWrapper>
+				<SideMenu>
+					<Title fontSize={110} textAlign="center" color="yellow">
+						{insurance.insuranceType}
+					</Title>
+					<ActionMenu descriptors={actions} />
+				</SideMenu>
+			</Container>
+		</article>
 	)
 }
 

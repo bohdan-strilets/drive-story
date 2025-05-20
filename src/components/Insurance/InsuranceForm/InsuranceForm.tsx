@@ -18,8 +18,6 @@ import { useWizard } from '@/hooks/ui/useWizard'
 
 import { routes } from '@/config/routes'
 
-import { assertString } from '@/utils/assertString'
-
 import { InsuranceDto } from '@/types/dto/InsuranceDto'
 import { AddInsuranceParams } from '@/types/params/AddInsuranceParams'
 import { UpdateInsuranceParams } from '@/types/params/UpdateInsuranceParams'
@@ -49,11 +47,9 @@ const fieldsByStep: Record<number, FieldPath<Fields>[]> = {
 	],
 }
 
-const InsuranceForm: FC<InsuranceFormProps> = ({ mode, insurance }) => {
-	assertString(insurance?._id, 'carId')
-
-	const methods = useForm<Fields>(Validation)
+const InsuranceForm: FC<InsuranceFormProps> = ({ mode, carId, insurance }) => {
 	const navigate = useNavigate()
+	const methods = useForm<Fields>(Validation)
 
 	useEffect(() => {
 		if (insurance) methods.reset(insurance)
@@ -89,41 +85,27 @@ const InsuranceForm: FC<InsuranceFormProps> = ({ mode, insurance }) => {
 	)
 
 	const onSubmit: SubmitHandler<Fields> = async (data) => {
-		const payload: InsuranceDto = {
-			insurerName: data.insurerName,
-			policyNumber: data.policyNumber,
-			insuranceType: data.insuranceType,
-			startDate: data.startDate,
-			endDate: data.endDate,
-			coverageAmount: data.coverageAmount,
-			paymentStatus: {
-				isPaid: data.paymentStatus?.isPaid ?? false,
-				installmentsCount: data.paymentStatus?.installmentsCount,
-				installmentCost: data.paymentStatus?.installmentCost,
-				totalInstallmentsSum: data.paymentStatus?.totalInstallmentsSum,
-			},
+		const payload: InsuranceDto = data
+
+		if (mode === 'create') {
+			const addInsuranceParams: AddInsuranceParams = { payload: data, carId }
+			const response = await submitCreateInsurance(addInsuranceParams)
+
+			const path = generatePath(routes.INSURANCE_BY_ID, {
+				carId,
+				insuranceId: response?.data?._id || null,
+			})
+
+			return navigate(path)
 		}
 
-		const createInsuranceDto = { payload, carId: insurance?.carId }
-		const updateInsuranceDto = {
+		const updateInsuranceParams: UpdateInsuranceParams = {
 			payload,
-			carId: insurance?.carId,
-			insuranceId: insurance?._id ?? '',
+			carId,
+			insuranceId: insurance!._id,
 		}
 
-		const response =
-			mode === 'create'
-				? await submitCreateInsurance(createInsuranceDto)
-				: await submitUpdateInsurance(updateInsuranceDto)
-
-		const insuranceId = response?.data?._id
-		const path = generatePath(routes.INSURANCE_BY_ID, {
-			carId: insurance?.carId,
-			insuranceId: insuranceId!,
-		})
-		navigate(path)
-
-		return response
+		return await submitUpdateInsurance(updateInsuranceParams)
 	}
 
 	return (
