@@ -24,7 +24,11 @@ import { UpdateInsuranceParams } from '@/types/params/UpdateInsuranceParams'
 import { InsuranceFormProps } from '@/types/props/Insurance/InsuranceFormProps'
 import { Insurance } from '@/types/types/Insurance'
 
-import { Fields, Validation } from '@/validation/schemas/InsuranceSchema'
+import {
+	Fields,
+	Schema,
+	Validation,
+} from '@/validation/schemas/InsuranceSchema'
 
 import InsuranceFields from './InsuranceFields'
 import PaymentFields from './PaymentFields'
@@ -52,7 +56,11 @@ const InsuranceForm: FC<InsuranceFormProps> = ({ mode, carId, insurance }) => {
 	const methods = useForm<Fields>(Validation)
 
 	useEffect(() => {
-		if (insurance) methods.reset(insurance)
+		if (insurance) {
+			const params = { stripUnknown: true }
+			const initialValues = Schema.cast(insurance, params) as Fields
+			methods.reset(initialValues)
+		}
 	}, [insurance, methods])
 
 	const { step, maxStep, isFirst, isLast, next, prev } = useWizard<Fields>(

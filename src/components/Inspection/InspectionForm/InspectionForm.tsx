@@ -21,7 +21,11 @@ import { InspectionFormProps } from '@/types/props/Inspection/InspectionFormProp
 import { Inspection } from '@/types/types/Inspection'
 
 import { inspectionRules } from '@/validation/rules/inspectionRules'
-import { Fields, Validation } from '@/validation/schemas/InspectionSchema'
+import {
+	Fields,
+	Schema,
+	Validation,
+} from '@/validation/schemas/InspectionSchema'
 
 const InspectionForm: FC<InspectionFormProps> = ({
 	mode,
@@ -32,7 +36,11 @@ const InspectionForm: FC<InspectionFormProps> = ({
 	const { control, handleSubmit, reset } = useForm<Fields>(Validation)
 
 	useEffect(() => {
-		if (inspection) reset(inspection)
+		if (inspection) {
+			const params = { stripUnknown: true }
+			const initialValues = Schema.cast(inspection, params) as Fields
+			reset(initialValues)
+		}
 	}, [inspection, reset])
 
 	const { mutateAsync: updateInspection, isPending: isUpdating } =

@@ -20,7 +20,7 @@ import { UpdateCarParams } from '@/types/params/UpdateCarParams'
 import { CarFormProps } from '@/types/props/Garage/CarFormProps'
 import { CarEntity } from '@/types/types/CarEntity'
 
-import { Fields, Validation } from '@/validation/schemas/CarSchema'
+import { Fields, Schema, Validation } from '@/validation/schemas/CarSchema'
 
 import BasicInfoFields from './BasicInfoFields'
 import OwnershipAndDescFields from './OwnershipAndDescFields'
@@ -58,7 +58,11 @@ const CarForm: FC<CarFormProps> = ({ mode, car }) => {
 	const methods = useForm<Fields>(Validation)
 
 	useEffect(() => {
-		if (car) methods.reset(car)
+		if (car) {
+			const params = { stripUnknown: true }
+			const initialValues = Schema.cast(car, params) as Fields
+			methods.reset(initialValues)
+		}
 	}, [car, methods])
 
 	const { step, maxStep, isFirst, isLast, next, prev } = useWizard<Fields>(
