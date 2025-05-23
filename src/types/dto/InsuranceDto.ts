@@ -2,11 +2,7 @@ import { Insurance, PaymentStatus } from '../types/Insurance'
 
 export type PaymentStatusDto = Pick<
 	PaymentStatus,
-	| 'isPaid'
-	| 'installmentsCount'
-	| 'installmentCost'
-	| 'paymentDates'
-	| 'totalInstallmentsSum'
+	'isPaid' | 'installmentsCount' | 'totalInstallmentsSum'
 >
 
 export type InsuranceDto = Pick<

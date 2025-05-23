@@ -1,14 +1,13 @@
 import { InsuranceType } from '../enums/InsuranceType'
+import { NumberRates } from '../enums/NumberRates'
 
 import { Image } from './Image'
 
 export type PaymentStatus = {
 	_id: string
 	isPaid: boolean
-	installmentsCount?: number
-	installmentCost?: number
+	installmentsCount?: NumberRates
 	totalInstallmentsSum?: number
-	paymentDates?: (Date | undefined)[]
 	createdAt: Date
 	updatedAt: Date
 }
@@ -22,9 +21,9 @@ export type Insurance = {
 	policyNumber: string
 	startDate: Date
 	endDate: Date
-	insuranceType?: InsuranceType
+	insuranceType: InsuranceType
 	coverageAmount: number
-	paymentStatus?: PaymentStatus
+	paymentStatus: PaymentStatus
 	photos: string | null | Image
 	createdAt: Date
 	updatedAt: Date

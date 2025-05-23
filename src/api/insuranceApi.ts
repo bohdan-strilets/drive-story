@@ -6,6 +6,7 @@ import { AddInsuranceParams } from '@/types/params/AddInsuranceParams'
 import { InsurancePathParams } from '@/types/params/InsurancePathParams'
 import { ListInsuranceParams } from '@/types/params/ListInsuranceParams'
 import { UpdateInsuranceParams } from '@/types/params/UpdateInsuranceParams'
+import { UpdatePaidStatusParams } from '@/types/params/UpdatePaidStatusParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Insurance } from '@/types/types/Insurance'
 import { PaginatedResponse } from '@/types/types/PaginatedResponse'
@@ -32,6 +33,20 @@ export const update = async ({
 }: UpdateInsuranceParams): Promise<ApiResponse<Insurance | null>> => {
 	try {
 		const path = `${ENDPOINT}/update/${carId}/${insuranceId}`
+		const { data } = await apiClient.patch(path, payload)
+		return data
+	} catch (error) {
+		return handleApiError(error)
+	}
+}
+
+export const updatePaidStatus = async ({
+	payload,
+	carId,
+	insuranceId,
+}: UpdatePaidStatusParams): Promise<ApiResponse<Insurance | null>> => {
+	try {
+		const path = `${ENDPOINT}/update-paid-status/${carId}/${insuranceId}`
 		const { data } = await apiClient.patch(path, payload)
 		return data
 	} catch (error) {

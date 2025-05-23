@@ -1,5 +1,3 @@
-import StatusBadge from '@/components/UI/StatusBadge'
-
 import { formatNumberWithSpaces } from '@/utils/formatNumberWithSpaces'
 import { parsedDateToString } from '@/utils/parsedDateToString'
 
@@ -22,12 +20,5 @@ export const insuranceField: FieldDescriptor<Insurance>[] = [
 		label: 'Coverage amount',
 		render: (insurance) =>
 			`${formatNumberWithSpaces(insurance?.coverageAmount ?? 0)} PLN`,
-	},
-	{
-		key: 'is-paid',
-		label: 'The policy is paid in full',
-		render: (insurance) => (
-			<StatusBadge status={insurance?.paymentStatus?.isPaid ?? false} />
-		),
 	},
 ]

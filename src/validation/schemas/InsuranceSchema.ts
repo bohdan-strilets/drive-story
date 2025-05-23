@@ -12,8 +12,7 @@ const {
 	policyNumber,
 	startDate,
 } = insuranceRules
-const { installmentCost, installmentsCount, isPaid, totalInstallmentsSum } =
-	paymentStatus
+const { installmentsCount, isPaid, totalInstallmentsSum } = paymentStatus
 
 export const Schema = yup.object().shape({
 	insurerName: yup
@@ -60,19 +59,8 @@ export const Schema = yup.object().shape({
 		isPaid: yup.boolean().required(isPaid.required),
 
 		installmentsCount: yup
-			.number()
-			.min(installmentsCount.min, installmentsCount.message)
-			.max(installmentsCount.max, installmentsCount.message)
-			.integer(installmentsCount.integerMessage)
-			.positive(installmentsCount.integerMessage)
-			.optional(),
-
-		installmentCost: yup
-			.number()
-			.min(installmentCost.min, installmentCost.message)
-			.max(installmentCost.max, installmentCost.message)
-			.integer(installmentCost.integerMessage)
-			.positive(installmentCost.integerMessage)
+			.string()
+			.oneOf(installmentsCount.oneOf, installmentsCount.oneOfMessage)
 			.optional(),
 
 		totalInstallmentsSum: yup
@@ -82,8 +70,6 @@ export const Schema = yup.object().shape({
 			.integer(totalInstallmentsSum.integerMessage)
 			.positive(totalInstallmentsSum.integerMessage)
 			.optional(),
-
-		paymentDates: yup.array().of(yup.date()).optional(),
 	}),
 })
 

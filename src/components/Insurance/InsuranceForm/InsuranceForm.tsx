@@ -45,9 +45,7 @@ const fieldsByStep: Record<number, FieldPath<Fields>[]> = {
 	2: [
 		'paymentStatus.isPaid',
 		'paymentStatus.installmentsCount',
-		'paymentStatus.installmentCost',
 		'paymentStatus.totalInstallmentsSum',
-		'paymentStatus.paymentDates',
 	],
 }
 

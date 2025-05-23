@@ -31,7 +31,6 @@ const InsuranceFields: FC = () => {
 				type="text"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder={insuranceRules.insurerName.placeholder}
 				rules={{
 					required: true,
 					minLength: insuranceRules.insurerName.min,
@@ -46,7 +45,6 @@ const InsuranceFields: FC = () => {
 				type="text"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder={insuranceRules.policyNumber.placeholder}
 				rules={{
 					required: true,
 					minLength: insuranceRules.policyNumber.min,
@@ -89,7 +87,7 @@ const InsuranceFields: FC = () => {
 				name="insuranceType"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder="Select fuel type"
+				placeholder="Type of insurance"
 				rules={{ required: true }}
 				defaultValue={formatValue<InsuranceType>(InsuranceType.OC)}
 			/>
@@ -99,7 +97,6 @@ const InsuranceFields: FC = () => {
 				name="coverageAmount"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder={insuranceRules.coverageAmount.placeholder}
 				rules={{
 					required: true,
 					min: insuranceRules.coverageAmount.min,

@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect, useRef } from 'react'
 
 import Gallery from '@/components/Gallery'
 import ActionMenu from '@/components/Layout/ActionMenu'
@@ -6,6 +6,8 @@ import PropertyList from '@/components/Layout/PropertyList'
 import DecorativeLine from '@/components/UI/DecorativeLine'
 import Title from '@/components/UI/Title'
 
+import { useUpdatePaidStatus } from '@/hooks/insurance/useUpdatePaidStatus'
+import { useGeneratePayments } from '@/hooks/ui/useGeneratePayments'
 import useModal from '@/hooks/ui/useModal'
 import useResponsive from '@/hooks/ui/useResponsive'
 
@@ -14,9 +16,11 @@ import { insuranceField } from '@/descriptors/fields/insuranceField'
 import { insurancePayment } from '@/descriptors/fields/insurancePayment'
 
 import { isImage } from '@/types/guards/isImage'
+import { UpdatePaidStatusParams } from '@/types/params/UpdatePaidStatusParams'
 import { InsuranceInfoProps } from '@/types/props/Insurance/InsuranceInfoProps'
 
 import Header from '../Header'
+import PaymentProgressBar from '../PaymentProgressBar'
 import Timer from '../Timer'
 
 import { Container, InformationWrapper, SideMenu } from './InsuranceInfo.styled'
@@ -31,6 +35,38 @@ const InsuranceInfo: FC<InsuranceInfoProps> = ({
 
 	const photos = insurance?.photos
 	const actions = getInsuranceActions({ onOpen })
+
+	const payments = useGeneratePayments({
+		startDate: new Date(insurance.startDate),
+		endDate: new Date(insurance.endDate),
+		isPaid: insurance.paymentStatus!.isPaid,
+		installmentsCount: insurance.paymentStatus?.installmentsCount,
+		totalInstallmentsSum: insurance.paymentStatus?.totalInstallmentsSum,
+	})
+
+	const { mutateAsync: updatePaidStatus } = useUpdatePaidStatus()
+	const hasCalledRef = useRef(false)
+
+	useEffect(() => {
+		const allPaid = payments.length > 0 && payments.every((p) => p.isPaid)
+
+		const params: UpdatePaidStatusParams = {
+			payload: { isPaid: true },
+			carId: insurance.carId,
+			insuranceId: insurance._id,
+		}
+
+		if (!insurance.paymentStatus.isPaid && allPaid && !hasCalledRef.current) {
+			hasCalledRef.current = true
+			updatePaidStatus(params)
+		}
+	}, [
+		insurance._id,
+		insurance.carId,
+		insurance.paymentStatus.isPaid,
+		payments,
+		updatePaidStatus,
+	])
 
 	return (
 		<article>
@@ -62,11 +98,14 @@ const InsuranceInfo: FC<InsuranceInfoProps> = ({
 			<Container>
 				<InformationWrapper>
 					<Timer startDate={insurance.startDate} endDate={insurance.endDate} />
+					<PaymentProgressBar payments={payments} />
+					<DecorativeLine color="gray" type="dashed" />
+
 					<PropertyList descriptors={insuranceField} context={insurance} />
-					{insurance.paymentStatus && insurance.paymentStatus.isPaid && (
+					{insurance.paymentStatus && (
 						<>
 							<Title
-								fontSize={maxMobile ? 20 : 44}
+								fontSize={maxMobile ? 20 : 28}
 								textAlign={'left'}
 								color="black"
 								type="h1"
