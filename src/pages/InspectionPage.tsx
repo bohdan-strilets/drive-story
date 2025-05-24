@@ -4,6 +4,7 @@ import { generatePath, useNavigate, useParams } from 'react-router-dom'
 
 import ErrorState from '@/components/Inspection/ErrorState'
 import InspectionForm from '@/components/Inspection/InspectionForm'
+import InspectionInfo from '@/components/Inspection/InspectionInfo'
 import NoInspectionState from '@/components/Inspection/NoInspectionState'
 import Modal from '@/components/Modal'
 import ButtonGoBack from '@/components/UI/ButtonGoBack'
@@ -42,7 +43,7 @@ const InspectionPage: FC = () => {
 			/>
 
 			{!inspection && <NoInspectionState />}
-			{inspection && <p>Inspection info</p>}
+			{inspection && <InspectionInfo inspection={inspection} />}
 
 			<AnimatePresence>
 				{checkQueryParam(modalNames.ADD_INSPECTION) && (
