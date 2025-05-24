@@ -1,6 +1,7 @@
 import { FC } from 'react'
 
 import Gallery from '@/components/Gallery'
+import NoImageState from '@/components/Gallery/NoImageState'
 import DecorativeLine from '@/components/UI/DecorativeLine'
 import Title from '@/components/UI/Title'
 
@@ -15,6 +16,8 @@ const ImageGallery: FC<ImageGalleryProps> = ({
 	isActionLoading,
 }) => {
 	const { maxMobile } = useResponsive()
+
+	if (!photos && !isImage(photos)) return <NoImageState />
 
 	return (
 		photos &&
