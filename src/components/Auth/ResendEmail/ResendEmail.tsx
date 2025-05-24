@@ -15,7 +15,6 @@ import { EmailDto } from '@/types/dto/EmailDto'
 import { ResendEmailProps } from '@/types/props/Auth/ResendEmailProps'
 import { User } from '@/types/types/User'
 
-import { userRules } from '@/validation/rules/userRules'
 import { Fields, Validation } from '@/validation/schemas/EmailSchema'
 
 const ResendEmail: FC<ResendEmailProps> = ({ showButtonGoBack = false }) => {
@@ -64,7 +63,6 @@ const ResendEmail: FC<ResendEmailProps> = ({ showButtonGoBack = false }) => {
 					type="email"
 					width="100%"
 					margin="0 0 15px 0"
-					placeholder={userRules.email.placeholder}
 					rules={{ required: true }}
 					defaultValue=""
 				/>

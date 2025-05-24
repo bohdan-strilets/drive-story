@@ -47,7 +47,6 @@ const Login: FC = () => {
 				type="email"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder={userRules.email.placeholder}
 				rules={{ required: true }}
 				defaultValue=""
 			/>
@@ -57,7 +56,6 @@ const Login: FC = () => {
 				name="password"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder={userRules.email.placeholder}
 				rules={{
 					required: true,
 					minLength: userRules.password.min,

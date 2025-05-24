@@ -2,6 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { reach } from 'yup'
 
+import { Gender } from '@/types/enums/Gender'
 import { Location } from '@/types/types/User'
 
 import { UserSchema } from './UserSchema'
@@ -11,7 +12,7 @@ const lastName = reach(UserSchema, 'lastName') as yup.StringSchema
 const nickname = reach(UserSchema, 'nickname') as yup.StringSchema
 const birthDate = reach(UserSchema, 'birthDate') as yup.DateSchema
 const phoneNumber = reach(UserSchema, 'phoneNumber') as yup.StringSchema
-const gender = reach(UserSchema, 'gender') as yup.StringSchema
+const gender = reach(UserSchema, 'gender') as yup.StringSchema<Gender>
 const location = reach(UserSchema, 'location') as yup.ObjectSchema<Location>
 
 export const Schema = yup.object().shape({

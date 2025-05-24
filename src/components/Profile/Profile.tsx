@@ -9,40 +9,33 @@ import { getUserActions } from '@/descriptors/actions/getUserActions'
 import { getUserUploadActions } from '@/descriptors/actions/getUserUploadActions'
 import { userField } from '@/descriptors/fields/userField'
 
-import { useUserStore } from '@/store/useUserStore'
-
 import { defaultImages } from '@/utils/defaultImages'
+
+import { ProfileProps } from '@/types/props/Profile/ProfileProps'
 
 import ActionMenu from '../Layout/ActionMenu'
 import PropertyList from '../Layout/PropertyList'
 import ImageBox from '../UI/ImageBox'
-import Loader from '../UI/Loader'
 import OpenGalleryButton from '../UI/OpenGalleryButton'
 
 import Header from './Header'
 import { Information, InformationWrapper, SideMenu } from './Profile.styled'
 import ProfileMeta from './ProfileMeta'
 
-const Profile: FC = () => {
+const Profile: FC<ProfileProps> = ({ user }) => {
 	const { onOpen } = useModal()
 	const userActions = getUserActions({ onOpen })
 	const userUploadActions = getUserUploadActions({ onOpen })
-
-	const user = useUserStore((state) => state.user)
-	const isLoading = useUserStore((state) => state.isLoading)
 
 	const userAvatar = useGetImage({
 		image: user?.avatars,
 		defaultImage: defaultImages.avatar,
 	})
+
 	const userPoster = useGetImage({
 		image: user?.posters,
 		defaultImage: defaultImages.poster,
 	})
-
-	if (isLoading) {
-		return <Loader color={'gray'} />
-	}
 
 	return (
 		<>

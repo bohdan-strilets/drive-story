@@ -59,7 +59,6 @@ const Registration: FC = () => {
 					type="text"
 					width={maxMobile ? '100%' : '49%'}
 					margin="0 0 15px 0"
-					placeholder={userRules.firstName.placeholder}
 					rules={{
 						required: true,
 						minLength: userRules.firstName.min,
@@ -75,7 +74,6 @@ const Registration: FC = () => {
 					type="text"
 					width={maxMobile ? '100%' : '49%'}
 					margin="0 0 15px 0"
-					placeholder={userRules.lastName.placeholder}
 					rules={{
 						required: true,
 						minLength: userRules.lastName.min,
@@ -92,7 +90,6 @@ const Registration: FC = () => {
 				type="email"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder={userRules.email.placeholder}
 				rules={{ required: true }}
 				defaultValue=""
 			/>
@@ -103,7 +100,6 @@ const Registration: FC = () => {
 					name="password"
 					width={maxMobile ? '100%' : '49%'}
 					margin="0 0 15px 0"
-					placeholder={userRules.password.placeholder}
 					rules={{
 						required: true,
 						minLength: userRules.password.min,
@@ -118,7 +114,6 @@ const Registration: FC = () => {
 					name="passwordAgain"
 					width={maxMobile ? '100%' : '49%'}
 					margin="0 0 15px 0"
-					placeholder={userRules.password.placeholder}
 					rules={{
 						required: true,
 						minLength: userRules.password.min,

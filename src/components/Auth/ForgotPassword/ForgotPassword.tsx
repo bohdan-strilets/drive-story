@@ -12,7 +12,6 @@ import { useRequestResetPassword } from '@/hooks/user/useRequestResetPassword'
 import { EmailDto } from '@/types/dto/EmailDto'
 import { User } from '@/types/types/User'
 
-import { userRules } from '@/validation/rules/userRules'
 import { Fields, Validation } from '@/validation/schemas/EmailSchema'
 
 const ForgotPassword: FC = () => {
@@ -45,7 +44,6 @@ const ForgotPassword: FC = () => {
 					type="email"
 					width="100%"
 					margin="0 0 15px 0"
-					placeholder={userRules.email.placeholder}
 					rules={{ required: true }}
 					defaultValue=""
 				/>

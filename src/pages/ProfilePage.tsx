@@ -9,6 +9,7 @@ import Profile from '@/components/Profile'
 import EditEmail from '@/components/Profile/EditEmail'
 import EditPassword from '@/components/Profile/EditPassword'
 import EditProfile from '@/components/Profile/EditProfile'
+import Loader from '@/components/UI/Loader'
 import Paragraph from '@/components/UI/Paragraph'
 import Uploader from '@/components/Uploader'
 
@@ -16,12 +17,11 @@ import { useLogout } from '@/hooks/auth/useLogout'
 import { useGalleryManager } from '@/hooks/ui/useGalleryManager'
 import useModal from '@/hooks/ui/useModal'
 import useSubmit from '@/hooks/ui/useSubmit'
+import { useGetCurrentUser } from '@/hooks/user/useGetCurrentUser'
 import { useRemoveProfile } from '@/hooks/user/useRemoveProfile'
 
 import { modalNames } from '@/config/modalConfig'
 import { routes } from '@/config/routes'
-
-import { useUserStore } from '@/store/useUserStore'
 
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
@@ -33,11 +33,11 @@ import { User } from '@/types/types/User'
 const ProfilePage: FC = () => {
 	const { checkQueryParam, onClose } = useModal()
 
-	const { mutateAsync: logout, isPending: isLogoutPending } = useLogout()
-	const { mutateAsync: removeProfile, isPending: isRemoveProfilePending } =
+	const { mutateAsync: logout, isPending: isLoggingOut } = useLogout()
+	const { mutateAsync: removeProfile, isPending: isRemoved } =
 		useRemoveProfile()
 
-	const user = useUserStore((state) => state.user)
+	const { data: user, isLoading } = useGetCurrentUser()
 
 	const logoutAndNavigate = useSubmit<AuthResponse | null>({
 		callback: logout,
@@ -68,14 +68,16 @@ const ProfilePage: FC = () => {
 		closeViewer: closePosterViewer,
 	} = useGalleryManager({ entityType: EntityType.POSTERS, entityId: user?._id })
 
+	if (isLoading) return <Loader color={'gray'} />
+
 	return (
 		<>
-			<Profile />
+			{user && <Profile user={user} />}
 
 			<AnimatePresence>
-				{checkQueryParam(modalNames.EDIT_EMAIL) && (
+				{checkQueryParam(modalNames.EDIT_EMAIL) && user && (
 					<Modal key={modalNames.EDIT_EMAIL} title="Edit email address">
-						<EditEmail />
+						<EditEmail email={user.email} />
 					</Modal>
 				)}
 
@@ -85,9 +87,9 @@ const ProfilePage: FC = () => {
 					</Modal>
 				)}
 
-				{checkQueryParam(modalNames.EDIT_PROFILE) && (
+				{checkQueryParam(modalNames.EDIT_PROFILE) && user && (
 					<Modal key={modalNames.EDIT_PROFILE} title="Edit profile">
-						<EditProfile />
+						<EditProfile user={user} />
 					</Modal>
 				)}
 
@@ -102,7 +104,7 @@ const ProfilePage: FC = () => {
 						key={modalNames.EXIT_PROFILE}
 						title="Logout from profile?"
 						isDialog={true}
-						isLoading={isLogoutPending}
+						isLoading={isLoggingOut}
 						negativeBtnLabel="no"
 						positiveBtnLabel="yes"
 						negativeCallback={onClose}
@@ -117,7 +119,7 @@ const ProfilePage: FC = () => {
 						key={modalNames.DELETE_PROFILE}
 						title="Do you want to delete your profile?"
 						isDialog={true}
-						isLoading={isRemoveProfilePending}
+						isLoading={isRemoved}
 						negativeBtnLabel="no"
 						positiveBtnLabel="yes"
 						negativeCallback={onClose}

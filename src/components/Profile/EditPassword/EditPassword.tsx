@@ -40,7 +40,6 @@ const EditPassword: FC = () => {
 				name="password"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder={userRules.password.placeholder}
 				rules={{
 					required: true,
 					minLength: userRules.password.min,
@@ -55,7 +54,6 @@ const EditPassword: FC = () => {
 				name="newPassword"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder={userRules.password.placeholder}
 				rules={{
 					required: true,
 					minLength: userRules.password.min,
@@ -70,7 +68,6 @@ const EditPassword: FC = () => {
 				name="passwordAgain"
 				width="100%"
 				margin="0 0 15px 0"
-				placeholder={userRules.password.placeholder}
 				rules={{
 					required: true,
 					minLength: userRules.password.min,

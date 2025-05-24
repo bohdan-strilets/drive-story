@@ -10,12 +10,12 @@ import useSubmit from '@/hooks/ui/useSubmit'
 import { useEditEmail } from '@/hooks/user/useEditEmail'
 
 import { EmailDto } from '@/types/dto/EmailDto'
+import { EditEmailProps } from '@/types/props/Profile/EditEmailProps'
 import { User } from '@/types/types/User'
 
-import { userRules } from '@/validation/rules/userRules'
 import { Fields, Validation } from '@/validation/schemas/EmailSchema'
 
-const EditEmail: FC = () => {
+const EditEmail: FC<EditEmailProps> = ({ email }) => {
 	const { mutateAsync: editEmail, isPending } = useEditEmail()
 	const { control, handleSubmit } = useForm<Fields>(Validation)
 
@@ -26,7 +26,8 @@ const EditEmail: FC = () => {
 	})
 
 	const onSubmit: SubmitHandler<Fields> = async (data) => {
-		submitEditEmail(data)
+		const payload: EmailDto = data
+		submitEditEmail(payload)
 	}
 
 	return (
@@ -53,9 +54,8 @@ const EditEmail: FC = () => {
 					type="email"
 					width="100%"
 					margin="0 0 15px 0"
-					placeholder={userRules.email.placeholder}
 					rules={{ required: true }}
-					defaultValue=""
+					defaultValue={email}
 				/>
 
 				{isPending && <Loader color="gray" margin="15px 0" />}

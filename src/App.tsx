@@ -1,31 +1,32 @@
-import { FC } from 'react'
+import { FC, Suspense, lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 import Loader from './components/UI/Loader'
 import { routes } from './config/routes'
 import { useGetCurrentUser } from './hooks/user/useGetCurrentUser'
-import ActivationSuccessPage from './pages/ActivationSuccessPage'
-import AuthPage from './pages/AuthPage'
-import CarInformationPage from './pages/CarInformationPage'
-import GaragePage from './pages/GaragePage'
-import HomePage from './pages/HomePage'
-import InspectionPage from './pages/InspectionPage'
-import InsurancePage from './pages/InsurancePage'
-import NotFoundPage from './pages/NotFoundPage'
-import PhoneBookPage from './pages/PhoneBookPage'
-import ProfilePage from './pages/ProfilePage'
-import RecoverPasswordPage from './pages/RecoverPasswordPage'
-import ResetPasswordPage from './pages/ResetPasswordPage'
+
+const HomePage = lazy(() => import('./pages/HomePage'))
+const AuthPage = lazy(() => import('./pages/AuthPage'))
+const CarInformationPage = lazy(() => import('./pages/CarInformationPage'))
+const GaragePage = lazy(() => import('./pages/GaragePage'))
+const InspectionPage = lazy(() => import('./pages/InspectionPage'))
+const InsurancePage = lazy(() => import('./pages/InsurancePage'))
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
+const PhoneBookPage = lazy(() => import('./pages/PhoneBookPage'))
+const ProfilePage = lazy(() => import('./pages/ProfilePage'))
+const RecoverPasswordPage = lazy(() => import('./pages/RecoverPasswordPage'))
+const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'))
+const ActivationSuccessPage = lazy(
+	() => import('./pages/ActivationSuccessPage')
+)
 
 const App: FC = () => {
 	const { isLoading } = useGetCurrentUser()
 
-	if (isLoading) {
-		return <Loader color="gray" />
-	}
+	if (isLoading) return <Loader color="gray" />
 
 	return (
-		<>
+		<Suspense fallback={<Loader color="gray" />}>
 			<Routes>
 				<Route path={routes.HOME} element={<HomePage />} />
 				<Route path={routes.AUTH} element={<AuthPage />} />
@@ -46,7 +47,7 @@ const App: FC = () => {
 				<Route path={routes.INSPECTION_BY_ID} element={<InspectionPage />} />
 				<Route path="*" element={<NotFoundPage />} />
 			</Routes>
-		</>
+		</Suspense>
 	)
 }
 

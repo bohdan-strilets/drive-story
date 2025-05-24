@@ -58,7 +58,10 @@ export const UserSchema = yup.object().shape({
 		.matches(phoneNumber.pattern, phoneNumber.patternMessage)
 		.optional(),
 
-	gender: yup.string().oneOf(gender.oneOf, gender.oneOfMessage).optional(),
+	gender: yup
+		.string()
+		.oneOf(gender.oneOf, gender.oneOfMessage)
+		.required(gender.required),
 
 	location: yup.object().shape({
 		country: yup

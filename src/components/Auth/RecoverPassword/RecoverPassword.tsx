@@ -13,6 +13,7 @@ import useSubmit from '@/hooks/ui/useSubmit'
 import { useResetPassword } from '@/hooks/user/useResetPassword'
 
 import { ResetPasswordDto } from '@/types/dto/ResetPasswordDto'
+import { ResetPasswordParams } from '@/types/params/ResetPasswordParams'
 import { User } from '@/types/types/User'
 
 import { userRules } from '@/validation/rules/userRules'
@@ -28,18 +29,15 @@ const RecoverPassword: FC = () => {
 
 	const { control, handleSubmit } = useForm<Fields>(Validation)
 
-	const submitResetPassword = useSubmit<
-		User | null,
-		{ dto: ResetPasswordDto; resetToken: string }
-	>({
+	const submitResetPassword = useSubmit<User | null, ResetPasswordParams>({
 		callback: resetPassword,
 		successMessage: 'The password has been changed successfully',
 	})
 
 	const onSubmit: SubmitHandler<Fields> = async (data) => {
-		const dto: ResetPasswordDto = { password: data.password }
+		const payload: ResetPasswordDto = { password: data.password }
 		submitResetPassword({
-			dto,
+			payload,
 			resetToken: resetToken ?? '',
 		})
 	}
@@ -62,7 +60,6 @@ const RecoverPassword: FC = () => {
 					name="password"
 					width="100%"
 					margin="0 0 15px 0"
-					placeholder={userRules.password.placeholder}
 					rules={{
 						required: true,
 						minLength: userRules.password.min,
@@ -77,7 +74,6 @@ const RecoverPassword: FC = () => {
 					name="passwordAgain"
 					width="100%"
 					margin="0 0 15px 0"
-					placeholder={userRules.password.placeholder}
 					rules={{
 						required: true,
 						minLength: userRules.password.min,
