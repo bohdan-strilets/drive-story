@@ -19,16 +19,16 @@ import { defaultImages } from '@/utils/defaultImages'
 
 import { CarInformationProps } from '@/types/props/Garage/CarInformationProps'
 
+import Header from '../Header'
 import ImageGallery from '../ImageGallery'
 import LicensePlate from '../LicensePlate'
+import MaintenanceAlerts from '../MaintenanceAlerts'
 
 import {
 	Container,
 	InformationWrapper,
 	SideMenu,
 } from './CarInformation.styled'
-import Header from './Header'
-import MaintenanceReminders from './MaintenanceReminders'
 
 const CarInformation: FC<CarInformationProps> = ({
 	car,
@@ -50,8 +50,8 @@ const CarInformation: FC<CarInformationProps> = ({
 		onOpen,
 		navigate,
 		carId: car._id,
-		insuranceId: car.insuranceId || null,
-		inspectionId: car.inspectionId || null,
+		insuranceId: car.insurance?.insuranceId || null,
+		inspectionId: car.inspection?.inspectionId || null,
 	})
 
 	return (
@@ -65,7 +65,12 @@ const CarInformation: FC<CarInformationProps> = ({
 				description={car.description}
 			/>
 
-			<MaintenanceReminders />
+			<MaintenanceAlerts
+				carId={car._id}
+				insurance={car.insurance}
+				inspection={car.inspection}
+				oilService={null}
+			/>
 
 			<ImageGallery
 				photos={photos}

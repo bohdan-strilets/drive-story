@@ -41,6 +41,16 @@ export type CarOwnership = {
 	saleDate?: Date | null
 }
 
+export type InsuranceInfo = {
+	insuranceId?: string | null
+	insuranceEnds?: Date | null
+}
+
+export type InspectionInfo = {
+	inspectionId?: string | null
+	inspectionEnds?: Date | null
+}
+
 export type CarEntity = {
 	_id: string
 	owner: string
@@ -50,8 +60,8 @@ export type CarEntity = {
 	ownership: CarOwnership
 	description?: string | null
 	photos: string | null | Image
-	insuranceId?: string | null
-	inspectionId?: string | null
+	insurance: InsuranceInfo | null
+	inspection: InspectionInfo | null
 	createdAt: Date
 	updatedAt: Date
 }
