@@ -2,7 +2,7 @@ import { BiSolidCarGarage, BiSupport } from 'react-icons/bi'
 import { BsFuelPumpFill } from 'react-icons/bs'
 import { FaImages, FaUserGear } from 'react-icons/fa6'
 import { GiAutoRepair } from 'react-icons/gi'
-import { IoHome } from 'react-icons/io5'
+import { IoBook, IoHome } from 'react-icons/io5'
 import { MdLocalCarWash } from 'react-icons/md'
 import { RiDonutChartFill } from 'react-icons/ri'
 
@@ -34,6 +34,12 @@ export const navigation: NavigationDescriptor[] = [
 			/>
 		),
 		route: routes.GARAGE,
+	},
+	{
+		key: 'phone-book',
+		label: 'Phone book',
+		icon: <IoBook color="var(--yellow-color)" size={20} className="icon" />,
+		route: routes.PHONE_BOOK,
 	},
 	{
 		key: 'service',

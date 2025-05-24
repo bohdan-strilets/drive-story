@@ -12,6 +12,7 @@ import HomePage from './pages/HomePage'
 import InspectionPage from './pages/InspectionPage'
 import InsurancePage from './pages/InsurancePage'
 import NotFoundPage from './pages/NotFoundPage'
+import PhoneBookPage from './pages/PhoneBookPage'
 import ProfilePage from './pages/ProfilePage'
 import RecoverPasswordPage from './pages/RecoverPasswordPage'
 import ResetPasswordPage from './pages/ResetPasswordPage'
@@ -39,6 +40,7 @@ const App: FC = () => {
 				<Route path={routes.RESET_PASSWORD} element={<ResetPasswordPage />} />
 				<Route path={routes.PROFILE} element={<ProfilePage />} />
 				<Route path={routes.GARAGE} element={<GaragePage />} />
+				<Route path={routes.PHONE_BOOK} element={<PhoneBookPage />} />
 				<Route path={routes.CAR_BY_ID} element={<CarInformationPage />} />
 				<Route path={routes.INSURANCE_BY_ID} element={<InsurancePage />} />
 				<Route path={routes.INSPECTION_BY_ID} element={<InspectionPage />} />

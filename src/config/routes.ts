@@ -8,6 +8,7 @@ export const routes = {
 	TERMS_USE: '/terms-use',
 	RECOVER_PASSWORD: '/recover-password',
 	GARAGE: '/garage',
+	PHONE_BOOK: 'phone-book',
 	CAR_BY_ID: '/garage/:carId',
 	INSURANCE_BY_ID: '/garage/:carId/insurance/:insuranceId?',
 	INSPECTION_BY_ID: '/garage/:carId/inspection/:inspectionId?',
