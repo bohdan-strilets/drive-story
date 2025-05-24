@@ -152,6 +152,7 @@ const InsurancePage: FC = () => {
 						/>
 					</Modal>
 				)}
+
 				{showImageViewer && (
 					<ImageViewer imageUrl={currentImage} closeViewer={closeImageViewer} />
 				)}

@@ -3,7 +3,12 @@ import { useMutation } from '@tanstack/react-query'
 import { upload } from '@/api/imageApi'
 
 import { queryClient } from '@/config/queryClient'
-import { CarKey, InsuranceKey, UserKey } from '@/config/queryKeys'
+import {
+	CarKey,
+	InspectionKey,
+	InsuranceKey,
+	UserKey,
+} from '@/config/queryKeys'
 
 import { UploadImageParams } from '@/types/params/UploadImageParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
@@ -20,6 +25,7 @@ export const useUploadImage = () => {
 				queryClient.invalidateQueries({ queryKey: [CarKey, entityId] })
 				queryClient.invalidateQueries({ queryKey: [CarKey] })
 				queryClient.invalidateQueries({ queryKey: [InsuranceKey, entityId] })
+				queryClient.invalidateQueries({ queryKey: [InspectionKey, entityId] })
 			}
 		},
 	})
