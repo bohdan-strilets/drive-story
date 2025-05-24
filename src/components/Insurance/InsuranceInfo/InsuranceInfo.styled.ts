@@ -5,6 +5,7 @@ import { itemInformationContainer } from '@/styles/mixins/itemInformationContain
 import { sideMenuWrapper } from '@/styles/mixins/sideMenuWrapper'
 
 export const Container = styled.div`
+	margin-top: 15px;
 	${itemInformationContainer()}
 `
 
