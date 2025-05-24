@@ -1,6 +1,5 @@
 import { FC, useEffect, useRef } from 'react'
 
-import Gallery from '@/components/Gallery'
 import ActionMenu from '@/components/Layout/ActionMenu'
 import PropertyList from '@/components/Layout/PropertyList'
 import DecorativeLine from '@/components/UI/DecorativeLine'
@@ -15,11 +14,11 @@ import { getInsuranceActions } from '@/descriptors/actions/getInsuranceActions'
 import { insuranceField } from '@/descriptors/fields/insuranceField'
 import { insurancePayment } from '@/descriptors/fields/insurancePayment'
 
-import { isImage } from '@/types/guards/isImage'
 import { UpdatePaidStatusParams } from '@/types/params/UpdatePaidStatusParams'
 import { InsuranceInfoProps } from '@/types/props/Insurance/InsuranceInfoProps'
 
 import Header from '../Header'
+import ImageGallery from '../ImageGallery'
 import PaymentProgressBar from '../PaymentProgressBar'
 import Timer from '../Timer'
 
@@ -78,22 +77,11 @@ const InsuranceInfo: FC<InsuranceInfoProps> = ({
 				updatedAt={insurance.updatedAt}
 			/>
 
-			{photos && isImage(photos) && (
-				<>
-					<Title fontSize={maxMobile ? 20 : 28} textAlign="left" color="black">
-						Gallery
-					</Title>
-					<Gallery
-						images={photos.resources}
-						overlayActions={imageActions}
-						isActionLoading={isActionLoading}
-						itemsPerPage={maxMobile ? 3 : 6}
-						itemHeight="240px"
-						isOverlay={true}
-					/>
-					<DecorativeLine color="gray" type="dashed" margin="20px 0" />
-				</>
-			)}
+			<ImageGallery
+				photos={photos}
+				imageActions={imageActions}
+				isActionLoading={isActionLoading}
+			/>
 
 			<Container>
 				<InformationWrapper>

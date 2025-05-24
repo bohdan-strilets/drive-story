@@ -1,7 +1,6 @@
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import Gallery from '@/components/Gallery'
 import ActionMenu from '@/components/Layout/ActionMenu'
 import PropertyList from '@/components/Layout/PropertyList'
 import Title from '@/components/UI/Title'
@@ -18,9 +17,9 @@ import { carSpecs } from '@/descriptors/fields/carSpecs'
 
 import { defaultImages } from '@/utils/defaultImages'
 
-import { isImage } from '@/types/guards/isImage'
 import { CarInformationProps } from '@/types/props/Garage/CarInformationProps'
 
+import ImageGallery from '../ImageGallery'
 import LicensePlate from '../LicensePlate'
 
 import {
@@ -68,21 +67,11 @@ const CarInformation: FC<CarInformationProps> = ({
 
 			<MaintenanceReminders />
 
-			{photos && isImage(photos) && (
-				<>
-					<Title fontSize={maxMobile ? 20 : 28} textAlign="left" color="black">
-						Gallery
-					</Title>
-					<Gallery
-						images={photos.resources}
-						overlayActions={imageActions}
-						isActionLoading={isActionLoading}
-						itemsPerPage={maxMobile ? 3 : 6}
-						itemHeight="240px"
-						isOverlay={true}
-					/>
-				</>
-			)}
+			<ImageGallery
+				photos={photos}
+				imageActions={imageActions}
+				isActionLoading={isActionLoading}
+			/>
 
 			<Container>
 				<InformationWrapper>
