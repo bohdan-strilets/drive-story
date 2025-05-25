@@ -14,7 +14,7 @@ export const Button = styled.button<ButtonProps>`
 	height: ${({ height }) => height};
 
 	border-radius: 5px;
-	background-color: ${getColor('gray')};
+	background-color: ${getColor('green')};
 	margin: ${({ margin }) => margin};
 
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
@@ -25,7 +25,7 @@ export const Button = styled.button<ButtonProps>`
 	:focus .icon,
 	:hover p,
 	:focus p {
-		color: ${getColor('black')};
+		color: ${getColor('white')};
 	}
 
 	:active {
@@ -39,7 +39,7 @@ export const IconWrapper = styled.div<IconWrapperProps>`
 	height: 65%;
 	font-size: ${({ iconSize }) => iconSize};
 
-	color: ${getColor('white')};
+	color: ${getColor('black')};
 	transition: color var(--hover-effect);
 `
 
@@ -48,6 +48,6 @@ export const Label = styled.p<LabelProps>`
 	font-size: ${({ labelSize }) => labelSize};
 	font-weight: 900;
 
-	color: ${getColor('white')};
+	color: ${getColor('black')};
 	transition: color var(--hover-effect);
 `
