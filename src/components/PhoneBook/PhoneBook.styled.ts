@@ -1,8 +1,9 @@
 import styled from '@emotion/styled'
+import { motion } from 'motion/react'
 
 import { getColor } from '@/styles/helpers/getColor'
 
-export const Item = styled.li`
+export const Item = styled(motion.li)`
 	border-radius: 5px;
 	margin-bottom: 3px;
 	padding: 5px;

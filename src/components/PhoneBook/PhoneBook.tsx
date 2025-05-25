@@ -1,5 +1,7 @@
 import { FC } from 'react'
 
+import { fadeSlide } from '@/animations/fadeSlide'
+
 import ContactCard from './ContactCard'
 import { Item } from './PhoneBook.styled'
 
@@ -97,8 +99,8 @@ const contacts = [
 const PhoneBook: FC = () => {
 	return (
 		<ul>
-			{contacts.map((contact) => (
-				<Item key={contact.id}>
+			{contacts.map((contact, index) => (
+				<Item key={contact.id} {...fadeSlide(0, 20, 0, 0.3 * index)}>
 					<ContactCard
 						name={contact.name}
 						phone={contact.phone}
