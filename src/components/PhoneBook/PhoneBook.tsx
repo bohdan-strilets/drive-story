@@ -1,4 +1,7 @@
 import { FC } from 'react'
+import { generatePath, useNavigate } from 'react-router-dom'
+
+import { routes } from '@/config/routes'
 
 import { fadeSlide } from '@/animations/fadeSlide'
 
@@ -97,10 +100,20 @@ const contacts = [
 ]
 
 const PhoneBook: FC = () => {
+	const navigate = useNavigate()
+
 	return (
 		<ul>
 			{contacts.map((contact, index) => (
-				<Item key={contact.id} {...fadeSlide(0, 20, 0, 0.3 * index)}>
+				<Item
+					key={contact.id}
+					{...fadeSlide(0, 20, 0, 0.3 * index)}
+					onClick={() =>
+						navigate(
+							generatePath(routes.CONTACT_BY_ID, { contactId: contact.id })
+						)
+					}
+				>
 					<ContactCard
 						name={contact.name}
 						phone={contact.phone}

@@ -9,6 +9,7 @@ export const routes = {
 	RECOVER_PASSWORD: '/recover-password',
 	GARAGE: '/garage',
 	PHONE_BOOK: 'phone-book',
+	CONTACT_BY_ID: '/phone-book/:contactId',
 	CAR_BY_ID: '/garage/:carId',
 	INSURANCE_BY_ID: '/garage/:carId/insurance/:insuranceId?',
 	INSPECTION_BY_ID: '/garage/:carId/inspection/:inspectionId?',
@@ -17,5 +18,5 @@ export const routes = {
 	ACCESSORIES: '/accessories',
 	GALLERY: '/gallery',
 	STATISTICS: '/statistics',
-	CONTACTS: '/contacts',
+	CONTACTS: '/support',
 } as const

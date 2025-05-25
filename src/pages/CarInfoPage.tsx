@@ -25,7 +25,7 @@ import { CurrentCarDto } from '@/types/dto/CurrentCarDto'
 import { EntityType } from '@/types/enums/EntityType'
 import { User } from '@/types/types/User'
 
-const CarInformationPage: FC = () => {
+const CarInfoPage: FC = () => {
 	const { checkQueryParam, onClose } = useModal()
 	const { carId } = useParams()
 
@@ -106,4 +106,4 @@ const CarInformationPage: FC = () => {
 	)
 }
 
-export default CarInformationPage
+export default CarInfoPage
