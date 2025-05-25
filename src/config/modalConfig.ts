@@ -27,4 +27,5 @@ export const modalNames = {
 	DELETE_INSPECTION: 'delete-inspection',
 	UPLOAD_INSPECTION_PHOTO: 'upload-inspection-photo',
 	CLEAR_INSPECTION_GALLERY: 'clear-inspection-gallery',
+	ADD_CONTACT: 'add-contact',
 } as const

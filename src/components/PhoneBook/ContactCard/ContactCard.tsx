@@ -1,0 +1,84 @@
+import { FC } from 'react'
+import { FaGlobe, FaPhone } from 'react-icons/fa6'
+import { MdEmail } from 'react-icons/md'
+
+import InitialAvatar from '@/components/UI/InitialAvatar'
+import Paragraph from '@/components/UI/Paragraph'
+
+import useResponsive from '@/hooks/ui/useResponsive'
+
+import { ContactCardProps } from '@/types/props/PhoneBook/ContactCardProps'
+
+import { getColor } from '@/styles/helpers/getColor'
+
+import Tags from '../Tags'
+
+import {
+	IconWithText,
+	InfoContainer,
+	NameContainer,
+	Wrapper,
+} from './ContactCard.styled'
+
+const ContactCard: FC<ContactCardProps> = ({
+	name,
+	specializations,
+	phone,
+	email,
+	website,
+}) => {
+	const { minTablet, minLaptop } = useResponsive()
+
+	return (
+		<Wrapper>
+			<NameContainer>
+				{minTablet && <InitialAvatar name={name} />}
+
+				<div>
+					<Paragraph
+						color="gray"
+						fontSize={minLaptop ? 24 : 16}
+						fontWeight={700}
+					>
+						{name}
+					</Paragraph>
+					{specializations && <Tags tags={specializations} length={3} />}
+				</div>
+			</NameContainer>
+
+			<InfoContainer>
+				<IconWithText>
+					<FaPhone color={getColor('yellow')} size={14} />
+					<Paragraph
+						color="gray"
+						fontWeight={500}
+						margin="0 0 0 10px"
+						fontSize={14}
+					>
+						{phone}
+					</Paragraph>
+				</IconWithText>
+
+				{email && (
+					<IconWithText>
+						<MdEmail color={getColor('yellow')} size={14} />
+						<Paragraph color="gray" margin="0 0 0 10px" fontSize={14}>
+							{email}
+						</Paragraph>
+					</IconWithText>
+				)}
+
+				{website && (
+					<IconWithText>
+						<FaGlobe color={getColor('yellow')} size={14} />
+						<Paragraph color="gray" margin="0 0 0 10px" fontSize={14}>
+							{website}
+						</Paragraph>
+					</IconWithText>
+				)}
+			</InfoContainer>
+		</Wrapper>
+	)
+}
+
+export default ContactCard
