@@ -14,6 +14,7 @@ export const Button = styled.button<ButtonProps>`
 	height: ${({ height }) => height};
 
 	border-radius: 5px;
+	background: var(--green-gradient);
 	background-color: ${getColor('green')};
 	margin: ${({ margin }) => margin};
 
