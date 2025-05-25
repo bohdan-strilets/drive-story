@@ -20,7 +20,7 @@ const InsuranceFields: FC = () => {
 	const { control } = useFormContext<Fields>()
 
 	const insuranceType = Object.values(InsuranceType)
-	const insuranceTypeDropdownOptions = generateDropdownOptions(insuranceType)
+	const insuranceTypeOptions = generateDropdownOptions(insuranceType)
 
 	return (
 		<>
@@ -82,7 +82,7 @@ const InsuranceFields: FC = () => {
 			/>
 			<DropdownList
 				control={control}
-				options={insuranceTypeDropdownOptions}
+				options={insuranceTypeOptions}
 				label="Type of insurance policy"
 				name="insuranceType"
 				width="100%"

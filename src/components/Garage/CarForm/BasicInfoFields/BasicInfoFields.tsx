@@ -16,7 +16,7 @@ const BasicInfoFields: FC = () => {
 
 	const currentYear = new Date().getFullYear()
 	const yearProduction = generateNumberArray(currentYear - 40, currentYear + 1)
-	const yearsDropdownOptions = generateDropdownOptions(yearProduction)
+	const yearOptions = generateDropdownOptions(yearProduction)
 
 	return (
 		<>
@@ -53,7 +53,7 @@ const BasicInfoFields: FC = () => {
 			/>
 			<DropdownList
 				control={control}
-				options={yearsDropdownOptions}
+				options={yearOptions}
 				label="Year of Manufacture"
 				name="basicInfo.year"
 				width="100%"

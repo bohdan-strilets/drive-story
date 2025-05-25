@@ -30,11 +30,11 @@ const Controllers: FC<ControllersProps> = ({
 		new Date(maxDate).getFullYear()
 	)
 
-	const yearDropdownOptions = generateDropdownOptions(yearValues)
+	const yearOptions = generateDropdownOptions(yearValues)
 
 	const months = Object.values(Months)
 	const monthValues = generateNumberArray(0, months.length)
-	const monthDropdownOptions = generateDropdownOptions(months, monthValues)
+	const monthOptions = generateDropdownOptions(months, monthValues)
 
 	const defaultMonth = formatValue(String(currentDate.getMonth()))
 	const defaultYear = formatValue(String(currentDate.getFullYear()))
@@ -77,7 +77,7 @@ const Controllers: FC<ControllersProps> = ({
 			<Group>
 				<DropdownList
 					control={control}
-					options={monthDropdownOptions}
+					options={monthOptions}
 					name="month"
 					width={dropdownWidth()}
 					margin="0 10px 0 0"
@@ -86,7 +86,7 @@ const Controllers: FC<ControllersProps> = ({
 				/>
 				<DropdownList
 					control={control}
-					options={yearDropdownOptions}
+					options={yearOptions}
 					name="year"
 					width={dropdownWidth()}
 					placeholder="Year"

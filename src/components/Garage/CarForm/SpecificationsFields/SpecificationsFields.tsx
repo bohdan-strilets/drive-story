@@ -20,16 +20,16 @@ const SpecificationsFields: FC = () => {
 	const { control } = useFormContext<Fields>()
 
 	const fuelType = Object.values(FuelType)
-	const fuelTypeDropdownOptions = generateDropdownOptions(fuelType)
+	const fuelTypeOptions = generateDropdownOptions(fuelType)
 
 	const transmission = Object.values(Transmission)
-	const transmissionDropdownOptions = generateDropdownOptions(transmission)
+	const transmissionOptions = generateDropdownOptions(transmission)
 
 	const drivetrain = Object.values(Drivetrain)
-	const drivetrainDropdownOptions = generateDropdownOptions(drivetrain)
+	const drivetrainOptions = generateDropdownOptions(drivetrain)
 
 	const bodyType = Object.values(BodyType)
-	const bodyTypeDropdownOptions = generateDropdownOptions(bodyType)
+	const bodyTypeOptions = generateDropdownOptions(bodyType)
 
 	return (
 		<>
@@ -51,7 +51,7 @@ const SpecificationsFields: FC = () => {
 			/>
 			<DropdownList
 				control={control}
-				options={fuelTypeDropdownOptions}
+				options={fuelTypeOptions}
 				label="Fuel type"
 				name="specifications.fuelType"
 				width="100%"
@@ -61,7 +61,7 @@ const SpecificationsFields: FC = () => {
 			/>
 			<DropdownList
 				control={control}
-				options={transmissionDropdownOptions}
+				options={transmissionOptions}
 				label="Transmission"
 				name="specifications.transmission"
 				width="100%"
@@ -71,7 +71,7 @@ const SpecificationsFields: FC = () => {
 			/>
 			<DropdownList
 				control={control}
-				options={drivetrainDropdownOptions}
+				options={drivetrainOptions}
 				label="Drivetrain"
 				name="specifications.drivetrain"
 				width="100%"
@@ -81,7 +81,7 @@ const SpecificationsFields: FC = () => {
 			/>
 			<DropdownList
 				control={control}
-				options={bodyTypeDropdownOptions}
+				options={bodyTypeOptions}
 				label="Body style"
 				name="specifications.bodyType"
 				width="100%"
