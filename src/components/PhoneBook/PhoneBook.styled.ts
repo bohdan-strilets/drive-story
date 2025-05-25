@@ -8,11 +8,19 @@ export const Item = styled(motion.li)`
 	margin-bottom: 3px;
 	padding: 5px;
 
+	cursor: pointer;
+	transition: box-shadow var(--hover-effect);
+
 	:nth-of-type(odd) {
 		background-color: ${getColor('#e8e8e8')};
 	}
 
 	:last-child {
 		margin-bottom: 0;
+	}
+
+	:hover,
+	:focus {
+		box-shadow: var(--box-shadow);
 	}
 `
