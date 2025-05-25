@@ -1,10 +1,12 @@
 import styled from '@emotion/styled'
 
+import { FirstLetterProps } from '@/types/props/UI/InitialAvatarProps'
+
 import { getColor } from '@/styles/helpers/getColor'
 import { breakpoints } from '@/styles/media/breakpoints'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 
-export const FirstLetter = styled.div`
+export const FirstLetter = styled.div<FirstLetterProps>`
 	${flexCenterDirection()}
 
 	font-size: 28px;
@@ -16,9 +18,8 @@ export const FirstLetter = styled.div`
 	margin-right: 15px;
 
 	color: ${getColor('white')};
-	background-color: ${getColor('gray')};
-	text-shadow: var(--text-shadow);
-	border-radius: 5px;
+	background-color: ${({ background }) => background};
+	box-shadow: var(--box-shadow);
 
 	@media screen and (min-width: ${breakpoints.laptopMin}) {
 		width: 80px;

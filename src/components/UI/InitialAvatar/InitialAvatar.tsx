@@ -1,15 +1,18 @@
 import { FC } from 'react'
 
+import { stringToColor } from '@/utils/stringToColor'
+
 import { InitialAvatarProps } from '@/types/props/UI/InitialAvatarProps'
 
 import { FirstLetter } from './InitialAvatar.styled'
 
 const InitialAvatar: FC<InitialAvatarProps> = ({ name }) => {
-	const latter = name.split('')[0]
+	const letter = name.split('')[0]
+	const bg = stringToColor(letter)
 
 	return (
-		<FirstLetter>
-			<p>{latter}</p>
+		<FirstLetter background={bg}>
+			<p>{letter}</p>
 		</FirstLetter>
 	)
 }
