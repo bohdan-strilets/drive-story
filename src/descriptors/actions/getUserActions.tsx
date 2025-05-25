@@ -1,6 +1,7 @@
+import { FaUserGear } from 'react-icons/fa6'
 import { ImExit } from 'react-icons/im'
 import { MdDelete, MdEmail } from 'react-icons/md'
-import { RiLockPasswordFill, RiProfileFill } from 'react-icons/ri'
+import { RiLockPasswordFill } from 'react-icons/ri'
 
 import { modalNames } from '@/config/modalConfig'
 
@@ -24,7 +25,7 @@ export const getUserActions = ({
 	{
 		key: 'edit-profile',
 		label: 'Edit profile',
-		icon: <RiProfileFill size={20} />,
+		icon: <FaUserGear size={20} />,
 		callback: () => onOpen(modalNames.EDIT_PROFILE),
 	},
 	{
