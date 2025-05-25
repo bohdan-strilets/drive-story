@@ -1,6 +1,7 @@
 import { FC } from 'react'
+import { IoDocumentText } from 'react-icons/io5'
 
-import BigButton from '@/components/UI/BigButton'
+import ActionButton from '@/components/UI/ActionButton'
 import EmptyState from '@/components/UI/EmptyState'
 
 import useModal from '@/hooks/ui/useModal'
@@ -12,9 +13,10 @@ const NoInsuranceState: FC = () => {
 
 	return (
 		<>
-			<BigButton
+			<ActionButton
 				onClick={() => onOpen(modalNames.ADD_INSURANCE)}
 				label="Add insurance"
+				icon={<IoDocumentText />}
 				height="140px"
 				iconSize="80px"
 				labelSize="20px"

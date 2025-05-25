@@ -1,6 +1,7 @@
 import { FC } from 'react'
+import { MdMiscellaneousServices } from 'react-icons/md'
 
-import BigButton from '@/components/UI/BigButton'
+import ActionButton from '@/components/UI/ActionButton'
 import EmptyState from '@/components/UI/EmptyState'
 
 import useModal from '@/hooks/ui/useModal'
@@ -12,9 +13,10 @@ const NoInspectionState: FC = () => {
 
 	return (
 		<>
-			<BigButton
+			<ActionButton
 				onClick={() => onOpen(modalNames.ADD_INSPECTION)}
-				label="Add technical inspection"
+				label="Add inspection"
+				icon={<MdMiscellaneousServices />}
 				height="140px"
 				iconSize="80px"
 				labelSize="20px"

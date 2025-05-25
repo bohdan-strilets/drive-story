@@ -1,13 +1,13 @@
 import { FC } from 'react'
-import { RiFunctionAddFill } from 'react-icons/ri'
 
-import { BigButtonProps } from '@/types/props/UI/BigButtonProps'
+import { ActionButtonProps } from '@/types/props/UI/ActionButtonProps'
 
-import { Button, IconWrapper, Label } from './BigButton.styled'
+import { Button, IconWrapper, Label } from './ActionButton.styled'
 
-const BigButton: FC<BigButtonProps> = ({
+const ActionButton: FC<ActionButtonProps> = ({
 	onClick,
 	label,
+	icon,
 	width = '100%',
 	height = '260px',
 	margin = '',
@@ -23,11 +23,11 @@ const BigButton: FC<BigButtonProps> = ({
 			margin={margin}
 		>
 			<IconWrapper className="icon" iconSize={iconSize}>
-				<RiFunctionAddFill />
+				{icon}
 			</IconWrapper>
 			<Label labelSize={labelSize}>{label}</Label>
 		</Button>
 	)
 }
 
-export default BigButton
+export default ActionButton

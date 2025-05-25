@@ -4,7 +4,7 @@ import {
 	ButtonProps,
 	IconWrapperProps,
 	LabelProps,
-} from '@/types/props/UI/BigButtonProps'
+} from '@/types/props/UI/ActionButtonProps'
 
 import { getColor } from '@/styles/helpers/getColor'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
@@ -16,6 +16,8 @@ export const Button = styled.button<ButtonProps>`
 	border-radius: 5px;
 	background-color: ${getColor('gray')};
 	margin: ${({ margin }) => margin};
+
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 
 	cursor: pointer;
 

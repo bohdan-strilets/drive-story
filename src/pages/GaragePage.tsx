@@ -1,10 +1,11 @@
 import { AnimatePresence } from 'motion/react'
 import { FC } from 'react'
+import { IoCarSportSharp } from 'react-icons/io5'
 
 import CarForm from '@/components/Garage/CarForm'
 import Parking from '@/components/Garage/Parking'
 import Modal from '@/components/Modal'
-import BigButton from '@/components/UI/BigButton'
+import ActionButton from '@/components/UI/ActionButton'
 
 import useModal from '@/hooks/ui/useModal'
 
@@ -15,9 +16,10 @@ const GaragePage: FC = () => {
 
 	return (
 		<>
-			<BigButton
+			<ActionButton
 				onClick={() => onOpen(modalNames.ADD_CAR)}
 				label="Add new car"
+				icon={<IoCarSportSharp />}
 				height="140px"
 				iconSize="80px"
 				labelSize="20px"
