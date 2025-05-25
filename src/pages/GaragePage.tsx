@@ -1,18 +1,52 @@
 import { AnimatePresence } from 'motion/react'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { IoCarSportSharp } from 'react-icons/io5'
 
+import Garage from '@/components/Garage'
 import CarForm from '@/components/Garage/CarForm'
-import Parking from '@/components/Garage/Parking'
 import Modal from '@/components/Modal'
 import ActionButton from '@/components/UI/ActionButton'
+import EmptyState from '@/components/UI/EmptyState'
+import Loader from '@/components/UI/Loader'
 
+import { useFetchCars } from '@/hooks/car/useFetchCars'
 import useModal from '@/hooks/ui/useModal'
+import useResponsive from '@/hooks/ui/useResponsive'
 
 import { modalNames } from '@/config/modalConfig'
 
+import { PaginationParams } from '@/types/params/PaginationParams'
+
 const GaragePage: FC = () => {
+	const [page, setPage] = useState(1)
+
 	const { checkQueryParam, onOpen } = useModal()
+	const { maxTablet } = useResponsive()
+
+	const limit = maxTablet ? 6 : 9
+	const paginationParams: PaginationParams = { limit, page }
+
+	const { isLoading, data } = useFetchCars(paginationParams)
+	const cars = data?.data ?? []
+
+	const paginationMeta = data?.meta ?? {
+		totalItems: 0,
+		itemsPerPage: limit,
+		itemCount: 0,
+		totalPages: 1,
+		currentPage: page,
+	}
+
+	if (isLoading) return <Loader color="gray" />
+
+	if (cars.length === 0) {
+		return (
+			<EmptyState
+				title="Nothing added yet..."
+				message="Looks like you haven't added anything yet.... Seems like it's high time to do it"
+			/>
+		)
+	}
 
 	return (
 		<>
@@ -26,7 +60,9 @@ const GaragePage: FC = () => {
 				margin="0 0 30px 0"
 			/>
 
-			<Parking />
+			{cars.length > 0 && (
+				<Garage cars={cars} paginationMeta={paginationMeta} setPage={setPage} />
+			)}
 
 			<AnimatePresence>
 				{checkQueryParam(modalNames.ADD_CAR) && (

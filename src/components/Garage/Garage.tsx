@@ -1,41 +1,20 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 
-import EmptyState from '@/components/UI/EmptyState'
-import Loader from '@/components/UI/Loader'
 import Pagination from '@/components/UI/Pagination'
 
-import { useFetchCars } from '@/hooks/car/useFetchCars'
-import useResponsive from '@/hooks/ui/useResponsive'
 import useServerPagination from '@/hooks/ui/useServerPagination'
 
 import { useUserStore } from '@/store/useUserStore'
 
-import { PaginationParams } from '@/types/params/PaginationParams'
+import { GarageProps } from '@/types/props/Garage/GarageProps'
 
 import { fadeSlide } from '@/animations/fadeSlide'
 
-import CarCard from '../CarCard'
+import CarCard from './CarCard'
+import { Item, List } from './Garage.styled'
 
-import { Item, List } from './Parking.styled'
-
-const Parking: FC = () => {
-	const { maxTablet } = useResponsive()
+const Garage: FC<GarageProps> = ({ cars, paginationMeta, setPage }) => {
 	const user = useUserStore((state) => state.user)
-
-	const [page, setPage] = useState(1)
-	const limit = maxTablet ? 6 : 9
-
-	const paginationParams: PaginationParams = { limit, page }
-
-	const { isLoading, data } = useFetchCars(paginationParams)
-	const cars = data?.data ?? []
-	const paginationMeta = data?.meta ?? {
-		totalItems: 0,
-		itemsPerPage: limit,
-		itemCount: 0,
-		totalPages: 1,
-		currentPage: page,
-	}
 
 	const { currentPage, totalPages, nextPage, prevPage, goToPage } =
 		useServerPagination({
@@ -43,24 +22,10 @@ const Parking: FC = () => {
 			onPageChange: setPage,
 		})
 
-	if (isLoading) {
-		return <Loader color="gray" />
-	}
-
-	if (cars.length === 0) {
-		return (
-			<EmptyState
-				title="Nothing added yet..."
-				message="Looks like you haven't added anything yet.... Seems like it's high time
-				to do it"
-			/>
-		)
-	}
-
 	return (
 		<>
 			<List>
-				{cars?.map((car, index) => (
+				{cars.map((car, index) => (
 					<Item
 						key={car._id}
 						{...fadeSlide(0, -30, index * 0.1, 0.2, 'easeOut', false)}
@@ -94,4 +59,4 @@ const Parking: FC = () => {
 	)
 }
 
-export default Parking
+export default Garage
