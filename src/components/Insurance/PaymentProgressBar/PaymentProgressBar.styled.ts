@@ -2,6 +2,13 @@ import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import { FaCheck } from 'react-icons/fa'
 
+import {
+	BadgeContainerProps,
+	MarkerProps,
+	PaidedProps,
+	TooltipProps,
+} from '@/types/props/Insurance/PaymentProgressBarProps'
+
 import { getColor } from '@/styles/helpers/getColor'
 import { breakpoints } from '@/styles/media/breakpoints'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
@@ -26,7 +33,7 @@ export const Bar = styled.div`
 	background-color: ${getColor('gray')};
 `
 
-export const Paided = styled.div<{ width: number }>`
+export const Paided = styled.div<PaidedProps>`
 	width: ${({ width }) => `${width}%`};
 	max-width: 100%;
 	height: 5px;
@@ -34,7 +41,7 @@ export const Paided = styled.div<{ width: number }>`
 	background-color: ${getColor('green')};
 `
 
-export const BadgeContainer = styled.div<{ position: number }>`
+export const BadgeContainer = styled.div<BadgeContainerProps>`
 	position: absolute;
 	top: 50%;
 	left: ${({ position }) => `${position}%`};
@@ -47,7 +54,7 @@ export const BadgeContainer = styled.div<{ position: number }>`
 	}
 `
 
-export const Marker = styled.div<{ isPaid: boolean; isNextRate: boolean }>`
+export const Marker = styled.div<MarkerProps>`
 	position: relative;
 
 	${flexCenterDirection()}
@@ -99,7 +106,7 @@ export const CheckIcon = styled(FaCheck)`
 	}
 `
 
-export const Tooltip = styled.div<{ isPaid: boolean }>`
+export const Tooltip = styled.div<TooltipProps>`
 	position: absolute;
 	top: 125%;
 	left: 50%;
