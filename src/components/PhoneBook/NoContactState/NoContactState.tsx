@@ -1,0 +1,16 @@
+import { FC } from 'react'
+
+import EmptyState from '@/components/UI/EmptyState'
+
+const NoContactState: FC = () => {
+	return (
+		<>
+			<EmptyState
+				title="Nothing added yet..."
+				message="Looks like you haven't added anything yet.... Seems like it's high time to do it"
+			/>
+		</>
+	)
+}
+
+export default NoContactState

@@ -6,7 +6,6 @@ import Garage from '@/components/Garage'
 import CarForm from '@/components/Garage/CarForm'
 import Modal from '@/components/Modal'
 import ActionButton from '@/components/UI/ActionButton'
-import EmptyState from '@/components/UI/EmptyState'
 import Loader from '@/components/UI/Loader'
 
 import { useFetchCars } from '@/hooks/car/useFetchCars'
@@ -39,15 +38,6 @@ const GaragePage: FC = () => {
 
 	if (isLoading) return <Loader color="gray" />
 
-	if (cars.length === 0) {
-		return (
-			<EmptyState
-				title="Nothing added yet..."
-				message="Looks like you haven't added anything yet.... Seems like it's high time to do it"
-			/>
-		)
-	}
-
 	return (
 		<>
 			<ActionButton
@@ -60,9 +50,7 @@ const GaragePage: FC = () => {
 				margin="0 0 30px 0"
 			/>
 
-			{cars.length > 0 && (
-				<Garage cars={cars} paginationMeta={paginationMeta} setPage={setPage} />
-			)}
+			<Garage cars={cars} paginationMeta={paginationMeta} setPage={setPage} />
 
 			<AnimatePresence>
 				{checkQueryParam(modalNames.ADD_CAR) && (

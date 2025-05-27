@@ -17,7 +17,7 @@ export type Contact = {
 	address: Address
 	mapLink?: string | null
 	website?: string | null
-	workingHours?: [string, string]
+	workingHours?: [string, string] | null
 	specializations?: string[]
 	photos: string | Image | null
 	createdAt: Date

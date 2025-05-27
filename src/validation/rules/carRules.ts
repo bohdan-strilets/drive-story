@@ -11,14 +11,12 @@ const yearProduction = generateNumberArray(currentYear - 40, currentYear + 1)
 export const carRules = {
 	basicInfo: {
 		make: {
-			placeholder: 'Toyota',
 			min: 2,
 			max: 50,
 			required: 'Manufacturer is required',
 			message: 'Manufacturer must be between 2 and 50 characters long',
 		},
 		model: {
-			placeholder: 'Corolla',
 			min: 2,
 			max: 50,
 			required: 'Model is required',
@@ -30,13 +28,11 @@ export const carRules = {
 			required: 'Year of production is required',
 		},
 		shortName: {
-			placeholder: 'Corolla E210',
 			min: 2,
 			max: 50,
 			message: 'Short name must be between 2 and 50 characters long',
 		},
 		generation: {
-			placeholder: '12th',
 			min: 1,
 			max: 50,
 			message: 'Generation must be between 1 and 50 characters long',
@@ -44,7 +40,6 @@ export const carRules = {
 	},
 	specifications: {
 		mileage: {
-			placeholder: '150000',
 			min: 1,
 			max: 1000000,
 			required: 'Mileage is required',
@@ -72,7 +67,6 @@ export const carRules = {
 		},
 		engine: {
 			volume: {
-				placeholder: '2000',
 				min: 500,
 				max: 10000,
 				message: 'Engine volume should be from 0.5L to 10L',
@@ -80,7 +74,6 @@ export const carRules = {
 				integerMessage: 'Engine volume must be a positive, integer number',
 			},
 			power: {
-				placeholder: '150',
 				min: 20,
 				max: 2000,
 				message: 'Engine power should be from 20HP to 2000HP',
@@ -89,7 +82,6 @@ export const carRules = {
 			},
 		},
 		color: {
-			placeholder: 'Red',
 			min: 1,
 			max: 30,
 			message: 'Color must be between 1 and 30 characters long',
@@ -109,13 +101,11 @@ export const carRules = {
 	},
 	registration: {
 		vin: {
-			placeholder: '1HGCM82633A004352',
 			min: 17,
 			max: 17,
 			message: 'VIN must be exactly 17 characters long',
 		},
 		regNumber: {
-			placeholder: 'ABC1234',
 			min: 1,
 			max: 15,
 			message: 'Registration number must be between 1 and 15 characters long',
@@ -128,18 +118,15 @@ export const carRules = {
 	},
 	ownership: {
 		purchaseDate: {
-			placeholder: '05-10-2020',
 			max: new Date(),
 			message: 'Purchase date must be a valid date',
 		},
 		saleDate: {
-			placeholder: '12-12-2023',
 			max: new Date(),
 			message: 'Sale date cannot be before purchase date',
 		},
 	},
 	description: {
-		placeholder: 'A reliable compact car in excellent condition.',
 		min: 20,
 		max: 500,
 		message: 'Description must be between 20 and 500 characters',

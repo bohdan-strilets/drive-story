@@ -6,7 +6,7 @@ import { TagsProps } from '@/types/props/PhoneBook/TagsProps'
 
 import { Item, List, Wrapper } from './Tags.styled'
 
-const Tags: FC<TagsProps> = ({ tags, length = 3 }) => {
+const Tags: FC<TagsProps> = ({ tags, length = tags.length }) => {
 	return (
 		<Wrapper>
 			<List>

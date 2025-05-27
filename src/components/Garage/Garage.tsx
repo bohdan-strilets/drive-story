@@ -12,6 +12,7 @@ import { fadeSlide } from '@/animations/fadeSlide'
 
 import CarCard from './CarCard'
 import { Item, List } from './Garage.styled'
+import NoCarState from './NoCarState'
 
 const Garage: FC<GarageProps> = ({ cars, paginationMeta, setPage }) => {
 	const user = useUserStore((state) => state.user)
@@ -21,6 +22,8 @@ const Garage: FC<GarageProps> = ({ cars, paginationMeta, setPage }) => {
 			meta: paginationMeta,
 			onPageChange: setPage,
 		})
+
+	if (cars.length === 0) return <NoCarState />
 
 	return (
 		<>
