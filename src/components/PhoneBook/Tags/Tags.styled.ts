@@ -9,11 +9,13 @@ export const Wrapper = styled.div`
 
 export const List = styled.ul`
 	${flexCenterDirection()}
+	flex-wrap: wrap;
 	justify-content: start;
 `
 
 export const Item = styled.li`
 	margin-right: 3px;
+	margin-bottom: 3px;
 
 	:last-child {
 		margin-right: 0;

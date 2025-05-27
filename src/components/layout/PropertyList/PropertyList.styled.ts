@@ -30,8 +30,14 @@ export const Item = styled(motion.li)`
 
 export const Property = styled.p`
 	font-weight: 700;
+
+	min-width: 35%;
 `
 
 export const Value = styled.div`
 	color: ${getColor('gray')};
+
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 `
