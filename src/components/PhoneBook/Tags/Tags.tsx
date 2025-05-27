@@ -4,7 +4,7 @@ import Paragraph from '@/components/UI/Paragraph'
 
 import { TagsProps } from '@/types/props/PhoneBook/TagsProps'
 
-import { Item, List, Wrapper } from './Tags.styled'
+import { Item, Label, List, Wrapper } from './Tags.styled'
 
 const Tags: FC<TagsProps> = ({ tags, length = tags.length }) => {
 	return (
@@ -18,7 +18,7 @@ const Tags: FC<TagsProps> = ({ tags, length = tags.length }) => {
 							fontSize={10}
 							padding="0 5px"
 						>
-							{item}
+							<Label>{item}</Label>
 						</Paragraph>
 					</Item>
 				))}
