@@ -90,7 +90,6 @@ const ContactForm: FC<ContactFormProps> = ({ mode, contact }) => {
 					: null,
 			specializations,
 		}
-		console.log(data)
 
 		if (mode === 'create') {
 			return submitCreateContact(payload)

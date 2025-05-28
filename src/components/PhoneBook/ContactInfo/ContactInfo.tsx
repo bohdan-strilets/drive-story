@@ -1,5 +1,6 @@
 import { FC } from 'react'
 
+import AddressMap from '@/components/AddressMap'
 import ActionMenu from '@/components/Layout/ActionMenu'
 import PropertyList from '@/components/Layout/PropertyList'
 import Title from '@/components/UI/Title'
@@ -62,6 +63,13 @@ const ContactInfo: FC<ContactInfoProps> = ({
 
 				<SideMenu>
 					<ActionMenu descriptors={actions} />
+
+					<AddressMap
+						address={contact.address}
+						height="400px"
+						margin="20px 0 0 0"
+						zoom={15}
+					/>
 				</SideMenu>
 			</Container>
 		</article>

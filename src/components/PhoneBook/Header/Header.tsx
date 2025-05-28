@@ -22,13 +22,13 @@ import Tags from '../Tags'
 import { HoursContainer, Wrapper } from './Header.styled'
 
 const Header: FC<HeaderProps> = ({
+	_id,
 	name,
 	workingHours,
 	specializations,
-	_id,
-	updatedAt,
 	country,
 	city,
+	updatedAt,
 }) => {
 	const { maxMobile } = useResponsive()
 	const navigate = useNavigate()
@@ -55,22 +55,31 @@ const Header: FC<HeaderProps> = ({
 			</Title>
 
 			<HoursContainer>
-				<FaClock color={getColor('yellow`')} size={maxMobile ? 14 : 16} />
-				<Paragraph
-					color="gray"
-					fontSize={maxMobile ? 12 : 16}
-					margin={maxMobile ? '0 15px 0 5px' : '0 20px 0 10px'}
-				>
-					{hours}
-				</Paragraph>
-				<FaLocationDot color={getColor('yellow`')} size={maxMobile ? 14 : 16} />
-				<Paragraph
-					color="gray"
-					fontSize={maxMobile ? 12 : 16}
-					margin={maxMobile ? '0 0 0 5px' : '0 0 0 10px'}
-				>
-					{location}
-				</Paragraph>
+				{workingHours && (
+					<>
+						<FaClock color={getColor('yellow`')} size={maxMobile ? 14 : 16} />
+						<Paragraph
+							color="gray"
+							fontSize={maxMobile ? 12 : 16}
+							margin={maxMobile ? '0 15px 0 5px' : '0 20px 0 10px'}
+						>
+							{hours}
+						</Paragraph>
+					</>
+				)}
+				<>
+					<FaLocationDot
+						color={getColor('yellow`')}
+						size={maxMobile ? 14 : 16}
+					/>
+					<Paragraph
+						color="gray"
+						fontSize={maxMobile ? 12 : 16}
+						margin={maxMobile ? '0 0 0 5px' : '0 0 0 10px'}
+					>
+						{location}
+					</Paragraph>
+				</>
 			</HoursContainer>
 
 			<Tags tags={specializations || []} />

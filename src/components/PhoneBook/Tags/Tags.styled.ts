@@ -22,6 +22,6 @@ export const Item = styled.li`
 	}
 `
 
-export const Label = styled.p`
+export const Label = styled.span`
 	text-transform: uppercase;
 `

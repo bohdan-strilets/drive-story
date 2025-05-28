@@ -28,9 +28,8 @@ export const Item = styled(motion.li)`
 	}
 `
 
-export const Property = styled.p`
+export const Property = styled.div`
 	font-weight: 700;
-
 	min-width: 35%;
 `
 
