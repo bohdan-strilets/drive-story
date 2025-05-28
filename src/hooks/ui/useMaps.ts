@@ -1,11 +1,11 @@
-import { type Libraries, useJsApiLoader } from '@react-google-maps/api'
+import { useJsApiLoader } from '@react-google-maps/api'
 import { useCallback, useEffect, useState } from 'react'
 
-import { GOOGLE_API_KEY } from '@/config/googleConfig'
+import { MAP_LIBRARIES } from '@/config/googleConfig'
 
 import { Params } from '@/types/hooks/useMaps'
 
-const MAP_LIBRARIES: Libraries = ['places', 'marker']
+const VITE_GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY as string
 
 export const useMaps = ({ address }: Params) => {
 	const [map, setMap] = useState<google.maps.Map | null>(null)
@@ -14,7 +14,7 @@ export const useMaps = ({ address }: Params) => {
 	)
 
 	const { isLoaded } = useJsApiLoader({
-		googleMapsApiKey: GOOGLE_API_KEY,
+		googleMapsApiKey: VITE_GOOGLE_API_KEY,
 		libraries: MAP_LIBRARIES,
 	})
 
