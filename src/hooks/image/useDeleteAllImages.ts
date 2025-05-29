@@ -5,6 +5,7 @@ import { removeAll } from '@/api/imageApi'
 import { queryClient } from '@/config/queryClient'
 import {
 	CarKey,
+	ContactKey,
 	InspectionKey,
 	InsuranceKey,
 	UserKey,
@@ -26,6 +27,7 @@ export const useDeleteAllImages = () => {
 				queryClient.invalidateQueries({ queryKey: [CarKey] })
 				queryClient.invalidateQueries({ queryKey: [InsuranceKey, entityId] })
 				queryClient.invalidateQueries({ queryKey: [InspectionKey, entityId] })
+				queryClient.invalidateQueries({ queryKey: [ContactKey, entityId] })
 			}
 		},
 	})

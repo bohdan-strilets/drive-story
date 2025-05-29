@@ -2,11 +2,13 @@ import { FC } from 'react'
 import { FaGlobe, FaPhone } from 'react-icons/fa6'
 import { MdEmail } from 'react-icons/md'
 
+import ImageBox from '@/components/UI/ImageBox'
 import InitialAvatar from '@/components/UI/InitialAvatar'
 import Paragraph from '@/components/UI/Paragraph'
 
 import useResponsive from '@/hooks/ui/useResponsive'
 
+import { isImage } from '@/types/guards/isImage'
 import { ContactCardProps } from '@/types/props/PhoneBook/ContactCardProps'
 
 import { getColor } from '@/styles/helpers/getColor'
@@ -26,13 +28,35 @@ const ContactCard: FC<ContactCardProps> = ({
 	phone,
 	email,
 	website,
+	photos,
 }) => {
 	const { minTablet, minLaptop } = useResponsive()
+
+	const avatar = isImage(photos) && photos.selected
 
 	return (
 		<Wrapper>
 			<NameContainer>
-				{minTablet && <InitialAvatar name={name} />}
+				{minTablet && (
+					<>
+						{avatar ? (
+							<ImageBox
+								imageUrl={avatar}
+								width="30px"
+								height="30px"
+								margin="0 15px 0 0"
+							/>
+						) : (
+							<InitialAvatar
+								name={name}
+								width="30px"
+								height="30px"
+								fontSize={20}
+								margin="0 15px 0 0"
+							/>
+						)}
+					</>
+				)}
 
 				<div>
 					<Paragraph

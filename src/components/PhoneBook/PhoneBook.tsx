@@ -34,6 +34,7 @@ const PhoneBook: FC<PhoneBookProps> = ({ contacts }) => {
 						specializations={contact.specializations}
 						email={contact.email}
 						website={contact.website}
+						photos={contact.photos}
 					/>
 				</Item>
 			))}
