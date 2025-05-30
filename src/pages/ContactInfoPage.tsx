@@ -8,21 +8,26 @@ import ContactForm from '@/components/PhoneBook/ContactForm'
 import ContactInfo from '@/components/PhoneBook/ContactInfo'
 import ErrorState from '@/components/PhoneBook/ErrorState'
 import Loader from '@/components/UI/Loader'
+import Paragraph from '@/components/UI/Paragraph'
 import Uploader from '@/components/Uploader'
 
+import { useDeleteContact } from '@/hooks/contact/useDeleteContact'
 import { useFetchContact } from '@/hooks/contact/useFetchContact'
 import { useGalleryManager } from '@/hooks/ui/useGalleryManager'
 import useModal from '@/hooks/ui/useModal'
+import useSubmit from '@/hooks/ui/useSubmit'
 
 import { modalNames } from '@/config/modalConfig'
+import { routes } from '@/config/routes'
 
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
+import { Contact } from '@/types/types/Contact'
 
 const ContactInfoPage: FC = () => {
 	const { contactId } = useParams()
-	const { checkQueryParam } = useModal()
+	const { checkQueryParam, onClose } = useModal()
 
 	const { data: contact, isLoading, isError } = useFetchContact(contactId)
 
@@ -36,6 +41,15 @@ const ContactInfoPage: FC = () => {
 	} = useGalleryManager({
 		entityType: EntityType.CONTACTS,
 		entityId: contactId,
+	})
+
+	const { mutateAsync: deleteContact, isPending: isDeleteContact } =
+		useDeleteContact()
+
+	const deleteAndNavigate = useSubmit<Contact | null, string | undefined>({
+		callback: deleteContact,
+		navigateTo: routes.PHONE_BOOK,
+		successMessage: 'The contact has been successfully deleted',
 	})
 
 	if (isLoading) return <Loader color="gray" />
@@ -71,6 +85,23 @@ const ContactInfoPage: FC = () => {
 				{checkQueryParam(modalNames.EDIT_CONTACT) && (
 					<Modal key={modalNames.EDIT_CONTACT} title="Edit contact information">
 						<ContactForm mode="edit" contact={contact} />
+					</Modal>
+				)}
+
+				{checkQueryParam(modalNames.DELETE_CONTACT) && (
+					<Modal
+						key={modalNames.DELETE_CONTACT}
+						title="Delete insurance policy?"
+						isDialog={true}
+						isLoading={isDeleteContact}
+						negativeBtnLabel="no"
+						positiveBtnLabel="yes"
+						negativeCallback={onClose}
+						positiveCallback={() => deleteAndNavigate(contact?._id)}
+					>
+						<Paragraph color="black" margin="0 0 15px 0">
+							Are you sure you want to delete this contact from your phone book?
+						</Paragraph>
 					</Modal>
 				)}
 			</AnimatePresence>

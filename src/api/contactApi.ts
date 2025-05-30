@@ -37,7 +37,7 @@ export const update = async ({
 }
 
 export const remove = async (
-	contactId: string
+	contactId?: string
 ): Promise<ApiResponse<Contact | null>> => {
 	try {
 		const path = `${ENDPOINT}/delete/${contactId}`
