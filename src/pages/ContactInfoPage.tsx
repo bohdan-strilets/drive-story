@@ -13,6 +13,7 @@ import Uploader from '@/components/Uploader'
 
 import { useDeleteContact } from '@/hooks/contact/useDeleteContact'
 import { useFetchContact } from '@/hooks/contact/useFetchContact'
+import { useDeleteAllImages } from '@/hooks/image/useDeleteAllImages'
 import { useGalleryManager } from '@/hooks/ui/useGalleryManager'
 import useModal from '@/hooks/ui/useModal'
 import useSubmit from '@/hooks/ui/useSubmit'
@@ -23,7 +24,10 @@ import { routes } from '@/config/routes'
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
+import { isImage } from '@/types/guards/isImage'
+import { DeleteImagesParams } from '@/types/params/DeleteImagesParams'
 import { Contact } from '@/types/types/Contact'
+import { Image } from '@/types/types/Image'
 
 const ContactInfoPage: FC = () => {
 	const { contactId } = useParams()
@@ -50,6 +54,24 @@ const ContactInfoPage: FC = () => {
 		callback: deleteContact,
 		navigateTo: routes.PHONE_BOOK,
 		successMessage: 'The contact has been successfully deleted',
+	})
+
+	const { mutateAsync: deleteAllImages, isPending: isDeleteallImages } =
+		useDeleteAllImages()
+
+	const imageId =
+		contact && isImage(contact.photos) ? contact.photos._id : undefined
+
+	const deleteImagesParams: DeleteImagesParams = {
+		entityId: contactId,
+		imageId,
+		entityType: EntityType.INSURANCE,
+	}
+
+	const clearGallery = useSubmit<Image | null, DeleteImagesParams>({
+		callback: deleteAllImages,
+		isCloseModal: true,
+		successMessage: 'All photos were successfully deleted',
 	})
 
 	if (isLoading) return <Loader color="gray" />
@@ -101,6 +123,24 @@ const ContactInfoPage: FC = () => {
 					>
 						<Paragraph color="black" margin="0 0 15px 0">
 							Are you sure you want to delete this contact from your phone book?
+						</Paragraph>
+					</Modal>
+				)}
+
+				{checkQueryParam(modalNames.CLEAR_CONTACT_GALLERY) && (
+					<Modal
+						key={modalNames.CLEAR_CONTACT_GALLERY}
+						title="Clear gallery?"
+						isDialog={true}
+						isLoading={isDeleteallImages}
+						negativeBtnLabel="no"
+						positiveBtnLabel="yes"
+						negativeCallback={onClose}
+						positiveCallback={() => clearGallery(deleteImagesParams)}
+					>
+						<Paragraph color="black" margin="0 0 15px 0">
+							After confirmation, all images from the gallery will be deleted
+							for this item. Do you want to continue?
 						</Paragraph>
 					</Modal>
 				)}
