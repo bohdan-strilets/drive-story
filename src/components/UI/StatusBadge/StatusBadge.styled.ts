@@ -11,7 +11,6 @@ export const Status = styled.div<StatusProps>`
 
 	border-radius: 50%;
 
-	box-shadow: var(--box-shadow);
 	background: ${({ status }) =>
 		status ? `${getColor('green')}` : `${getColor('red')}`};
 
