@@ -42,16 +42,16 @@ const ContactCard: FC<ContactCardProps> = ({
 						{avatar ? (
 							<ImageBox
 								imageUrl={avatar}
-								width="30px"
-								height="30px"
+								width="65px"
+								height="65px"
 								margin="0 15px 0 0"
 							/>
 						) : (
 							<InitialAvatar
 								name={name}
-								width="30px"
-								height="30px"
-								fontSize={20}
+								width="65px"
+								height="65px"
+								fontSize={44}
 								margin="0 15px 0 0"
 							/>
 						)}
