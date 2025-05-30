@@ -52,7 +52,18 @@ const ContactForm: FC<ContactFormProps> = ({ mode, contact }) => {
 	useEffect(() => {
 		if (contact) {
 			const params = { stripUnknown: true }
-			const initialValues = Schema.cast(contact, params) as Fields
+			const open = contact.workingHours?.[0]
+			const close = contact.workingHours?.[1]
+
+			const initialValues = Schema.cast(
+				{
+					...contact,
+					specializations: null,
+					workingHours: { open, close },
+				},
+				params
+			) as Fields
+
 			methods.reset(initialValues)
 		}
 	}, [contact, methods])
@@ -113,7 +124,10 @@ const ContactForm: FC<ContactFormProps> = ({ mode, contact }) => {
 
 			<form onSubmit={methods.handleSubmit(onSubmit)}>
 				{step === 1 && (
-					<ContactFields getSpecializations={getSpecializations} />
+					<ContactFields
+						getSpecializations={getSpecializations}
+						initialSpecialization={contact?.specializations}
+					/>
 				)}
 				{step === 2 && <AddressFields />}
 

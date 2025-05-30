@@ -18,7 +18,10 @@ import Tags from '../../Tags'
 
 import { Group } from './ContactFields.styled'
 
-const ContactFields: FC<ContactFieldsProps> = ({ getSpecializations }) => {
+const ContactFields: FC<ContactFieldsProps> = ({
+	getSpecializations,
+	initialSpecialization,
+}) => {
 	const [specializations, setSpecializations] = useState<string[]>([])
 
 	const { control, getValues, resetField } = useFormContext<Fields>()
@@ -26,7 +29,7 @@ const ContactFields: FC<ContactFieldsProps> = ({ getSpecializations }) => {
 	const hours = generateHoursArr()
 	const hoursOptions = generateDropdownOptions(hours)
 
-	const addSpecialization = () => {
+	const addItem = () => {
 		const value = getValues('specializations')
 		if (typeof value === 'string') {
 			setSpecializations((state) => [...state, value])
@@ -34,9 +37,18 @@ const ContactFields: FC<ContactFieldsProps> = ({ getSpecializations }) => {
 		}
 	}
 
+	const deleteLastItem = () => {
+		const updatedSpecializations = specializations.slice(0, -1)
+		setSpecializations(updatedSpecializations)
+	}
+
 	useEffect(() => {
 		getSpecializations(specializations)
 	}, [getSpecializations, specializations])
+
+	useEffect(() => {
+		setSpecializations(initialSpecialization ? initialSpecialization : [])
+	}, [initialSpecialization])
 
 	return (
 		<>
@@ -110,7 +122,9 @@ const ContactFields: FC<ContactFieldsProps> = ({ getSpecializations }) => {
 				/>
 			</Group>
 			<p>Areas of expertise</p>
-			{specializations.length > 0 && <Tags tags={specializations} />}
+			{specializations.length > 0 && (
+				<Tags tags={specializations} mode="edit" deleteTag={deleteLastItem} />
+			)}
 			<Group>
 				<TextInput
 					control={control}
@@ -121,7 +135,7 @@ const ContactFields: FC<ContactFieldsProps> = ({ getSpecializations }) => {
 				<Button
 					type="button"
 					width="29%"
-					onClick={addSpecialization}
+					onClick={addItem}
 					color="black"
 					background="yellow"
 					hoverColor="white"

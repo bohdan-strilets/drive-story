@@ -81,7 +81,8 @@ export const Schema = yup.object().shape({
 		.string()
 		.min(specializations.min, specializations.message)
 		.max(specializations.max, specializations.message)
-		.optional(),
+		.optional()
+		.nullable(),
 })
 
 export type Fields = yup.InferType<typeof Schema>

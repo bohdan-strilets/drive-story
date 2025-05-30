@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import ImageViewer from '@/components/Gallery/ImageViewer'
 import Modal from '@/components/Modal'
+import ContactForm from '@/components/PhoneBook/ContactForm'
 import ContactInfo from '@/components/PhoneBook/ContactInfo'
 import ErrorState from '@/components/PhoneBook/ErrorState'
 import Loader from '@/components/UI/Loader'
@@ -65,6 +66,12 @@ const ContactInfoPage: FC = () => {
 
 				{showImageViewer && (
 					<ImageViewer imageUrl={currentImage} closeViewer={closeImageViewer} />
+				)}
+
+				{checkQueryParam(modalNames.EDIT_CONTACT) && (
+					<Modal key={modalNames.EDIT_CONTACT} title="Edit contact information">
+						<ContactForm mode="edit" contact={contact} />
+					</Modal>
 				)}
 			</AnimatePresence>
 		</>
