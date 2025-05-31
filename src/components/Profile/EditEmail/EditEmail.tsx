@@ -69,7 +69,7 @@ const EditEmail: FC<EditEmailProps> = ({ email }) => {
 					type="submit"
 					disabled={isPending}
 				>
-					{isPending ? '...' : 'Edit'}
+					{isPending ? '...' : 'Filter'}
 				</Button>
 			</form>
 		</>

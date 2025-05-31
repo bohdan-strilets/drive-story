@@ -29,6 +29,7 @@ export type TextInputProps<
 	mask?: string
 	unmask?: boolean
 	isShowCharCounter?: boolean
+	onChange?: React.ChangeEventHandler<HTMLInputElement>
 }
 
 export type WrapperProps = Pick<TextInputProps, 'margin' | 'width'>

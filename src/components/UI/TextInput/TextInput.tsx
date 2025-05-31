@@ -34,6 +34,7 @@ const TextInput = <
 	mask,
 	unmask,
 	isShowCharCounter = false,
+	onChange,
 }: TextInputProps<TFieldValues, TName>) => {
 	const {
 		field,
@@ -51,10 +52,13 @@ const TextInput = <
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		let newValue = e.target.value
+
 		if (type === 'tel') {
 			newValue = formatPhoneNumber(newValue)
 		}
+
 		field.onChange(newValue)
+		if (onChange) onChange(e)
 	}
 
 	return (
