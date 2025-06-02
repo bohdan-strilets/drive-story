@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'motion/react'
-import { FC, useCallback, useState } from 'react'
+import { FC, useState } from 'react'
 import { BiSolidContact } from 'react-icons/bi'
 
 import Modal from '@/components/Modal'
@@ -22,23 +22,13 @@ const PhoneBookPage: FC = () => {
 
 	const { onOpen, checkQueryParam } = useModal()
 
-	const getQuery = useCallback((query: string) => {
-		setQuery(query)
-	}, [])
-
 	const limit = 10
 	const paginationParams: PaginationParams = { limit, page, searchQuery: query }
 
 	const { isLoading, data } = useFilterContacts(paginationParams)
-	const contacts = data?.data ?? []
 
-	const paginationMeta = data?.meta ?? {
-		totalItems: 0,
-		itemsPerPage: limit,
-		itemCount: 0,
-		totalPages: 1,
-		currentPage: page,
-	}
+	const contacts = data?.data ?? []
+	const paginationMeta = data?.meta
 
 	return (
 		<>
@@ -52,11 +42,11 @@ const PhoneBookPage: FC = () => {
 				margin="0 0 10px 0"
 			/>
 
-			{data?.meta.totalItems !== 0 && <ContactsFilter getQuery={getQuery} />}
+			<ContactsFilter getQuery={setQuery} />
 
-			{isLoading ? (
-				<Loader color="gray" />
-			) : (
+			{isLoading && <Loader color="gray" />}
+
+			{!isLoading && (
 				<PhoneBook
 					contacts={contacts}
 					paginationMeta={paginationMeta}

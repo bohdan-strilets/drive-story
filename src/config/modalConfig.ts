@@ -22,6 +22,7 @@ export const modalNames = {
 	DELETE_INSURANCE: 'delete-insurance',
 	UPLOAD_INSURANCE_PHOTO: 'upload-insurance-photo',
 	CLEAR_INSURANCE_GALLERY: 'clear-insurance-gallery',
+	BIND_INSURANCE_CONTACT: 'bind-insurance-contact',
 	ADD_INSPECTION: 'add-inspection',
 	EDIT_INSPECTION: 'edit-inspection',
 	DELETE_INSPECTION: 'delete-inspection',

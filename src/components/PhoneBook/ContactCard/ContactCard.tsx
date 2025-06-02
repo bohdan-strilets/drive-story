@@ -51,7 +51,7 @@ const ContactCard: FC<ContactCardProps> = ({
 								name={name}
 								width="65px"
 								height="65px"
-								fontSize={44}
+								fontSize={28}
 								margin="0 15px 0 0"
 							/>
 						)}
@@ -61,7 +61,7 @@ const ContactCard: FC<ContactCardProps> = ({
 				<div>
 					<Paragraph
 						color="gray"
-						fontSize={minLaptop ? 24 : 16}
+						fontSize={minLaptop ? 18 : 16}
 						fontWeight={700}
 					>
 						{name}

@@ -3,6 +3,7 @@ import apiClient from '@/config/axiosConfig'
 import { handleApiError } from '@/utils/handleApiError'
 
 import { AddInsuranceParams } from '@/types/params/AddInsuranceParams'
+import { BindContactParams } from '@/types/params/BindContactParams'
 import { InsurancePathParams } from '@/types/params/InsurancePathParams'
 import { ListInsuranceParams } from '@/types/params/ListInsuranceParams'
 import { UpdateInsuranceParams } from '@/types/params/UpdateInsuranceParams'
@@ -90,6 +91,21 @@ export const getAll = async ({
 		const { page, limit } = pagination
 		const params = { page, limit }
 		const { data } = await apiClient.get(path, { params })
+		return data
+	} catch (error) {
+		return handleApiError(error)
+	}
+}
+
+export const bindContact = async ({
+	carId,
+	entityId,
+	contactId,
+}: BindContactParams): Promise<ApiResponse<Insurance | null>> => {
+	try {
+		const path = `${ENDPOINT}/bind-contact/${carId}/${entityId}`
+		const params = { contactId }
+		const { data } = await apiClient.put(path, null, { params })
 		return data
 	} catch (error) {
 		return handleApiError(error)

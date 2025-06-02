@@ -1,8 +1,8 @@
 import { PaginationMeta } from '../types/PaginationMeta'
 
 export type Params = {
-	meta: PaginationMeta
 	onPageChange: (page: number) => void
+	meta?: PaginationMeta
 }
 
 export type Result = {

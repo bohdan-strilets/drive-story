@@ -35,7 +35,7 @@ export const getInsuranceActions = ({
 		key: 'bind-contact',
 		label: 'Bind contact',
 		icon: <MdContactEmergency size={20} />,
-		callback: () => {},
+		callback: () => onOpen(modalNames.BIND_INSURANCE_CONTACT),
 	},
 	{
 		key: 'delete-insurance',

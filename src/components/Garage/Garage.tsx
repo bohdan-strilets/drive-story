@@ -49,6 +49,7 @@ const Garage: FC<GarageProps> = ({ cars, paginationMeta, setPage }) => {
 					</Item>
 				))}
 			</List>
+
 			{totalPages > 1 && (
 				<Pagination
 					goToPage={goToPage}

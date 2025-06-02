@@ -26,15 +26,9 @@ const GaragePage: FC = () => {
 	const paginationParams: PaginationParams = { limit, page }
 
 	const { isLoading, data } = useFetchCars(paginationParams)
-	const cars = data?.data ?? []
 
-	const paginationMeta = data?.meta ?? {
-		totalItems: 0,
-		itemsPerPage: limit,
-		itemCount: 0,
-		totalPages: 1,
-		currentPage: page,
-	}
+	const cars = data?.data ?? []
+	const paginationMeta = data?.meta
 
 	if (isLoading) return <Loader color="gray" />
 

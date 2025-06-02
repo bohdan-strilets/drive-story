@@ -8,12 +8,14 @@ import InsuranceForm from '@/components/Insurance/InsuranceForm'
 import InsuranceInfo from '@/components/Insurance/InsuranceInfo'
 import NoInsuranceState from '@/components/Insurance/NoInsuranceState'
 import Modal from '@/components/Modal'
+import BindContact from '@/components/PhoneBook/BindContact'
 import ButtonGoBack from '@/components/UI/ButtonGoBack'
 import Loader from '@/components/UI/Loader'
 import Paragraph from '@/components/UI/Paragraph'
 import Uploader from '@/components/Uploader'
 
 import { useDeleteAllImages } from '@/hooks/image/useDeleteAllImages'
+import { useBindContact } from '@/hooks/insurance/useBindContact'
 import { useDeleteInsurance } from '@/hooks/insurance/useDeleteInsurance'
 import { useFetchInsurance } from '@/hooks/insurance/useFetchInsurance'
 import { useGalleryManager } from '@/hooks/ui/useGalleryManager'
@@ -27,6 +29,7 @@ import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
 import { isImage } from '@/types/guards/isImage'
+import { BindContactParams } from '@/types/params/BindContactParams'
 import { DeleteImagesParams } from '@/types/params/DeleteImagesParams'
 import { InsurancePathParams } from '@/types/params/InsurancePathParams'
 import { Image } from '@/types/types/Image'
@@ -87,6 +90,14 @@ const InsurancePage: FC = () => {
 	} = useGalleryManager({
 		entityType: EntityType.INSURANCE,
 		entityId: insuranceId,
+	})
+
+	const { mutateAsync: bindContact, isPending: isBinding } = useBindContact()
+
+	const submitBindContact = useSubmit<Insurance | null, BindContactParams>({
+		callback: bindContact,
+		isCloseModal: true,
+		successMessage: 'Contact bound successfully',
 	})
 
 	if (isFetching) return <Loader color="gray" />
@@ -172,6 +183,15 @@ const InsurancePage: FC = () => {
 							After confirmation, all images from the gallery will be deleted
 							for this item. Do you want to continue?
 						</Paragraph>
+					</Modal>
+				)}
+
+				{checkQueryParam(modalNames.BIND_INSURANCE_CONTACT) && (
+					<Modal key={modalNames.BIND_INSURANCE_CONTACT} title="Bind contact">
+						<BindContact<Insurance>
+							isBinding={isBinding}
+							bindContact={submitBindContact}
+						/>
 					</Modal>
 				)}
 			</AnimatePresence>

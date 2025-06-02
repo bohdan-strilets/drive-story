@@ -3,6 +3,6 @@ import { PaginationMeta } from '@/types/types/PaginationMeta'
 
 export type PhoneBookProps = {
 	contacts: Contact[]
-	paginationMeta: PaginationMeta
+	paginationMeta?: PaginationMeta
 	setPage: React.Dispatch<React.SetStateAction<number>>
 }

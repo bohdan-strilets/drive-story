@@ -3,6 +3,6 @@ import { PaginationMeta } from '@/types/types/PaginationMeta'
 
 export type GarageProps = {
 	cars: CarEntity[]
-	paginationMeta: PaginationMeta
+	paginationMeta?: PaginationMeta
 	setPage: React.Dispatch<React.SetStateAction<number>>
 }
