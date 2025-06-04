@@ -23,10 +23,10 @@ import useSubmit from '@/hooks/ui/useSubmit'
 import { modalNames } from '@/config/modalConfig'
 import { routes } from '@/config/routes'
 
+import { getImageId } from '@/utils/getImageId'
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
-import { isImage } from '@/types/guards/isImage'
 import { DeleteImagesParams } from '@/types/params/DeleteImagesParams'
 import { Image } from '@/types/types/Image'
 import { Inspection } from '@/types/types/Inspection'
@@ -62,8 +62,7 @@ const InspectionPage: FC = () => {
 		successMessage: 'All photos were successfully deleted',
 	})
 
-	const imageId =
-		inspection && isImage(inspection.photos) ? inspection.photos._id : undefined
+	const imageId = getImageId<Inspection>(inspection)
 
 	const deleteImagesParams: DeleteImagesParams = {
 		entityId: inspectionId,

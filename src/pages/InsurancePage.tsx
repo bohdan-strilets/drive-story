@@ -25,10 +25,10 @@ import useSubmit from '@/hooks/ui/useSubmit'
 import { modalNames } from '@/config/modalConfig'
 import { routes } from '@/config/routes'
 
+import { getImageId } from '@/utils/getImageId'
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
-import { isImage } from '@/types/guards/isImage'
 import { BindContactParams } from '@/types/params/BindContactParams'
 import { DeleteImagesParams } from '@/types/params/DeleteImagesParams'
 import { Image } from '@/types/types/Image'
@@ -59,8 +59,7 @@ const InsurancePage: FC = () => {
 	const { mutateAsync: deleteAllImages, isPending: isDeleteallImages } =
 		useDeleteAllImages()
 
-	const imageId =
-		insurance && isImage(insurance.photos) ? insurance.photos._id : undefined
+	const imageId = getImageId<Insurance>(insurance)
 
 	const deleteImagesParams: DeleteImagesParams = {
 		entityId: insuranceId,

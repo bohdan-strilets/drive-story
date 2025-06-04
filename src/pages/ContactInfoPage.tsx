@@ -21,10 +21,10 @@ import useSubmit from '@/hooks/ui/useSubmit'
 import { modalNames } from '@/config/modalConfig'
 import { routes } from '@/config/routes'
 
+import { getImageId } from '@/utils/getImageId'
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
-import { isImage } from '@/types/guards/isImage'
 import { DeleteImagesParams } from '@/types/params/DeleteImagesParams'
 import { Contact } from '@/types/types/Contact'
 import { Image } from '@/types/types/Image'
@@ -59,8 +59,7 @@ const ContactInfoPage: FC = () => {
 	const { mutateAsync: deleteAllImages, isPending: isDeleteallImages } =
 		useDeleteAllImages()
 
-	const imageId =
-		contact && isImage(contact.photos) ? contact.photos._id : undefined
+	const imageId = getImageId<Contact>(contact)
 
 	const deleteImagesParams: DeleteImagesParams = {
 		entityId: contactId,
