@@ -59,14 +59,14 @@ const MaintenanceAlerts: FC<MaintenanceAlertsProps> = ({
 		<List>
 			<Item
 				isDatePassed={insuranceWithinThreshold}
-				hasEntity={!!insurance}
+				hasEntity={!!insurance?.insuranceId}
 				onClick={() => navigate(insurancePath)}
 				{...fadeIn()}
 			>
 				<p>Insurance policy</p>
 				<IoDocumentText size={maxMobile ? 32 : 54} />
 				<p>
-					{insurance
+					{insurance?.insuranceId
 						? `Ends: ${parsedDateToString(insurance.insuranceEnds)}`
 						: 'Date not specified'}
 				</p>
@@ -74,14 +74,14 @@ const MaintenanceAlerts: FC<MaintenanceAlertsProps> = ({
 
 			<Item
 				isDatePassed={inspectionWithinThreshold}
-				hasEntity={!!inspection}
+				hasEntity={!!inspection?.inspectionId}
 				onClick={() => navigate(inspectionPath)}
 				{...fadeIn()}
 			>
 				<p>Technical inspection</p>
 				<MdMiscellaneousServices size={maxMobile ? 32 : 54} />
 				<p>
-					{inspection
+					{inspection?.inspectionId
 						? `Ends: ${parsedDateToString(inspection.inspectionEnds)}`
 						: 'Date not specified'}
 				</p>
@@ -89,13 +89,13 @@ const MaintenanceAlerts: FC<MaintenanceAlertsProps> = ({
 
 			<Item
 				isDatePassed={oilServiceWithinThreshold}
-				hasEntity={!!oilService}
+				hasEntity={!!oilService?.inspectionId}
 				{...fadeIn()}
 			>
 				<p>Oil service</p>
 				<FaOilCan size={maxMobile ? 32 : 54} />
 				<p>
-					{oilService
+					{oilService?.inspectionId
 						? `Ends: ${parsedDateToString(oilService.nextService)}`
 						: 'Date not specified'}
 				</p>
