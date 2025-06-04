@@ -114,10 +114,12 @@ const InsurancePage: FC = () => {
 
 			{!insurance && <NoInsuranceState />}
 			{insurance && (
-				<InsuranceInfo
+				<InsuranceInfo<Insurance>
 					insurance={insurance}
 					imageActions={imageActions}
 					isActionLoading={isImageLoading}
+					isBinding={isBinding}
+					bindContact={submitBindContact}
 				/>
 			)}
 

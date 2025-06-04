@@ -1,14 +1,14 @@
-import { Action } from '@/types/hooks/useGalleryManager'
 import { BindContactParams } from '@/types/params/BindContactParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
-import { Insurance } from '@/types/types/Insurance'
+import { Contact } from '@/types/types/Contact'
 
-export type InsuranceInfoProps<T> = {
-	imageActions: Action[]
-	isActionLoading: boolean
-	insurance: Insurance
+export type ContactWidgetProps<T> = {
+	contact?: Contact
+	margin?: string
 	isBinding: boolean
 	bindContact: (
 		params: BindContactParams
 	) => Promise<ApiResponse<T | null> | undefined>
 }
+
+export type WrapperProps<T> = Pick<ContactWidgetProps<T>, 'margin'>

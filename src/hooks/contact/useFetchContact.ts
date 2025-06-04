@@ -7,7 +7,7 @@ import { ContactKey } from '@/config/queryKeys'
 import { Contact } from '@/types/types/Contact'
 
 export const useFetchContact = (
-	contactId?: string
+	contactId?: string | null
 ): UseQueryResult<Contact | undefined, unknown> => {
 	return useQuery({
 		queryKey: [ContactKey, contactId],

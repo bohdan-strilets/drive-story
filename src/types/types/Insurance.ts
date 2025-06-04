@@ -1,6 +1,7 @@
 import { InsuranceType } from '../enums/InsuranceType'
 import { NumberRates } from '../enums/NumberRates'
 
+import { Contact } from './Contact'
 import { Image } from './Image'
 
 export type PaymentStatus = {
@@ -15,7 +16,7 @@ export type PaymentStatus = {
 export type Insurance = {
 	_id: string
 	owner: string
-	contactId?: string | null
+	contactId: string | null | Contact
 	carId: string
 	insurerName: string
 	policyNumber: string

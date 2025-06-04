@@ -1,7 +1,8 @@
-import { FC, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 import ActionMenu from '@/components/Layout/ActionMenu'
 import PropertyList from '@/components/Layout/PropertyList'
+import ContactWidget from '@/components/PhoneBook/ContactWidget'
 import DecorativeLine from '@/components/UI/DecorativeLine'
 import Title from '@/components/UI/Title'
 
@@ -14,6 +15,7 @@ import { getInsuranceActions } from '@/descriptors/actions/getInsuranceActions'
 import { insuranceField } from '@/descriptors/fields/insuranceField'
 import { insurancePayment } from '@/descriptors/fields/insurancePayment'
 
+import { isContact } from '@/types/guards/isContact'
 import { UpdatePaidStatusParams } from '@/types/params/UpdatePaidStatusParams'
 import { InsuranceInfoProps } from '@/types/props/Insurance/InsuranceInfoProps'
 
@@ -24,16 +26,21 @@ import Timer from '../Timer'
 
 import { Container, InformationWrapper, SideMenu } from './InsuranceInfo.styled'
 
-const InsuranceInfo: FC<InsuranceInfoProps> = ({
+const InsuranceInfo = <T,>({
 	insurance,
 	imageActions,
 	isActionLoading,
-}) => {
+	isBinding,
+	bindContact,
+}: InsuranceInfoProps<T>) => {
 	const { onOpen } = useModal()
 	const { maxMobile } = useResponsive()
 
 	const photos = insurance?.photos
 	const actions = getInsuranceActions({ onOpen })
+	const contact = isContact(insurance.contactId)
+		? insurance.contactId
+		: undefined
 
 	const payments = useGeneratePayments({
 		startDate: new Date(insurance.startDate),
@@ -112,6 +119,12 @@ const InsuranceInfo: FC<InsuranceInfoProps> = ({
 						{insurance.insuranceType}
 					</Title>
 					<ActionMenu descriptors={actions} />
+					<ContactWidget<T>
+						bindContact={bindContact}
+						isBinding={isBinding}
+						contact={contact}
+						margin="15px 0 0 0"
+					/>
 				</SideMenu>
 			</Container>
 		</article>

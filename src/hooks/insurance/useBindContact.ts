@@ -12,7 +12,7 @@ import { Insurance } from '@/types/types/Insurance'
 export const useBindContact = () => {
 	return useMutation<ApiResponse<Insurance | null>, unknown, BindContactParams>(
 		{
-			mutationFn: (payload) => bindContact(payload),
+			mutationFn: (params) => bindContact(params),
 			onSuccess: (response) => {
 				if (response.success) {
 					queryClient.invalidateQueries({ queryKey: [InsuranceKey] })
