@@ -15,6 +15,8 @@ import { carOwnership } from '@/descriptors/fields/carOwnership'
 import { carRegistration } from '@/descriptors/fields/carRegistration'
 import { carSpecs } from '@/descriptors/fields/carSpecs'
 
+import { useUserStore } from '@/store/useUserStore'
+
 import { defaultImages } from '@/utils/defaultImages'
 
 import { CarInformationProps } from '@/types/props/Garage/CarInformationProps'
@@ -36,15 +38,17 @@ const CarInformation: FC<CarInformationProps> = ({
 	isActionLoading,
 }) => {
 	const { maxMobile } = useResponsive()
-
 	const { onOpen } = useModal()
 	const navigate = useNavigate()
+
+	const user = useUserStore((state) => state.user)
 
 	const photos = car.photos
 	const carPoster = useGetImage({
 		image: photos,
 		defaultImage: defaultImages.poster,
 	})
+	const isCurrentCar = user?.currentCar === car._id
 
 	const actions = getCarActions({
 		onOpen,
@@ -63,6 +67,7 @@ const CarInformation: FC<CarInformationProps> = ({
 				carId={car._id}
 				updatedDate={car.updatedAt}
 				description={car.description}
+				isCurrentCar={isCurrentCar}
 			/>
 
 			<MaintenanceAlerts

@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import Badge from '@/components/UI/Badge'
 import ButtonGoBack from '@/components/UI/ButtonGoBack'
 import DecorativeLine from '@/components/UI/DecorativeLine'
 import ImageBox from '@/components/UI/ImageBox'
@@ -22,6 +23,7 @@ const Header: FC<HeaderProps> = ({
 	carId,
 	updatedDate,
 	description,
+	isCurrentCar,
 }) => {
 	const { maxMobile } = useResponsive()
 	const navigate = useNavigate()
@@ -42,6 +44,7 @@ const Header: FC<HeaderProps> = ({
 				isShadow={true}
 				gradient="var(--black-transparent-gradient)"
 			>
+				{isCurrentCar && <Badge label={'Current car'} />}
 				<Title
 					fontSize={maxMobile ? 20 : 44}
 					textAlign={'left'}

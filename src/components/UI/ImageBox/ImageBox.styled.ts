@@ -7,6 +7,8 @@ import { getColor } from '@/styles/helpers/getColor'
 import { flexCenterDirection } from '@/styles/mixins/flexCenterDirection'
 
 export const Image = styled(motion.div)<ImageProps>`
+	position: relative;
+
 	${flexCenterDirection('column')}
 	justify-content: start;
 	align-items: start;
