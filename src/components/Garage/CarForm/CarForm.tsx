@@ -16,7 +16,7 @@ import useSubmit from '@/hooks/ui/useSubmit'
 import { useWizard } from '@/hooks/ui/useWizard'
 
 import { CarDetailsDto } from '@/types/dto/CarDetailsDto'
-import { UpdateCarParams } from '@/types/params/UpdateCarParams'
+import { UpdateParams } from '@/types/params/UpdateParams'
 import { CarFormProps } from '@/types/props/Garage/CarFormProps'
 import { CarEntity } from '@/types/types/CarEntity'
 
@@ -74,7 +74,10 @@ const CarForm: FC<CarFormProps> = ({ mode, car }) => {
 	const { mutateAsync: createCar, isPending: isCreating } = useCreateCar()
 	const isLoading = isUpdating || isCreating
 
-	const submitUpdateCar = useSubmit<CarEntity | null, UpdateCarParams>({
+	const submitUpdateCar = useSubmit<
+		CarEntity | null,
+		UpdateParams<CarDetailsDto>
+	>({
 		callback: updateCar,
 		successMessage: 'The car has been successfully updated',
 		isCloseModal: true,
@@ -93,7 +96,10 @@ const CarForm: FC<CarFormProps> = ({ mode, car }) => {
 			return submitCreateCar(payload)
 		}
 
-		const updateCarParams: UpdateCarParams = { payload, carId: car?._id }
+		const updateCarParams: UpdateParams<CarDetailsDto> = {
+			payload,
+			entityId: car?._id,
+		}
 		return submitUpdateCar(updateCarParams)
 	}
 

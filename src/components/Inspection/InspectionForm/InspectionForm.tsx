@@ -15,8 +15,8 @@ import useSubmit from '@/hooks/ui/useSubmit'
 import { routes } from '@/config/routes'
 
 import { InspectionDto } from '@/types/dto/InspectionDto'
-import { AddInspectionParams } from '@/types/params/AddInspectionParams'
-import { UpdateInspectionParams } from '@/types/params/UpdateInspectionParams'
+import { AddParams } from '@/types/params/AddParams'
+import { UpdateParams } from '@/types/params/UpdateParams'
 import { InspectionFormProps } from '@/types/props/Inspection/InspectionFormProps'
 import { Inspection } from '@/types/types/Inspection'
 
@@ -52,7 +52,7 @@ const InspectionForm: FC<InspectionFormProps> = ({
 
 	const submitUpdateInspection = useSubmit<
 		Inspection | null,
-		UpdateInspectionParams
+		UpdateParams<InspectionDto>
 	>({
 		callback: updateInspection,
 		successMessage: 'The inspection has been successfully updated',
@@ -61,7 +61,7 @@ const InspectionForm: FC<InspectionFormProps> = ({
 
 	const submitCreateInspection = useSubmit<
 		Inspection | null,
-		AddInspectionParams
+		AddParams<InspectionDto>
 	>({
 		callback: createInsspection,
 		successMessage: 'The inspection has been successfully created',
@@ -72,7 +72,7 @@ const InspectionForm: FC<InspectionFormProps> = ({
 		const payload: InspectionDto = data
 
 		if (mode === 'create') {
-			const addInspectionParams: AddInspectionParams = { payload, carId }
+			const addInspectionParams: AddParams<InspectionDto> = { payload, carId }
 			const response = await submitCreateInspection(addInspectionParams)
 
 			const path = generatePath(routes.INSPECTION_BY_ID, {
@@ -83,10 +83,9 @@ const InspectionForm: FC<InspectionFormProps> = ({
 			return navigate(path)
 		}
 
-		const updateInspectionParams: UpdateInspectionParams = {
+		const updateInspectionParams: UpdateParams<InspectionDto> = {
 			payload,
-			carId,
-			inspectionId: inspection!._id,
+			entityId: inspection!._id,
 		}
 
 		return await submitUpdateInspection(updateInspectionParams)

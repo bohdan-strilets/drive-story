@@ -11,12 +11,12 @@ import {
 	UserKey,
 } from '@/config/queryKeys'
 
-import { DeleteImageParams } from '@/types/params/DeleteImageParams'
+import { PublicIdImageParams } from '@/types/params/PublicIdImageParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Image } from '@/types/types/Image'
 
 export const useDeleteImage = () => {
-	return useMutation<ApiResponse<Image | null>, unknown, DeleteImageParams>({
+	return useMutation<ApiResponse<Image | null>, unknown, PublicIdImageParams>({
 		mutationFn: ({ entityId, entityType, publicId }) =>
 			remove({ entityId, entityType, publicId }),
 

@@ -31,7 +31,6 @@ import { EntityType } from '@/types/enums/EntityType'
 import { isImage } from '@/types/guards/isImage'
 import { BindContactParams } from '@/types/params/BindContactParams'
 import { DeleteImagesParams } from '@/types/params/DeleteImagesParams'
-import { InsurancePathParams } from '@/types/params/InsurancePathParams'
 import { Image } from '@/types/types/Image'
 import { Insurance } from '@/types/types/Insurance'
 
@@ -40,7 +39,7 @@ const InsurancePage: FC = () => {
 	const { carId, insuranceId } = useParams()
 
 	const navigate = useNavigate()
-	const path = generatePath(routes.CAR_BY_ID, { carId: carId! })
+	const carByIdPath = generatePath(routes.CAR_BY_ID, { carId: carId! })
 
 	const {
 		data: insurance,
@@ -51,14 +50,9 @@ const InsurancePage: FC = () => {
 	const { mutateAsync: deleteInsurance, isPending: isDeleteInsurance } =
 		useDeleteInsurance()
 
-	const insurancePathParams: InsurancePathParams = {
-		carId: carId!,
-		insuranceId,
-	}
-
-	const deleteAndNavigate = useSubmit<Insurance | null, InsurancePathParams>({
+	const deleteAndNavigate = useSubmit<Insurance | null, string | undefined>({
 		callback: deleteInsurance,
-		navigateTo: path,
+		navigateTo: carByIdPath,
 		successMessage: 'The insurance policy has been successfully deleted',
 	})
 
@@ -107,7 +101,7 @@ const InsurancePage: FC = () => {
 		<>
 			<ButtonGoBack
 				label="car"
-				onClick={() => navigate(path)}
+				onClick={() => navigate(carByIdPath)}
 				margin="0 0 5px 0"
 				color="black"
 			/>
@@ -145,7 +139,7 @@ const InsurancePage: FC = () => {
 						negativeBtnLabel="no"
 						positiveBtnLabel="yes"
 						negativeCallback={onClose}
-						positiveCallback={() => deleteAndNavigate(insurancePathParams)}
+						positiveCallback={() => deleteAndNavigate(insuranceId)}
 					>
 						<Paragraph color="black" margin="0 0 15px 0">
 							Are you sure you want to delete your current insurance policy

@@ -11,7 +11,7 @@ import { Contact } from '@/types/types/Contact'
 
 export const useCreateContact = () => {
 	return useMutation<ApiResponse<Contact | null>, unknown, ContactDto>({
-		mutationFn: (dto) => create(dto),
+		mutationFn: (params) => create(params),
 		onSuccess: (response) => {
 			if (response.success) {
 				queryClient.invalidateQueries({ queryKey: [ContactKey] })

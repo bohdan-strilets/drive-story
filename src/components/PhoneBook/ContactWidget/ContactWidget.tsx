@@ -26,7 +26,7 @@ const ContactWidget = <T,>({
 	margin = '',
 }: ContactWidgetProps<T>) => {
 	const navigate = useNavigate()
-	const { carId, insuranceId } = useParams()
+	const { insuranceId } = useParams()
 
 	const path = generatePath(routes.CONTACT_BY_ID, {
 		contactId: contact?._id || '',
@@ -34,7 +34,6 @@ const ContactWidget = <T,>({
 
 	const removeLink = async () => {
 		const bindContactParams: BindContactParams = {
-			carId,
 			entityId: insuranceId,
 		}
 

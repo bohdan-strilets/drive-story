@@ -4,7 +4,7 @@ import { handleApiError } from '@/utils/handleApiError'
 
 import { ContactDto } from '@/types/dto/ContactDto'
 import { PaginationParams } from '@/types/params/PaginationParams'
-import { UpdateContactParams } from '@/types/params/UpdateContactParams'
+import { UpdateParams } from '@/types/params/UpdateParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Contact } from '@/types/types/Contact'
 import { PaginatedResponse } from '@/types/types/PaginatedResponse'
@@ -25,8 +25,8 @@ export const create = async (
 
 export const update = async ({
 	payload,
-	contactId,
-}: UpdateContactParams): Promise<ApiResponse<Contact | null>> => {
+	entityId: contactId,
+}: UpdateParams<ContactDto>): Promise<ApiResponse<Contact | null>> => {
 	try {
 		const path = `${ENDPOINT}/update/${contactId}`
 		const { data } = await apiClient.patch(path, payload)

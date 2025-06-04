@@ -19,8 +19,8 @@ import { useWizard } from '@/hooks/ui/useWizard'
 import { routes } from '@/config/routes'
 
 import { InsuranceDto } from '@/types/dto/InsuranceDto'
-import { AddInsuranceParams } from '@/types/params/AddInsuranceParams'
-import { UpdateInsuranceParams } from '@/types/params/UpdateInsuranceParams'
+import { AddParams } from '@/types/params/AddParams'
+import { UpdateParams } from '@/types/params/UpdateParams'
 import { InsuranceFormProps } from '@/types/props/Insurance/InsuranceFormProps'
 import { Insurance } from '@/types/types/Insurance'
 
@@ -75,26 +75,30 @@ const InsuranceForm: FC<InsuranceFormProps> = ({ mode, carId, insurance }) => {
 
 	const submitUpdateInsurance = useSubmit<
 		Insurance | null,
-		UpdateInsuranceParams
+		UpdateParams<InsuranceDto>
 	>({
 		callback: updateInsurance,
 		successMessage: 'The insurance has been successfully updated',
 		isCloseModal: true,
 	})
 
-	const submitCreateInsurance = useSubmit<Insurance | null, AddInsuranceParams>(
-		{
-			callback: createInsurance,
-			successMessage: 'The insurance has been successfully created',
-			isCloseModal: true,
-		}
-	)
+	const submitCreateInsurance = useSubmit<
+		Insurance | null,
+		AddParams<InsuranceDto>
+	>({
+		callback: createInsurance,
+		successMessage: 'The insurance has been successfully created',
+		isCloseModal: true,
+	})
 
 	const onSubmit: SubmitHandler<Fields> = async (data) => {
 		const payload: InsuranceDto = data
 
 		if (mode === 'create') {
-			const addInsuranceParams: AddInsuranceParams = { payload: data, carId }
+			const addInsuranceParams: AddParams<InsuranceDto> = {
+				payload: data,
+				carId,
+			}
 			const response = await submitCreateInsurance(addInsuranceParams)
 
 			const path = generatePath(routes.INSURANCE_BY_ID, {
@@ -105,10 +109,9 @@ const InsuranceForm: FC<InsuranceFormProps> = ({ mode, carId, insurance }) => {
 			return navigate(path)
 		}
 
-		const updateInsuranceParams: UpdateInsuranceParams = {
+		const updateInsuranceParams: UpdateParams<InsuranceDto> = {
 			payload,
-			carId,
-			insuranceId: insurance!._id,
+			entityId: insurance!._id,
 		}
 
 		return await submitUpdateInsurance(updateInsuranceParams)

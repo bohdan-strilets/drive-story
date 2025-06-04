@@ -12,15 +12,11 @@ export const useFetchContact = (
 	return useQuery({
 		queryKey: [ContactKey, contactId],
 		queryFn: async () => {
-			if (!contactId) {
-				throw new Error('No contactId provided')
-			}
+			if (!contactId) throw new Error('No contactId provided')
 
 			const response = await getById(contactId)
 
-			if (response.success) {
-				return response.data
-			}
+			if (response.success) return response.data
 		},
 
 		enabled: Boolean(contactId),

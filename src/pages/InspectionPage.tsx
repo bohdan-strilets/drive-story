@@ -28,7 +28,6 @@ import { uploadFileParams } from '@/utils/uploadFileParams'
 import { EntityType } from '@/types/enums/EntityType'
 import { isImage } from '@/types/guards/isImage'
 import { DeleteImagesParams } from '@/types/params/DeleteImagesParams'
-import { InspectionPathParams } from '@/types/params/InspectionPathParams'
 import { Image } from '@/types/types/Image'
 import { Inspection } from '@/types/types/Inspection'
 
@@ -37,7 +36,7 @@ const InspectionPage: FC = () => {
 	const { carId, inspectionId } = useParams()
 
 	const navigate = useNavigate()
-	const path = generatePath(routes.CAR_BY_ID, { carId: carId! })
+	const carByIdPath = generatePath(routes.CAR_BY_ID, { carId: carId! })
 
 	const {
 		data: inspection,
@@ -48,14 +47,9 @@ const InspectionPage: FC = () => {
 	const { mutateAsync: deleteInspection, isPending: isDeleteInspection } =
 		useDeleteInspection()
 
-	const inspectionPathParams: InspectionPathParams = {
-		carId: carId!,
-		inspectionId,
-	}
-
-	const deleteAndNavigate = useSubmit<Inspection | null, InspectionPathParams>({
+	const deleteAndNavigate = useSubmit<Inspection | null, string | undefined>({
 		callback: deleteInspection,
-		navigateTo: path,
+		navigateTo: carByIdPath,
 		successMessage: 'The technical inspection has been successfully deleted',
 	})
 
@@ -96,7 +90,7 @@ const InspectionPage: FC = () => {
 		<>
 			<ButtonGoBack
 				label="car"
-				onClick={() => navigate(path)}
+				onClick={() => navigate(carByIdPath)}
 				margin="0 0 5px 0"
 				color="black"
 			/>
@@ -142,7 +136,7 @@ const InspectionPage: FC = () => {
 						negativeBtnLabel="no"
 						positiveBtnLabel="yes"
 						negativeCallback={onClose}
-						positiveCallback={() => deleteAndNavigate(inspectionPathParams)}
+						positiveCallback={() => deleteAndNavigate(inspectionId)}
 					>
 						<Paragraph color="black" margin="0 0 15px 0">
 							Are you sure you want to delete your current technical inspection

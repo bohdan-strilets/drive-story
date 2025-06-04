@@ -4,12 +4,12 @@ import { getAll } from '@/api/insuranceApi'
 
 import { InspectionKey } from '@/config/queryKeys'
 
-import { ListInspectionParams } from '@/types/params/ListInspectionParams'
+import { ListParams } from '@/types/params/ListParams'
 import { Inspection } from '@/types/types/Inspection'
 import { PaginatedResponse } from '@/types/types/PaginatedResponse'
 
 export const useFetchInspections = (
-	params: ListInspectionParams
+	params: ListParams
 ): UseQueryResult<PaginatedResponse<Inspection> | undefined, unknown> => {
 	return useQuery({
 		queryKey: [InspectionKey, params.pagination.page, params.pagination.limit],

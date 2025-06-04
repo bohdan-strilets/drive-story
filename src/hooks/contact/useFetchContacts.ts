@@ -9,12 +9,12 @@ import { Contact } from '@/types/types/Contact'
 import { PaginatedResponse } from '@/types/types/PaginatedResponse'
 
 export const useFetchContacts = (
-	dto: PaginationParams
+	params: PaginationParams
 ): UseQueryResult<PaginatedResponse<Contact> | undefined, unknown> => {
 	return useQuery({
-		queryKey: [ContactKey, dto.page, dto.limit],
+		queryKey: [ContactKey, params.page, params.limit],
 		queryFn: async () => {
-			const response = await getAll(dto)
+			const response = await getAll(params)
 			if (response.success) {
 				return response.data
 			}

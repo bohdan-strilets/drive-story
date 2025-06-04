@@ -5,7 +5,6 @@ import { remove } from '@/api/inspectionApi'
 import { queryClient } from '@/config/queryClient'
 import { CarKey, InspectionKey } from '@/config/queryKeys'
 
-import { InspectionPathParams } from '@/types/params/InspectionPathParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Inspection } from '@/types/types/Inspection'
 
@@ -13,13 +12,13 @@ export const useDeleteInspection = () => {
 	return useMutation<
 		ApiResponse<Inspection | null>,
 		unknown,
-		InspectionPathParams
+		string | undefined
 	>({
-		mutationFn: (params) => remove(params),
-		onSuccess: (response, { carId }) => {
+		mutationFn: (inspectionId) => remove(inspectionId),
+		onSuccess: (response) => {
 			if (response.success) {
 				queryClient.invalidateQueries({ queryKey: [InspectionKey] })
-				queryClient.invalidateQueries({ queryKey: [CarKey, carId] })
+				queryClient.invalidateQueries({ queryKey: [CarKey] })
 			}
 		},
 	})

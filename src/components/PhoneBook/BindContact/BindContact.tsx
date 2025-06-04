@@ -25,7 +25,7 @@ const BindContact = <T,>({ isBinding, bindContact }: BindContactProps<T>) => {
 	const [selectedContact, setSelectedContact] = useState<null | string>(null)
 
 	const navigate = useNavigate()
-	const { carId, insuranceId } = useParams()
+	const { insuranceId } = useParams()
 
 	const limit = 5
 	const paginationParams: PaginationParams = { limit, page, searchQuery: query }
@@ -44,7 +44,6 @@ const BindContact = <T,>({ isBinding, bindContact }: BindContactProps<T>) => {
 
 	const handleBindContact = async (contactId: string) => {
 		const bindContactParams: BindContactParams = {
-			carId,
 			entityId: insuranceId,
 			contactId,
 		}

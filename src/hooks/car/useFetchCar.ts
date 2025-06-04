@@ -12,14 +12,11 @@ export const useFetchCar = (
 	return useQuery({
 		queryKey: [CarKey, carId],
 		queryFn: async () => {
-			if (!carId) {
-				throw new Error('No carId provided')
-			}
+			if (!carId) throw new Error('No carId provided')
 
 			const response = await getById(carId)
-			if (response.success) {
-				return response.data
-			}
+
+			if (response.success) return response.data
 		},
 
 		enabled: Boolean(carId),

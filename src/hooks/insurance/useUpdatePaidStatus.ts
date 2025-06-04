@@ -5,7 +5,8 @@ import { updatePaidStatus } from '@/api/insuranceApi'
 import { queryClient } from '@/config/queryClient'
 import { InsuranceKey } from '@/config/queryKeys'
 
-import { UpdatePaidStatusParams } from '@/types/params/UpdatePaidStatusParams'
+import { PaidStatusDto } from '@/types/dto/PaidStatusDto'
+import { UpdateParams } from '@/types/params/UpdateParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Insurance } from '@/types/types/Insurance'
 
@@ -13,12 +14,12 @@ export const useUpdatePaidStatus = () => {
 	return useMutation<
 		ApiResponse<Insurance | null>,
 		unknown,
-		UpdatePaidStatusParams
+		UpdateParams<PaidStatusDto>
 	>({
-		mutationFn: (dto) => updatePaidStatus(dto),
-		onSuccess: (response, { insuranceId }) => {
+		mutationFn: (params) => updatePaidStatus(params),
+		onSuccess: (response) => {
 			if (response.success) {
-				queryClient.invalidateQueries({ queryKey: [InsuranceKey, insuranceId] })
+				queryClient.invalidateQueries({ queryKey: [InsuranceKey] })
 			}
 		},
 	})

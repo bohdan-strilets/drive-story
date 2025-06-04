@@ -11,12 +11,12 @@ import {
 	UserKey,
 } from '@/config/queryKeys'
 
-import { SelectImageParams } from '@/types/params/SelectImageParams'
+import { PublicIdImageParams } from '@/types/params/PublicIdImageParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Image } from '@/types/types/Image'
 
 export const useSelectImage = () => {
-	return useMutation<ApiResponse<Image | null>, unknown, SelectImageParams>({
+	return useMutation<ApiResponse<Image | null>, unknown, PublicIdImageParams>({
 		mutationFn: ({ entityId, entityType, publicId }) =>
 			select({ entityId, entityType, publicId }),
 

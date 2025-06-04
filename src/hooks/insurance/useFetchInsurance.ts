@@ -12,14 +12,11 @@ export const useFetchInsurance = (
 	return useQuery({
 		queryKey: [InsuranceKey, insuranceId],
 		queryFn: async () => {
-			if (!insuranceId) {
-				throw new Error('No insuranceId provided')
-			}
+			if (!insuranceId) throw new Error('No insuranceId provided')
 
 			const response = await getById(insuranceId)
-			if (response.success) {
-				return response.data
-			}
+
+			if (response.success) return response.data
 		},
 
 		enabled: Boolean(insuranceId),

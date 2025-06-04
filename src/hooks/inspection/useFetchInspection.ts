@@ -12,14 +12,11 @@ export const useFetchInspection = (
 	return useQuery({
 		queryKey: [InspectionKey, inspectionId],
 		queryFn: async () => {
-			if (!inspectionId) {
-				throw new Error('No inspectionId provided')
-			}
+			if (!inspectionId) throw new Error('No inspectionId provided')
 
 			const response = await getById(inspectionId)
-			if (response.success) {
-				return response.data
-			}
+
+			if (response.success) return response.data
 		},
 
 		enabled: Boolean(inspectionId),

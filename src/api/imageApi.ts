@@ -2,9 +2,8 @@ import apiClient from '@/config/axiosConfig'
 
 import { handleApiError } from '@/utils/handleApiError'
 
-import { DeleteImageParams } from '@/types/params/DeleteImageParams'
 import { DeleteImagesParams } from '@/types/params/DeleteImagesParams'
-import { SelectImageParams } from '@/types/params/SelectImageParams'
+import { PublicIdImageParams } from '@/types/params/PublicIdImageParams'
 import { UploadImageParams } from '@/types/params/UploadImageParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Image } from '@/types/types/Image'
@@ -30,7 +29,7 @@ export const remove = async ({
 	entityId,
 	entityType,
 	publicId,
-}: DeleteImageParams): Promise<ApiResponse<Image | null>> => {
+}: PublicIdImageParams): Promise<ApiResponse<Image | null>> => {
 	try {
 		const path = `${ENDPOINT}/delete/${entityId}`
 		const params = { entityType, publicId }
@@ -45,7 +44,7 @@ export const select = async ({
 	entityId,
 	entityType,
 	publicId,
-}: SelectImageParams): Promise<ApiResponse<Image | null>> => {
+}: PublicIdImageParams): Promise<ApiResponse<Image | null>> => {
 	try {
 		const path = `${ENDPOINT}/select/${entityId}`
 		const params = { entityType, publicId }

@@ -16,7 +16,7 @@ import useSubmit from '@/hooks/ui/useSubmit'
 import { useWizard } from '@/hooks/ui/useWizard'
 
 import { ContactDto } from '@/types/dto/ContactDto'
-import { UpdateContactParams } from '@/types/params/UpdateContactParams'
+import { UpdateParams } from '@/types/params/UpdateParams'
 import { ContactFormProps } from '@/types/props/PhoneBook/ContactFormProps'
 import { Contact } from '@/types/types/Contact'
 
@@ -80,7 +80,10 @@ const ContactForm: FC<ContactFormProps> = ({ mode, contact }) => {
 
 	const isLoading = isUpdating || isCreating
 
-	const submitUpdateContact = useSubmit<Contact | null, UpdateContactParams>({
+	const submitUpdateContact = useSubmit<
+		Contact | null,
+		UpdateParams<ContactDto>
+	>({
 		callback: updateContact,
 		successMessage: 'The contact has been successfully updated',
 		isCloseModal: true,
@@ -106,9 +109,9 @@ const ContactForm: FC<ContactFormProps> = ({ mode, contact }) => {
 			return submitCreateContact(payload)
 		}
 
-		const updateCarParams: UpdateContactParams = {
+		const updateCarParams: UpdateParams<ContactDto> = {
 			payload,
-			contactId: contact?._id,
+			entityId: contact?._id,
 		}
 
 		return submitUpdateContact(updateCarParams)

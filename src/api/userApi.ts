@@ -14,7 +14,8 @@ const ENDPOINT = '/user'
 
 export const getCurrentUser = async (): Promise<ApiResponse<User | null>> => {
 	try {
-		const { data } = await apiClient.get(`${ENDPOINT}/current-user`)
+		const path = `${ENDPOINT}/current-user`
+		const { data } = await apiClient.get(path)
 		return data
 	} catch (error) {
 		return handleApiError(error)

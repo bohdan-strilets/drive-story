@@ -4,12 +4,12 @@ import { getAll } from '@/api/insuranceApi'
 
 import { InsuranceKey } from '@/config/queryKeys'
 
-import { ListInsuranceParams } from '@/types/params/ListInsuranceParams'
+import { ListParams } from '@/types/params/ListParams'
 import { Insurance } from '@/types/types/Insurance'
 import { PaginatedResponse } from '@/types/types/PaginatedResponse'
 
 export const useFetchInsurances = (
-	params: ListInsuranceParams
+	params: ListParams
 ): UseQueryResult<PaginatedResponse<Insurance> | undefined, unknown> => {
 	return useQuery({
 		queryKey: [InsuranceKey, params.pagination.page, params.pagination.limit],

@@ -11,7 +11,7 @@ import { CarEntity } from '@/types/types/CarEntity'
 
 export const useCreateCar = () => {
 	return useMutation<ApiResponse<CarEntity | null>, unknown, CarDetailsDto>({
-		mutationFn: (dto) => create(dto),
+		mutationFn: (params) => create(params),
 		onSuccess: (response) => {
 			if (response.success) {
 				queryClient.invalidateQueries({ queryKey: [CarKey] })

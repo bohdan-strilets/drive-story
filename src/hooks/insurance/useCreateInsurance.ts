@@ -5,7 +5,8 @@ import { create } from '@/api/insuranceApi'
 import { queryClient } from '@/config/queryClient'
 import { CarKey, InsuranceKey } from '@/config/queryKeys'
 
-import { AddInsuranceParams } from '@/types/params/AddInsuranceParams'
+import { InsuranceDto } from '@/types/dto/InsuranceDto'
+import { AddParams } from '@/types/params/AddParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Insurance } from '@/types/types/Insurance'
 
@@ -13,9 +14,9 @@ export const useCreateInsurance = () => {
 	return useMutation<
 		ApiResponse<Insurance | null>,
 		unknown,
-		AddInsuranceParams
+		AddParams<InsuranceDto>
 	>({
-		mutationFn: (dto) => create(dto),
+		mutationFn: (params) => create(params),
 		onSuccess: (response, { carId }) => {
 			if (response.success) {
 				queryClient.invalidateQueries({ queryKey: [InsuranceKey] })

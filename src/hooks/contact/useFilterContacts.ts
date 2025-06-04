@@ -9,12 +9,12 @@ import { Contact } from '@/types/types/Contact'
 import { PaginatedResponse } from '@/types/types/PaginatedResponse'
 
 export const useFilterContacts = (
-	dto: PaginationParams
+	params: PaginationParams
 ): UseQueryResult<PaginatedResponse<Contact> | undefined, unknown> => {
 	return useQuery({
-		queryKey: [ContactKey, dto.page, dto.limit, dto.searchQuery],
+		queryKey: [ContactKey, params.page, params.limit, params.searchQuery],
 		queryFn: async () => {
-			const response = await filterByNameOrPhone(dto)
+			const response = await filterByNameOrPhone(params)
 			if (response.success) {
 				return response.data
 			}
@@ -22,7 +22,7 @@ export const useFilterContacts = (
 			return undefined
 		},
 
-		enabled: dto.searchQuery !== undefined,
+		enabled: params.searchQuery !== undefined,
 		staleTime: 1000 * 60 * 2,
 	})
 }

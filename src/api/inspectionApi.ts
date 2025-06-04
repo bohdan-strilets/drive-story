@@ -2,10 +2,10 @@ import apiClient from '@/config/axiosConfig'
 
 import { handleApiError } from '@/utils/handleApiError'
 
-import { AddInspectionParams } from '@/types/params/AddInspectionParams'
-import { InspectionPathParams } from '@/types/params/InspectionPathParams'
+import { InspectionDto } from '@/types/dto/InspectionDto'
+import { AddParams } from '@/types/params/AddParams'
 import { ListInspectionParams } from '@/types/params/ListInspectionParams'
-import { UpdateInspectionParams } from '@/types/params/UpdateInspectionParams'
+import { UpdateParams } from '@/types/params/UpdateParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Inspection } from '@/types/types/Inspection'
 import { PaginatedResponse } from '@/types/types/PaginatedResponse'
@@ -15,7 +15,7 @@ const ENDPOINT = '/inspection'
 export const create = async ({
 	payload,
 	carId,
-}: AddInspectionParams): Promise<ApiResponse<Inspection | null>> => {
+}: AddParams<InspectionDto>): Promise<ApiResponse<Inspection | null>> => {
 	try {
 		const path = `${ENDPOINT}/create/${carId}`
 		const { data } = await apiClient.post(path, payload)
@@ -27,11 +27,10 @@ export const create = async ({
 
 export const update = async ({
 	payload,
-	carId,
-	inspectionId,
-}: UpdateInspectionParams): Promise<ApiResponse<Inspection | null>> => {
+	entityId: inspectionId,
+}: UpdateParams<InspectionDto>): Promise<ApiResponse<Inspection | null>> => {
 	try {
-		const path = `${ENDPOINT}/update/${carId}/${inspectionId}`
+		const path = `${ENDPOINT}/update/${inspectionId}`
 		const { data } = await apiClient.patch(path, payload)
 		return data
 	} catch (error) {
@@ -39,12 +38,11 @@ export const update = async ({
 	}
 }
 
-export const remove = async ({
-	carId,
-	inspectionId,
-}: InspectionPathParams): Promise<ApiResponse<Inspection | null>> => {
+export const remove = async (
+	inspectionId?: string
+): Promise<ApiResponse<Inspection | null>> => {
 	try {
-		const path = `${ENDPOINT}/delete/${carId}/${inspectionId}`
+		const path = `${ENDPOINT}/delete/${inspectionId}`
 		const { data } = await apiClient.delete(path)
 		return data
 	} catch (error) {
@@ -74,6 +72,7 @@ export const getAll = async ({
 		const path = `${ENDPOINT}/get-all/${carId}`
 		const { page, limit } = pagination
 		const params = { page, limit }
+
 		const { data } = await apiClient.get(path, { params })
 		return data
 	} catch (error) {

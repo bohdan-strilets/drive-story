@@ -15,8 +15,9 @@ import { getInsuranceActions } from '@/descriptors/actions/getInsuranceActions'
 import { insuranceField } from '@/descriptors/fields/insuranceField'
 import { insurancePayment } from '@/descriptors/fields/insurancePayment'
 
+import { PaidStatusDto } from '@/types/dto/PaidStatusDto'
 import { isContact } from '@/types/guards/isContact'
-import { UpdatePaidStatusParams } from '@/types/params/UpdatePaidStatusParams'
+import { UpdateParams } from '@/types/params/UpdateParams'
 import { InsuranceInfoProps } from '@/types/props/Insurance/InsuranceInfoProps'
 
 import Header from '../Header'
@@ -56,10 +57,9 @@ const InsuranceInfo = <T,>({
 	useEffect(() => {
 		const allPaid = payments.length > 0 && payments.every((p) => p.isPaid)
 
-		const params: UpdatePaidStatusParams = {
+		const params: UpdateParams<PaidStatusDto> = {
 			payload: { isPaid: true },
-			carId: insurance.carId,
-			insuranceId: insurance._id,
+			entityId: insurance._id,
 		}
 
 		if (!insurance.paymentStatus.isPaid && allPaid && !hasCalledRef.current) {
