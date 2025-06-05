@@ -19,6 +19,7 @@ import { useSetCurrentCar } from '@/hooks/user/useSetCurrentCar'
 
 import { modalNames } from '@/config/modalConfig'
 
+import { getImageResources } from '@/utils/getImageResources'
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { CurrentCarDto } from '@/types/dto/CurrentCarDto'
@@ -48,6 +49,8 @@ const CarInfoPage: FC = () => {
 		successMessage: 'The current car has been modified',
 	})
 
+	const photos = getImageResources(car?.photos)
+
 	if (isLoading) return <Loader color="gray" />
 	if (isError) return <ErrorState />
 
@@ -75,7 +78,11 @@ const CarInfoPage: FC = () => {
 				)}
 
 				{showImageViewer && (
-					<ImageViewer imageUrl={currentImage} closeViewer={closeImageViewer} />
+					<ImageViewer
+						imageUrl={currentImage}
+						closeViewer={closeImageViewer}
+						imageUrls={photos}
+					/>
 				)}
 
 				{checkQueryParam(modalNames.EDIT_CAR) && (

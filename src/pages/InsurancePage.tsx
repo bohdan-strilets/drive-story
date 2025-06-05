@@ -26,6 +26,7 @@ import { modalNames } from '@/config/modalConfig'
 import { routes } from '@/config/routes'
 
 import { getImageId } from '@/utils/getImageId'
+import { getImageResources } from '@/utils/getImageResources'
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
@@ -59,7 +60,8 @@ const InsurancePage: FC = () => {
 	const { mutateAsync: deleteAllImages, isPending: isDeleteallImages } =
 		useDeleteAllImages()
 
-	const imageId = getImageId<Insurance>(insurance)
+	const imageId = getImageId(insurance?.photos)
+	const photos = getImageResources(insurance?.photos)
 
 	const deleteImagesParams: DeleteImagesParams = {
 		entityId: insuranceId,
@@ -160,7 +162,11 @@ const InsurancePage: FC = () => {
 				)}
 
 				{showImageViewer && (
-					<ImageViewer imageUrl={currentImage} closeViewer={closeImageViewer} />
+					<ImageViewer
+						imageUrl={currentImage}
+						closeViewer={closeImageViewer}
+						imageUrls={photos}
+					/>
 				)}
 
 				{checkQueryParam(modalNames.CLEAR_INSURANCE_GALLERY) && (

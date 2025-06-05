@@ -24,6 +24,7 @@ import { modalNames } from '@/config/modalConfig'
 import { routes } from '@/config/routes'
 
 import { getImageId } from '@/utils/getImageId'
+import { getImageResources } from '@/utils/getImageResources'
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
@@ -62,7 +63,8 @@ const InspectionPage: FC = () => {
 		successMessage: 'All photos were successfully deleted',
 	})
 
-	const imageId = getImageId<Inspection>(inspection)
+	const imageId = getImageId(inspection?.photos)
+	const photos = getImageResources(inspection?.photos)
 
 	const deleteImagesParams: DeleteImagesParams = {
 		entityId: inspectionId,
@@ -157,7 +159,11 @@ const InspectionPage: FC = () => {
 				)}
 
 				{showImageViewer && (
-					<ImageViewer imageUrl={currentImage} closeViewer={closeImageViewer} />
+					<ImageViewer
+						imageUrl={currentImage}
+						closeViewer={closeImageViewer}
+						imageUrls={photos}
+					/>
 				)}
 
 				{checkQueryParam(modalNames.CLEAR_INSPECTION_GALLERY) && (

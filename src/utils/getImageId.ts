@@ -1,14 +1,8 @@
 import { isImage } from '@/types/guards/isImage'
 import { Image } from '@/types/types/Image'
 
-export const getImageId = <T extends { photos: string | Image | null }>(
-	entity?: T
+export const getImageId = (
+	photos?: string | Image | null
 ): string | undefined => {
-	const photosCandidate = entity?.photos as string | Image | null
-
-	if (photosCandidate !== undefined && isImage(photosCandidate)) {
-		return (photosCandidate as Image)._id
-	}
-
-	return undefined
+	return photos && isImage(photos) ? photos._id : undefined
 }

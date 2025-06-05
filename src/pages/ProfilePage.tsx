@@ -23,6 +23,7 @@ import { useRemoveProfile } from '@/hooks/user/useRemoveProfile'
 import { modalNames } from '@/config/modalConfig'
 import { routes } from '@/config/routes'
 
+import { getImageResources } from '@/utils/getImageResources'
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
@@ -67,6 +68,9 @@ const ProfilePage: FC = () => {
 		currentImage: currentPoster,
 		closeViewer: closePosterViewer,
 	} = useGalleryManager({ entityType: EntityType.POSTERS, entityId: user?._id })
+
+	const avatars = getImageResources(user?.avatars)
+	const posters = getImageResources(user?.posters)
 
 	if (isLoading) return <Loader color={'gray'} />
 
@@ -194,6 +198,7 @@ const ProfilePage: FC = () => {
 					<ImageViewer
 						imageUrl={currentAvatar}
 						closeViewer={closeAvatarViewer}
+						imageUrls={avatars}
 					/>
 				)}
 
@@ -201,6 +206,7 @@ const ProfilePage: FC = () => {
 					<ImageViewer
 						imageUrl={currentPoster}
 						closeViewer={closePosterViewer}
+						imageUrls={posters}
 					/>
 				)}
 			</AnimatePresence>

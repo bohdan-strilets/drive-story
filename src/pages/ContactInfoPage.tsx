@@ -22,6 +22,7 @@ import { modalNames } from '@/config/modalConfig'
 import { routes } from '@/config/routes'
 
 import { getImageId } from '@/utils/getImageId'
+import { getImageResources } from '@/utils/getImageResources'
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
@@ -59,7 +60,8 @@ const ContactInfoPage: FC = () => {
 	const { mutateAsync: deleteAllImages, isPending: isDeleteallImages } =
 		useDeleteAllImages()
 
-	const imageId = getImageId<Contact>(contact)
+	const imageId = getImageId(contact?.photos)
+	const photos = getImageResources(contact?.photos)
 
 	const deleteImagesParams: DeleteImagesParams = {
 		entityId: contactId,
@@ -100,7 +102,11 @@ const ContactInfoPage: FC = () => {
 				)}
 
 				{showImageViewer && (
-					<ImageViewer imageUrl={currentImage} closeViewer={closeImageViewer} />
+					<ImageViewer
+						imageUrl={currentImage}
+						closeViewer={closeImageViewer}
+						imageUrls={photos}
+					/>
 				)}
 
 				{checkQueryParam(modalNames.EDIT_CONTACT) && (

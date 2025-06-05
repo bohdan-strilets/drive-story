@@ -6,7 +6,7 @@ import { PiResizeBold } from 'react-icons/pi'
 
 import { extractPublicId } from '@/utils/extractImagePublicId'
 
-import { Params, Result } from '@/types/hooks/useGalleryManager'
+import { Params } from '@/types/hooks/useGalleryManager'
 import { PublicIdImageParams } from '@/types/params/PublicIdImageParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Image } from '@/types/types/Image'
@@ -17,7 +17,7 @@ import { useUploadImage } from '../image/useUploadImage'
 
 import useSubmit from './useSubmit'
 
-export const useGalleryManager = ({ entityType, entityId }: Params): Result => {
+export const useGalleryManager = ({ entityType, entityId }: Params) => {
 	const [showImageViewer, setShowImageViewer] = useState(false)
 	const [currentImage, setCurrentImage] = useState<string | null>(null)
 
