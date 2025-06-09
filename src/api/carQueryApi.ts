@@ -5,13 +5,13 @@ import { handleApiError } from '@/utils/handleApiError'
 import { FetchCarTrimParams } from '@/types/params/FetchCarTrimParams'
 import { FetchModelsParams } from '@/types/params/FetchModelsParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
-import { CarTrim, MakeResponse, ModelResponse } from '@/types/types/CarQuery'
+import { CarTrim, Make, Model } from '@/types/types/CarQuery'
 
 const ENDPOINT = '/car-query'
 
 export const getMakes = async (
 	year?: string
-): Promise<ApiResponse<MakeResponse | null>> => {
+): Promise<ApiResponse<Make[] | null>> => {
 	try {
 		const params = { year }
 		const path = `${ENDPOINT}/makes`
@@ -25,7 +25,7 @@ export const getMakes = async (
 export const getModelsForMake = async ({
 	make,
 	year,
-}: FetchModelsParams): Promise<ApiResponse<ModelResponse | null>> => {
+}: FetchModelsParams): Promise<ApiResponse<Model[] | null>> => {
 	try {
 		const params = { make, year }
 		const path = `${ENDPOINT}/models`

@@ -2,18 +2,19 @@ import { UseQueryResult, useQuery } from '@tanstack/react-query'
 
 import { getMakes } from '@/api/carQueryApi'
 
-import { CarQueryKey } from '@/config/queryKeys'
+import { CarQueryKey, MakeKey } from '@/config/queryKeys'
 
-import { MakeResponse } from '@/types/types/CarQuery'
+import { ApiResponse } from '@/types/types/ApiResponse'
+import { Make } from '@/types/types/CarQuery'
 
 export const useFetchMakes = (
 	year?: string
-): UseQueryResult<MakeResponse | undefined, unknown> => {
+): UseQueryResult<ApiResponse<Make[]>> => {
 	return useQuery({
-		queryKey: [CarQueryKey],
+		queryKey: [CarQueryKey, MakeKey],
 		queryFn: async () => {
 			const response = await getMakes(year)
-			return response
+			if (response.success) return response
 		},
 	})
 }

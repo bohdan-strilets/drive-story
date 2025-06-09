@@ -30,6 +30,7 @@ export const Header = styled.div`
 export const Name = styled.p`
 	font-weight: 700;
 	font-size: 20px;
+	text-transform: uppercase;
 `
 
 export const Year = styled.p`

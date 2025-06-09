@@ -19,6 +19,7 @@ import { getColor } from '@/styles/helpers/getColor'
 
 import InputErrorMessage from '../InputErrorMessage'
 import InputLabel from '../InputLabel'
+import Loader from '../Loader'
 
 import {
 	ArrowIcon,
@@ -46,6 +47,7 @@ const DropdownList = <
 	margin,
 	listHeight = 300,
 	listPosition = 'bottom',
+	isLoading = false,
 }: DropdownListProps<TFieldValues, TName>) => {
 	const {
 		field: { onChange, value },
@@ -130,6 +132,7 @@ const DropdownList = <
 					placeholder={placeholder}
 					aria-haspopup="listbox"
 					aria-expanded={isOpen}
+					autoComplete="off"
 				/>
 				<ArrowIcon isOpen={isOpen} />
 			</InputContainer>
@@ -152,7 +155,10 @@ const DropdownList = <
 							</Item>
 						))
 					) : (
-						<EmptyList>No matches found...</EmptyList>
+						<>
+							<EmptyList>No matches found...</EmptyList>
+							{isLoading && <Loader color="gray" />}
+						</>
 					)}
 				</List>
 			)}

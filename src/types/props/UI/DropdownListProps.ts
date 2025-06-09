@@ -22,6 +22,7 @@ export type DropdownListProps<
 	margin?: string
 	listHeight?: number
 	listPosition?: 'top' | 'bottom'
+	isLoading?: boolean
 }
 
 export type WrapperProps = Pick<DropdownListProps, 'width' | 'margin'>

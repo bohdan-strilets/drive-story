@@ -2,20 +2,26 @@ import { UseQueryResult, useQuery } from '@tanstack/react-query'
 
 import { getModelsForMake } from '@/api/carQueryApi'
 
-import { CarQueryKey } from '@/config/queryKeys'
+import { CarQueryKey, ModelKey } from '@/config/queryKeys'
 
 import { FetchModelsParams } from '@/types/params/FetchModelsParams'
-import { ModelResponse } from '@/types/types/CarQuery'
+import { ApiResponse } from '@/types/types/ApiResponse'
+import { Model } from '@/types/types/CarQuery'
 
 export const useFetchModelForMake = ({
 	make,
 	year,
-}: FetchModelsParams): UseQueryResult<ModelResponse | undefined, unknown> => {
+}: FetchModelsParams): UseQueryResult<ApiResponse<Model[]>> => {
 	return useQuery({
-		queryKey: [CarQueryKey],
+		queryKey: [CarQueryKey, ModelKey, make, year],
 		queryFn: async () => {
+			if (!make || !year) throw new Error('No make or year provided')
+
 			const response = await getModelsForMake({ make, year })
-			return response
+
+			if (response.success) return response
 		},
+
+		enabled: Boolean(make) && Boolean(year),
 	})
 }

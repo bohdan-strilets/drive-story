@@ -13,3 +13,9 @@ export const InspectionKey = 'inspection'
 export const ContactKey = 'contact'
 
 export const CarQueryKey = 'car-query'
+
+export const MakeKey = 'make'
+
+export const ModelKey = 'model'
+
+export const TrimKey = 'trim'

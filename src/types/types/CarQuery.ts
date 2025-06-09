@@ -6,19 +6,9 @@ export type Make = {
 	logoUrl: string
 }
 
-export type MakeResponse = {
-	count: number
-	data: Make[]
-}
-
 export type Model = {
 	model_make_id: string
 	model_name: string
-}
-
-export type ModelResponse = {
-	count: number
-	data: Model[]
 }
 
 export type CarTrim = {
