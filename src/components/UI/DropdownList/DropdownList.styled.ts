@@ -19,28 +19,27 @@ export const Wrapper = styled.div<WrapperProps>`
 	margin: ${({ margin }) => margin};
 `
 
-export const CustomInput = styled.button`
+export const InputContainer = styled.div`
 	${flexCenterDirection()}
-	justify-content: space-between;
-
-	width: 100%;
-	height: 30px;
-	padding: 0 10px;
-	margin: 5px 0;
-
 	font-size: 14px;
 
+	padding: 0 10px;
+	height: 30px;
+	margin: 5px 0;
+
 	background-color: ${getColor('#e4e4e4')};
-	color: ${getColor('black')};
 	border-radius: 3px;
 	border-bottom: 2px solid transparent;
 
 	cursor: pointer;
 	transition: border-bottom-color var(--hover-effect);
 
-	:hover,
-	:focus {
-		border-bottom-color: ${getColor('green')};
+	&:hover {
+		border-color: ${getColor('green')};
+	}
+
+	&:focus-within {
+		border-color: ${getColor('green')};
 	}
 
 	@media screen and (min-width: ${breakpoints.tabletMin}) {
@@ -51,6 +50,14 @@ export const CustomInput = styled.button`
 	@media screen and (min-width: ${breakpoints.laptopMin}) {
 		height: 40px;
 	}
+`
+
+export const CustomInput = styled.input`
+	width: 100%;
+	height: 100%;
+
+	color: ${getColor('black')};
+	background-color: transparent;
 `
 
 export const ArrowIcon = styled(IoMdArrowDropdown, {
@@ -106,4 +113,9 @@ export const Button = styled.button`
 		background: ${getColor('yellow')};
 		color: 'black';
 	}
+`
+
+export const EmptyList = styled.p`
+	text-align: center;
+	padding: 15px;
 `
