@@ -62,7 +62,8 @@ const CarInformation: FC<CarInformationProps> = ({
 		<article>
 			<Header
 				carPoster={carPoster}
-				carName={`${car.basicInfo.make} ${car.basicInfo.model}`}
+				carMake={car.basicInfo.make}
+				carModel={car.basicInfo.model}
 				shortName={car.basicInfo.shortName}
 				carId={car._id}
 				updatedDate={car.updatedAt}

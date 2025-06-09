@@ -16,9 +16,14 @@ import { parsedDateToString } from '@/utils/parsedDateToString'
 
 import { HeaderProps } from '@/types/props/Garage/HeaderProps'
 
+import BrandLogo from '../BrandLogo'
+
+import { Wrapper } from './Header.styled'
+
 const Header: FC<HeaderProps> = ({
 	carPoster,
-	carName,
+	carMake,
+	carModel,
 	shortName,
 	carId,
 	updatedDate,
@@ -45,22 +50,30 @@ const Header: FC<HeaderProps> = ({
 				gradient="var(--black-transparent-gradient)"
 			>
 				{isCurrentCar && <Badge label={'Current car'} />}
-				<Title
-					fontSize={maxMobile ? 20 : 44}
-					textAlign={'left'}
-					color="white"
-					type="h1"
-				>
-					{carName}
-				</Title>
-				<Title
-					fontSize={maxMobile ? 16 : 24}
-					textAlign={'left'}
-					color="white"
-					type="h2"
-				>
-					{shortName}
-				</Title>
+				<Wrapper>
+					<BrandLogo
+						brand={carMake}
+						margin={maxMobile ? '0 5px 0 0' : '0 15px 0 0'}
+					/>
+					<div>
+						<Title
+							fontSize={maxMobile ? 20 : 44}
+							textAlign={'left'}
+							color="white"
+							type="h1"
+						>
+							{carMake} {carModel}
+						</Title>
+						<Title
+							fontSize={maxMobile ? 16 : 24}
+							textAlign={'left'}
+							color="white"
+							type="h2"
+						>
+							{shortName}
+						</Title>
+					</div>
+				</Wrapper>
 			</ImageBox>
 			<Paragraph color="black" fontSize={12} textAlign="right" margin="5px 0">
 				ID: {carId}
