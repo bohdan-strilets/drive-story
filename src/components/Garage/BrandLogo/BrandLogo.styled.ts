@@ -15,7 +15,8 @@ export const Wrapper = styled.div<WrapperProps>`
 	margin: ${({ margin }) => margin};
 
 	border-radius: 5px;
-	background-color: ${getColor('white')};
+	background-color: ${getColor('rgba(255, 255, 255,0.7)')};
+	backdrop-filter: blur(1px);
 
 	@media screen and (min-width: ${breakpoints.tabletMin}) {
 		width: 110px;
