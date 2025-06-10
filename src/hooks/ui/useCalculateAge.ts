@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { AgeResult } from '@/types/types/AgeResult'
 
-export const useCalculateAge = (date: Date): AgeResult => {
+export const useCalculateAge = (date?: Date | null): AgeResult => {
 	const [age, setAge] = useState<AgeResult>({ ageInYears: 0, detailedAge: '' })
 
 	const getYearWord = (years: number): string => {
@@ -10,7 +10,9 @@ export const useCalculateAge = (date: Date): AgeResult => {
 	}
 
 	useEffect(() => {
-		const calculateAge = (date: Date): AgeResult => {
+		const calculateAge = (date?: Date | null): AgeResult => {
+			if (!date) return { ageInYears: 0, detailedAge: '' }
+
 			const now = new Date()
 			const formatedDate = new Date(date)
 

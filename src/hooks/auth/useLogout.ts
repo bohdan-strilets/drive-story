@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query'
 import { logout } from '@/api/authApi'
 
 import { queryClient } from '@/config/queryClient'
-import { AuthKey } from '@/config/queryKeys'
+import { AuthKey, UserKey } from '@/config/queryKeys'
 
 import { useAuthStore } from '@/store/useAuthStore'
 import { useUserStore } from '@/store/useUserStore'
@@ -23,8 +23,15 @@ export const useLogout = () => {
 				setUser(null)
 				setToken(null)
 				setIsLoggedIn(false)
+				queryClient.invalidateQueries({ queryKey: [UserKey] })
 				queryClient.invalidateQueries({ queryKey: [AuthKey] })
 			}
+		},
+		onError: (error) => {
+			console.error('Logout error:', error)
+			setUser(null)
+			setToken(null)
+			setIsLoggedIn(false)
 		},
 	})
 }

@@ -23,6 +23,8 @@ import { useRemoveProfile } from '@/hooks/user/useRemoveProfile'
 import { modalNames } from '@/config/modalConfig'
 import { routes } from '@/config/routes'
 
+import { useAuthStore } from '@/store/useAuthStore'
+
 import { getImageResources } from '@/utils/getImageResources'
 import { uploadFileParams } from '@/utils/uploadFileParams'
 
@@ -38,7 +40,9 @@ const ProfilePage: FC = () => {
 	const { mutateAsync: removeProfile, isPending: isRemoved } =
 		useRemoveProfile()
 
-	const { data: user, isLoading } = useGetCurrentUser()
+	const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
+	const { data, isLoading } = useGetCurrentUser(isLoggedIn)
+	const user = data?.data
 
 	const logoutAndNavigate = useSubmit<AuthResponse | null>({
 		callback: logout,
@@ -75,142 +79,147 @@ const ProfilePage: FC = () => {
 	if (isLoading) return <Loader color={'gray'} />
 
 	return (
-		<>
-			{user && <Profile user={user} />}
+		user && (
+			<>
+				<Profile user={user} />
 
-			<AnimatePresence>
-				{checkQueryParam(modalNames.EDIT_EMAIL) && user && (
-					<Modal key={modalNames.EDIT_EMAIL} title="Edit email address">
-						<EditEmail email={user.email} />
-					</Modal>
-				)}
+				<AnimatePresence>
+					{checkQueryParam(modalNames.EDIT_EMAIL) && user && (
+						<Modal key={modalNames.EDIT_EMAIL} title="Edit email address">
+							<EditEmail email={user.email} />
+						</Modal>
+					)}
 
-				{checkQueryParam(modalNames.EDIT_PASSWORD) && (
-					<Modal key={modalNames.EDIT_PASSWORD} title="Edit password">
-						<EditPassword />
-					</Modal>
-				)}
+					{checkQueryParam(modalNames.EDIT_PASSWORD) && (
+						<Modal key={modalNames.EDIT_PASSWORD} title="Edit password">
+							<EditPassword />
+						</Modal>
+					)}
 
-				{checkQueryParam(modalNames.EDIT_PROFILE) && user && (
-					<Modal key={modalNames.EDIT_PROFILE} title="Edit profile">
-						<EditProfile user={user} />
-					</Modal>
-				)}
+					{checkQueryParam(modalNames.EDIT_PROFILE) && user && (
+						<Modal key={modalNames.EDIT_PROFILE} title="Edit profile">
+							<EditProfile user={user} />
+						</Modal>
+					)}
 
-				{checkQueryParam(modalNames.RESEND_EMAIL) && (
-					<Modal key={modalNames.RESEND_EMAIL} title="Resend activation email">
-						<ResendEmail />
-					</Modal>
-				)}
+					{checkQueryParam(modalNames.RESEND_EMAIL) && (
+						<Modal
+							key={modalNames.RESEND_EMAIL}
+							title="Resend activation email"
+						>
+							<ResendEmail />
+						</Modal>
+					)}
 
-				{checkQueryParam(modalNames.EXIT_PROFILE) && (
-					<Modal
-						key={modalNames.EXIT_PROFILE}
-						title="Logout from profile?"
-						isDialog={true}
-						isLoading={isLoggingOut}
-						negativeBtnLabel="no"
-						positiveBtnLabel="yes"
-						negativeCallback={onClose}
-						positiveCallback={logoutAndNavigate}
-					>
-						<p>Do you want to log out of your current account?</p>
-					</Modal>
-				)}
+					{checkQueryParam(modalNames.EXIT_PROFILE) && (
+						<Modal
+							key={modalNames.EXIT_PROFILE}
+							title="Logout from profile?"
+							isDialog={true}
+							isLoading={isLoggingOut}
+							negativeBtnLabel="no"
+							positiveBtnLabel="yes"
+							negativeCallback={onClose}
+							positiveCallback={logoutAndNavigate}
+						>
+							<p>Do you want to log out of your current account?</p>
+						</Modal>
+					)}
 
-				{checkQueryParam(modalNames.DELETE_PROFILE) && (
-					<Modal
-						key={modalNames.DELETE_PROFILE}
-						title="Do you want to delete your profile?"
-						isDialog={true}
-						isLoading={isRemoved}
-						negativeBtnLabel="no"
-						positiveBtnLabel="yes"
-						negativeCallback={onClose}
-						positiveCallback={deleteAndNavigate}
-					>
-						<Paragraph color={'black'} margin="0 0 15px 0">
-							Are you sure you want to permanently delete your profile and all
-							associated data? Please be aware that this action is irreversible,
-							and we will not be able to recover your account and information
-							after deletion.
-						</Paragraph>
-						<Paragraph color={'red'}>
-							All your personal information, uploaded files, and activity
-							history will be lost forever.
-						</Paragraph>
-					</Modal>
-				)}
+					{checkQueryParam(modalNames.DELETE_PROFILE) && (
+						<Modal
+							key={modalNames.DELETE_PROFILE}
+							title="Do you want to delete your profile?"
+							isDialog={true}
+							isLoading={isRemoved}
+							negativeBtnLabel="no"
+							positiveBtnLabel="yes"
+							negativeCallback={onClose}
+							positiveCallback={deleteAndNavigate}
+						>
+							<Paragraph color={'black'} margin="0 0 15px 0">
+								Are you sure you want to permanently delete your profile and all
+								associated data? Please be aware that this action is
+								irreversible, and we will not be able to recover your account
+								and information after deletion.
+							</Paragraph>
+							<Paragraph color={'red'}>
+								All your personal information, uploaded files, and activity
+								history will be lost forever.
+							</Paragraph>
+						</Modal>
+					)}
 
-				{checkQueryParam(modalNames.USER_AVATARS) && (
-					<Modal key={modalNames.USER_AVATARS} title="Avatars">
-						{user && isImage(user.avatars) && (
-							<Gallery
-								images={user?.avatars.resources}
-								isOverlay={true}
-								overlayActions={avatarActions}
-								isActionLoading={isAvatarActionLoading}
-								itemHeight="210px"
+					{checkQueryParam(modalNames.USER_AVATARS) && (
+						<Modal key={modalNames.USER_AVATARS} title="Avatars">
+							{user && isImage(user.avatars) && (
+								<Gallery
+									images={user?.avatars.resources}
+									isOverlay={true}
+									overlayActions={avatarActions}
+									isActionLoading={isAvatarActionLoading}
+									itemHeight="210px"
+								/>
+							)}
+						</Modal>
+					)}
+
+					{checkQueryParam(modalNames.USER_POSTERS) && (
+						<Modal key={modalNames.USER_POSTERS} title="Posters">
+							{user && isImage(user.posters) && (
+								<Gallery
+									images={user?.posters.resources}
+									isOverlay={true}
+									overlayActions={posterActions}
+									isActionLoading={isPosterActionLoading}
+									itemHeight="210px"
+								/>
+							)}
+						</Modal>
+					)}
+
+					{checkQueryParam(modalNames.UPLOAD_AVATAR) && (
+						<Modal key={modalNames.UPLOAD_AVATAR} title="Upload avatar">
+							<Uploader
+								fileName="image"
+								fileTypes={uploadFileParams.types}
+								fileSize={uploadFileParams.size}
+								isLoading={isAvatarActionLoading}
+								callback={uploadAvatar}
 							/>
-						)}
-					</Modal>
-				)}
+						</Modal>
+					)}
 
-				{checkQueryParam(modalNames.USER_POSTERS) && (
-					<Modal key={modalNames.USER_POSTERS} title="Posters">
-						{user && isImage(user.posters) && (
-							<Gallery
-								images={user?.posters.resources}
-								isOverlay={true}
-								overlayActions={posterActions}
-								isActionLoading={isPosterActionLoading}
-								itemHeight="210px"
+					{checkQueryParam(modalNames.UPLOAD_POSTER) && (
+						<Modal key={modalNames.UPLOAD_POSTER} title="Upload poster">
+							<Uploader
+								fileName="image"
+								fileTypes={uploadFileParams.types}
+								fileSize={uploadFileParams.size}
+								isLoading={isPosterActionLoading}
+								callback={uploadPoster}
 							/>
-						)}
-					</Modal>
-				)}
+						</Modal>
+					)}
 
-				{checkQueryParam(modalNames.UPLOAD_AVATAR) && (
-					<Modal key={modalNames.UPLOAD_AVATAR} title="Upload avatar">
-						<Uploader
-							fileName="image"
-							fileTypes={uploadFileParams.types}
-							fileSize={uploadFileParams.size}
-							isLoading={isAvatarActionLoading}
-							callback={uploadAvatar}
+					{showAvatarViewer && (
+						<ImageViewer
+							imageUrl={currentAvatar}
+							closeViewer={closeAvatarViewer}
+							imageUrls={avatars}
 						/>
-					</Modal>
-				)}
+					)}
 
-				{checkQueryParam(modalNames.UPLOAD_POSTER) && (
-					<Modal key={modalNames.UPLOAD_POSTER} title="Upload poster">
-						<Uploader
-							fileName="image"
-							fileTypes={uploadFileParams.types}
-							fileSize={uploadFileParams.size}
-							isLoading={isPosterActionLoading}
-							callback={uploadPoster}
+					{showPosterViewer && (
+						<ImageViewer
+							imageUrl={currentPoster}
+							closeViewer={closePosterViewer}
+							imageUrls={posters}
 						/>
-					</Modal>
-				)}
-
-				{showAvatarViewer && (
-					<ImageViewer
-						imageUrl={currentAvatar}
-						closeViewer={closeAvatarViewer}
-						imageUrls={avatars}
-					/>
-				)}
-
-				{showPosterViewer && (
-					<ImageViewer
-						imageUrl={currentPoster}
-						closeViewer={closePosterViewer}
-						imageUrls={posters}
-					/>
-				)}
-			</AnimatePresence>
-		</>
+					)}
+				</AnimatePresence>
+			</>
+		)
 	)
 }
 

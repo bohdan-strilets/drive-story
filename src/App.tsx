@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import Loader from './components/UI/Loader'
 import { routes } from './config/routes'
 import { useGetCurrentUser } from './hooks/user/useGetCurrentUser'
+import { useAuthStore } from './store/useAuthStore'
 
 const HomePage = lazy(() => import('./pages/HomePage'))
 const AuthPage = lazy(() => import('./pages/AuthPage'))
@@ -22,7 +23,8 @@ const ActivationSuccessPage = lazy(
 )
 
 const App: FC = () => {
-	const { isLoading } = useGetCurrentUser()
+	const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
+	const { isLoading } = useGetCurrentUser(isLoggedIn)
 
 	if (isLoading) return <Loader color="gray" />
 

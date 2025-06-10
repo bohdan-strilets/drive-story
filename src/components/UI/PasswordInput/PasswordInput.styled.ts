@@ -5,7 +5,7 @@ import { breakpoints } from '@/styles/media/breakpoints'
 
 export const Button = styled.button`
 	position: absolute;
-	top: 50%;
+	top: 40%;
 	right: 10px;
 	transform: translateY(-50%);
 

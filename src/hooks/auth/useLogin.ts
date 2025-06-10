@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query'
 import { login } from '@/api/authApi'
 
 import { queryClient } from '@/config/queryClient'
-import { AuthKey } from '@/config/queryKeys'
+import { AuthKey, UserKey } from '@/config/queryKeys'
 
 import { useAuthStore } from '@/store/useAuthStore'
 import { useUserStore } from '@/store/useUserStore'
@@ -20,12 +20,19 @@ export const useLogin = () => {
 	return useMutation<ApiResponse<AuthResponse | null>, unknown, LoginDto>({
 		mutationFn: (dto) => login(dto),
 		onSuccess: (response) => {
-			if (response.success) {
-				setUser(response.data?.user || null)
-				setToken(response.data?.tokens.accessToken || null)
+			if (response.success && response.data) {
+				setUser(response.data?.user)
+				setToken(response.data?.tokens.accessToken)
 				setIsLoggedIn(true)
+				queryClient.invalidateQueries({ queryKey: [UserKey] })
 				queryClient.invalidateQueries({ queryKey: [AuthKey] })
 			}
+		},
+		onError: (error) => {
+			console.error('Login error:', error)
+			setUser(null)
+			setToken(null)
+			setIsLoggedIn(false)
 		},
 	})
 }

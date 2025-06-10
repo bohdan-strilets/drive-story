@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react'
+import { FC } from 'react'
 
 import AccentText from '@/components/UI/AccentText'
 
@@ -14,9 +14,7 @@ import { Item, List, Property, Value } from './ProfileMeta.styled'
 
 const ProfileMeta: FC = () => {
 	const user = useUserStore((state) => state.user)
-
-	const memoCreatedDate = useMemo(() => user?.createdAt || new Date(), [user])
-	const userOnPortal = useCalculateAge(memoCreatedDate)
+	const userOnPortal = useCalculateAge(user?.createdAt)
 
 	return (
 		<List>

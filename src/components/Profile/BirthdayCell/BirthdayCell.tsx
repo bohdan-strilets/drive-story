@@ -9,8 +9,7 @@ import { parsedDateToString } from '@/utils/parsedDateToString'
 import { BirthdayCellProps } from '@/types/props/Profile/BirthdayCellProps'
 
 const BirthdayCell: FC<BirthdayCellProps> = ({ user }) => {
-	const memoBirthDate = user?.birthDate || new Date()
-	const age = useCalculateAge(memoBirthDate)
+	const age = useCalculateAge(user?.birthDate)
 
 	return (
 		<>
