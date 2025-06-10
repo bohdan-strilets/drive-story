@@ -21,6 +21,7 @@ import { defaultImages } from '@/utils/defaultImages'
 
 import { CarInformationProps } from '@/types/props/Garage/CarInformationProps'
 
+import Dimensions from '../Dimensions'
 import Header from '../Header'
 import ImageGallery from '../ImageGallery'
 import LicensePlate from '../LicensePlate'
@@ -36,6 +37,7 @@ const CarInformation: FC<CarInformationProps> = ({
 	car,
 	imageActions,
 	isActionLoading,
+	trims,
 }) => {
 	const { maxMobile } = useResponsive()
 	const { onOpen } = useModal()
@@ -112,8 +114,18 @@ const CarInformation: FC<CarInformationProps> = ({
 
 				<SideMenu>
 					<ActionMenu descriptors={actions} />
+
 					{car.registration.regNumber && (
 						<LicensePlate licensePlate={car.registration.regNumber} />
+					)}
+
+					{trims && (
+						<Dimensions
+							length={trims?.model_length_mm ?? 0}
+							height={trims?.model_height_mm ?? 0}
+							wheelbase={trims?.model_wheelbase_mm ?? 0}
+							weight={trims?.model_weight_kg ?? 0}
+						/>
 					)}
 				</SideMenu>
 			</Container>

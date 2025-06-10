@@ -11,6 +11,8 @@ import { ImCheckmark } from 'react-icons/im'
 import useClickOutside from '@/hooks/ui/useClickOutside'
 import { useDebounce } from '@/hooks/ui/useDebounce'
 
+import { formatLabel } from '@/utils/generateDropdownOptions'
+
 import { DropdownListProps } from '@/types/props/UI/DropdownListProps'
 
 import { fadeSlide } from '@/animations/fadeSlide'
@@ -60,12 +62,12 @@ const DropdownList = <
 	})
 
 	const [isOpen, setIsOpen] = useState(false)
-	const [filterValue, setFilterValue] = useState('')
+	const [filterValue, setFilterValue] = useState<null | string>(null)
 	const [filteredOptions, setFilteredOptions] = useState(options)
 
 	const defaultLabel = useCallback(() => {
 		const option = options.find((item) => item.value === value)
-		setFilterValue(option ? option.label : '')
+		setFilterValue(option ? option.value : '')
 	}, [options, value])
 
 	useEffect(() => {
@@ -87,16 +89,13 @@ const DropdownList = <
 	const ref = useClickOutside<HTMLDivElement>(closeList)
 	const required = rules?.required
 
-	const handleSelectOption = (
-		optionValue: string,
-		optionLabel: string
-	): void => {
+	const handleSelectOption = (optionValue: string): void => {
 		onChange(value === optionValue ? null : optionValue)
-		setFilterValue(value === optionValue ? '' : optionLabel)
+		setFilterValue(value === optionValue ? null : optionValue)
 		closeList()
 	}
 
-	const debouncedQuery = useDebounce<string>(filterValue, 500)
+	const debouncedQuery = useDebounce<string>(filterValue ?? '', 500)
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value.trim().toLowerCase()
@@ -128,7 +127,7 @@ const DropdownList = <
 					onClick={toggleList}
 					onChange={handleChange}
 					onKeyDown={handleKeyDown}
-					value={filterValue}
+					value={formatLabel(filterValue ?? '')}
 					placeholder={placeholder}
 					aria-haspopup="listbox"
 					aria-expanded={isOpen}
@@ -145,7 +144,7 @@ const DropdownList = <
 								<Button
 									type="button"
 									data-value={item.value}
-									onClick={() => handleSelectOption(item.value, item.label)}
+									onClick={() => handleSelectOption(item.value)}
 								>
 									{item.label}
 									{item.value === value && (

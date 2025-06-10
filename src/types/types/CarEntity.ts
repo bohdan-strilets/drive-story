@@ -11,6 +11,7 @@ export type CarBasicInfo = {
 	year: string
 	shortName?: string | null
 	generation?: string | null
+	trimsId?: string | null
 }
 
 export type EngineSpecs = {

@@ -8,7 +8,7 @@ import {
 
 export type CarBasicInfoDto = Pick<
 	CarBasicInfo,
-	'make' | 'model' | 'generation' | 'shortName' | 'year'
+	'make' | 'model' | 'generation' | 'shortName' | 'year' | 'trimsId'
 >
 
 export type CarEngineDto = Pick<EngineSpecs, 'power' | 'volume'>

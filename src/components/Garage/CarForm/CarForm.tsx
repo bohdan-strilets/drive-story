@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 import {
 	FieldPath,
 	FormProvider,
@@ -55,6 +55,8 @@ const fieldsByStep: Record<number, FieldPath<Fields>[]> = {
 }
 
 const CarForm: FC<CarFormProps> = ({ mode, car }) => {
+	const [trimsId, setTrimsId] = useState<null | string>(null)
+
 	const methods = useForm<Fields>(Validation)
 
 	useEffect(() => {
@@ -90,7 +92,10 @@ const CarForm: FC<CarFormProps> = ({ mode, car }) => {
 	})
 
 	const onSubmit: SubmitHandler<Fields> = (data) => {
-		const payload: CarDetailsDto = data
+		const payload: CarDetailsDto = {
+			...data,
+			basicInfo: { ...data.basicInfo, trimsId },
+		}
 
 		if (mode === 'create') {
 			return submitCreateCar(payload)
@@ -103,12 +108,14 @@ const CarForm: FC<CarFormProps> = ({ mode, car }) => {
 		return submitUpdateCar(updateCarParams)
 	}
 
+	const getTrimsId = (trimsId: string | null) => setTrimsId(trimsId)
+
 	return (
 		<FormProvider {...methods}>
 			<Stepper currentStep={step} totalSteps={maxStep} />
 
 			<form onSubmit={methods.handleSubmit(onSubmit)}>
-				{step === 1 && <BasicInfoFields />}
+				{step === 1 && <BasicInfoFields getTrimsId={getTrimsId} />}
 				{step === 2 && <SpecificationsFields />}
 				{step === 3 && <RegistrationFields />}
 				{step === 4 && <OwnershipAndDescFields />}

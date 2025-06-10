@@ -50,3 +50,24 @@ export const getTrims = async ({
 		return handleApiError(error)
 	}
 }
+
+export const getTrimsById = async ({
+	make,
+	model,
+	year,
+	trimsId,
+}: {
+	make?: string
+	model?: string
+	year?: string
+	trimsId?: string | null
+}): Promise<ApiResponse<CarTrim | null>> => {
+	try {
+		const params = { make, model, year, trimsId }
+		const path = `${ENDPOINT}/trims-by-id`
+		const { data } = await apiClient.get(path, { params })
+		return data
+	} catch (error) {
+		return handleApiError(error)
+	}
+}

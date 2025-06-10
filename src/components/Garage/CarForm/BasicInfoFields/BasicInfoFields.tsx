@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import DropdownList from '@/components/UI/DropdownList'
@@ -9,13 +9,18 @@ import { useFetchMakes } from '@/hooks/carQuery/useFetchMakes'
 import { useFetchModelForMake } from '@/hooks/carQuery/useFetchModelForMake'
 import { useFetchTrims } from '@/hooks/carQuery/useFetchTrims'
 
-import { generateDropdownOptions } from '@/utils/generateDropdownOptions'
+import {
+	formatLabel,
+	generateDropdownOptions,
+} from '@/utils/generateDropdownOptions'
 import { generateNumberArray } from '@/utils/generateNumberArray'
+
+import { BasicInfoFieldsProps } from '@/types/props/Garage/CarForm'
 
 import { carRules } from '@/validation/rules/carRules'
 import { Fields } from '@/validation/schemas/CarSchema'
 
-const BasicInfoFields: FC = () => {
+const BasicInfoFields: FC<BasicInfoFieldsProps> = ({ getTrimsId }) => {
 	const { control, watch } = useFormContext<Fields>()
 
 	const currentYear = new Date().getFullYear()
@@ -29,9 +34,14 @@ const BasicInfoFields: FC = () => {
 		makes?.data?.map((item) => item.make_id) ?? []
 	)
 
+	const make = watch('basicInfo.make')
+	const year = watch('basicInfo.year')
+	const model = watch('basicInfo.model')
+	const generation = formatLabel(watch('basicInfo.generation') ?? '')
+
 	const { data: models, isLoading: isFetchModel } = useFetchModelForMake({
-		make: watch('basicInfo.make'),
-		year: watch('basicInfo.year'),
+		make,
+		year,
 	})
 
 	const modelOptions = generateDropdownOptions(
@@ -39,14 +49,24 @@ const BasicInfoFields: FC = () => {
 	)
 
 	const { data: trims, isLoading: isFetchTrims } = useFetchTrims({
-		make: watch('basicInfo.make'),
-		model: watch('basicInfo.model'),
-		year: watch('basicInfo.year'),
+		make,
+		model,
+		year,
 	})
 
 	const trimsOptions = generateDropdownOptions(
 		trims?.data?.map((item) => item.model_trim) ?? []
 	)
+
+	useEffect(() => {
+		const selectedTrims = trims?.data?.find(
+			(item) => item.model_trim.toLowerCase() === generation?.toLowerCase()
+		)
+
+		if (selectedTrims) {
+			getTrimsId(selectedTrims?.model_id)
+		}
+	}, [generation, getTrimsId, trims?.data])
 
 	return (
 		<>

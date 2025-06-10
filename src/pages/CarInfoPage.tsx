@@ -12,6 +12,7 @@ import Paragraph from '@/components/UI/Paragraph'
 import Uploader from '@/components/Uploader'
 
 import { useFetchCar } from '@/hooks/car/useFetchCar'
+import { useFetchTrimsById } from '@/hooks/carQuery/useFetchTrimsById'
 import { useGalleryManager } from '@/hooks/ui/useGalleryManager'
 import useModal from '@/hooks/ui/useModal'
 import useSubmit from '@/hooks/ui/useSubmit'
@@ -31,6 +32,12 @@ const CarInfoPage: FC = () => {
 	const { carId } = useParams()
 
 	const { data: car, isLoading, isError } = useFetchCar(carId)
+	const { data: carTrims } = useFetchTrimsById({
+		make: car?.basicInfo.make,
+		model: car?.basicInfo.model,
+		year: car?.basicInfo.year,
+		trimsId: car?.basicInfo.trimsId,
+	})
 
 	const {
 		actions: imageActions,
@@ -61,6 +68,7 @@ const CarInfoPage: FC = () => {
 					car={car}
 					imageActions={imageActions}
 					isActionLoading={isImageLoading}
+					trims={carTrims?.data}
 				/>
 			)}
 
