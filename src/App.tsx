@@ -38,7 +38,7 @@ const App: FC = () => {
 	const { mutateAsync: logout, isPending } = useLogout()
 	const logoutAndNavigate = useSubmit<AuthResponse | null>({
 		callback: logout,
-		navigateTo: routes.HOME,
+		navigateTo: routes.AUTH,
 	})
 
 	if (isLoading) return <Loader color="gray" />

@@ -2,9 +2,6 @@ import { useMutation } from '@tanstack/react-query'
 
 import { removeProfile } from '@/api/userApi'
 
-import { queryClient } from '@/config/queryClient'
-import { AuthKey, UserKey } from '@/config/queryKeys'
-
 import { useAuthStore } from '@/store/useAuthStore'
 import { useUserStore } from '@/store/useUserStore'
 
@@ -23,7 +20,6 @@ export const useRemoveProfile = () => {
 				setUser(null)
 				setToken(null)
 				setIsLoggedIn(false)
-				queryClient.invalidateQueries({ queryKey: [UserKey, AuthKey] })
 			}
 		},
 	})
