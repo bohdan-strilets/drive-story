@@ -116,7 +116,10 @@ const CarInformation: FC<CarInformationProps> = ({
 					<ActionMenu descriptors={actions} />
 
 					{car.registration.regNumber && (
-						<LicensePlate licensePlate={car.registration.regNumber} />
+						<LicensePlate
+							licensePlate={car.registration.regNumber}
+							margin="15px 0"
+						/>
 					)}
 
 					{trims && (
