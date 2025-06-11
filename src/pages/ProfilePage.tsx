@@ -14,7 +14,6 @@ import Loader from '@/components/UI/Loader'
 import Paragraph from '@/components/UI/Paragraph'
 import Uploader from '@/components/Uploader'
 
-import { useLogout } from '@/hooks/auth/useLogout'
 import { useGalleryManager } from '@/hooks/ui/useGalleryManager'
 import useModal from '@/hooks/ui/useModal'
 import useSubmit from '@/hooks/ui/useSubmit'
@@ -31,24 +30,17 @@ import { uploadFileParams } from '@/utils/uploadFileParams'
 
 import { EntityType } from '@/types/enums/EntityType'
 import { isImage } from '@/types/guards/isImage'
-import { AuthResponse } from '@/types/types/AuthResponse'
 import { User } from '@/types/types/User'
 
 const ProfilePage: FC = () => {
 	const { checkQueryParam, onClose } = useModal()
 
-	const { mutateAsync: logout, isPending: isLoggingOut } = useLogout()
 	const { mutateAsync: removeProfile, isPending: isRemoved } =
 		useRemoveProfile()
 
 	const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
 	const { data, isLoading } = useGetCurrentUser(isLoggedIn)
 	const user = data?.data
-
-	const logoutAndNavigate = useSubmit<AuthResponse | null>({
-		callback: logout,
-		navigateTo: routes.HOME,
-	})
 
 	const deleteAndNavigate = useSubmit<User | null>({
 		callback: removeProfile,
@@ -109,21 +101,6 @@ const ProfilePage: FC = () => {
 							title="Resend activation email"
 						>
 							<ResendEmail />
-						</Modal>
-					)}
-
-					{checkQueryParam(modalNames.EXIT_PROFILE) && (
-						<Modal
-							key={modalNames.EXIT_PROFILE}
-							title="Logout from profile?"
-							isDialog={true}
-							isLoading={isLoggingOut}
-							negativeBtnLabel="no"
-							positiveBtnLabel="yes"
-							negativeCallback={onClose}
-							positiveCallback={logoutAndNavigate}
-						>
-							<p>Do you want to log out of your current account?</p>
 						</Modal>
 					)}
 
