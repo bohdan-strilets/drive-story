@@ -21,3 +21,5 @@ export const ModelKey = 'model'
 export const TrimKey = 'trim'
 
 export const CountryKey = 'country'
+
+export const FuelingKey = 'fueling'

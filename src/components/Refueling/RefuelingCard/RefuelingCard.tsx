@@ -4,18 +4,28 @@ import Paragraph from '@/components/UI/Paragraph'
 
 import useResponsive from '@/hooks/ui/useResponsive'
 
-import { FuelType } from '@/types/enums/FuelType'
+import { parsedDateToString } from '@/utils/parsedDateToString'
+
+import { RefuelingCardProps } from '@/types/props/Refueling/RefuelingCardProps'
 
 import RefuelingIcon from '../RefuelingIcon'
 
 import { Item, List, Wrapper } from './RefuelingCard.styled'
 
-const RefuelingCard: FC = () => {
+const RefuelingCard: FC<RefuelingCardProps> = ({
+	fuelType,
+	quantity,
+	pricePerUnit,
+	totalCost,
+	fuelingDate,
+}) => {
 	const { maxTablet, maxMobile } = useResponsive()
+
+	const priceAllFuel = quantity * pricePerUnit
 
 	return (
 		<Wrapper>
-			<RefuelingIcon fuelType={FuelType.DIESEL_HYBRID} />
+			<RefuelingIcon fuelType={fuelType} />
 
 			<List
 				margin={maxTablet ? '0 0 15px 0' : ''}
@@ -30,7 +40,7 @@ const RefuelingCard: FC = () => {
 						color="gray"
 						fontWeight={600}
 					>
-						44 L
+						{quantity} L
 					</Paragraph>
 				</Item>
 				<Item>
@@ -42,7 +52,7 @@ const RefuelingCard: FC = () => {
 						color="gray"
 						fontWeight={600}
 					>
-						6.30 PLN
+						{pricePerUnit} PLN
 					</Paragraph>
 				</Item>
 				<Item>
@@ -54,7 +64,7 @@ const RefuelingCard: FC = () => {
 						color="gray"
 						fontWeight={600}
 					>
-						277.2 PLN
+						{priceAllFuel.toFixed(2)} PLN
 					</Paragraph>
 				</Item>
 			</List>
@@ -69,7 +79,7 @@ const RefuelingCard: FC = () => {
 						color="gray"
 						fontWeight={600}
 					>
-						305.73 PLN
+						{totalCost} PLN
 					</Paragraph>
 				</Item>
 				<Item>
@@ -81,7 +91,7 @@ const RefuelingCard: FC = () => {
 						color="gray"
 						fontWeight={600}
 					>
-						11.06.2025
+						{parsedDateToString(fuelingDate)}
 					</Paragraph>
 				</Item>
 			</List>

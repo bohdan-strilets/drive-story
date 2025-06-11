@@ -1,5 +1,7 @@
-import { FuelType } from '@/types/enums/FuelType'
+import { RefuelingType } from '@/types/enums/RefuelingType'
 
 export type RefuelingIconProps = {
-	fuelType: FuelType
+	fuelType: RefuelingType
 }
+
+export type IconProps = Pick<RefuelingIconProps, 'fuelType'>

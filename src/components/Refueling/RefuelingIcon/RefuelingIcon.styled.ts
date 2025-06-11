@@ -1,7 +1,8 @@
 import styled from '@emotion/styled'
 import { BsFillFuelPumpFill } from 'react-icons/bs'
 
-import { FuelType } from '@/types/enums/FuelType'
+import { RefuelingType } from '@/types/enums/RefuelingType'
+import { IconProps } from '@/types/props/Refueling/RefuelingIconProps'
 
 import { getColor } from '@/styles/helpers/getColor'
 
@@ -10,30 +11,22 @@ export const Wrapper = styled.div`
 	display: inline-flex;
 `
 
-export const Icon = styled(BsFillFuelPumpFill)<{ fuelType: FuelType }>`
+export const Icon = styled(BsFillFuelPumpFill, {
+	shouldForwardProp: (prop) => prop !== 'fuelType',
+})<IconProps>`
 	width: 74px;
 	height: 74px;
 
 	color: ${({ fuelType }) => {
 		switch (fuelType) {
-			case FuelType.DIESEL:
+			case RefuelingType.DIESEL:
 				return getColor('#7f8c8d')
-
-			case FuelType.DIESEL_HYBRID:
-				return getColor('#4b6f63')
-
-			case FuelType.GASOLINE:
+			case RefuelingType.PETROL:
 				return getColor('#27ae60')
-
-			case FuelType.GASOLINE_HYBRID:
-				return getColor('#2ecc71')
-
-			case FuelType.GASOLINE_GAS:
+			case RefuelingType.GAS:
 				return getColor('#2980b9')
-
-			case FuelType.ELECTRIC:
+			case RefuelingType.ELECTRIC:
 				return getColor('#00e6ac')
-
 			default:
 				return getColor('#95a5a6')
 		}
