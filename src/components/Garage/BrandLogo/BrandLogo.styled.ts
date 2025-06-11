@@ -23,3 +23,5 @@ export const Wrapper = styled.div<WrapperProps>`
 		height: 110px;
 	}
 `
+
+export const Flag = styled.div``

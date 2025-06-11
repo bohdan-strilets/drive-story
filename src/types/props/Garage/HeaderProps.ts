@@ -7,4 +7,5 @@ export type HeaderProps = {
 	carId?: string
 	updatedDate?: Date
 	description?: string | null
+	countryName?: string
 }

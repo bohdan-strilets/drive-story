@@ -71,6 +71,7 @@ const CarInformation: FC<CarInformationProps> = ({
 				updatedDate={car.updatedAt}
 				description={car.description}
 				isCurrentCar={isCurrentCar}
+				countryName={trims?.make_country}
 			/>
 
 			<MaintenanceAlerts

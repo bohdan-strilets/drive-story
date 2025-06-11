@@ -45,4 +45,5 @@ export type CarTrim = {
 	model_sold_in_us: string
 	model_co2: string
 	model_make_display: string
+	make_country: string
 }

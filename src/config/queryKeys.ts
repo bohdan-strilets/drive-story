@@ -19,3 +19,5 @@ export const MakeKey = 'make'
 export const ModelKey = 'model'
 
 export const TrimKey = 'trim'
+
+export const CountryKey = 'country'

@@ -8,6 +8,7 @@ import ImageBox from '@/components/UI/ImageBox'
 import Paragraph from '@/components/UI/Paragraph'
 import Title from '@/components/UI/Title'
 
+import { useFetchFlag } from '@/hooks/country/useFetchFlag'
 import useResponsive from '@/hooks/ui/useResponsive'
 
 import { routes } from '@/config/routes'
@@ -29,9 +30,13 @@ const Header: FC<HeaderProps> = ({
 	updatedDate,
 	description,
 	isCurrentCar,
+	countryName,
 }) => {
 	const { maxMobile } = useResponsive()
 	const navigate = useNavigate()
+
+	const { data: countryInfo, isPending } = useFetchFlag(countryName)
+	const flagSvg = countryInfo?.[0].flags.svg
 
 	return (
 		<>
@@ -54,6 +59,8 @@ const Header: FC<HeaderProps> = ({
 					<BrandLogo
 						brand={carMake}
 						margin={maxMobile ? '0 5px 0 0' : '0 15px 0 0'}
+						countryFlag={flagSvg}
+						isFetchFlag={isPending}
 					/>
 					<div>
 						<Title
