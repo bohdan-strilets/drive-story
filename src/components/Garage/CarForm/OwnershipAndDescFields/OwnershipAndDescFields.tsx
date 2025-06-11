@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import DatePicker from '@/components/UI/DatePicker'
+import NumberInput from '@/components/UI/NumberInput'
 import Textarea from '@/components/UI/Textarea'
 import Title from '@/components/UI/Title'
 
@@ -40,6 +41,30 @@ const OwnershipAndDescFields: FC = () => {
 					minDate: new Date(`${yearIssue}-01-01`),
 					maxDate: carRules.ownership.saleDate.max,
 				}}
+			/>
+			<NumberInput
+				control={control}
+				label="Purchase price (PLN)"
+				name="ownership.purchasePrice"
+				width="100%"
+				margin="0 0 15px 0"
+				rules={{
+					min: carRules.ownership.purchasePrice.min,
+					max: carRules.ownership.purchasePrice.max,
+				}}
+				defaultValue={0}
+			/>
+			<NumberInput
+				control={control}
+				label="Sale price (PLN)"
+				name="ownership.salePrice"
+				width="100%"
+				margin="0 0 15px 0"
+				rules={{
+					min: carRules.ownership.salePrice.min,
+					max: carRules.ownership.salePrice.max,
+				}}
+				defaultValue={0}
 			/>
 
 			<Textarea

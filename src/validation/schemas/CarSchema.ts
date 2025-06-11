@@ -12,7 +12,7 @@ export const {
 } = carRules
 const { make, model, year, generation, shortName } = basicInfo
 const { firstRegDate, regNumber, vin } = registration
-const { saleDate } = ownership
+const { saleDate, purchasePrice, salePrice } = ownership
 const {
 	bodyType,
 	transmission,
@@ -162,6 +162,20 @@ export const Schema = yup.object().shape({
 				}
 				return true
 			}),
+
+		purchasePrice: yup
+			.number()
+			.min(purchasePrice.min)
+			.max(purchasePrice.max)
+			.integer(purchasePrice.integerMessage)
+			.positive(purchasePrice.integerMessage),
+
+		salePrice: yup
+			.number()
+			.min(salePrice.min)
+			.max(salePrice.max)
+			.integer(salePrice.integerMessage)
+			.positive(salePrice.integerMessage),
 	}),
 
 	description: yup

@@ -40,6 +40,8 @@ export type CarRegistration = {
 export type CarOwnership = {
 	purchaseDate?: Date | null
 	saleDate?: Date | null
+	purchasePrice?: number
+	salePrice?: number
 }
 
 export type InsuranceInfo = {

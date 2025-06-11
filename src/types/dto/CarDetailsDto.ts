@@ -31,7 +31,10 @@ export type CarRegistrationDto = Pick<
 	'firstRegDate' | 'regNumber' | 'vin'
 >
 
-export type CarOwnershipDto = Pick<CarOwnership, 'purchaseDate' | 'saleDate'>
+export type CarOwnershipDto = Pick<
+	CarOwnership,
+	'purchaseDate' | 'saleDate' | 'purchasePrice' | 'salePrice'
+>
 
 export type CarDetailsDto = {
 	basicInfo: CarBasicInfoDto

@@ -125,6 +125,16 @@ export const carRules = {
 			max: new Date(),
 			message: 'Sale date cannot be before purchase date',
 		},
+		purchasePrice: {
+			min: 1,
+			max: 5000000,
+			integerMessage: 'Purchase price must be a positive, integer number',
+		},
+		salePrice: {
+			min: 1,
+			max: 5000000,
+			integerMessage: 'Sale price must be a positive, integer number',
+		},
 	},
 	description: {
 		min: 20,
