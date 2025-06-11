@@ -75,7 +75,12 @@ export const getCarActions = ({
 			key: 'refueling-sessions',
 			label: 'Refueling sessions',
 			icon: <BsFillFuelPumpFill size={20} />,
-			callback: () => () => null,
+			callback: () => {
+				if (navigate) {
+					const path = generatePath(routes.REFUELING_BY_CAR, { carId: carId })
+					navigate(path)
+				}
+			},
 		},
 		{
 			key: 'repair-and-maintenance',

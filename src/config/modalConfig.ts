@@ -34,4 +34,5 @@ export const modalNames = {
 	CLEAR_CONTACT_GALLERY: 'clear-contact-gallery',
 	EDIT_CONTACT: 'edit-contact',
 	DELETE_CONTACT: 'delete-contact',
+	ADD_REFUELING: 'add-refueling',
 } as const

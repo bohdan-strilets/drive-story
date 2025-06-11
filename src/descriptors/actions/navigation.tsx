@@ -55,7 +55,7 @@ export const navigation: NavigationDescriptor[] = [
 		icon: (
 			<BsFuelPumpFill color="var(--yellow-color)" size={20} className="icon" />
 		),
-		route: routes.FUEL,
+		route: routes.REFUELING_BY_CAR,
 	},
 	{
 		key: 'accessories',
