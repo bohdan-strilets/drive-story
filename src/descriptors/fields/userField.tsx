@@ -1,5 +1,6 @@
 import BirthdayCell from '@/components/Profile/BirthdayCell'
 import EmailActivationCell from '@/components/Profile/EmailActivationCell'
+import PasswordCell from '@/components/Profile/PasswordCell'
 
 import { formatPhoneNumber } from '@/utils/formatPhoneNumber'
 import { formatLabel } from '@/utils/generateDropdownOptions'
@@ -21,7 +22,7 @@ export const userField: FieldDescriptor<User>[] = [
 	{
 		key: 'password',
 		label: 'Password',
-		render: () => '************',
+		render: (user) => <PasswordCell user={user} />,
 	},
 	{
 		key: 'birthday',

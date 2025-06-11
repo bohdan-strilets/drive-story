@@ -24,4 +24,5 @@ export type User = {
 	phoneNumber?: string | null
 	location?: Location | null
 	currentCar?: string | null
+	isGoogleAuth: boolean
 }

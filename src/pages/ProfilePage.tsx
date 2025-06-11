@@ -9,6 +9,7 @@ import Profile from '@/components/Profile'
 import EditEmail from '@/components/Profile/EditEmail'
 import EditPassword from '@/components/Profile/EditPassword'
 import EditProfile from '@/components/Profile/EditProfile'
+import SetPassword from '@/components/Profile/SetPassword'
 import Loader from '@/components/UI/Loader'
 import Paragraph from '@/components/UI/Paragraph'
 import Uploader from '@/components/Uploader'
@@ -216,6 +217,12 @@ const ProfilePage: FC = () => {
 							closeViewer={closePosterViewer}
 							imageUrls={posters}
 						/>
+					)}
+
+					{checkQueryParam(modalNames.SET_PASSWORD) && (
+						<Modal key={modalNames.SET_PASSWORD} title="Set password">
+							<SetPassword />
+						</Modal>
 					)}
 				</AnimatePresence>
 			</>

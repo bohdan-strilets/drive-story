@@ -6,6 +6,7 @@ import { CurrentCarDto } from '@/types/dto/CurrentCarDto'
 import { EditPasswordDto } from '@/types/dto/EditPasswordDto'
 import { EmailDto } from '@/types/dto/EmailDto'
 import { ProfileDto } from '@/types/dto/ProfileDto'
+import { SetPasswordDto } from '@/types/dto/SetPasswordDto'
 import { ResetPasswordParams } from '@/types/params/ResetPasswordParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { User } from '@/types/types/User'
@@ -110,6 +111,18 @@ export const setCurrentCar = async (
 ): Promise<ApiResponse<User | null>> => {
 	try {
 		const path = `${ENDPOINT}/set-current-car`
+		const { data } = await apiClient.patch(path, payload)
+		return data
+	} catch (error) {
+		return handleApiError(error)
+	}
+}
+
+export const setPassword = async (
+	payload: SetPasswordDto
+): Promise<ApiResponse> => {
+	try {
+		const path = `${ENDPOINT}/set-password`
 		const { data } = await apiClient.patch(path, payload)
 		return data
 	} catch (error) {
