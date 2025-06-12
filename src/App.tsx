@@ -26,6 +26,7 @@ const RecoverPasswordPage = lazy(() => import('./pages/RecoverPasswordPage'))
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'))
 const ContactInfoPage = lazy(() => import('./pages/ContactInfoPage'))
 const RefuelingPage = lazy(() => import('./pages/RefuelingPage'))
+const RefuelingInfoPage = lazy(() => import('./pages/RefuelingInfoPage'))
 const ActivationSuccessPage = lazy(
 	() => import('./pages/ActivationSuccessPage')
 )
@@ -67,6 +68,10 @@ const App: FC = () => {
 					<Route path={routes.INSURANCE_BY_ID} element={<InsurancePage />} />
 					<Route path={routes.INSPECTION_BY_ID} element={<InspectionPage />} />
 					<Route path={routes.REFUELING_BY_CAR} element={<RefuelingPage />} />
+					<Route
+						path={routes.REFUELING_BY_ID}
+						element={<RefuelingInfoPage />}
+					/>
 					<Route path="*" element={<NotFoundPage />} />
 				</Routes>
 			</Suspense>
