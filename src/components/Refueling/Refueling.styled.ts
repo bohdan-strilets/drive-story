@@ -4,12 +4,13 @@ import { getColor } from '@/styles/helpers/getColor'
 
 export const Item = styled.li`
 	margin-bottom: 10px;
+	padding: 5px;
 
 	border: 1px solid #e8e8e8;
 	border-radius: 5px;
 
-	transition: box-shadow var(--hover-effect);
 	cursor: pointer;
+	transition: box-shadow var(--hover-effect);
 
 	:last-child {
 		margin-bottom: 0;

@@ -24,7 +24,7 @@ const PhoneBookPage = lazy(() => import('./pages/PhoneBookPage'))
 const ProfilePage = lazy(() => import('./pages/ProfilePage'))
 const RecoverPasswordPage = lazy(() => import('./pages/RecoverPasswordPage'))
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'))
-const ContactInfoPage = lazy(() => import('./pages/ContactInfoPage'))
+const ContactPage = lazy(() => import('./pages/ContactPage'))
 const RefuelingPage = lazy(() => import('./pages/RefuelingPage'))
 const RefuelingInfoPage = lazy(() => import('./pages/RefuelingInfoPage'))
 const ActivationSuccessPage = lazy(
@@ -63,7 +63,7 @@ const App: FC = () => {
 					<Route path={routes.PROFILE} element={<ProfilePage />} />
 					<Route path={routes.GARAGE} element={<GaragePage />} />
 					<Route path={routes.PHONE_BOOK} element={<PhoneBookPage />} />
-					<Route path={routes.CONTACT_BY_ID} element={<ContactInfoPage />} />
+					<Route path={routes.CONTACT_BY_ID} element={<ContactPage />} />
 					<Route path={routes.CAR_BY_ID} element={<CarInfoPage />} />
 					<Route path={routes.INSURANCE_BY_ID} element={<InsurancePage />} />
 					<Route path={routes.INSPECTION_BY_ID} element={<InspectionPage />} />

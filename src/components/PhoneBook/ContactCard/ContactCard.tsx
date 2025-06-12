@@ -8,6 +8,8 @@ import Paragraph from '@/components/UI/Paragraph'
 
 import useResponsive from '@/hooks/ui/useResponsive'
 
+import { formatPhoneNumber } from '@/utils/formatPhoneNumber'
+
 import { isImage } from '@/types/guards/isImage'
 import { ContactCardProps } from '@/types/props/PhoneBook/ContactCardProps'
 
@@ -79,7 +81,7 @@ const ContactCard: FC<ContactCardProps> = ({
 						margin="0 0 0 10px"
 						fontSize={14}
 					>
-						{phone}
+						{formatPhoneNumber(phone)}
 					</Paragraph>
 				</IconWithText>
 

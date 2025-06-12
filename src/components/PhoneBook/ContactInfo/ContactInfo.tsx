@@ -2,6 +2,7 @@ import { FC } from 'react'
 
 import AddressMap from '@/components/AddressMap'
 import ActionMenu from '@/components/Layout/ActionMenu'
+import ImageGallery from '@/components/Layout/ImageGallery'
 import PropertyList from '@/components/Layout/PropertyList'
 import ImageBox from '@/components/UI/ImageBox'
 import InitialAvatar from '@/components/UI/InitialAvatar'
@@ -18,14 +19,13 @@ import { isImage } from '@/types/guards/isImage'
 import { ContactInfoProps } from '@/types/props/PhoneBook/ContactInfoProps'
 
 import Header from '../Header'
-import ImageGallery from '../ImageGallery'
 
 import { Container, InformationWrapper, SideMenu } from './ContactInfo.styled'
 
 const ContactInfo: FC<ContactInfoProps> = ({
 	contact,
-	imageActions,
-	isActionLoading,
+	overlayActions,
+	isProcessing,
 }) => {
 	const { onOpen } = useModal()
 	const { maxMobile } = useResponsive()
@@ -47,8 +47,8 @@ const ContactInfo: FC<ContactInfoProps> = ({
 			/>
 			<ImageGallery
 				photos={photos}
-				imageActions={imageActions}
-				isActionLoading={isActionLoading}
+				overlayActions={overlayActions}
+				isProcessing={isProcessing}
 			/>
 			<Container>
 				<InformationWrapper>

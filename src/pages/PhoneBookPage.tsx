@@ -42,7 +42,7 @@ const PhoneBookPage: FC = () => {
 				margin="0 0 10px 0"
 			/>
 
-			<ContactsFilter getQuery={setQuery} />
+			{contacts.length > 0 && <ContactsFilter getQuery={setQuery} />}
 
 			{isLoading && <Loader color="gray" />}
 

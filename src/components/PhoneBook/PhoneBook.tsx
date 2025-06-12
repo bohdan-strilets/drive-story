@@ -3,16 +3,18 @@ import { generatePath, useNavigate } from 'react-router-dom'
 
 import useServerPagination from '@/hooks/ui/useServerPagination'
 
+import phoneBookWebp from '@/assets/phoneBook/phone-book.webp'
+
 import { routes } from '@/config/routes'
 
 import { PhoneBookProps } from '@/types/props/PhoneBook/PhoneBookProps'
 
 import { fadeSlide } from '@/animations/fadeSlide'
 
+import EmptyState from '../UI/EmptyState'
 import Pagination from '../UI/Pagination'
 
 import ContactCard from './ContactCard'
-import NoContactState from './NoContactState'
 import { Item } from './PhoneBook.styled'
 
 const PhoneBook: FC<PhoneBookProps> = ({
@@ -28,7 +30,14 @@ const PhoneBook: FC<PhoneBookProps> = ({
 			onPageChange: setPage,
 		})
 
-	if (contacts.length === 0) return <NoContactState />
+	if (contacts.length === 0)
+		return (
+			<EmptyState
+				title="Nothing added yet..."
+				message="Looks like you haven't added anything yet.... Seems like it's high time to do it"
+				imageUrl={phoneBookWebp}
+			/>
+		)
 
 	return (
 		<>
