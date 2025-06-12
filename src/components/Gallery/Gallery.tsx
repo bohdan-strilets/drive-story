@@ -16,9 +16,9 @@ import OverlayActions from './OverlayActions'
 
 const Gallery: FC<GalleryProps> = ({
 	images = [],
-	isOverlay = false,
+	isShowOverlay = false,
 	overlayActions,
-	isActionLoading,
+	isProcessing,
 	itemsPerPage = 6,
 	itemHeight = 'auto',
 }) => {
@@ -56,11 +56,11 @@ const Gallery: FC<GalleryProps> = ({
 							>
 								<ImageContainer>
 									<ImageBox imageUrl={imageUrl} width="100%" height="100%" />
-									{isOverlay && (
+									{isShowOverlay && (
 										<OverlayActions
 											imageUrl={imageUrl}
 											overlayActions={overlayActions}
-											isActionLoading={isActionLoading}
+											isProcessing={isProcessing}
 										/>
 									)}
 								</ImageContainer>

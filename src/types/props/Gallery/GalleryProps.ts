@@ -2,9 +2,9 @@ import { OverlayActionsProps } from './OverlayActionsProps'
 
 export type GalleryProps = {
 	images: string[]
-	isOverlay?: boolean
+	isShowOverlay?: boolean
 	itemsPerPage?: number
 	itemHeight?: string
-} & Pick<OverlayActionsProps, 'overlayActions' | 'isActionLoading'>
+} & Pick<OverlayActionsProps, 'overlayActions' | 'isProcessing'>
 
 export type ItemProps = Pick<GalleryProps, 'itemHeight'>

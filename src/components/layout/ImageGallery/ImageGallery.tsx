@@ -8,12 +8,12 @@ import Title from '@/components/UI/Title'
 import useResponsive from '@/hooks/ui/useResponsive'
 
 import { isImage } from '@/types/guards/isImage'
-import { ImageGalleryProps } from '@/types/props/Insurance/ImageGalleryProps'
+import { ImageGalleryProps } from '@/types/props/Layout/ImageGalleryProps'
 
 const ImageGallery: FC<ImageGalleryProps> = ({
 	photos,
-	imageActions,
-	isActionLoading,
+	isProcessing,
+	overlayActions,
 }) => {
 	const { maxMobile } = useResponsive()
 
@@ -28,11 +28,11 @@ const ImageGallery: FC<ImageGalleryProps> = ({
 				</Title>
 				<Gallery
 					images={photos.resources}
-					overlayActions={imageActions}
-					isActionLoading={isActionLoading}
+					overlayActions={overlayActions}
+					isProcessing={isProcessing}
 					itemsPerPage={maxMobile ? 3 : 6}
 					itemHeight="240px"
-					isOverlay={true}
+					isShowOverlay={true}
 				/>
 				<DecorativeLine color="gray" type="dashed" margin="20px 0" />
 			</>

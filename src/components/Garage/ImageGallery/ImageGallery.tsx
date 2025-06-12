@@ -28,10 +28,10 @@ const ImageGallery: FC<ImageGalleryProps> = ({
 				<Gallery
 					images={photos.resources}
 					overlayActions={imageActions}
-					isActionLoading={isActionLoading}
+					isProcessing={isActionLoading}
 					itemsPerPage={maxMobile ? 3 : 6}
 					itemHeight="240px"
-					isOverlay={true}
+					isShowOverlay={true}
 				/>
 			</>
 		)

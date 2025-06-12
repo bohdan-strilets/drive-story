@@ -1,14 +1,9 @@
-import { Action } from '@/types/hooks/useGalleryManager'
-import { BindContactParams } from '@/types/params/BindContactParams'
-import { ApiResponse } from '@/types/types/ApiResponse'
 import { Insurance } from '@/types/types/Insurance'
 
-export type InsuranceInfoProps<T> = {
-	imageActions: Action[]
-	isActionLoading: boolean
+import { OverlayActionsProps } from '../Gallery/OverlayActionsProps'
+import { BindContactProps } from '../PhoneBook/BindContactProps'
+
+export type InsuranceInfoProps = {
 	insurance: Insurance
-	isBinding: boolean
-	bindContact: (
-		params: BindContactParams
-	) => Promise<ApiResponse<T | null> | undefined>
-}
+} & Pick<OverlayActionsProps, 'overlayActions' | 'isProcessing'> &
+	Pick<BindContactProps<Insurance>, 'isBinding' | 'bindContact'>

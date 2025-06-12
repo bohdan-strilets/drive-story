@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import useResponsive from '@/hooks/ui/useResponsive'
 
-import errorMessageImage from '@/assets/errorMessage/error-message.webp'
+import garageWebp from '@/assets/ui/garage.webp'
 
 import { ErrorMessageProps } from '@/types/props/UI/ErrorMessageProps'
 
@@ -18,7 +18,7 @@ const ErrorMessage: FC<ErrorMessageProps> = ({ message }) => {
 				{message}
 			</Paragraph>
 			<ImageBox
-				imageUrl={errorMessageImage}
+				imageUrl={garageWebp}
 				width="100%"
 				height={maxTablet ? '300px' : '500px'}
 				size="contain"

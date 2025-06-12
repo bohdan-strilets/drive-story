@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react'
+import { FC, useEffect, useRef } from 'react'
 
 import ActionMenu from '@/components/Layout/ActionMenu'
+import ImageGallery from '@/components/Layout/ImageGallery'
 import PropertyList from '@/components/Layout/PropertyList'
 import ContactWidget from '@/components/PhoneBook/ContactWidget'
 import DecorativeLine from '@/components/UI/DecorativeLine'
@@ -19,21 +20,21 @@ import { PaidStatusDto } from '@/types/dto/PaidStatusDto'
 import { isContact } from '@/types/guards/isContact'
 import { UpdateParams } from '@/types/params/UpdateParams'
 import { InsuranceInfoProps } from '@/types/props/Insurance/InsuranceInfoProps'
+import { Insurance } from '@/types/types/Insurance'
 
 import Header from '../Header'
-import ImageGallery from '../ImageGallery'
 import PaymentProgressBar from '../PaymentProgressBar'
 import Timer from '../Timer'
 
 import { Container, InformationWrapper, SideMenu } from './InsuranceInfo.styled'
 
-const InsuranceInfo = <T,>({
+const InsuranceInfo: FC<InsuranceInfoProps> = ({
 	insurance,
-	imageActions,
-	isActionLoading,
+	overlayActions,
+	isProcessing,
 	isBinding,
 	bindContact,
-}: InsuranceInfoProps<T>) => {
+}) => {
 	const { onOpen } = useModal()
 	const { maxMobile } = useResponsive()
 
@@ -86,8 +87,8 @@ const InsuranceInfo = <T,>({
 
 			<ImageGallery
 				photos={photos}
-				imageActions={imageActions}
-				isActionLoading={isActionLoading}
+				overlayActions={overlayActions}
+				isProcessing={isProcessing}
 			/>
 
 			<Container>
@@ -114,12 +115,15 @@ const InsuranceInfo = <T,>({
 						</>
 					)}
 				</InformationWrapper>
+
 				<SideMenu>
 					<Title fontSize={110} textAlign="center" color="yellow">
 						{insurance.insuranceType}
 					</Title>
+
 					<ActionMenu descriptors={actions} />
-					<ContactWidget<T>
+
+					<ContactWidget<Insurance>
 						bindContact={bindContact}
 						isBinding={isBinding}
 						contact={contact}

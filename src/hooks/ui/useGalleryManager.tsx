@@ -1,5 +1,4 @@
 import { nanoid } from 'nanoid'
-import { useState } from 'react'
 import { BiSolidSelectMultiple } from 'react-icons/bi'
 import { MdDelete } from 'react-icons/md'
 import { PiResizeBold } from 'react-icons/pi'
@@ -17,21 +16,16 @@ import { useUploadImage } from '../image/useUploadImage'
 
 import useSubmit from './useSubmit'
 
-export const useGalleryManager = ({ entityType, entityId }: Params) => {
-	const [showImageViewer, setShowImageViewer] = useState(false)
-	const [currentImage, setCurrentImage] = useState<string | null>(null)
+export const useGalleryManager = ({
+	entityType,
+	entityId,
+	openViewer,
+}: Params) => {
+	const { mutateAsync: selectImage, isPending: isSelect } = useSelectImage()
+	const { mutateAsync: deleteImage, isPending: isDelete } = useDeleteImage()
+	const { mutateAsync: uploadImage, isPending: isUpload } = useUploadImage()
 
-	const { mutateAsync: selectImage, isPending: isSelectImagePending } =
-		useSelectImage()
-
-	const { mutateAsync: deleteImage, isPending: isDeleteImagePending } =
-		useDeleteImage()
-
-	const { mutateAsync: uploadImage, isPending: isUploadImagePending } =
-		useUploadImage()
-
-	const isLoading =
-		isSelectImagePending || isDeleteImagePending || isUploadImagePending
+	const isLoading = isSelect || isDelete || isUpload
 
 	const submitSelectImage = useSubmit<Image | null, PublicIdImageParams>({
 		callback: selectImage,
@@ -69,16 +63,6 @@ export const useGalleryManager = ({ entityType, entityId }: Params) => {
 		return uploadImage({ entityId, entityType, file })
 	}
 
-	const openViewer = (imageUrl: string) => {
-		setShowImageViewer(true)
-		setCurrentImage(imageUrl)
-	}
-
-	const closeViewer = () => {
-		setShowImageViewer(false)
-		setCurrentImage(null)
-	}
-
 	const actions = [
 		{
 			id: nanoid(),
@@ -104,8 +88,5 @@ export const useGalleryManager = ({ entityType, entityId }: Params) => {
 		actions,
 		isLoading,
 		upload,
-		showImageViewer,
-		currentImage,
-		closeViewer,
 	}
 }

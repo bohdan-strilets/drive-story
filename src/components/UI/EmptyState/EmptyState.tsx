@@ -12,7 +12,7 @@ import Title from '../Title'
 
 import { Wrapper } from './EmptyState.styled'
 
-const EmptyState: FC<EmptyStateProps> = ({ title, message }) => {
+const EmptyState: FC<EmptyStateProps> = ({ title, message, imageUrl }) => {
 	const { maxTablet } = useResponsive()
 
 	return (
@@ -21,7 +21,7 @@ const EmptyState: FC<EmptyStateProps> = ({ title, message }) => {
 				{title}
 			</Title>
 			<ImageBox
-				imageUrl={emptyListImage}
+				imageUrl={imageUrl ?? emptyListImage}
 				width="100%"
 				height={maxTablet ? '300px' : '500px'}
 				size="contain"

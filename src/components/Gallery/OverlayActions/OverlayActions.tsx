@@ -10,7 +10,7 @@ import { ControllerButton, Item, Label, List } from './OverlayActions.styled'
 const OverlayActions: FC<OverlayActionsProps> = ({
 	imageUrl,
 	overlayActions,
-	isActionLoading,
+	isProcessing,
 }) => {
 	return (
 		<Overlay>
@@ -20,7 +20,7 @@ const OverlayActions: FC<OverlayActionsProps> = ({
 						<ControllerButton
 							type="button"
 							onClick={() => callback(imageUrl)}
-							disabled={isActionLoading}
+							disabled={isProcessing}
 						>
 							{icon}
 							<Label>{label}</Label>
@@ -28,7 +28,8 @@ const OverlayActions: FC<OverlayActionsProps> = ({
 					</Item>
 				))}
 			</List>
-			{isActionLoading && <Loader color="black" margin="10px 0" size={22} />}
+
+			{isProcessing && <Loader color="black" margin="10px 0" size={22} />}
 		</Overlay>
 	)
 }
