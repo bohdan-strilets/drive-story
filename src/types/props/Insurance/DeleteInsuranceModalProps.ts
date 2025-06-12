@@ -1,4 +1,6 @@
-export type DeleteInsuranceModalProps = {
-	carId: string
-	insuranceId: string
-}
+import { InsuranceModalsProps } from './InsuranceModalsProps'
+
+export type DeleteInsuranceModalProps = Pick<
+	InsuranceModalsProps,
+	'carId' | 'insuranceId'
+>

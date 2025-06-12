@@ -1,15 +1,15 @@
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Image } from '@/types/types/Image'
-import { Insurance } from '@/types/types/Insurance'
+import { Inspection } from '@/types/types/Inspection'
 
 import { BindContactProps } from '../PhoneBook/BindContactProps'
 
-export type InsuranceModalsProps = {
+export type InspectionModalsProps = {
 	carId: string
-	insuranceId?: string
-	insurance?: Insurance
-	isLoading: boolean
+	inspectionId?: string
+	inspection?: Inspection
 	upload: (file: FormData) => Promise<ApiResponse<Image | null>>
+	isLoading: boolean
 	showViewer: boolean
 	closeViewer: () => void
 	currentImage: string | null

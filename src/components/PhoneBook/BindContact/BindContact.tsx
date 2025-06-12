@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { FC, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import ButtonAsLink from '@/components/UI/ButtonAsLink'
 import Loader from '@/components/UI/Loader'
@@ -19,13 +19,16 @@ import ContactsFilter from '../ContactsFilter'
 
 import { BindBtn, Button, Item, List } from './BindContact.styled'
 
-const BindContact = <T,>({ isBinding, bindContact }: BindContactProps<T>) => {
+const BindContact: FC<BindContactProps> = ({
+	isBinding,
+	bindContact,
+	entityId,
+}) => {
 	const [page, setPage] = useState(1)
 	const [query, setQuery] = useState<string>('')
 	const [selectedContact, setSelectedContact] = useState<null | string>(null)
 
 	const navigate = useNavigate()
-	const { insuranceId } = useParams()
 
 	const limit = 5
 	const paginationParams: PaginationParams = { limit, page, searchQuery: query }
@@ -43,11 +46,7 @@ const BindContact = <T,>({ isBinding, bindContact }: BindContactProps<T>) => {
 		})
 
 	const handleBindContact = async (contactId: string) => {
-		const bindContactParams: BindContactParams = {
-			entityId: insuranceId,
-			contactId,
-		}
-
+		const bindContactParams: BindContactParams = { entityId, contactId }
 		bindContact(bindContactParams)
 	}
 

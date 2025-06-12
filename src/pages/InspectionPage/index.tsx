@@ -3,9 +3,9 @@ import { generatePath, useNavigate, useParams } from 'react-router-dom'
 
 import ButtonGoBack from '@/components/UI/ButtonGoBack'
 
-import { useBindContact } from '@/hooks/insurance/useBindContact'
-import { useClearContact } from '@/hooks/insurance/useClearContact'
-import { useFetchInsurance } from '@/hooks/insurance/useFetchInsurance'
+import { useBindContact } from '@/hooks/inspection/useBindContact'
+import { useClearContact } from '@/hooks/inspection/useClearContact'
+import { useFetchInspection } from '@/hooks/inspection/useFetchInspection'
 import { useGalleryManager } from '@/hooks/ui/useGalleryManager'
 import useSubmit from '@/hooks/ui/useSubmit'
 import { useViewerManager } from '@/hooks/ui/useViewerManager'
@@ -14,23 +14,23 @@ import { routes } from '@/config/routes'
 
 import { EntityType } from '@/types/enums/EntityType'
 import { BindContactParams } from '@/types/params/BindContactParams'
-import { Insurance } from '@/types/types/Insurance'
+import { Inspection } from '@/types/types/Inspection'
 
-import InsuranceFetching from './InsuranceFetching'
-import InsuranceMainView from './InsuranceMainView'
-import InsuranceModals from './InsuranceModals'
+import InspectionFetching from './InspectionFetching'
+import InspectionMainView from './InspectionMainView'
+import InspectionModals from './InspectionModals'
 
-const InsurancePage: FC = () => {
-	const { carId, insuranceId } = useParams()
+const InspectionPage: FC = () => {
+	const { carId, inspectionId } = useParams()
 
 	const navigate = useNavigate()
 	const path = generatePath(routes.CAR_BY_ID, { carId: carId! })
 
 	const {
-		data: insurance,
+		data: inspection,
 		isLoading: isFetching,
 		isError,
-	} = useFetchInsurance(insuranceId)
+	} = useFetchInspection(inspectionId)
 
 	const { closeViewer, currentImage, showViewer, openViewer } =
 		useViewerManager()
@@ -40,21 +40,21 @@ const InsurancePage: FC = () => {
 		isLoading: isProcessing,
 		upload,
 	} = useGalleryManager({
-		entityType: EntityType.INSURANCE,
-		entityId: insuranceId,
+		entityType: EntityType.INSPECTION,
+		entityId: inspectionId,
 		openViewer,
 	})
 
 	const { mutateAsync: bindContact, isPending: isBinding } = useBindContact()
 	const { mutateAsync: clearContact, isPending: isCleaning } = useClearContact()
 
-	const submitBindContact = useSubmit<Insurance | null, BindContactParams>({
+	const submitBindContact = useSubmit<Inspection | null, BindContactParams>({
 		callback: bindContact,
 		isCloseModal: true,
 		successMessage: 'Contact bound successfully',
 	})
 
-	const submitclearContact = useSubmit<Insurance | null, string | undefined>({
+	const submitclearContact = useSubmit<Inspection | null, string | undefined>({
 		callback: clearContact,
 		isCloseModal: true,
 		successMessage: 'The contact is no longer linked',
@@ -62,11 +62,11 @@ const InsurancePage: FC = () => {
 
 	if (!carId || isError || isFetching) {
 		return (
-			<InsuranceFetching
+			<InspectionFetching
 				isError={isError}
 				isFetching={isFetching}
 				carId={carId}
-				insuranceId={insuranceId}
+				inspectionId={inspectionId}
 			/>
 		)
 	}
@@ -80,28 +80,28 @@ const InsurancePage: FC = () => {
 				color="black"
 			/>
 
-			<InsuranceMainView
-				insurance={insurance}
+			<InspectionMainView
+				inspection={inspection}
 				overlayActions={actions}
 				isProcessing={isProcessing}
-				clearContact={submitclearContact}
 				isCleaning={isCleaning}
+				clearContact={submitclearContact}
 			/>
 
-			<InsuranceModals
+			<InspectionModals
 				carId={carId}
-				insuranceId={insuranceId}
-				insurance={insurance}
+				inspectionId={inspectionId}
+				inspection={inspection}
 				upload={upload}
-				isLoading={isProcessing}
+				bindContact={submitBindContact}
+				isBinding={isBinding}
+				currentImage={currentImage}
 				showViewer={showViewer}
 				closeViewer={closeViewer}
-				currentImage={currentImage}
-				isBinding={isBinding}
-				bindContact={submitBindContact}
+				isLoading={isProcessing}
 			/>
 		</>
 	)
 }
 
-export default InsurancePage
+export default InspectionPage

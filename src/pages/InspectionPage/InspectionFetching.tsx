@@ -7,13 +7,13 @@ import Loader from '@/components/UI/Loader'
 
 import { routes } from '@/config/routes'
 
-import { InsuranceFetchingProps } from '@/types/props/Insurance/InsuranceFetchingProps'
+import { InspectionFetchingProps } from '@/types/props/Inspection/InspectionFetchingProps'
 
-const InsuranceFetching: FC<InsuranceFetchingProps> = ({
+const InspectionFetching: FC<InspectionFetchingProps> = ({
 	carId,
 	isError,
-	insuranceId,
 	isFetching,
+	inspectionId,
 }) => {
 	const navigate = useNavigate()
 	const path = generatePath(routes.CAR_BY_ID, { carId: carId ?? '' })
@@ -42,8 +42,9 @@ const InsuranceFetching: FC<InsuranceFetchingProps> = ({
 					color="black"
 				/>
 				<ErrorMessage
-					message={`Insurance policy with ID: ${insuranceId} was not found`}
+					message={`Technical inspection with ID: ${inspectionId} was not found.`}
 				/>
+				Z
 			</>
 		)
 	}
@@ -55,4 +56,4 @@ const InsuranceFetching: FC<InsuranceFetchingProps> = ({
 	return null
 }
 
-export default InsuranceFetching
+export default InspectionFetching

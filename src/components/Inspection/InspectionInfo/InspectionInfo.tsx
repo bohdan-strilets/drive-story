@@ -1,17 +1,19 @@
 import { FC } from 'react'
 
 import ActionMenu from '@/components/Layout/ActionMenu'
+import ImageGallery from '@/components/Layout/ImageGallery'
 import PropertyList from '@/components/Layout/PropertyList'
+import ContactWidget from '@/components/PhoneBook/ContactWidget'
 
 import useModal from '@/hooks/ui/useModal'
 
 import { getInspectionActions } from '@/descriptors/actions/getInspectionActions'
 import { inspectionField } from '@/descriptors/fields/inspectionField'
 
+import { isContact } from '@/types/guards/isContact'
 import { InspectionInfoProps } from '@/types/props/Inspection/InspectionInfoProps'
 
 import Header from '../Header'
-import ImageGallery from '../ImageGallery'
 import Timer from '../Timer'
 
 import {
@@ -22,13 +24,18 @@ import {
 
 const InspectionInfo: FC<InspectionInfoProps> = ({
 	inspection,
-	imageActions,
-	isActionLoading,
+	overlayActions,
+	isProcessing,
+	clearContact,
+	isCleaning,
 }) => {
 	const { onOpen } = useModal()
 
 	const photos = inspection?.photos
 	const actions = getInspectionActions({ onOpen })
+	const contact = isContact(inspection.contactId)
+		? inspection.contactId
+		: undefined
 
 	return (
 		<article>
@@ -40,8 +47,8 @@ const InspectionInfo: FC<InspectionInfoProps> = ({
 
 			<ImageGallery
 				photos={photos}
-				imageActions={imageActions}
-				isActionLoading={isActionLoading}
+				overlayActions={overlayActions}
+				isProcessing={isProcessing}
 			/>
 
 			<Container>
@@ -55,6 +62,14 @@ const InspectionInfo: FC<InspectionInfoProps> = ({
 				</InformationWrapper>
 				<SideMenu>
 					<ActionMenu descriptors={actions} />
+
+					<ContactWidget
+						clearContact={clearContact}
+						isCleaning={isCleaning}
+						entityId={inspection._id}
+						contact={contact}
+						margin="15px 0 0 0"
+					/>
 				</SideMenu>
 			</Container>
 		</article>

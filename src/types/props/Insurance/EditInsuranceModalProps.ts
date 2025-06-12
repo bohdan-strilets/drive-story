@@ -1,6 +1,6 @@
-import { Insurance } from '@/types/types/Insurance'
+import { InsuranceModalsProps } from './InsuranceModalsProps'
 
-export type EditInsuranceModalProps = {
-	carId: string
-	insurance: Insurance
-}
+export type DeleteInsuranceModalProps = Pick<
+	InsuranceModalsProps,
+	'carId' | 'insurance'
+>

@@ -4,6 +4,7 @@ import { handleApiError } from '@/utils/handleApiError'
 
 import { InspectionDto } from '@/types/dto/InspectionDto'
 import { AddParams } from '@/types/params/AddParams'
+import { BindContactParams } from '@/types/params/BindContactParams'
 import { ListParams } from '@/types/params/ListParams'
 import { UpdateParams } from '@/types/params/UpdateParams'
 import { ApiResponse } from '@/types/types/ApiResponse'
@@ -72,6 +73,32 @@ export const getAll = async ({
 		const params = { page, limit }
 
 		const { data } = await apiClient.get(path, { params })
+		return data
+	} catch (error) {
+		return handleApiError(error)
+	}
+}
+
+export const bindContact = async ({
+	entityId,
+	contactId,
+}: BindContactParams): Promise<ApiResponse<Inspection | null>> => {
+	try {
+		const path = `${ENDPOINT}/bind-contact/${entityId}`
+		const params = { contactId }
+		const { data } = await apiClient.put(path, null, { params })
+		return data
+	} catch (error) {
+		return handleApiError(error)
+	}
+}
+
+export const clearContact = async (
+	inspectionId?: string
+): Promise<ApiResponse<Inspection | null>> => {
+	try {
+		const path = `${ENDPOINT}/clear-contact/${inspectionId}`
+		const { data } = await apiClient.put(path)
 		return data
 	} catch (error) {
 		return handleApiError(error)

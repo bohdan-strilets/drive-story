@@ -1,8 +1,9 @@
-import { Action } from '@/types/hooks/useGalleryManager'
 import { Inspection } from '@/types/types/Inspection'
+
+import { OverlayActionsProps } from '../Gallery/OverlayActionsProps'
+import { ContactWidgetProps } from '../PhoneBook/ContactWidgetProps'
 
 export type InspectionInfoProps = {
 	inspection: Inspection
-	imageActions: Action[]
-	isActionLoading: boolean
-}
+} & Pick<OverlayActionsProps, 'overlayActions' | 'isProcessing'> &
+	Pick<ContactWidgetProps, 'clearContact' | 'isCleaning'>

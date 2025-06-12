@@ -1,8 +1,8 @@
 import { Image } from '@/types/types/Image'
 
-import { InsuranceModalsProps } from './InsuranceModalsProps'
+import { InspectionModalsProps } from './InspectionModalsProps'
 
 export type ClearGalleryModalProps = { images: string | null | Image } & Pick<
-	InsuranceModalsProps,
-	'insuranceId'
+	InspectionModalsProps,
+	'inspectionId'
 >

@@ -1,7 +1,8 @@
+import { FC } from 'react'
 import { FaLocationDot, FaPhone } from 'react-icons/fa6'
 import { IoMdContacts } from 'react-icons/io'
 import { MdDelete } from 'react-icons/md'
-import { generatePath, useNavigate, useParams } from 'react-router-dom'
+import { generatePath, useNavigate } from 'react-router-dom'
 
 import Button from '@/components/UI/Button'
 import DecorativeLine from '@/components/UI/DecorativeLine'
@@ -12,32 +13,27 @@ import { routes } from '@/config/routes'
 
 import { formatPhoneNumber } from '@/utils/formatPhoneNumber'
 
-import { BindContactParams } from '@/types/params/BindContactParams'
 import { ContactWidgetProps } from '@/types/props/PhoneBook/ContactWidgetProps'
 
 import { getColor } from '@/styles/helpers/getColor'
 
 import { Header, Item, Placeholder, Wrapper } from './ContactWidget.styled'
 
-const ContactWidget = <T,>({
-	isBinding,
-	bindContact,
+const ContactWidget: FC<ContactWidgetProps> = ({
+	clearContact,
+	isCleaning,
+	entityId,
 	contact,
 	margin = '',
-}: ContactWidgetProps<T>) => {
+}) => {
 	const navigate = useNavigate()
-	const { insuranceId } = useParams()
 
 	const path = generatePath(routes.CONTACT_BY_ID, {
 		contactId: contact?._id || '',
 	})
 
 	const removeLink = async () => {
-		const bindContactParams: BindContactParams = {
-			entityId: insuranceId,
-		}
-
-		await bindContact(bindContactParams)
+		await clearContact(entityId)
 	}
 
 	if (!contact || !contact._id) {
@@ -92,7 +88,7 @@ const ContactWidget = <T,>({
 				</Item>
 			</ul>
 
-			{isBinding && <Loader color="gray" />}
+			{isCleaning && <Loader color="gray" />}
 		</Wrapper>
 	)
 }

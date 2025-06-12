@@ -106,3 +106,15 @@ export const bindContact = async ({
 		return handleApiError(error)
 	}
 }
+
+export const clearContact = async (
+	insuranceId?: string
+): Promise<ApiResponse<Insurance | null>> => {
+	try {
+		const path = `${ENDPOINT}/clear-contact/${insuranceId}`
+		const { data } = await apiClient.put(path)
+		return data
+	} catch (error) {
+		return handleApiError(error)
+	}
+}

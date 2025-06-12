@@ -20,7 +20,6 @@ import { PaidStatusDto } from '@/types/dto/PaidStatusDto'
 import { isContact } from '@/types/guards/isContact'
 import { UpdateParams } from '@/types/params/UpdateParams'
 import { InsuranceInfoProps } from '@/types/props/Insurance/InsuranceInfoProps'
-import { Insurance } from '@/types/types/Insurance'
 
 import Header from '../Header'
 import PaymentProgressBar from '../PaymentProgressBar'
@@ -32,8 +31,8 @@ const InsuranceInfo: FC<InsuranceInfoProps> = ({
 	insurance,
 	overlayActions,
 	isProcessing,
-	isBinding,
-	bindContact,
+	clearContact,
+	isCleaning,
 }) => {
 	const { onOpen } = useModal()
 	const { maxMobile } = useResponsive()
@@ -123,9 +122,10 @@ const InsuranceInfo: FC<InsuranceInfoProps> = ({
 
 					<ActionMenu descriptors={actions} />
 
-					<ContactWidget<Insurance>
-						bindContact={bindContact}
-						isBinding={isBinding}
+					<ContactWidget
+						clearContact={clearContact}
+						isCleaning={isCleaning}
+						entityId={insurance._id}
 						contact={contact}
 						margin="15px 0 0 0"
 					/>

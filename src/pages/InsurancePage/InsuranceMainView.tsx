@@ -17,8 +17,8 @@ const InsuranceMainView: FC<InsuranceMainViewProps> = ({
 	insurance,
 	overlayActions,
 	isProcessing,
-	isBinding,
-	bindContact,
+	clearContact,
+	isCleaning,
 }) => {
 	const { onOpen } = useModal()
 
@@ -48,8 +48,8 @@ const InsuranceMainView: FC<InsuranceMainViewProps> = ({
 					insurance={insurance}
 					overlayActions={overlayActions}
 					isProcessing={isProcessing}
-					isBinding={isBinding}
-					bindContact={bindContact}
+					clearContact={clearContact}
+					isCleaning={isCleaning}
 				/>
 			)}
 		</>

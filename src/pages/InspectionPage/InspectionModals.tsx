@@ -3,34 +3,34 @@ import { FC } from 'react'
 
 import { getImageResources } from '@/utils/getImageResources'
 
-import { InsuranceModalsProps } from '@/types/props/Insurance/InsuranceModalsProps'
+import { InspectionModalsProps } from '@/types/props/Inspection/InspectionModalsProps'
 
-import AddInsuranceModal from './modals/AddInsuranceModal'
+import AddInspectionModal from './modals/AddInspectionModal'
 import BindContactModal from './modals/BindContactModal'
 import ClearGalleryModal from './modals/ClearGalleryModal'
-import DeleteInsuranceModal from './modals/DeleteInsuranceModal'
-import EditInsuranceModal from './modals/EditInsuranceModal'
+import DeleteInspectionModal from './modals/DeleteInspectionModal'
+import EditInspectionModal from './modals/EditInspectionModal'
 import ShowImageViewer from './modals/ShowImageViewer'
 import UploadPhotoModal from './modals/UploadPhotoModal'
 
-const InsuranceModals: FC<InsuranceModalsProps> = ({
+const InspectionModals: FC<InspectionModalsProps> = ({
 	carId,
-	insuranceId,
-	insurance,
-	isLoading,
+	inspectionId,
+	inspection,
 	upload,
+	isLoading,
 	showViewer,
 	closeViewer,
 	currentImage,
 	bindContact,
 	isBinding,
 }) => {
-	const photos = getImageResources(insurance?.photos)
+	const photos = getImageResources(inspection?.photos)
 
-	if (!insurance || !insuranceId) {
+	if (!inspection || !inspectionId) {
 		return (
 			<AnimatePresence>
-				<AddInsuranceModal carId={carId} key={1} />
+				<AddInspectionModal carId={carId} key={1} />
 			</AnimatePresence>
 		)
 	}
@@ -38,9 +38,13 @@ const InsuranceModals: FC<InsuranceModalsProps> = ({
 	return (
 		<>
 			<AnimatePresence>
-				<EditInsuranceModal carId={carId} insurance={insurance} key={2} />
+				<EditInspectionModal carId={carId} inspection={inspection} key={2} />
 
-				<DeleteInsuranceModal carId={carId} insuranceId={insuranceId} key={3} />
+				<DeleteInspectionModal
+					carId={carId}
+					inspectionId={inspectionId}
+					key={3}
+				/>
 
 				<UploadPhotoModal isLoading={isLoading} upload={upload} key={4} />
 
@@ -53,15 +57,15 @@ const InsuranceModals: FC<InsuranceModalsProps> = ({
 				/>
 
 				<ClearGalleryModal
-					insuranceId={insuranceId}
-					images={insurance.photos}
+					inspectionId={inspectionId}
+					images={inspection.photos}
 					key={6}
 				/>
 
 				<BindContactModal
 					bindContact={bindContact}
 					isBinding={isBinding}
-					entityId={insuranceId}
+					entityId={inspectionId}
 					key={7}
 				/>
 			</AnimatePresence>
@@ -69,4 +73,4 @@ const InsuranceModals: FC<InsuranceModalsProps> = ({
 	)
 }
 
-export default InsuranceModals
+export default InspectionModals

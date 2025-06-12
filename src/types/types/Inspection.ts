@@ -1,9 +1,10 @@
+import { Contact } from './Contact'
 import { Image } from './Image'
 
 export type Inspection = {
 	_id: string
 	owner: string
-	contactId?: string | null
+	contactId: string | null | Contact
 	carId: string
 	inspectionDate: Date
 	organization: string

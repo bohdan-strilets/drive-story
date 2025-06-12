@@ -1,10 +1,14 @@
+import { ApiResponse } from '@/types/types/ApiResponse'
 import { Contact } from '@/types/types/Contact'
 
-import { BindContactProps } from './BindContactProps'
-
-export type ContactWidgetProps<T> = {
+export type ContactWidgetProps = {
 	contact?: Contact
 	margin?: string
-} & Pick<BindContactProps<T>, 'isBinding' | 'bindContact'>
+	isCleaning: boolean
+	entityId: string
+	clearContact: (
+		params?: string
+	) => Promise<ApiResponse<unknown | null> | undefined>
+}
 
-export type WrapperProps<T> = Pick<ContactWidgetProps<T>, 'margin'>
+export type WrapperProps = Pick<ContactWidgetProps, 'margin'>

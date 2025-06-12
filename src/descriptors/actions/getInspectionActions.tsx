@@ -35,7 +35,7 @@ export const getInspectionActions = ({
 		key: 'bind-contact',
 		label: 'Bind contact',
 		icon: <MdContactEmergency size={20} />,
-		callback: () => {},
+		callback: () => onOpen(modalNames.BIND_INSPECTION_CONTACT),
 	},
 	{
 		key: 'delete-inspection',
