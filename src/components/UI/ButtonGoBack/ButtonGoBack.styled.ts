@@ -22,7 +22,7 @@ export const Button = styled.button<ButtonProps>`
 
 	:hover,
 	:focus {
-		color: ${getColor('black')};
+		color: ${getColor('#cccccc')};
 	}
 
 	@media screen and (min-width: ${breakpoints.tabletMin}) {
