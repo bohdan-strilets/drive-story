@@ -1,6 +1,9 @@
 import { AnimatePresence } from 'motion/react'
 import { FC } from 'react'
 
+import ShowImageViewer from '@/components/Layout/ShowImageViewer'
+import UploadPhotoModal from '@/components/Layout/UploadPhotoModal'
+
 import { getImageResources } from '@/utils/getImageResources'
 
 import { ContactModalsProps } from '@/types/props/PhoneBook/ContactModalsProps'
@@ -8,8 +11,6 @@ import { ContactModalsProps } from '@/types/props/PhoneBook/ContactModalsProps'
 import ClearGalleryModal from './modals/ClearGalleryModal'
 import DeleteContactModal from './modals/DeleteContactModal'
 import EditContactModal from './modals/EditContactModal'
-import ShowImageViewer from './modals/ShowImageViewer'
-import UploadPhotoModal from './modals/UploadPhotoModal'
 
 const ContactModals: FC<ContactModalsProps> = ({
 	contact,
@@ -24,7 +25,7 @@ const ContactModals: FC<ContactModalsProps> = ({
 
 	return (
 		<AnimatePresence>
-			<UploadPhotoModal isLoading={isLoading} upload={upload} key={1} />
+			<UploadPhotoModal isLoading={isLoading} callback={upload} key={1} />
 
 			<ShowImageViewer
 				showViewer={showViewer}

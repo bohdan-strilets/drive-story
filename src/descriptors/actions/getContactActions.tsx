@@ -12,7 +12,7 @@ export const getContactActions = ({
 		key: 'upload-contact-photo',
 		label: 'Upload photo',
 		icon: <MdCloudUpload size={20} />,
-		callback: () => onOpen(modalNames.UPLOAD_CONTACT_PHOTO),
+		callback: () => onOpen(modalNames.UPLOAD_PHOTO),
 	},
 	{
 		key: 'clear-gallery',

@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import ImageViewer from '@/components/Gallery/ImageViewer'
 
-import { ShowImageViewerProps } from '@/types/props/PhoneBook/ShowImageViewerProps'
+import { ShowImageViewerProps } from '@/types/props/Layout/ShowImageViewerProps'
 
 const ShowImageViewer: FC<ShowImageViewerProps> = ({
 	showViewer,

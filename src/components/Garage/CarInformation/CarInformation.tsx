@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import ActionMenu from '@/components/Layout/ActionMenu'
+import ImageGallery from '@/components/Layout/ImageGallery'
 import PropertyList from '@/components/Layout/PropertyList'
 import Title from '@/components/UI/Title'
 
@@ -23,7 +24,6 @@ import { CarInformationProps } from '@/types/props/Garage/CarInformationProps'
 
 import Dimensions from '../Dimensions'
 import Header from '../Header'
-import ImageGallery from '../ImageGallery'
 import LicensePlate from '../LicensePlate'
 import MaintenanceAlerts from '../MaintenanceAlerts'
 
@@ -35,9 +35,9 @@ import {
 
 const CarInformation: FC<CarInformationProps> = ({
 	car,
-	imageActions,
-	isActionLoading,
 	trims,
+	isProcessing,
+	overlayActions,
 }) => {
 	const { maxMobile } = useResponsive()
 	const { onOpen } = useModal()
@@ -83,8 +83,8 @@ const CarInformation: FC<CarInformationProps> = ({
 
 			<ImageGallery
 				photos={photos}
-				imageActions={imageActions}
-				isActionLoading={isActionLoading}
+				isProcessing={isProcessing}
+				overlayActions={overlayActions}
 			/>
 
 			<Container>

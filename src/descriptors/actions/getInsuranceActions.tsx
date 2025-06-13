@@ -17,7 +17,7 @@ export const getInsuranceActions = ({
 		key: 'upload-insurance-photo',
 		label: 'Upload photo',
 		icon: <MdCloudUpload size={20} />,
-		callback: () => onOpen(modalNames.UPLOAD_INSURANCE_PHOTO),
+		callback: () => onOpen(modalNames.UPLOAD_PHOTO),
 	},
 	{
 		key: 'clear-gallery',

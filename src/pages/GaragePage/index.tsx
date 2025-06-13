@@ -1,12 +1,7 @@
-import { AnimatePresence } from 'motion/react'
 import { FC, useState } from 'react'
 import { IoCarSportSharp } from 'react-icons/io5'
 
-import Garage from '@/components/Garage'
-import CarForm from '@/components/Garage/CarForm'
-import Modal from '@/components/Modal'
 import ActionButton from '@/components/UI/ActionButton'
-import Loader from '@/components/UI/Loader'
 
 import { useFetchCars } from '@/hooks/car/useFetchCars'
 import useModal from '@/hooks/ui/useModal'
@@ -16,21 +11,27 @@ import { modalNames } from '@/config/modalConfig'
 
 import { PaginationParams } from '@/types/params/PaginationParams'
 
+import GarageFetcing from './GarageFetcing'
+import GarageMainView from './GarageMainView'
+import GarageModals from './GarageModals'
+
 const GaragePage: FC = () => {
 	const [page, setPage] = useState(1)
 
-	const { checkQueryParam, onOpen } = useModal()
+	const { onOpen } = useModal()
 	const { maxTablet } = useResponsive()
 
 	const limit = maxTablet ? 6 : 9
 	const paginationParams: PaginationParams = { limit, page }
 
-	const { isLoading, data } = useFetchCars(paginationParams)
+	const { isLoading, data, isError } = useFetchCars(paginationParams)
 
 	const cars = data?.data ?? []
 	const paginationMeta = data?.meta
 
-	if (isLoading) return <Loader color="gray" />
+	if (isLoading || isError) {
+		return <GarageFetcing isError={isError} isFetching={isLoading} />
+	}
 
 	return (
 		<>
@@ -44,15 +45,13 @@ const GaragePage: FC = () => {
 				margin="0 0 30px 0"
 			/>
 
-			<Garage cars={cars} paginationMeta={paginationMeta} setPage={setPage} />
+			<GarageMainView
+				cars={cars}
+				paginationMeta={paginationMeta}
+				setPage={setPage}
+			/>
 
-			<AnimatePresence>
-				{checkQueryParam(modalNames.ADD_CAR) && (
-					<Modal key={modalNames.ADD_CAR} title="Add new car">
-						<CarForm mode="create" />
-					</Modal>
-				)}
-			</AnimatePresence>
+			<GarageModals />
 		</>
 	)
 }

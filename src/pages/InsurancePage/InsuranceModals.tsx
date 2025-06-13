@@ -1,6 +1,9 @@
 import { AnimatePresence } from 'motion/react'
 import { FC } from 'react'
 
+import ShowImageViewer from '@/components/Layout/ShowImageViewer'
+import UploadPhotoModal from '@/components/Layout/UploadPhotoModal'
+
 import { getImageResources } from '@/utils/getImageResources'
 
 import { InsuranceModalsProps } from '@/types/props/Insurance/InsuranceModalsProps'
@@ -10,8 +13,6 @@ import BindContactModal from './modals/BindContactModal'
 import ClearGalleryModal from './modals/ClearGalleryModal'
 import DeleteInsuranceModal from './modals/DeleteInsuranceModal'
 import EditInsuranceModal from './modals/EditInsuranceModal'
-import ShowImageViewer from './modals/ShowImageViewer'
-import UploadPhotoModal from './modals/UploadPhotoModal'
 
 const InsuranceModals: FC<InsuranceModalsProps> = ({
 	carId,
@@ -42,7 +43,7 @@ const InsuranceModals: FC<InsuranceModalsProps> = ({
 
 				<DeleteInsuranceModal carId={carId} insuranceId={insuranceId} key={3} />
 
-				<UploadPhotoModal isLoading={isLoading} upload={upload} key={4} />
+				<UploadPhotoModal isLoading={isLoading} callback={upload} key={4} />
 
 				<ShowImageViewer
 					photos={photos}

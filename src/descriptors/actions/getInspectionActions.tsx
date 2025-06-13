@@ -17,7 +17,7 @@ export const getInspectionActions = ({
 		key: 'upload-inspection-photo',
 		label: 'Upload photo',
 		icon: <MdCloudUpload size={20} />,
-		callback: () => onOpen(modalNames.UPLOAD_INSPECTION_PHOTO),
+		callback: () => onOpen(modalNames.UPLOAD_PHOTO),
 	},
 	{
 		key: 'clear-gallery',

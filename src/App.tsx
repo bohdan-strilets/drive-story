@@ -15,7 +15,7 @@ import { AuthResponse } from './types/types/AuthResponse'
 
 const HomePage = lazy(() => import('./pages/HomePage'))
 const AuthPage = lazy(() => import('./pages/AuthPage'))
-const CarInfoPage = lazy(() => import('./pages/CarInfoPage'))
+const CarPage = lazy(() => import('./pages/CarPage'))
 const GaragePage = lazy(() => import('./pages/GaragePage'))
 const InspectionPage = lazy(() => import('./pages/InspectionPage'))
 const InsurancePage = lazy(() => import('./pages/InsurancePage'))
@@ -64,7 +64,7 @@ const App: FC = () => {
 					<Route path={routes.GARAGE} element={<GaragePage />} />
 					<Route path={routes.PHONE_BOOK} element={<PhoneBookPage />} />
 					<Route path={routes.CONTACT_BY_ID} element={<ContactPage />} />
-					<Route path={routes.CAR_BY_ID} element={<CarInfoPage />} />
+					<Route path={routes.CAR_BY_ID} element={<CarPage />} />
 					<Route path={routes.INSURANCE_BY_ID} element={<InsurancePage />} />
 					<Route path={routes.INSPECTION_BY_ID} element={<InspectionPage />} />
 					<Route path={routes.REFUELING_BY_CAR} element={<RefuelingPage />} />

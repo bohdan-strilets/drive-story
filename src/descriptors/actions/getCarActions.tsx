@@ -29,7 +29,7 @@ export const getCarActions = ({
 			key: 'upload-car-photo',
 			label: 'Upload photo',
 			icon: <MdCloudUpload size={20} />,
-			callback: () => onOpen(modalNames.UPLOAD_CAR_PHOTO),
+			callback: () => onOpen(modalNames.UPLOAD_PHOTO),
 		},
 		{
 			key: 'edit-car-information',
