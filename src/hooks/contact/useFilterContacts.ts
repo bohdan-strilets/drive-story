@@ -2,7 +2,7 @@ import { UseQueryResult, useQuery } from '@tanstack/react-query'
 
 import { filterByNameOrPhone } from '@/api/contactApi'
 
-import { ContactKey } from '@/config/queryKeys'
+import { ContactKey, ListKey } from '@/config/queryKeys'
 
 import { PaginationParams } from '@/types/params/PaginationParams'
 import { Contact } from '@/types/types/Contact'
@@ -12,7 +12,7 @@ export const useFilterContacts = (
 	params: PaginationParams
 ): UseQueryResult<PaginatedResponse<Contact> | undefined, unknown> => {
 	return useQuery({
-		queryKey: [ContactKey, params.page, params.limit, params.searchQuery],
+		queryKey: [ContactKey, ListKey],
 		queryFn: async () => {
 			const response = await filterByNameOrPhone(params)
 			if (response.success) {

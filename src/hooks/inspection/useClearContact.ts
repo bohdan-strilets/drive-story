@@ -15,9 +15,11 @@ export const useClearContact = () => {
 		string | undefined
 	>({
 		mutationFn: (inspectionId) => clearContact(inspectionId),
-		onSuccess: (response) => {
+		onSuccess: (response, inspectionId) => {
 			if (response.success) {
-				queryClient.invalidateQueries({ queryKey: [InspectionKey] })
+				queryClient.invalidateQueries({
+					queryKey: [InspectionKey, inspectionId],
+				})
 			}
 		},
 	})

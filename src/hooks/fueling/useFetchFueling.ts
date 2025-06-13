@@ -2,7 +2,7 @@ import { UseQueryResult, useQuery } from '@tanstack/react-query'
 
 import { getById } from '@/api/refuelingApi'
 
-import { InsuranceKey } from '@/config/queryKeys'
+import { FuelingKey } from '@/config/queryKeys'
 
 import { Fueling } from '@/types/types/Fueling'
 
@@ -10,7 +10,7 @@ export const useFetchFueling = (
 	fuelingId?: string
 ): UseQueryResult<Fueling | undefined, unknown> => {
 	return useQuery({
-		queryKey: [InsuranceKey, fuelingId],
+		queryKey: [FuelingKey, fuelingId],
 		queryFn: async () => {
 			if (!fuelingId) throw new Error('No fuelingId provided')
 

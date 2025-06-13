@@ -23,3 +23,5 @@ export const TrimKey = 'trim'
 export const CountryKey = 'country'
 
 export const FuelingKey = 'fueling'
+
+export const ListKey = 'list'

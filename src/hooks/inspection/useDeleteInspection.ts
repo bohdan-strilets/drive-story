@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query'
 import { remove } from '@/api/inspectionApi'
 
 import { queryClient } from '@/config/queryClient'
-import { CarKey, InspectionKey } from '@/config/queryKeys'
+import { CarKey, InspectionKey, ListKey } from '@/config/queryKeys'
 
 import { ApiResponse } from '@/types/types/ApiResponse'
 import { Inspection } from '@/types/types/Inspection'
@@ -15,10 +15,14 @@ export const useDeleteInspection = () => {
 		string | undefined
 	>({
 		mutationFn: (inspectionId) => remove(inspectionId),
-		onSuccess: (response) => {
+		onSuccess: (response, inspectionId) => {
 			if (response.success) {
-				queryClient.invalidateQueries({ queryKey: [InspectionKey] })
+				queryClient.invalidateQueries({ queryKey: [InspectionKey, ListKey] })
 				queryClient.invalidateQueries({ queryKey: [CarKey] })
+				queryClient.removeQueries({
+					queryKey: [InspectionKey, inspectionId],
+					exact: true,
+				})
 			}
 		},
 	})

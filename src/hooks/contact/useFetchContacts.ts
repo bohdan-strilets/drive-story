@@ -2,7 +2,7 @@ import { UseQueryResult, useQuery } from '@tanstack/react-query'
 
 import { getAll } from '@/api/contactApi'
 
-import { ContactKey } from '@/config/queryKeys'
+import { ContactKey, ListKey } from '@/config/queryKeys'
 
 import { PaginationParams } from '@/types/params/PaginationParams'
 import { Contact } from '@/types/types/Contact'
@@ -12,7 +12,7 @@ export const useFetchContacts = (
 	params: PaginationParams
 ): UseQueryResult<PaginatedResponse<Contact> | undefined, unknown> => {
 	return useQuery({
-		queryKey: [ContactKey, params.page, params.limit],
+		queryKey: [ContactKey, ListKey],
 		queryFn: async () => {
 			const response = await getAll(params)
 			if (response.success) {

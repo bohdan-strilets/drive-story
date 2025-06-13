@@ -2,6 +2,9 @@ import { useMutation } from '@tanstack/react-query'
 
 import { logout } from '@/api/authApi'
 
+import { queryClient } from '@/config/queryClient'
+import { AuthKey, UserKey } from '@/config/queryKeys'
+
 import { useAuthStore } from '@/store/useAuthStore'
 import { useUserStore } from '@/store/useUserStore'
 
@@ -17,6 +20,9 @@ export const useLogout = () => {
 		mutationFn: () => logout(),
 		onSuccess: (response) => {
 			if (response.success) {
+				queryClient.removeQueries({ queryKey: [UserKey], exact: true })
+				queryClient.removeQueries({ queryKey: [AuthKey], exact: true })
+
 				setUser(null)
 				setToken(null)
 				setIsLoggedIn(false)
