@@ -6,7 +6,7 @@ import ImageBox from '@/components/UI/ImageBox'
 import Paragraph from '@/components/UI/Paragraph'
 import Title from '@/components/UI/Title'
 
-import medalImage from '@/assets/activationSuccess/medal.webp'
+import medalImage from '@/assets/auth/medal.webp'
 
 import { routes } from '@/config/routes'
 

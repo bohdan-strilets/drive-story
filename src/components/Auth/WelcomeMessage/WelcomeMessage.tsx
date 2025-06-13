@@ -6,7 +6,7 @@ import Paragraph from '@/components/UI/Paragraph'
 
 import useModal from '@/hooks/ui/useModal'
 
-import successImage from '@/assets/welcome/success.webp'
+import successImage from '@/assets/auth/success.webp'
 
 import { modalNames } from '@/config/modalConfig'
 
