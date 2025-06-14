@@ -6,10 +6,7 @@ import DropdownList from '@/components/UI/DropdownList'
 
 import useResponsive from '@/hooks/ui/useResponsive'
 
-import {
-	formatValue,
-	generateDropdownOptions,
-} from '@/utils/generateDropdownOptions'
+import { generateDropdownOptions } from '@/utils/generateDropdownOptions'
 import { generateNumberArray } from '@/utils/generateNumberArray'
 
 import { Months } from '@/types/enums/Months'
@@ -18,7 +15,6 @@ import { ControllersProps } from '@/types/props/Calendar/ControllersProps'
 import { Group, Wrapper } from './Controllers.styled'
 
 const Controllers: FC<ControllersProps> = ({
-	currentDate,
 	handleNextMonth,
 	handlePreviousMonth,
 	control,
@@ -33,11 +29,7 @@ const Controllers: FC<ControllersProps> = ({
 	const yearOptions = generateDropdownOptions(yearValues)
 
 	const months = Object.values(Months)
-	const monthValues = generateNumberArray(0, months.length)
-	const monthOptions = generateDropdownOptions(months, monthValues)
-
-	const defaultMonth = formatValue(String(currentDate.getMonth()))
-	const defaultYear = formatValue(String(currentDate.getFullYear()))
+	const monthOptions = generateDropdownOptions(months)
 
 	const { maxTablet, minLaptop, minTablet } = useResponsive()
 
@@ -82,7 +74,6 @@ const Controllers: FC<ControllersProps> = ({
 					width={dropdownWidth()}
 					margin="0 10px 0 0"
 					placeholder="Month"
-					defaultValue={defaultMonth}
 				/>
 				<DropdownList
 					control={control}
@@ -90,7 +81,6 @@ const Controllers: FC<ControllersProps> = ({
 					name="year"
 					width={dropdownWidth()}
 					placeholder="Year"
-					defaultValue={defaultYear}
 				/>
 			</Group>
 			<Button
