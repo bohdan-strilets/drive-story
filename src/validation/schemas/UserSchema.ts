@@ -35,7 +35,8 @@ export const UserSchema = yup.object().shape({
 		.trim()
 		.min(nickname.min, nickname.message)
 		.max(nickname.max, nickname.message)
-		.optional(),
+		.optional()
+		.nullable(),
 
 	email: yup.string().trim().email(email.message).required(email.required),
 
@@ -51,37 +52,45 @@ export const UserSchema = yup.object().shape({
 		.date()
 		.min(birthDate.min, birthDate.message)
 		.max(birthDate.max, birthDate.message)
-		.optional(),
+		.optional()
+		.nullable(),
 
 	phoneNumber: yup
 		.string()
 		.matches(phoneNumber.pattern, phoneNumber.patternMessage)
-		.optional(),
+		.optional()
+		.nullable(),
 
 	gender: yup
 		.string()
 		.oneOf(gender.oneOf, gender.oneOfMessage)
 		.required(gender.required),
 
-	location: yup.object().shape({
-		country: yup
-			.string()
-			.trim()
-			.min(country.min, country.message)
-			.max(country.max, country.message)
-			.optional(),
+	location: yup
+		.object()
+		.shape({
+			country: yup
+				.string()
+				.trim()
+				.min(country.min, country.message)
+				.max(country.max, country.message)
+				.optional()
+				.nullable(),
 
-		city: yup
-			.string()
-			.trim()
-			.min(city.min, city.message)
-			.max(city.max, city.message)
-			.optional(),
+			city: yup
+				.string()
+				.trim()
+				.min(city.min, city.message)
+				.max(city.max, city.message)
+				.optional()
+				.nullable(),
 
-		postalCode: yup
-			.string()
-			.trim()
-			.matches(postalCode.pattern, postalCode.patternMessage)
-			.optional(),
-	}),
+			postalCode: yup
+				.string()
+				.trim()
+				.matches(postalCode.pattern, postalCode.patternMessage)
+				.optional()
+				.nullable(),
+		})
+		.nullable(),
 })
