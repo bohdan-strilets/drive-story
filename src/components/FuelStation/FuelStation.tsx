@@ -12,10 +12,10 @@ import { fadeSlide } from '@/animations/fadeSlide'
 import Pagination from '../UI/Pagination'
 
 import EmptyState from './EmptyState'
-import { Item } from './Refueling.styled'
+import { Item } from './FuelStation.styled'
 import RefuelingCard from './RefuelingCard'
 
-const Refueling: FC<RefuelingProps> = ({
+const FuelStation: FC<RefuelingProps> = ({
 	refuelings,
 	paginationMeta,
 	setPage,
@@ -70,4 +70,4 @@ const Refueling: FC<RefuelingProps> = ({
 	)
 }
 
-export default Refueling
+export default FuelStation

@@ -1,12 +1,12 @@
 import { FC } from 'react'
 import { useParams } from 'react-router-dom'
 
-import ErrorState from '@/components/Refueling/ErrorState/ErrorState'
+import ErrorState from '@/components/FuelStation/ErrorState/ErrorState'
 import Loader from '@/components/UI/Loader'
 
 import { useFetchFueling } from '@/hooks/fueling/useFetchFueling'
 
-const RefuelingInfoPage: FC = () => {
+const RefuelingPage: FC = () => {
 	const { refuelingId } = useParams()
 	const { carId } = useParams()
 
@@ -15,7 +15,9 @@ const RefuelingInfoPage: FC = () => {
 	if (isLoading) return <Loader color="gray" />
 	if (isError) return <ErrorState carId={carId!} />
 
-	return <p>RefuelingInfoPage</p>
+	console.log(refueling)
+
+	return <p>RefuelingPage</p>
 }
 
-export default RefuelingInfoPage
+export default RefuelingPage

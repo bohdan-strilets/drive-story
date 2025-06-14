@@ -1,13 +1,9 @@
-import { AnimatePresence } from 'motion/react'
 import { FC, useState } from 'react'
 import { BsFillFuelPumpFill } from 'react-icons/bs'
 import { useParams } from 'react-router-dom'
 
-import Modal from '@/components/Modal'
-import Refueling from '@/components/Refueling'
-import RefuelingForm from '@/components/Refueling/RefuelingForm'
+import Refueling from '@/components/FuelStation'
 import ActionButton from '@/components/UI/ActionButton'
-import Loader from '@/components/UI/Loader'
 
 import { useFetchFuelings } from '@/hooks/fueling/useFetchFuelings'
 import useModal from '@/hooks/ui/useModal'
@@ -16,10 +12,13 @@ import { modalNames } from '@/config/modalConfig'
 
 import { ListParams } from '@/types/params/ListParams'
 
-const RefuelingPage: FC = () => {
+import FuelStationFetching from './FuelStationFetching'
+import FuelStationModals from './FuelStationModals'
+
+const FuelStationPage: FC = () => {
 	const [page, setPage] = useState(1)
 
-	const { onOpen, checkQueryParam } = useModal()
+	const { onOpen } = useModal()
 	const { carId } = useParams()
 
 	const limit = 10
@@ -30,6 +29,10 @@ const RefuelingPage: FC = () => {
 
 	const { isLoading, data: fuelings } = useFetchFuelings(paginationParams)
 	const paginationMeta = fuelings?.meta
+
+	if (!carId || isLoading) {
+		return <FuelStationFetching carId={carId} isFetching={isLoading} />
+	}
 
 	return (
 		<>
@@ -43,8 +46,6 @@ const RefuelingPage: FC = () => {
 				margin="0 0 30px 0"
 			/>
 
-			{isLoading && <Loader color="gray" />}
-
 			{fuelings && (
 				<Refueling
 					refuelings={fuelings.data}
@@ -53,15 +54,9 @@ const RefuelingPage: FC = () => {
 				/>
 			)}
 
-			<AnimatePresence>
-				{checkQueryParam(modalNames.ADD_REFUELING) && (
-					<Modal key={modalNames.ADD_REFUELING} title="Add new refueling">
-						<RefuelingForm mode="create" carId={carId!} />
-					</Modal>
-				)}
-			</AnimatePresence>
+			<FuelStationModals carId={carId} />
 		</>
 	)
 }
 
-export default RefuelingPage
+export default FuelStationPage
