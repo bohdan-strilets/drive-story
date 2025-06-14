@@ -48,6 +48,7 @@ const Profile: FC<ProfileProps> = ({ user }) => {
 				<InformationWrapper>
 					<PropertyList descriptors={userField} context={user} />
 				</InformationWrapper>
+
 				<SideMenu>
 					<OpenGalleryButton
 						onClick={() => onOpen(modalNames.USER_AVATARS)}
@@ -61,6 +62,7 @@ const Profile: FC<ProfileProps> = ({ user }) => {
 							isShadow={true}
 						/>
 					</OpenGalleryButton>
+
 					<ActionMenu descriptors={userUploadActions} />
 					<ProfileMeta />
 					<ActionMenu descriptors={userActions} />

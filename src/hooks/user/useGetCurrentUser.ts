@@ -2,7 +2,7 @@ import { UseQueryResult, useQuery } from '@tanstack/react-query'
 
 import { getCurrentUser } from '@/api/userApi'
 
-import { AuthKey, UserKey } from '@/config/queryKeys'
+import { UserKey } from '@/config/queryKeys'
 
 import { useAuthStore } from '@/store/useAuthStore'
 import { useUserStore } from '@/store/useUserStore'
@@ -18,7 +18,7 @@ export const useGetCurrentUser = (
 	const setToken = useAuthStore((state) => state.setToken)
 
 	return useQuery({
-		queryKey: [UserKey, AuthKey],
+		queryKey: [UserKey],
 		queryFn: async () => {
 			const response = await getCurrentUser()
 			if (response.success && response.data) {
