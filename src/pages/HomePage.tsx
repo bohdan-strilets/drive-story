@@ -18,7 +18,7 @@ const HomePage: FC = () => {
 		if (state?.openModal === modalNames.WELCOME) {
 			onOpen(modalNames.WELCOME)
 		}
-	}, [state, modalNames.WELCOME, onOpen])
+	}, [onOpen, state?.openModal])
 
 	return (
 		<>
@@ -36,14 +36,15 @@ const HomePage: FC = () => {
 			</p>
 
 			<AnimatePresence>
-				{checkQueryParam(modalNames.WELCOME) && (
-					<Modal title="Welcome">
-						<WelcomeMessage />
-					</Modal>
-				)}
 				{checkQueryParam(modalNames.RESEND_EMAIL) && (
 					<Modal title="Resend activation email">
 						<ResendEmail showButtonGoBack={true} />
+					</Modal>
+				)}
+
+				{checkQueryParam(modalNames.WELCOME) && (
+					<Modal title="Welcome">
+						<WelcomeMessage />
 					</Modal>
 				)}
 			</AnimatePresence>
