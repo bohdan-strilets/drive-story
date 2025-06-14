@@ -1,13 +1,10 @@
-import { AnimatePresence } from 'motion/react'
 import { FC, useState } from 'react'
 import { BiSolidContact } from 'react-icons/bi'
+import { useParams } from 'react-router-dom'
 
-import Modal from '@/components/Modal'
 import PhoneBook from '@/components/PhoneBook'
-import ContactForm from '@/components/PhoneBook/ContactForm'
 import ContactsFilter from '@/components/PhoneBook/ContactsFilter'
 import ActionButton from '@/components/UI/ActionButton'
-import Loader from '@/components/UI/Loader'
 
 import { useFilterContacts } from '@/hooks/contact/useFilterContacts'
 import useModal from '@/hooks/ui/useModal'
@@ -16,11 +13,15 @@ import { modalNames } from '@/config/modalConfig'
 
 import { PaginationParams } from '@/types/params/PaginationParams'
 
+import PhoneBookFetching from './PhoneBookFetching'
+import PhoneBookModals from './PhoneBookModals'
+
 const PhoneBookPage: FC = () => {
 	const [page, setPage] = useState(1)
 	const [query, setQuery] = useState<string>('')
 
-	const { onOpen, checkQueryParam } = useModal()
+	const { carId } = useParams()
+	const { onOpen } = useModal()
 
 	const limit = 10
 	const paginationParams: PaginationParams = { limit, page, searchQuery: query }
@@ -29,6 +30,10 @@ const PhoneBookPage: FC = () => {
 
 	const contacts = data?.data ?? []
 	const paginationMeta = data?.meta
+
+	if (isLoading || !carId) {
+		return <PhoneBookFetching isFetching={isLoading} carId={carId} />
+	}
 
 	return (
 		<>
@@ -44,8 +49,6 @@ const PhoneBookPage: FC = () => {
 
 			{contacts.length > 0 && <ContactsFilter getQuery={setQuery} />}
 
-			{isLoading && <Loader color="gray" />}
-
 			{!isLoading && (
 				<PhoneBook
 					contacts={contacts}
@@ -54,13 +57,7 @@ const PhoneBookPage: FC = () => {
 				/>
 			)}
 
-			<AnimatePresence>
-				{checkQueryParam(modalNames.ADD_CONTACT) && (
-					<Modal key={modalNames.ADD_CONTACT} title="Add new contact">
-						<ContactForm mode="create" />
-					</Modal>
-				)}
-			</AnimatePresence>
+			<PhoneBookModals />
 		</>
 	)
 }
