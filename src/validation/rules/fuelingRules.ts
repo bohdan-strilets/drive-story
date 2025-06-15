@@ -18,7 +18,7 @@ export const fuelingRules = {
 	},
 
 	pricePerUnit: {
-		min: 1,
+		min: 0.1,
 		max: 50,
 		required: 'Price per unit is required',
 		message: 'Price per unit must be between 0,01 and 50',
@@ -26,7 +26,7 @@ export const fuelingRules = {
 	},
 
 	totalCost: {
-		min: 1,
+		min: 0.1,
 		max: 5000,
 		message: 'Total cost must be between 0,01 and 5000',
 		required: 'Total cost is required',
