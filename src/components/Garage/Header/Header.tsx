@@ -35,7 +35,7 @@ const Header: FC<HeaderProps> = ({
 	const { maxMobile } = useResponsive()
 	const navigate = useNavigate()
 
-	const { data: countryInfo, isPending } = useFetchFlag(countryName)
+	const { data: countryInfo, fetchStatus } = useFetchFlag(countryName)
 	const flagSvg = countryInfo?.[0].flags.svg
 
 	return (
@@ -60,7 +60,7 @@ const Header: FC<HeaderProps> = ({
 						brand={carMake}
 						margin={maxMobile ? '0 5px 0 0' : '0 15px 0 0'}
 						countryFlag={flagSvg}
-						isFetchFlag={isPending}
+						isFetchFlag={fetchStatus === 'fetching'}
 					/>
 					<div>
 						<Title

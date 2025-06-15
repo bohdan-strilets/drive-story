@@ -21,7 +21,7 @@ const BrandLogo: FC<BrandLogoProps> = ({
 	brand,
 	margin = '',
 	countryFlag,
-	isFetchFlag = false,
+	isFetchFlag,
 }) => {
 	const { maxMobile } = useResponsive()
 
@@ -52,7 +52,7 @@ const BrandLogo: FC<BrandLogoProps> = ({
 					<GiAbstract021 size="100%" color={getColor('black')} />
 				)}
 			</Wrapper>
-			{isFetchFlag && <Loader color="yellow" />}
+			{isFetchFlag && <Loader color="yellow" margin="15px 0 0 0" />}
 			{countryFlag && (
 				<ImageBox
 					imageUrl={countryFlag}
