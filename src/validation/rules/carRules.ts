@@ -17,10 +17,10 @@ export const carRules = {
 			message: 'Manufacturer must be between 2 and 50 characters long',
 		},
 		model: {
-			min: 2,
+			min: 1,
 			max: 50,
 			required: 'Model is required',
-			message: 'Model must be between 2 and 50 characters long',
+			message: 'Model must be between 1 and 50 characters long',
 		},
 		year: {
 			oneOf: Object.values(yearProduction),
@@ -120,13 +120,16 @@ export const carRules = {
 		purchaseDate: {
 			max: new Date(),
 			message: 'Purchase date must be a valid date',
+			maxMessage: 'Purchase date cannot be in the future',
 		},
 		saleDate: {
 			max: new Date(),
-			message: 'Sale date cannot be before purchase date',
+			required: 'Enter the sale date',
+			minMessage: 'Sale date cannot be earlier than purchase date',
+			maxMessage: 'Sale date cannot be in the future',
 		},
 		purchasePrice: {
-			min: 1,
+			min: 0,
 			max: 5000000,
 			integerMessage: 'Purchase price must be a positive, integer number',
 		},
@@ -134,7 +137,9 @@ export const carRules = {
 			min: 1,
 			max: 5000000,
 			integerMessage: 'Sale price must be a positive, integer number',
+			message: 'Please enter the sale price',
 		},
+		isSold: {},
 	},
 	description: {
 		min: 20,

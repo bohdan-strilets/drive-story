@@ -1,5 +1,4 @@
 import { formatNumberWithSpaces } from '@/utils/formatNumberWithSpaces'
-import { isWithinThreshold } from '@/utils/isWithinThreshold'
 import { parsedDateToString } from '@/utils/parsedDateToString'
 
 import { CarOwnership } from '@/types/types/CarEntity'
@@ -12,25 +11,23 @@ export const carOwnership: FieldDescriptor<CarOwnership>[] = [
 		render: (ownership) => parsedDateToString(ownership?.purchaseDate),
 	},
 	{
-		key: 'date-of-sale',
-		label: 'Date of sale',
-		render: (ownership) =>
-			isWithinThreshold(new Date())
-				? 'The car hasn’t been sold yet'
-				: parsedDateToString(ownership?.saleDate),
-	},
-	{
 		key: 'price-of-purchase',
 		label: 'Price of purchase',
 		render: (ownership) =>
 			`${formatNumberWithSpaces(ownership?.purchasePrice || 0)} PLN`,
 	},
 	{
+		key: 'date-of-sale',
+		label: 'Date of sale',
+		render: (ownership) =>
+			ownership?.isSold ? parsedDateToString(ownership?.saleDate) : '—',
+	},
+	{
 		key: 'price-of-sale',
 		label: 'Price of sale',
 		render: (ownership) =>
-			ownership?.salePrice && ownership?.salePrice > 0
+			ownership?.isSold
 				? `${formatNumberWithSpaces(ownership?.salePrice || 0)} PLN`
-				: 'The car hasn’t been sold yet',
+				: '—',
 	},
 ]

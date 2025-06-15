@@ -95,6 +95,9 @@ const CarForm: FC<CarFormProps> = ({ mode, car }) => {
 		const payload: CarDetailsDto = {
 			...data,
 			basicInfo: { ...data.basicInfo, trimsId },
+			ownership: data.ownership.isSold
+				? { ...data.ownership }
+				: { ...data.ownership, salePrice: 0, saleDate: null },
 		}
 
 		if (mode === 'create') {

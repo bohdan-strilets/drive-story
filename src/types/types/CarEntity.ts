@@ -42,6 +42,7 @@ export type CarOwnership = {
 	saleDate?: Date | null
 	purchasePrice?: number
 	salePrice?: number
+	isSold?: boolean
 }
 
 export type InsuranceInfo = {

@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { useFormContext } from 'react-hook-form'
 
+import Checkbox from '@/components/UI/Checkbox'
 import DatePicker from '@/components/UI/DatePicker'
 import NumberInput from '@/components/UI/NumberInput'
 import Textarea from '@/components/UI/Textarea'
@@ -11,7 +12,9 @@ import { Fields } from '@/validation/schemas/CarSchema'
 
 const OwnershipAndDescFields: FC = () => {
 	const { control, watch } = useFormContext<Fields>()
+
 	const yearIssue = watch('basicInfo.year')
+	const isSold = watch('ownership.isSold')
 
 	return (
 		<>
@@ -30,18 +33,6 @@ const OwnershipAndDescFields: FC = () => {
 					maxDate: carRules.ownership.purchaseDate.max,
 				}}
 			/>
-			<DatePicker
-				control={control}
-				name="ownership.saleDate"
-				label="Sale Date"
-				placeholder="Select date"
-				width="100%"
-				margin="0 0 15px 0"
-				rules={{
-					minDate: new Date(`${yearIssue}-01-01`),
-					maxDate: carRules.ownership.saleDate.max,
-				}}
-			/>
 			<NumberInput
 				control={control}
 				label="Purchase price (PLN)"
@@ -54,18 +45,44 @@ const OwnershipAndDescFields: FC = () => {
 				}}
 				defaultValue={0}
 			/>
-			<NumberInput
+
+			<Checkbox
 				control={control}
-				label="Sale price (PLN)"
-				name="ownership.salePrice"
-				width="100%"
+				name="ownership.isSold"
 				margin="0 0 15px 0"
-				rules={{
-					min: carRules.ownership.salePrice.min,
-					max: carRules.ownership.salePrice.max,
-				}}
-				defaultValue={0}
-			/>
+				rules={{ isChecked: false, required: false }}
+			>
+				<p>Car is sold?</p>
+			</Checkbox>
+
+			{isSold && (
+				<>
+					<DatePicker
+						control={control}
+						name="ownership.saleDate"
+						label="Sale Date"
+						placeholder="Select date"
+						width="100%"
+						margin="0 0 15px 0"
+						rules={{
+							minDate: new Date(`${yearIssue}-01-01`),
+							maxDate: carRules.ownership.saleDate.max,
+						}}
+					/>
+					<NumberInput
+						control={control}
+						label="Sale price (PLN)"
+						name="ownership.salePrice"
+						width="100%"
+						margin="0 0 15px 0"
+						rules={{
+							min: carRules.ownership.salePrice.min,
+							max: carRules.ownership.salePrice.max,
+						}}
+						defaultValue={0}
+					/>
+				</>
+			)}
 
 			<Textarea
 				control={control}

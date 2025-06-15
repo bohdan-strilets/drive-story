@@ -12,7 +12,7 @@ export const {
 } = carRules
 const { make, model, year, generation, shortName } = basicInfo
 const { firstRegDate, regNumber, vin } = registration
-const { saleDate, purchasePrice, salePrice } = ownership
+const { saleDate, purchasePrice, salePrice, purchaseDate } = ownership
 const {
 	bodyType,
 	transmission,
@@ -150,32 +150,41 @@ export const Schema = yup.object().shape({
 	}),
 
 	ownership: yup.object().shape({
-		purchaseDate: yup.date().nullable().optional(),
+		purchaseDate: yup
+			.date()
+			.max(purchaseDate.max, purchaseDate.maxMessage)
+			.nullable()
+			.optional(),
+
 		saleDate: yup
 			.date()
 			.nullable()
-			.optional()
-			.test('saleDate-check', saleDate.message, function (saleDate) {
-				const { purchaseDate } = this.parent
-				if (purchaseDate && saleDate) {
-					return new Date(saleDate) >= new Date(purchaseDate)
-				}
-				return true
+			.min(yup.ref('purchaseDate'), saleDate.minMessage)
+			.max(saleDate.max, saleDate.maxMessage)
+			.when('isSold', {
+				is: true,
+				then: (s) => s.required(saleDate.required),
+				otherwise: (s) => s.optional(),
 			}),
 
 		purchasePrice: yup
 			.number()
 			.min(purchasePrice.min)
 			.max(purchasePrice.max)
-			.integer(purchasePrice.integerMessage)
-			.positive(purchasePrice.integerMessage),
+			.optional(),
 
 		salePrice: yup
 			.number()
 			.min(salePrice.min)
 			.max(salePrice.max)
-			.integer(salePrice.integerMessage)
-			.positive(salePrice.integerMessage),
+			.when('isSold', {
+				is: true,
+				then: (s) =>
+					s.required(salePrice.message).positive(salePrice.integerMessage),
+				otherwise: (s) => s.optional(),
+			}),
+
+		isSold: yup.boolean().optional(),
 	}),
 
 	description: yup

@@ -40,7 +40,7 @@ const DatePicker = <
 
 	const required = rules?.required
 
-	const [currentDate, setCurrentDate] = useState(new Date(value))
+	const [currentDate, setCurrentDate] = useState(new Date(value || new Date()))
 	const [isOpen, setIsOpen] = useState(false)
 
 	const toggleList = useCallback(() => setIsOpen((state) => !state), [])
