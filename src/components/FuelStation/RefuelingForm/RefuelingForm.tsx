@@ -97,7 +97,6 @@ const RefuelingForm: FC<RefuelingFormProps> = ({ mode, carId, refueling }) => {
 					required: true,
 					min: fuelingRules.quantity.min,
 					max: fuelingRules.quantity.max,
-					step: 0.1,
 				}}
 				defaultValue={0}
 			/>
@@ -111,7 +110,6 @@ const RefuelingForm: FC<RefuelingFormProps> = ({ mode, carId, refueling }) => {
 					required: true,
 					min: fuelingRules.pricePerUnit.min,
 					max: fuelingRules.pricePerUnit.max,
-					step: 0.1,
 				}}
 				defaultValue={0}
 			/>
@@ -125,7 +123,6 @@ const RefuelingForm: FC<RefuelingFormProps> = ({ mode, carId, refueling }) => {
 					required: true,
 					min: fuelingRules.totalCost.min,
 					max: fuelingRules.totalCost.max,
-					step: 0.1,
 				}}
 				defaultValue={0}
 			/>
