@@ -92,3 +92,15 @@ export const bindContact = async ({
 		return handleApiError(error)
 	}
 }
+
+export const clearContact = async (
+	fuelingId?: string
+): Promise<ApiResponse<Fueling | null>> => {
+	try {
+		const path = `${ENDPOINT}/clear-contact/${fuelingId}`
+		const { data } = await apiClient.put(path)
+		return data
+	} catch (error) {
+		return handleApiError(error)
+	}
+}

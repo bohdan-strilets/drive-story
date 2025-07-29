@@ -85,7 +85,7 @@ const Header: FC<HeaderProps> = ({
 			<Paragraph color="black" fontSize={12} textAlign="right" margin="5px 0">
 				ID: {carId}
 			</Paragraph>
-			<Paragraph color="black" fontSize={12} textAlign="right">
+			<Paragraph color="green" fontSize={12} textAlign="right">
 				Latest changes: {parsedDateToString(updatedDate)}
 			</Paragraph>
 			<DecorativeLine type="dashed" color="#ccc" margin="10px 0" />
