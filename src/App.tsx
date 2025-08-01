@@ -3,6 +3,7 @@ import { FC, Suspense, lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 import Modal from './components/Modal'
+import ProtectedRoute from './components/ProtectedRoute'
 import Loader from './components/UI/Loader'
 import { modalNames } from './config/modalConfig'
 import { routes } from './config/routes'
@@ -55,20 +56,30 @@ const App: FC = () => {
 						path={routes.RECOVER_PASSWORD}
 						element={<RecoverPasswordPage />}
 					/>
-					<Route
-						path={routes.ACTIVATION_SUCCESS}
-						element={<ActivationSuccessPage />}
-					/>
 					<Route path={routes.RESET_PASSWORD} element={<ResetPasswordPage />} />
-					<Route path={routes.PROFILE} element={<ProfilePage />} />
-					<Route path={routes.GARAGE} element={<GaragePage />} />
-					<Route path={routes.PHONE_BOOK} element={<PhoneBookPage />} />
-					<Route path={routes.CONTACT_BY_ID} element={<ContactPage />} />
-					<Route path={routes.CAR_BY_ID} element={<CarPage />} />
-					<Route path={routes.INSURANCE_BY_ID} element={<InsurancePage />} />
-					<Route path={routes.INSPECTION_BY_ID} element={<InspectionPage />} />
-					<Route path={routes.REFUELING_BY_CAR} element={<FuelStationPage />} />
-					<Route path={routes.REFUELING_BY_ID} element={<RefuelingPage />} />
+
+					<Route element={<ProtectedRoute />}>
+						<Route
+							path={routes.ACTIVATION_SUCCESS}
+							element={<ActivationSuccessPage />}
+						/>
+						<Route path={routes.PROFILE} element={<ProfilePage />} />
+						<Route path={routes.GARAGE} element={<GaragePage />} />
+						<Route path={routes.PHONE_BOOK} element={<PhoneBookPage />} />
+						<Route path={routes.CONTACT_BY_ID} element={<ContactPage />} />
+						<Route path={routes.CAR_BY_ID} element={<CarPage />} />
+						<Route path={routes.INSURANCE_BY_ID} element={<InsurancePage />} />
+						<Route
+							path={routes.INSPECTION_BY_ID}
+							element={<InspectionPage />}
+						/>
+						<Route
+							path={routes.REFUELING_BY_CAR}
+							element={<FuelStationPage />}
+						/>
+						<Route path={routes.REFUELING_BY_ID} element={<RefuelingPage />} />
+					</Route>
+
 					<Route path="*" element={<NotFoundPage />} />
 				</Routes>
 			</Suspense>
