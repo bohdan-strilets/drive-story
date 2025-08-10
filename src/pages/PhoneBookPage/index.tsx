@@ -1,6 +1,5 @@
 import { FC, useState } from 'react'
 import { BiSolidContact } from 'react-icons/bi'
-import { useParams } from 'react-router-dom'
 
 import PhoneBook from '@/components/PhoneBook'
 import ContactsFilter from '@/components/PhoneBook/ContactsFilter'
@@ -20,7 +19,6 @@ const PhoneBookPage: FC = () => {
 	const [page, setPage] = useState(1)
 	const [query, setQuery] = useState<string>('')
 
-	const { carId } = useParams()
 	const { onOpen } = useModal()
 
 	const limit = 10
@@ -31,8 +29,8 @@ const PhoneBookPage: FC = () => {
 	const contacts = data?.data ?? []
 	const paginationMeta = data?.meta
 
-	if (isLoading || !carId) {
-		return <PhoneBookFetching isFetching={isLoading} carId={carId} />
+	if (isLoading) {
+		return <PhoneBookFetching isFetching={isLoading} />
 	}
 
 	return (
