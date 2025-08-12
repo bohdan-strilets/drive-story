@@ -28,6 +28,6 @@ export const refuelingFields: FieldDescriptor<Fueling>[] = [
 	{
 		key: 'total-cost',
 		label: 'Total Cost',
-		render: (fueling) => `${fueling?.totalCost} L`,
+		render: (fueling) => `${fueling?.totalCost} PLN`,
 	},
 ]
