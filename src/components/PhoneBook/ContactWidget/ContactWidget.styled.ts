@@ -23,17 +23,9 @@ export const Wrapper = styled.div<WrapperProps>`
 	padding: 10px;
 	width: 100%;
 
-	background-color: ${getColor('#d6d6d6')};
+	background-color: ${getColor('#eeeeee')};
 	border-radius: 5px;
 	box-shadow: var(--box-shadow);
-
-	transition: background-color var(--hover-effect);
-	cursor: pointer;
-
-	:hover,
-	:focus {
-		background-color: ${getColor('#b4b4b4')};
-	}
 `
 
 export const Header = styled.div`

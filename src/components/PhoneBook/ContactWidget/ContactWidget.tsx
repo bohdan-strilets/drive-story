@@ -2,12 +2,14 @@ import { FC } from 'react'
 import { FaLocationDot, FaPhone } from 'react-icons/fa6'
 import { IoMdContacts } from 'react-icons/io'
 import { MdDelete } from 'react-icons/md'
-import { generatePath, useNavigate } from 'react-router-dom'
+import { generatePath } from 'react-router-dom'
 
+import AddressMap from '@/components/AddressMap'
 import Button from '@/components/UI/Button'
 import DecorativeLine from '@/components/UI/DecorativeLine'
 import Loader from '@/components/UI/Loader'
 import Paragraph from '@/components/UI/Paragraph'
+import StyledLink from '@/components/UI/StyledLink'
 
 import { routes } from '@/config/routes'
 
@@ -26,8 +28,6 @@ const ContactWidget: FC<ContactWidgetProps> = ({
 	contact,
 	margin = '',
 }) => {
-	const navigate = useNavigate()
-
 	const path = generatePath(routes.CONTACT_BY_ID, {
 		contactId: contact?._id || '',
 	})
@@ -48,11 +48,15 @@ const ContactWidget: FC<ContactWidgetProps> = ({
 	}
 
 	return (
-		<Wrapper margin={margin} onClick={() => navigate(path)}>
+		<Wrapper margin={margin}>
 			<Header>
-				<Paragraph color="black" fontWeight={700} fontSize={20}>
-					{contact.name}
-				</Paragraph>
+				<StyledLink
+					path={path}
+					label={contact.name}
+					color="black"
+					hoverColor="green"
+				/>
+
 				<Button
 					onClick={removeLink}
 					color="white"
@@ -83,10 +87,12 @@ const ContactWidget: FC<ContactWidgetProps> = ({
 				<Item>
 					<FaLocationDot color={getColor('black')} />
 					<Paragraph color="black" margin="0 0 0 10px">
-						{contact.address.country} {contact.address.city}
+						{contact.address.country}, {contact.address.city}
 					</Paragraph>
 				</Item>
 			</ul>
+
+			<AddressMap address={contact.address} height="300px" />
 
 			{isCleaning && <Loader color="gray" />}
 		</Wrapper>
