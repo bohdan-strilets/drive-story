@@ -97,7 +97,17 @@ const ContactCard: FC<ContactCardProps> = ({
 				{website && (
 					<IconWithText>
 						<FaGlobe color={getColor('yellow')} size={14} />
-						<Paragraph color="gray" margin="0 0 0 10px" fontSize={14}>
+						<Paragraph
+							color="gray"
+							margin="0 0 0 10px"
+							fontSize={14}
+							style={{
+								width: '200px',
+								whiteSpace: 'nowrap',
+								overflow: 'hidden',
+								textOverflow: 'ellipsis',
+							}}
+						>
 							{website}
 						</Paragraph>
 					</IconWithText>

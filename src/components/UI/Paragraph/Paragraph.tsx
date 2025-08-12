@@ -14,6 +14,7 @@ const Paragraph: FC<ParagraphProps> = ({
 	padding = '',
 	lineHeight = 1.7,
 	textAlign = 'left',
+	...props
 }) => {
 	return (
 		<Text
@@ -25,6 +26,7 @@ const Paragraph: FC<ParagraphProps> = ({
 			padding={padding}
 			lineHeight={lineHeight}
 			textAlign={textAlign}
+			{...props}
 		>
 			{children}
 		</Text>
