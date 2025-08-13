@@ -7,12 +7,18 @@ export const carRegistration: FieldDescriptor<CarRegistration>[] = [
 	{
 		key: 'vin-number',
 		label: 'Vin number',
-		render: (registration) => registration?.vin || '—',
+		render: (registration) => (
+			<p style={{ textTransform: 'uppercase' }}>{registration?.vin || '—'}</p>
+		),
 	},
 	{
 		key: 'registration-number',
 		label: 'Registration number',
-		render: (registration) => registration?.regNumber || '—',
+		render: (registration) => (
+			<p style={{ textTransform: 'uppercase' }}>
+				{registration?.regNumber || '—'}
+			</p>
+		),
 	},
 	{
 		key: 'date-of-first-registration',
