@@ -1,16 +1,17 @@
 import { AnimatePresence } from 'motion/react'
 import { FC } from 'react'
 
+import BindContactModal from '@/components/Layout/BindContactModal'
+import ClearGalleryModal from '@/components/Layout/ClearGalleryModal'
 import ShowImageViewer from '@/components/Layout/ShowImageViewer'
 import UploadPhotoModal from '@/components/Layout/UploadPhotoModal'
 
 import { getImageResources } from '@/utils/getImageResources'
 
+import { EntityType } from '@/types/enums/EntityType'
 import { InsuranceModalsProps } from '@/types/props/Insurance/InsuranceModalsProps'
 
 import AddInsuranceModal from './modals/AddInsuranceModal'
-import BindContactModal from './modals/BindContactModal'
-import ClearGalleryModal from './modals/ClearGalleryModal'
 import DeleteInsuranceModal from './modals/DeleteInsuranceModal'
 import EditInsuranceModal from './modals/EditInsuranceModal'
 
@@ -54,7 +55,8 @@ const InsuranceModals: FC<InsuranceModalsProps> = ({
 				/>
 
 				<ClearGalleryModal
-					insuranceId={insuranceId}
+					entityId={insuranceId}
+					EntityType={EntityType.INSURANCE}
 					images={insurance.photos}
 					key={6}
 				/>

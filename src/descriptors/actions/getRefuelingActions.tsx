@@ -23,24 +23,24 @@ export const getRefuelingActions = ({
 		key: 'clear-gallery',
 		label: 'Clear gallery',
 		icon: <GiBroom size={20} />,
-		callback: () => onOpen(modalNames.CLEAR_INSURANCE_GALLERY),
+		callback: () => onOpen(modalNames.CLEAR_GALLERY),
 	},
 	{
 		key: 'edit-refueling',
 		label: 'Edit refueling',
 		icon: <MdModeEdit size={20} />,
-		callback: () => onOpen(modalNames.EDIT_INSURANCE),
+		callback: () => onOpen(modalNames.EDIT_REFUELING),
 	},
 	{
 		key: 'bind-contact',
 		label: 'Bind contact',
 		icon: <MdContactEmergency size={20} />,
-		callback: () => onOpen(modalNames.BIND_INSURANCE_CONTACT),
+		callback: () => onOpen(modalNames.BIND_CONTACT),
 	},
 	{
 		key: 'delete-insurance',
 		label: 'Delete refueling',
 		icon: <MdDelete size={20} />,
-		callback: () => onOpen(modalNames.DELETE_INSURANCE),
+		callback: () => onOpen(modalNames.DELETE_REFUELING),
 	},
 ]

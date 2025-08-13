@@ -1,6 +1,6 @@
 import { InsuranceModalsProps } from './InsuranceModalsProps'
 
-export type DeleteInsuranceModalProps = Pick<
+export type EditInsuranceModalProps = Pick<
 	InsuranceModalsProps,
 	'carId' | 'insurance'
 >

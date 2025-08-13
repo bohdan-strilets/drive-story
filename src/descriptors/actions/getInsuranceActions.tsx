@@ -23,7 +23,7 @@ export const getInsuranceActions = ({
 		key: 'clear-gallery',
 		label: 'Clear gallery',
 		icon: <GiBroom size={20} />,
-		callback: () => onOpen(modalNames.CLEAR_INSURANCE_GALLERY),
+		callback: () => onOpen(modalNames.CLEAR_GALLERY),
 	},
 	{
 		key: 'edit-insurance',
@@ -35,7 +35,7 @@ export const getInsuranceActions = ({
 		key: 'bind-contact',
 		label: 'Bind contact',
 		icon: <MdContactEmergency size={20} />,
-		callback: () => onOpen(modalNames.BIND_INSURANCE_CONTACT),
+		callback: () => onOpen(modalNames.BIND_CONTACT),
 	},
 	{
 		key: 'delete-insurance',

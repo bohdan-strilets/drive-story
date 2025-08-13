@@ -6,6 +6,7 @@ import { queryClient } from '@/config/queryClient'
 import {
 	CarKey,
 	ContactKey,
+	FuelingKey,
 	InspectionKey,
 	InsuranceKey,
 	UserKey,
@@ -28,6 +29,7 @@ export const useDeleteImage = () => {
 				queryClient.invalidateQueries({ queryKey: [InsuranceKey, entityId] })
 				queryClient.invalidateQueries({ queryKey: [InspectionKey, entityId] })
 				queryClient.invalidateQueries({ queryKey: [ContactKey, entityId] })
+				queryClient.invalidateQueries({ queryKey: [FuelingKey, entityId] })
 			}
 		},
 	})

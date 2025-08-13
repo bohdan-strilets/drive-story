@@ -6,6 +6,7 @@ import ButtonGoBack from '@/components/UI/ButtonGoBack'
 
 import { useClearContact } from '@/hooks/fueling/useClearContact'
 import { useFetchFueling } from '@/hooks/fueling/useFetchFueling'
+import { useBindContact } from '@/hooks/inspection/useBindContact'
 import { useGalleryManager } from '@/hooks/ui/useGalleryManager'
 import { useViewerManager } from '@/hooks/ui/useViewerManager'
 
@@ -14,6 +15,7 @@ import { routes } from '@/config/routes'
 import { EntityType } from '@/types/enums/EntityType'
 
 import RefuelingFetching from './RefuelingFetching'
+import RefuelingModals from './RefuelingModals'
 
 const RefuelingPage: FC = () => {
 	const { refuelingId, carId } = useParams()
@@ -26,11 +28,17 @@ const RefuelingPage: FC = () => {
 	})
 
 	const { mutateAsync: clearContact, isPending: isCleaning } = useClearContact()
+	const { mutateAsync: bindContact, isPending: isBinding } = useBindContact()
 
-	const { openViewer } = useViewerManager()
+	const { openViewer, showViewer, closeViewer, currentImage } =
+		useViewerManager()
 
-	const { actions, isLoading: isProcessing } = useGalleryManager({
-		entityType: EntityType.INSURANCE,
+	const {
+		actions,
+		isLoading: isProcessing,
+		upload,
+	} = useGalleryManager({
+		entityType: EntityType.FUELING,
 		entityId: refuelingId,
 		openViewer,
 	})
@@ -56,13 +64,28 @@ const RefuelingPage: FC = () => {
 			/>
 
 			{refueling && (
-				<RefuelingInfo
-					refueling={refueling}
-					overlayActions={actions}
-					isProcessing={isProcessing}
-					clearContact={clearContact}
-					isCleaning={isCleaning}
-				/>
+				<>
+					<RefuelingInfo
+						refueling={refueling}
+						overlayActions={actions}
+						isProcessing={isProcessing}
+						clearContact={clearContact}
+						isCleaning={isCleaning}
+					/>
+
+					<RefuelingModals
+						isLoading={isLoading}
+						upload={upload}
+						refueling={refueling}
+						showViewer={showViewer}
+						closeViewer={closeViewer}
+						currentImage={currentImage}
+						refuelingId={refuelingId}
+						bindContact={bindContact}
+						isBinding={isBinding}
+						carId={carId}
+					/>
+				</>
 			)}
 		</>
 	)

@@ -23,7 +23,7 @@ export const getInspectionActions = ({
 		key: 'clear-gallery',
 		label: 'Clear gallery',
 		icon: <GiBroom size={20} />,
-		callback: () => onOpen(modalNames.CLEAR_INSPECTION_GALLERY),
+		callback: () => onOpen(modalNames.CLEAR_GALLERY),
 	},
 	{
 		key: 'edit-inspection',
@@ -35,7 +35,7 @@ export const getInspectionActions = ({
 		key: 'bind-contact',
 		label: 'Bind contact',
 		icon: <MdContactEmergency size={20} />,
-		callback: () => onOpen(modalNames.BIND_INSPECTION_CONTACT),
+		callback: () => onOpen(modalNames.BIND_CONTACT),
 	},
 	{
 		key: 'delete-inspection',

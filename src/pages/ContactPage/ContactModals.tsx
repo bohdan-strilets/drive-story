@@ -1,14 +1,15 @@
 import { AnimatePresence } from 'motion/react'
 import { FC } from 'react'
 
+import ClearGalleryModal from '@/components/Layout/ClearGalleryModal'
 import ShowImageViewer from '@/components/Layout/ShowImageViewer'
 import UploadPhotoModal from '@/components/Layout/UploadPhotoModal'
 
 import { getImageResources } from '@/utils/getImageResources'
 
+import { EntityType } from '@/types/enums/EntityType'
 import { ContactModalsProps } from '@/types/props/PhoneBook/ContactModalsProps'
 
-import ClearGalleryModal from './modals/ClearGalleryModal'
 import DeleteContactModal from './modals/DeleteContactModal'
 import EditContactModal from './modals/EditContactModal'
 
@@ -40,8 +41,9 @@ const ContactModals: FC<ContactModalsProps> = ({
 			<DeleteContactModal contactId={contactId} key={4} />
 
 			<ClearGalleryModal
-				contactId={contactId}
-				images={contact?.photos}
+				entityId={contactId}
+				EntityType={EntityType.CONTACTS}
+				images={contact?.photos || null}
 				key={5}
 			/>
 		</AnimatePresence>

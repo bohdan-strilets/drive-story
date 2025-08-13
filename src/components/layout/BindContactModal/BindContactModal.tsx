@@ -7,7 +7,7 @@ import useModal from '@/hooks/ui/useModal'
 
 import { modalNames } from '@/config/modalConfig'
 
-import { BindContactModalProps } from '@/types/props/Insurance/BindContactModalProps'
+import { BindContactModalProps } from '@/types/props/Layout/BindContactModalProps'
 
 const BindContactModal: FC<BindContactModalProps> = ({
 	bindContact,
@@ -17,7 +17,7 @@ const BindContactModal: FC<BindContactModalProps> = ({
 	const { checkQueryParam } = useModal()
 
 	return (
-		checkQueryParam(modalNames.BIND_INSURANCE_CONTACT) && (
+		checkQueryParam(modalNames.BIND_CONTACT) && (
 			<Modal title="Bind contact">
 				<BindContact
 					isBinding={isBinding}

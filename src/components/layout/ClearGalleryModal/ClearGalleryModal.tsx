@@ -11,23 +11,22 @@ import { modalNames } from '@/config/modalConfig'
 
 import { getImageId } from '@/utils/getImageId'
 
-import { EntityType } from '@/types/enums/EntityType'
 import { DeleteImagesParams } from '@/types/params/DeleteImagesParams'
-import { ClearGalleryModalProps } from '@/types/props/PhoneBook/ClearGalleryModalProps'
+import { ClearGalleryModalProps } from '@/types/props/Layout/ClearGalleryModalProps'
 import { Image } from '@/types/types/Image'
 
 const ClearGalleryModal: FC<ClearGalleryModalProps> = ({
-	contactId,
+	entityId,
+	EntityType,
 	images,
 }) => {
 	const { checkQueryParam, onClose } = useModal()
-
 	const { mutateAsync: deleteAllImages, isPending } = useDeleteAllImages()
 
-	const deleteImagesParams: DeleteImagesParams = {
-		entityId: contactId,
+	const params: DeleteImagesParams = {
+		entityId: entityId,
 		imageId: getImageId(images),
-		entityType: EntityType.INSURANCE,
+		entityType: EntityType,
 	}
 
 	const clearGallery = useSubmit<Image | null, DeleteImagesParams>({
@@ -37,16 +36,15 @@ const ClearGalleryModal: FC<ClearGalleryModalProps> = ({
 	})
 
 	return (
-		checkQueryParam(modalNames.CLEAR_CONTACT_GALLERY) && (
+		checkQueryParam(modalNames.CLEAR_GALLERY) && (
 			<Modal
-				key={modalNames.CLEAR_CONTACT_GALLERY}
 				title="Clear gallery?"
 				isDialog={true}
 				isLoading={isPending}
 				negativeBtnLabel="no"
 				positiveBtnLabel="yes"
 				negativeCallback={onClose}
-				positiveCallback={() => clearGallery(deleteImagesParams)}
+				positiveCallback={() => clearGallery(params)}
 			>
 				<Paragraph color="black" margin="0 0 15px 0">
 					After confirmation, all images from the gallery will be deleted for
